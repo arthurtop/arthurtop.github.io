@@ -1,70 +1,163 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  <title>Socket搭建即时通讯服务器 | Hexo</title>
-  <meta name="author" content="John Doe">
-  
-  <meta name="description" content="">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+<title>Socket搭建即时通讯服务器 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Socket搭建即时通讯服务器">
-  <meta property="og:site_name" content="Hexo">
 
-  
-    <meta property="og:image" content="">
-  
 
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="https://oindk07nf.qussl.com/atom-one-dark.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="https://oindk07nf.qussl.com/style.css?v=20170717" media="screen" type="text/css">
-  <link rel="stylesheet" href="https://oindk07nf.qussl.com/animation.css?v=7" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
+    <meta name="keywords" content="Node.js,Socket,WebSocket,Socket.IO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Socket搭建即时通讯服务器">
+<meta property="og:url" content="http://yoursite.com/2018/11/16/Socket搭建即时通讯服务器/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/WebSocket1.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="http://pcat1usdp.bkt.clouddn.com/webServer.jpg">
+<meta property="og:updated_time" content="2018-12-18T15:26:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Socket搭建即时通讯服务器">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/WebSocket1.png?x-oss-process=style/titanjun">
 
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
 </head>
-</html>
-
-<body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Hexo</a></h1>
-  <h2><a href="/"></a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Socket搭建即时通讯服务器" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
 </nav>
-<div class="clearfix"></div>
-</header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-11-16T03:45:00.000Z"><a href="/2018/11/16/Socket搭建即时通讯服务器/">2018-11-16</a></time>
-      
-      
-  
-    <h1 class="title">Socket搭建即时通讯服务器</h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/WebSocket1.png?x-oss-process=style/titanjun" alt="webSecket"></p>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-11-16T03:45:00.000Z">2018-11-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Socket学习笔记/">Socket学习笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    33 minutes read (About 5013 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Socket搭建即时通讯服务器
+            
+        </h1>
+        <div class="content">
+            <p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/WebSocket1.png?x-oss-process=style/titanjun" alt="webSecket"></p>
 <a id="more"></a>
 <h2 id="即时通讯"><a href="#即时通讯" class="headerlink" title="即时通讯"></a>即时通讯</h2><ul>
 <li>相关代码<a href="https://github.com/CoderTitan/WebSocketDemo" target="_blank" rel="noopener">Demo地址</a></li>
@@ -120,10 +213,10 @@
 </ul>
 <p><img src="http://pcat1usdp.bkt.clouddn.com/webServer.jpg" alt="webServer"></p>
 <h4 id="Websocket协议"><a href="#Websocket协议" class="headerlink" title="Websocket协议"></a><code>Websocket</code>协议</h4><p>协议头: ws, 服务器根据协议头判断是<code>Http</code>还是<code>websocket</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求头</span></span><br><span class="line">     GET ws:<span class="comment">//localhost:12345/websocket/test.html HTTP/1.1</span></span><br><span class="line">     Origin: http:<span class="comment">//localhost</span></span><br><span class="line">     Connection: Upgrade</span><br><span class="line">     Host: localhost:<span class="number">12345</span></span><br><span class="line">     Sec-WebSocket-Key: JspZdPxs9MrWCt3j6h7KdQ==  </span><br><span class="line">     Upgrade: websocket </span><br><span class="line">     Sec-WebSocket-Version: <span class="number">13</span></span><br><span class="line">    <span class="comment">// Sec-WebSocket-Key: 叫“梦幻字符串”是个密钥，只有有这个密钥 服务器才能通过解码认出来，这是个WB的请求，要建立TCP连接了！！！如果这个字符串没有按照加密规则加密，那服务端就认不出来，就会认为这整个协议就是个HTTP请求。更不会开TCP。其他的字段都可以随便设置，但是这个字段是最重要的字段，标识WB协议的一个字段</span></span><br><span class="line">     </span><br><span class="line"></span><br><span class="line"><span class="comment">// 响应头</span></span><br><span class="line">     HTTP/<span class="number">1.1</span> <span class="number">101</span> Web Socket Protocol Handshake</span><br><span class="line">     WebSocket-Location: ws:<span class="comment">//localhost:12345/websocket/test.php</span></span><br><span class="line">     Connection: Upgrade</span><br><span class="line">     Upgrade: websocket</span><br><span class="line">     Sec-WebSocket-Accept: zUyzbJdkVJjhhu8KiAUCDmHtY/o= </span><br><span class="line">     WebSocket-Origin: http:<span class="comment">//localhost</span></span><br><span class="line">     </span><br><span class="line">    <span class="comment">// Sec-WebSocket-Accept: 叫“梦幻字符串”，和上面那个梦幻字符串作用一样。不同的是，这个字符串是要让客户端辨认的，客户端拿到后自动解码。并且辨认是不是一个WB请求。然后进行相应的操作。这个字段也是重中之重，不可随便修改的。加密规则，依然是有规则的</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 请求头</span></span><br><span class="line">     GET ws:<span class="hljs-comment">//localhost:12345/websocket/test.html HTTP/1.1</span></span><br><span class="line">     Origin: http:<span class="hljs-comment">//localhost</span></span><br><span class="line">     Connection: Upgrade</span><br><span class="line">     Host: localhost:<span class="hljs-number">12345</span></span><br><span class="line">     Sec-WebSocket-Key: JspZdPxs9MrWCt3j6h7KdQ==  </span><br><span class="line">     Upgrade: websocket </span><br><span class="line">     Sec-WebSocket-Version: <span class="hljs-number">13</span></span><br><span class="line">    <span class="hljs-comment">// Sec-WebSocket-Key: 叫“梦幻字符串”是个密钥，只有有这个密钥 服务器才能通过解码认出来，这是个WB的请求，要建立TCP连接了！！！如果这个字符串没有按照加密规则加密，那服务端就认不出来，就会认为这整个协议就是个HTTP请求。更不会开TCP。其他的字段都可以随便设置，但是这个字段是最重要的字段，标识WB协议的一个字段</span></span><br><span class="line">     </span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 响应头</span></span><br><span class="line">     HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">101</span> Web Socket Protocol Handshake</span><br><span class="line">     WebSocket-Location: ws:<span class="hljs-comment">//localhost:12345/websocket/test.php</span></span><br><span class="line">     Connection: Upgrade</span><br><span class="line">     Upgrade: websocket</span><br><span class="line">     Sec-WebSocket-Accept: zUyzbJdkVJjhhu8KiAUCDmHtY/o= </span><br><span class="line">     WebSocket-Origin: http:<span class="hljs-comment">//localhost</span></span><br><span class="line">     </span><br><span class="line">    <span class="hljs-comment">// Sec-WebSocket-Accept: 叫“梦幻字符串”，和上面那个梦幻字符串作用一样。不同的是，这个字符串是要让客户端辨认的，客户端拿到后自动解码。并且辨认是不是一个WB请求。然后进行相应的操作。这个字段也是重中之重，不可随便修改的。加密规则，依然是有规则的</span></span><br></pre></td></tr></table></figure>
 <h3 id="WebSocket客户端"><a href="#WebSocket客户端" class="headerlink" title="WebSocket客户端"></a>WebSocket客户端</h3><p>在客户端，没有必要为<code>WebSockets</code>使用<code>JavaScript</code>库。实现<code>WebSockets</code>的<code>Web</code> 浏览器将通过<code>WebSockets</code>对象公开所有必需的客户端功能（主要指支持<code>HTML5</code>的浏览器）</p>
 <h4 id="客户端-API"><a href="#客户端-API" class="headerlink" title="客户端 API"></a>客户端 API</h4><p>以下 API 用于创建<code>WebSocket</code>对象。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Socket = <span class="keyword">new</span> WebSocket(url, [protocol] );</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> Socket = <span class="hljs-keyword">new</span> WebSocket(url, [protocol] );</span><br></pre></td></tr></table></figure>
 <ul>
 <li>以上代码中的第一个参数<code>url</code>, 指定连接的<code>URL</code></li>
 <li>第二个参数<code>protocol</code>是可选的，指定了可接受的子协议</li>
@@ -195,7 +288,7 @@
 </table>
 <div class="note success"><p>代码示例</p></div>
 
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端</span></span><br><span class="line"><span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">"ws://localhost:9090"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建立 web socket 连接成功触发事件</span></span><br><span class="line">socket.onopen = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 使用send发送数据</span></span><br><span class="line">    socket.send(<span class="string">"发送数据"</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(socket.bufferedAmount)</span><br><span class="line">    alert(<span class="string">'数据发送中'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接受服务端数据是触发事件</span></span><br><span class="line">socket.onmessage = <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> received_msg = evt.data</span><br><span class="line">    alert(<span class="string">'数据已经接受..'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 断开 websocket 连接成功触发事件</span></span><br><span class="line">socket.onclose = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">'链接已经关闭'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(socket.readyState)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 客户端</span></span><br><span class="line"><span class="hljs-keyword">var</span> socket = <span class="hljs-keyword">new</span> WebSocket(<span class="hljs-string">"ws://localhost:9090"</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 建立 web socket 连接成功触发事件</span></span><br><span class="line">socket.onopen = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 使用send发送数据</span></span><br><span class="line">    socket.send(<span class="hljs-string">"发送数据"</span>)</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(socket.bufferedAmount)</span><br><span class="line">    alert(<span class="hljs-string">'数据发送中'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 接受服务端数据是触发事件</span></span><br><span class="line">socket.onmessage = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">evt</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> received_msg = evt.data</span><br><span class="line">    alert(<span class="hljs-string">'数据已经接受..'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 断开 websocket 连接成功触发事件</span></span><br><span class="line">socket.onclose = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="hljs-string">'链接已经关闭'</span>)</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(socket.readyState)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="WebSocket服务端"><a href="#WebSocket服务端" class="headerlink" title="WebSocket服务端"></a>WebSocket服务端</h3><p><code>WebSocket</code>在服务端的实现非常丰富。<code>Node.js</code>、<code>Java</code>、<code>C++</code>、<code>Python</code> 等多种语言都有自己的解决方案, 其中<code>Node.js</code>常用的有以下三种</p>
 <ul>
 <li><a href="https://github.com/uNetworking/uWebSockets" target="_blank" rel="noopener">µWebSockets</a></li>
@@ -221,12 +314,12 @@
 <li><a href="https://github.com/socketio" target="_blank" rel="noopener">Socket.IO</a>实质是一个库, 所以在使用之前必须先导入<code>Socket.IO</code>库</li>
 <li><code>Node.js</code>导入库和<code>iOS</code>导入第三方库性质一样, 只不过<code>iOS</code>使用的是<code>pods</code>管理, <code>Node.js</code>使用<code>npm</code></li>
 </ul>
-<h4 id="导入Socket-IO库"><a href="#导入Socket-IO库" class="headerlink" title="导入Socket.IO库"></a>导入<code>Socket.IO</code>库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 1. 进入当当前文件夹</span><br><span class="line">cd ...</span><br><span class="line"></span><br><span class="line">// 2. 创建package.json文件</span><br><span class="line">npm init</span><br><span class="line"></span><br><span class="line">/// 3. 导入库</span><br><span class="line">npm install socket.io --sava</span><br><span class="line">npm install express --sava</span><br></pre></td></tr></table></figure>
+<h4 id="导入Socket-IO库"><a href="#导入Socket-IO库" class="headerlink" title="导入Socket.IO库"></a>导入<code>Socket.IO</code>库</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 1. 进入当当前文件夹</span><br><span class="line">cd ...</span><br><span class="line"></span><br><span class="line">// 2. 创建package.json文件</span><br><span class="line">npm init</span><br><span class="line"></span><br><span class="line">/// 3. 导入库</span><br><span class="line">npm install socket.io --sava</span><br><span class="line">npm install express --sava</span><br></pre></td></tr></table></figure>
 <h4 id="创建socket"><a href="#创建socket" class="headerlink" title="创建socket"></a>创建socket</h4><ul>
 <li><code>socket</code>本质还是<code>http</code>协议，所以需要绑定<code>http</code>服务器，才能启动socket服务.</li>
 <li>而且需要通过<code>web</code>服务器监听端口，<code>socket</code>不能监听端口，有人访问端口才能建立连接，所以先创建<code>web</code>服务器</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入http模块</span></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 面向express框架开发，加载express框架，方便处理get,post请求</span></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建web服务器</span></span><br><span class="line"><span class="keyword">var</span> server = http.Server(express)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入socket.io模块</span></span><br><span class="line"><span class="keyword">var</span> socketio = <span class="built_in">require</span>(<span class="string">'socket.io'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建爱你socket服务器</span></span><br><span class="line"><span class="keyword">var</span> serverSocket = socketio(server)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">9090</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'监听9090'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 引入http模块</span></span><br><span class="line"><span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 面向express框架开发，加载express框架，方便处理get,post请求</span></span><br><span class="line"><span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 创建web服务器</span></span><br><span class="line"><span class="hljs-keyword">var</span> server = http.Server(express)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 引入socket.io模块</span></span><br><span class="line"><span class="hljs-keyword">var</span> socketio = <span class="hljs-built_in">require</span>(<span class="hljs-string">'socket.io'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 创建爱你socket服务器</span></span><br><span class="line"><span class="hljs-keyword">var</span> serverSocket = socketio(server)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server.listen(<span class="hljs-number">9090</span>)</span><br><span class="line"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">'监听9090'</span>)</span><br></pre></td></tr></table></figure>
 <h4 id="建立socket连接"><a href="#建立socket连接" class="headerlink" title="建立socket连接"></a>建立socket连接</h4><ul>
 <li>服务器不需要主动建立连接，建立连接是客户端的事情，服务器只需要监听连接</li>
 <li>客户端主动连接会发送<code>connection</code>事件，服务端只需要监听<code>connection</code>事件有没有发送，就知道客户端有没有主动连接服务器</li>
@@ -235,20 +328,20 @@
 <li>监听<code>connection</code>，回调函数会传入一个连接好的<code>socket</code>，这个<code>socket</code>就是客户端的<code>socket</code></li>
 <li><code>socket</code>连接原理，就是客户端和服务端通过<code>socket</code>连接，服务器有<code>socket</code>，客户端也有</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监听客户端有没有连接成功,如果连接成功,服务端会发送connection事件,通知客户端连接成功</span></span><br><span class="line"><span class="comment">// serverSocket: 服务端, clientSocket: 客户端</span></span><br><span class="line">serverSocket.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">clientSocket</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 建立socket连接成功</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'建立连接成功'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(clientSocket)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 监听客户端有没有连接成功,如果连接成功,服务端会发送connection事件,通知客户端连接成功</span></span><br><span class="line"><span class="hljs-comment">// serverSocket: 服务端, clientSocket: 客户端</span></span><br><span class="line">serverSocket.on(<span class="hljs-string">'connection'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">clientSocket</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 建立socket连接成功</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'建立连接成功'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(clientSocket)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h3 id="Socket-IO客户端"><a href="#Socket-IO客户端" class="headerlink" title="Socket.IO客户端"></a>Socket.IO客户端</h3><ul>
 <li><a href="https://github.com/socketio/socket.io-client-swift" target="_blank" rel="noopener">Socket.IO-Client-Swift</a>是<code>iOS</code>使用的库, 目前只有<code>Swift</code>版本</li>
 <li>iOS中的使用</li>
 </ul>
 <h4 id="创建socket对象"><a href="#创建socket对象" class="headerlink" title="创建socket对象"></a>创建socket对象</h4><p>创建<code>SocketIOClient</code>对象, 两种创建方式</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种, SocketIOClientConfiguration: 可选参数</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">init</span>(socketURL: <span class="type">URL</span>, config: <span class="type">SocketIOClientConfiguration</span> = [])</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种, 底层还是使用的第一种方式创建</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">convenience</span> <span class="keyword">init</span>(socketURL: <span class="type">URL</span>, config: [<span class="type">String</span>: <span class="type">Any</span>]?) &#123;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(socketURL: socketURL, config: config?.toSocketConfiguration() ?? [])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 第一种, SocketIOClientConfiguration: 可选参数</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">init</span>(socketURL: <span class="hljs-type">URL</span>, config: <span class="hljs-type">SocketIOClientConfiguration</span> = [])</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 第二种, 底层还是使用的第一种方式创建</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">convenience</span> <span class="hljs-keyword">init</span>(socketURL: <span class="hljs-type">URL</span>, config: [<span class="hljs-type">String</span>: <span class="hljs-type">Any</span>]?) &#123;</span><br><span class="line">        <span class="hljs-keyword">self</span>.<span class="hljs-keyword">init</span>(socketURL: socketURL, config: config?.toSocketConfiguration() ?? [])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>SocketIOClientConfiguration</code>: 是一个数组, 等同于<code>[SocketIOClientOption]</code></li>
 <li><code>SocketIOClientOption</code>的所有取值如下</li>
 </ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">SocketIOClientOption</span> : <span class="title">ClientOption</span> </span>&#123;</span><br><span class="line">    <span class="comment">/// 使用压缩的方式进行传输</span></span><br><span class="line">    <span class="keyword">case</span> compress</span><br><span class="line">    <span class="comment">/// 通过字典内容连接</span></span><br><span class="line">    <span class="keyword">case</span> connectParams([<span class="type">String</span>: <span class="type">Any</span>])</span><br><span class="line">    <span class="comment">/// NSHTTPCookies的数组, 在握手过程中传递, Default is nil.</span></span><br><span class="line">    <span class="keyword">case</span> cookies([<span class="type">HTTPCookie</span>])</span><br><span class="line">    <span class="comment">/// 添加自定义请求头初始化来请求, 默认为nil</span></span><br><span class="line">    <span class="keyword">case</span> extraHeaders([<span class="type">String</span>: <span class="type">String</span>])</span><br><span class="line">    <span class="comment">/// 将为每个连接创建一个新的connect, 如果你在重新连接有bug时使用.</span></span><br><span class="line">    <span class="keyword">case</span> forceNew(<span class="type">Bool</span>)</span><br><span class="line">    <span class="comment">/// 传输是否使用HTTP长轮询, 默认false</span></span><br><span class="line">    <span class="keyword">case</span> forcePolling(<span class="type">Bool</span>)</span><br><span class="line">    <span class="comment">/// 是否使用 WebSockets. Default is `false`</span></span><br><span class="line">    <span class="keyword">case</span> forceWebsockets(<span class="type">Bool</span>)</span><br><span class="line">    <span class="comment">/// 调度handle的运行队列, 默认在主队列</span></span><br><span class="line">    <span class="keyword">case</span> handleQueue(<span class="type">DispatchQueue</span>)</span><br><span class="line">    <span class="comment">/// 是否打印调试信息. Default is false</span></span><br><span class="line">    <span class="keyword">case</span> log(<span class="type">Bool</span>)</span><br><span class="line">    <span class="comment">/// 可自定义SocketLogger调试日志</span></span><br><span class="line">    <span class="keyword">case</span> logger(<span class="type">SocketLogger</span>)</span><br><span class="line">    <span class="comment">/// 自定义服务器使用的路径.</span></span><br><span class="line">    <span class="keyword">case</span> path(<span class="type">String</span>)</span><br><span class="line">    <span class="comment">/// 链接失败时, 是否重新链接, Default is `true`</span></span><br><span class="line">    <span class="keyword">case</span> reconnects(<span class="type">Bool</span>)</span><br><span class="line">    <span class="comment">/// 重新连接多少次. Default is `-1` (无限次)</span></span><br><span class="line">    <span class="keyword">case</span> reconnectAttempts(<span class="type">Int</span>)</span><br><span class="line">    <span class="comment">/// 等待重连时间. Default is `10`</span></span><br><span class="line">    <span class="keyword">case</span> reconnectWait(<span class="type">Int</span>)</span><br><span class="line">    <span class="comment">/// 是否使用安全传输, Default is false</span></span><br><span class="line">    <span class="keyword">case</span> secure(<span class="type">Bool</span>)</span><br><span class="line">    <span class="comment">/// 设置允许那些证书有效</span></span><br><span class="line">    <span class="keyword">case</span> security(<span class="type">SSLSecurity</span>)</span><br><span class="line">    <span class="comment">/// 自签名只能用于开发模式</span></span><br><span class="line">    <span class="keyword">case</span> selfSigned(<span class="type">Bool</span>)</span><br><span class="line">    <span class="comment">/// NSURLSessionDelegate 底层引擎设置. 如果你需要处理自签名证书. Default is nil.</span></span><br><span class="line">    <span class="keyword">case</span> sessionDelegate(<span class="type">URLSessionDelegate</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">SocketIOClientOption</span> : <span class="hljs-title">ClientOption</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/// 使用压缩的方式进行传输</span></span><br><span class="line">    <span class="hljs-keyword">case</span> compress</span><br><span class="line">    <span class="hljs-comment">/// 通过字典内容连接</span></span><br><span class="line">    <span class="hljs-keyword">case</span> connectParams([<span class="hljs-type">String</span>: <span class="hljs-type">Any</span>])</span><br><span class="line">    <span class="hljs-comment">/// NSHTTPCookies的数组, 在握手过程中传递, Default is nil.</span></span><br><span class="line">    <span class="hljs-keyword">case</span> cookies([<span class="hljs-type">HTTPCookie</span>])</span><br><span class="line">    <span class="hljs-comment">/// 添加自定义请求头初始化来请求, 默认为nil</span></span><br><span class="line">    <span class="hljs-keyword">case</span> extraHeaders([<span class="hljs-type">String</span>: <span class="hljs-type">String</span>])</span><br><span class="line">    <span class="hljs-comment">/// 将为每个连接创建一个新的connect, 如果你在重新连接有bug时使用.</span></span><br><span class="line">    <span class="hljs-keyword">case</span> forceNew(<span class="hljs-type">Bool</span>)</span><br><span class="line">    <span class="hljs-comment">/// 传输是否使用HTTP长轮询, 默认false</span></span><br><span class="line">    <span class="hljs-keyword">case</span> forcePolling(<span class="hljs-type">Bool</span>)</span><br><span class="line">    <span class="hljs-comment">/// 是否使用 WebSockets. Default is `false`</span></span><br><span class="line">    <span class="hljs-keyword">case</span> forceWebsockets(<span class="hljs-type">Bool</span>)</span><br><span class="line">    <span class="hljs-comment">/// 调度handle的运行队列, 默认在主队列</span></span><br><span class="line">    <span class="hljs-keyword">case</span> handleQueue(<span class="hljs-type">DispatchQueue</span>)</span><br><span class="line">    <span class="hljs-comment">/// 是否打印调试信息. Default is false</span></span><br><span class="line">    <span class="hljs-keyword">case</span> log(<span class="hljs-type">Bool</span>)</span><br><span class="line">    <span class="hljs-comment">/// 可自定义SocketLogger调试日志</span></span><br><span class="line">    <span class="hljs-keyword">case</span> logger(<span class="hljs-type">SocketLogger</span>)</span><br><span class="line">    <span class="hljs-comment">/// 自定义服务器使用的路径.</span></span><br><span class="line">    <span class="hljs-keyword">case</span> path(<span class="hljs-type">String</span>)</span><br><span class="line">    <span class="hljs-comment">/// 链接失败时, 是否重新链接, Default is `true`</span></span><br><span class="line">    <span class="hljs-keyword">case</span> reconnects(<span class="hljs-type">Bool</span>)</span><br><span class="line">    <span class="hljs-comment">/// 重新连接多少次. Default is `-1` (无限次)</span></span><br><span class="line">    <span class="hljs-keyword">case</span> reconnectAttempts(<span class="hljs-type">Int</span>)</span><br><span class="line">    <span class="hljs-comment">/// 等待重连时间. Default is `10`</span></span><br><span class="line">    <span class="hljs-keyword">case</span> reconnectWait(<span class="hljs-type">Int</span>)</span><br><span class="line">    <span class="hljs-comment">/// 是否使用安全传输, Default is false</span></span><br><span class="line">    <span class="hljs-keyword">case</span> secure(<span class="hljs-type">Bool</span>)</span><br><span class="line">    <span class="hljs-comment">/// 设置允许那些证书有效</span></span><br><span class="line">    <span class="hljs-keyword">case</span> security(<span class="hljs-type">SSLSecurity</span>)</span><br><span class="line">    <span class="hljs-comment">/// 自签名只能用于开发模式</span></span><br><span class="line">    <span class="hljs-keyword">case</span> selfSigned(<span class="hljs-type">Bool</span>)</span><br><span class="line">    <span class="hljs-comment">/// NSURLSessionDelegate 底层引擎设置. 如果你需要处理自签名证书. Default is nil.</span></span><br><span class="line">    <span class="hljs-keyword">case</span> sessionDelegate(<span class="hljs-type">URLSessionDelegate</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>创建<code>SocketIOClient</code></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意协议：ws开头</span></span><br><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> url = <span class="type">URL</span>(string: <span class="string">"ws://localhost:9090"</span>) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"><span class="keyword">let</span> manager = <span class="type">SocketManager</span>(socketURL: url, config: [.log(<span class="literal">true</span>), .compress])</span><br><span class="line"><span class="comment">// SocketIOClient</span></span><br><span class="line"><span class="keyword">let</span> socket = manager.defaultSocket</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 注意协议：ws开头</span></span><br><span class="line"><span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> url = <span class="hljs-type">URL</span>(string: <span class="hljs-string">"ws://localhost:9090"</span>) <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line"><span class="hljs-keyword">let</span> manager = <span class="hljs-type">SocketManager</span>(socketURL: url, config: [.log(<span class="hljs-literal">true</span>), .compress])</span><br><span class="line"><span class="hljs-comment">// SocketIOClient</span></span><br><span class="line"><span class="hljs-keyword">let</span> socket = manager.defaultSocket</span><br></pre></td></tr></table></figure>
 <h4 id="监听连接"><a href="#监听连接" class="headerlink" title="监听连接"></a>监听连接</h4><ul>
 <li>创建好<code>socket</code>对象,然后连接用<code>connect</code>方法</li>
 <li>因为<code>socket</code>需要进行3次握手，不可能马上建议连接，需要监听是否连接成功的回调,使用<code>on</code>方法</li>
@@ -259,23 +352,23 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 回调闭包</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">typealias</span> <span class="type">NormalCallback</span> = ([<span class="type">Any</span>], <span class="type">SocketAckEmitter</span>) -&gt; ()</span><br><span class="line"></span><br><span class="line"><span class="comment">// on方法</span></span><br><span class="line"><span class="meta">@discardableResult</span></span><br><span class="line"><span class="keyword">open</span> <span class="function"><span class="keyword">func</span> <span class="title">on</span><span class="params">(<span class="number">_</span> event: String, callback: @escaping NormalCallback)</span></span> -&gt; <span class="type">UUID</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// SocketClientEvent: 接受枚举类型的on方法</span></span><br><span class="line"><span class="meta">@discardableResult</span></span><br><span class="line"><span class="keyword">open</span> <span class="function"><span class="keyword">func</span> <span class="title">on</span><span class="params">(clientEvent event: SocketClientEvent, callback: @escaping NormalCallback)</span></span> -&gt; <span class="type">UUID</span> &#123;</span><br><span class="line">    <span class="comment">// 这里调用的是上面的on方法</span></span><br><span class="line">    <span class="keyword">return</span> on(event.rawValue, callback: callback)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 回调闭包</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">typealias</span> <span class="hljs-type">NormalCallback</span> = ([<span class="hljs-type">Any</span>], <span class="hljs-type">SocketAckEmitter</span>) -&gt; ()</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// on方法</span></span><br><span class="line"><span class="hljs-meta">@discardableResult</span></span><br><span class="line"><span class="hljs-keyword">open</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">on</span><span class="hljs-params">(<span class="hljs-number">_</span> event: String, callback: @escaping NormalCallback)</span></span> -&gt; <span class="hljs-type">UUID</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// SocketClientEvent: 接受枚举类型的on方法</span></span><br><span class="line"><span class="hljs-meta">@discardableResult</span></span><br><span class="line"><span class="hljs-keyword">open</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">on</span><span class="hljs-params">(clientEvent event: SocketClientEvent, callback: @escaping NormalCallback)</span></span> -&gt; <span class="hljs-type">UUID</span> &#123;</span><br><span class="line">    <span class="hljs-comment">// 这里调用的是上面的on方法</span></span><br><span class="line">    <span class="hljs-keyword">return</span> on(event.rawValue, callback: callback)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>完整代码</p>
 </blockquote>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> url = <span class="type">URL</span>(string: <span class="string">"ws://localhost:9090"</span>) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> manager = <span class="type">SocketManager</span>(socketURL: url, config: [.log(<span class="literal">true</span>), .compress])</span><br><span class="line"><span class="keyword">let</span> socket = manager.defaultSocket</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听链接成功</span></span><br><span class="line">socket.on(clientEvent: .connect) &#123; (data, ack) <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"链接成功"</span>)</span><br><span class="line">    <span class="built_in">print</span>(data)</span><br><span class="line">    <span class="built_in">print</span>(ack)</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line">socket.connect()</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> url = <span class="hljs-type">URL</span>(string: <span class="hljs-string">"ws://localhost:9090"</span>) <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">let</span> manager = <span class="hljs-type">SocketManager</span>(socketURL: url, config: [.log(<span class="hljs-literal">true</span>), .compress])</span><br><span class="line"><span class="hljs-keyword">let</span> socket = manager.defaultSocket</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 监听链接成功</span></span><br><span class="line">socket.on(clientEvent: .connect) &#123; (data, ack) <span class="hljs-keyword">in</span></span><br><span class="line">    <span class="hljs-built_in">print</span>(<span class="hljs-string">"链接成功"</span>)</span><br><span class="line">    <span class="hljs-built_in">print</span>(data)</span><br><span class="line">    <span class="hljs-built_in">print</span>(ack)</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line">socket.connect()</span><br></pre></td></tr></table></figure>
 <h3 id="SocketIO事件"><a href="#SocketIO事件" class="headerlink" title="SocketIO事件"></a>SocketIO事件</h3><p><code>SocketIO</code>通过事件链接服务器和传递数据</p>
-<h4 id="客户端监听事件"><a href="#客户端监听事件" class="headerlink" title="客户端监听事件"></a>客户端监听事件</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监听链接成功</span></span><br><span class="line">socket.on(clientEvent: .connect) &#123; (data, ack) <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"链接成功"</span>)</span><br><span class="line">    <span class="built_in">print</span>(data)</span><br><span class="line">    <span class="built_in">print</span>(ack)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="客户端监听事件"><a href="#客户端监听事件" class="headerlink" title="客户端监听事件"></a>客户端监听事件</h4><figure class="highlight swift hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 监听链接成功</span></span><br><span class="line">socket.on(clientEvent: .connect) &#123; (data, ack) <span class="hljs-keyword">in</span></span><br><span class="line">    <span class="hljs-built_in">print</span>(<span class="hljs-string">"链接成功"</span>)</span><br><span class="line">    <span class="hljs-built_in">print</span>(data)</span><br><span class="line">    <span class="hljs-built_in">print</span>(ack)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="客户端发送事件"><a href="#客户端发送事件" class="headerlink" title="客户端发送事件"></a>客户端发送事件</h4><p>只有连接成功之后，才能发送事件</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 建立一个连接到服务器. 连接成功会触发 "connect"事件</span></span><br><span class="line"><span class="keyword">open</span> <span class="function"><span class="keyword">func</span> <span class="title">connect</span><span class="params">()</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接到服务器. 如果连接超时,会调用handle</span></span><br><span class="line"><span class="keyword">open</span> <span class="function"><span class="keyword">func</span> <span class="title">connect</span><span class="params">(timeoutAfter: Double, withHandler handler: <span class="params">(<span class="params">()</span></span></span></span> -&gt; ())?)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重开一个断开连接的socket</span></span><br><span class="line"><span class="keyword">open</span> <span class="function"><span class="keyword">func</span> <span class="title">disconnect</span><span class="params">()</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 向服务器发送事件, 参数一: 事件的名称，参数二: 传输的数据组</span></span><br><span class="line"><span class="keyword">open</span> <span class="function"><span class="keyword">func</span> <span class="title">emit</span><span class="params">(<span class="number">_</span> event: String, with items: [<span class="keyword">Any</span>])</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 建立一个连接到服务器. 连接成功会触发 "connect"事件</span></span><br><span class="line"><span class="hljs-keyword">open</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">connect</span><span class="hljs-params">()</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 连接到服务器. 如果连接超时,会调用handle</span></span><br><span class="line"><span class="hljs-keyword">open</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">connect</span><span class="hljs-params">(timeoutAfter: Double, withHandler handler: <span class="hljs-params">(<span class="hljs-params">()</span></span></span></span> -&gt; ())?)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 重开一个断开连接的socket</span></span><br><span class="line"><span class="hljs-keyword">open</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">disconnect</span><span class="hljs-params">()</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 向服务器发送事件, 参数一: 事件的名称，参数二: 传输的数据组</span></span><br><span class="line"><span class="hljs-keyword">open</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">emit</span><span class="hljs-params">(<span class="hljs-number">_</span> event: String, with items: [<span class="hljs-keyword">Any</span>])</span></span></span><br></pre></td></tr></table></figure>
 <h4 id="服务器监听事件"><a href="#服务器监听事件" class="headerlink" title="服务器监听事件"></a>服务器监听事件</h4><ul>
 <li>监听客户端事件，需要嵌套在连接好的<code>connect</code>回调函数中</li>
 <li>必须使用回调函数的<code>socket</code>参数，如<code>function(s)</code>中的s，监听事件,因此这是客户端的<code>socket</code>，肯定监听客户端发来的事件</li>
 <li>服务器监听连接的回调函数的参数可以添加多个，具体看客户端传递数据数组有几个，每个参数都是与客户段一一对应，第一个参数对应客户端数组第0个数据</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监听socket连接</span></span><br><span class="line">socket.on(<span class="string">'connection'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">s</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'监听到客户端连接'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// data:客户端数组第0个元素</span></span><br><span class="line">    <span class="comment">// data1:客户端数组第1个元素</span></span><br><span class="line">    s.on(<span class="string">'chat'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">data,data1</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'监听到chat事件'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">console</span>.log(data,data1);</span><br><span class="line">        </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 监听socket连接</span></span><br><span class="line">socket.on(<span class="hljs-string">'connection'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'监听到客户端连接'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// data:客户端数组第0个元素</span></span><br><span class="line">    <span class="hljs-comment">// data1:客户端数组第1个元素</span></span><br><span class="line">    s.on(<span class="hljs-string">'chat'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data,data1</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'监听到chat事件'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-built_in">console</span>.log(data,data1);</span><br><span class="line">        </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h4 id="服务器发送事件"><a href="#服务器发送事件" class="headerlink" title="服务器发送事件"></a>服务器发送事件</h4><p>这里的<code>socket</code>一定要用服务器端的<code>socket</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给当前客户端发送数据，其他客户端收不到.</span></span><br><span class="line">socket.emit(<span class="string">'chat'</span>, <span class="string">'服务器'</span> + data)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发给所有客户端，不包含当前客户端</span></span><br><span class="line">socket.emit.broadcast.emit(<span class="string">'chat'</span>, <span class="string">'发给所有客户端,不包含当前客户端'</span> + data)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发给所有客户端，包含当前客户端</span></span><br><span class="line">socket.emit.sockets.emit(<span class="string">'chat'</span>, <span class="string">'发给所有客户端,包含当前客户端'</span> + data)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 给当前客户端发送数据，其他客户端收不到.</span></span><br><span class="line">socket.emit(<span class="hljs-string">'chat'</span>, <span class="hljs-string">'服务器'</span> + data)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 发给所有客户端，不包含当前客户端</span></span><br><span class="line">socket.emit.broadcast.emit(<span class="hljs-string">'chat'</span>, <span class="hljs-string">'发给所有客户端,不包含当前客户端'</span> + data)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 发给所有客户端，包含当前客户端</span></span><br><span class="line">socket.emit.sockets.emit(<span class="hljs-string">'chat'</span>, <span class="hljs-string">'发给所有客户端,包含当前客户端'</span> + data)</span><br></pre></td></tr></table></figure>
 <h2 id="SocketIO分组"><a href="#SocketIO分组" class="headerlink" title="SocketIO分组"></a>SocketIO分组</h2><ul>
 <li>每一个客户端和服务器只会保持一个<code>socket</code>链接, 那么怎么吧每一条信息推送到对应的聊天室, 针对多个聊天室的问题有如何解决</li>
 <li>给每个聊天室都分组, 服务器就可以给指定的组进行数据的推送, 就不会影响到其他的聊天室</li>
@@ -285,7 +378,7 @@
 <li>用<code>rooms</code>的API就可以实现多房间聊天了，总结出来无外乎就是：<code>join/leave room</code> 和 <code>say to room</code></li>
 <li>这里的<code>socket</code>是客户端的<code>socket</code>，也就是连接成功，传递过来的<code>socket</code></li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// join和leave</span></span><br><span class="line">io.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">socket</span>)</span>&#123;</span><br><span class="line">  socket.join(<span class="string">'some room'</span>);</span><br><span class="line">  <span class="comment">// socket.leave('some room');</span></span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// say to room</span></span><br><span class="line">io.to(<span class="string">'some room'</span>).emit(<span class="string">'some event'</span>):</span><br><span class="line">io.in(<span class="string">'some room'</span>).emit(<span class="string">'some event'</span>):</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// join和leave</span></span><br><span class="line">io.on(<span class="hljs-string">'connection'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">socket</span>)</span>&#123;</span><br><span class="line">  socket.join(<span class="hljs-string">'some room'</span>);</span><br><span class="line">  <span class="hljs-comment">// socket.leave('some room');</span></span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"><span class="hljs-comment">// say to room</span></span><br><span class="line">io.to(<span class="hljs-string">'some room'</span>).emit(<span class="hljs-string">'some event'</span>):</span><br><span class="line">io.in(<span class="hljs-string">'some room'</span>).emit(<span class="hljs-string">'some event'</span>):</span><br></pre></td></tr></table></figure>
 <h3 id="分组的原理"><a href="#分组的原理" class="headerlink" title="分组的原理"></a>分组的原理</h3><ul>
 <li>只要客户端<code>socket</code>调用<code>join</code>，服务器就会把客户端<code>socket</code>和分组的名称绑定起来</li>
 <li>到时候就可以根据分组的名称找到对应客户端的<code>socket</code>，就能给指定的客户端推送信息</li>
@@ -293,194 +386,1495 @@
 </ul>
 <hr>
 
-      
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Node-js/">Node.js</a>, <a class="has-link-grey -link" href="/tags/Socket/">Socket</a>, <a class="has-link-grey -link" href="/tags/Socket-IO/">Socket.IO</a>, <a class="has-link-grey -link" href="/tags/WebSocket/">WebSocket</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
-    <footer>
-      
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-  
-  <div class="categories">
-    <a href="/categories/Socket学习笔记/">Socket学习笔记</a>
-  </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/08/10/Realm在iOS中的简单使用/">
+                <span class="level-item">Realm在iOS中的简单使用</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="SooLe">
+                    
+                    <p class="is-size-4 is-block">
+                        SooLe
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        iOS
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>shenzhen</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Entradas
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        13
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categorias
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        9
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Etiquetas
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/arthurtop">
+                SEGUIR</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/arthurtop">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://weibo.com/3935895096677821">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://www.jianshu.com/u/cda07f394e73">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://juejin.im/user/5ac98725f265da23830b263b">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/arthurtop" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://github.com/arthurtop</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categorias
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Hexo博客/">
+            <span class="level-start">
+                <span class="level-item">Hexo博客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Socket学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Socket学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SwiftLint/">
+            <span class="level-start">
+                <span class="level-item">SwiftLint</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Swift学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift高阶功能/">
+            <span class="level-start">
+                <span class="level-item">Swift高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS动画/">
+            <span class="level-start">
+                <span class="level-item">iOS动画</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS高阶功能/">
+            <span class="level-start">
+                <span class="level-item">iOS高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数据库基础/">
+            <span class="level-start">
+                <span class="level-item">数据库基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/组件化开发/">
+            <span class="level-start">
+                <span class="level-item">组件化开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Nube de etiquetas
+        </h3>
+        <a href="/tags/AppIcon/" style="font-size: 10px;">AppIcon</a> <a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/CoreAnimation/" style="font-size: 10px;">CoreAnimation</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Homebrew/" style="font-size: 10px;">Homebrew</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Socket/" style="font-size: 10px;">Socket</a> <a href="/tags/Socket-IO/" style="font-size: 10px;">Socket.IO</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/Swift4-0/" style="font-size: 10px;">Swift4.0</a> <a href="/tags/SwiftLint/" style="font-size: 16.67px;">SwiftLint</a> <a href="/tags/UIStackView/" style="font-size: 10px;">UIStackView</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS-10-3/" style="font-size: 10px;">iOS 10.3</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/spec/" style="font-size: 10px;">spec</a> <a href="/tags/trunk/" style="font-size: 10px;">trunk</a> <a href="/tags/入坑/" style="font-size: 10px;">入坑</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/规则/" style="font-size: 13.33px;">规则</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recientes
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Socket搭建即时通讯服务器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-16T03:45:00.000Z">2018-11-16</time></div>
+                    <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="has-link-black-ter is-size-6">Socket搭建即时通讯服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Socket学习笔记/">Socket学习笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/10/Realm在iOS中的简单使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Realm在iOS中的简单使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-10T02:46:40.000Z">2018-08-10</time></div>
+                    <a href="/2018/08/10/Realm在iOS中的简单使用/" class="has-link-black-ter is-size-6">Realm在iOS中的简单使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库基础/">数据库基础</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="发布开源框架到CocoaPods入坑指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-06-29T12:06:20.000Z">2018-06-29</time></div>
+                    <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="has-link-black-ter is-size-6">发布开源框架到CocoaPods入坑指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/组件化开发/">组件化开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="iOS神技之动态更换APP的Icon图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-16T12:18:00.000Z">2018-03-16</time></div>
+                    <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="has-link-black-ter is-size-6">iOS神技之动态更换APP的Icon图</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Swift高阶功能/">Swift高阶功能</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SwiftLint代码规范属性说明03">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-10T12:04:54.000Z">2018-03-10</time></div>
+                    <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="has-link-black-ter is-size-6">SwiftLint代码规范属性说明03</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
 
         
-  
-  <div class="tags">
-    <a href="/tags/Node-js/">Node.js</a>, <a href="/tags/Socket/">Socket</a>, <a href="/tags/WebSocket/">WebSocket</a>, <a href="/tags/Socket-IO/">Socket.IO</a>
-  </div>
-
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archivos
+        </h3>
+        <ul class="menu-list">
         
-  <div class="addthis addthis_toolbox addthis_default_style">
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Etiquetas
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">6</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
     
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-<section id="comment">
-  <h1 class="title">Comments</h1>
-
-  
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="http://yoursite.com/2018/11/16/Socket搭建即时通讯服务器/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
-  
-</section>
-
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:yoursite.com">
-  </form>
 </div>
 
-  
-<div class="widget tag">
-  <h3 class="title">Categories</h3>
-  <ul class="entry">
-  
-    <li><a href="/categories/Hexo博客/">Hexo博客</a><small>1</small></li>
-  
-    <li><a href="/categories/Socket学习笔记/">Socket学习笔记</a><small>1</small></li>
-  
-    <li><a href="/categories/SwiftLint/">SwiftLint</a><small>4</small></li>
-  
-    <li><a href="/categories/Swift学习笔记/">Swift学习笔记</a><small>1</small></li>
-  
-    <li><a href="/categories/Swift高阶功能/">Swift高阶功能</a><small>2</small></li>
-  
-    <li><a href="/categories/iOS动画/">iOS动画</a><small>1</small></li>
-  
-    <li><a href="/categories/iOS高阶功能/">iOS高阶功能</a><small>1</small></li>
-  
-    <li><a href="/categories/数据库基础/">数据库基础</a><small>1</small></li>
-  
-    <li><a href="/categories/组件化开发/">组件化开发</a><small>1</small></li>
-  
-  </ul>
-</div>
+                
 
 
-  
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/AppIcon/">AppIcon</a><small>1</small></li>
-  
-    <li><a href="/tags/CocoaPods/">CocoaPods</a><small>1</small></li>
-  
-    <li><a href="/tags/CoreAnimation/">CoreAnimation</a><small>1</small></li>
-  
-    <li><a href="/tags/Error/">Error</a><small>1</small></li>
-  
-    <li><a href="/tags/Github/">Github</a><small>1</small></li>
-  
-    <li><a href="/tags/HTTPS/">HTTPS</a><small>1</small></li>
-  
-    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
-  
-    <li><a href="/tags/Homebrew/">Homebrew</a><small>1</small></li>
-  
-    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
-  
-    <li><a href="/tags/Objective-C/">Objective-C</a><small>1</small></li>
-  
-    <li><a href="/tags/Realm/">Realm</a><small>1</small></li>
-  
-    <li><a href="/tags/Socket/">Socket</a><small>1</small></li>
-  
-    <li><a href="/tags/Socket-IO/">Socket.IO</a><small>1</small></li>
-  
-    <li><a href="/tags/Swift/">Swift</a><small>6</small></li>
-  
-    <li><a href="/tags/Swift4-0/">Swift4.0</a><small>1</small></li>
-  
-    <li><a href="/tags/SwiftLint/">SwiftLint</a><small>4</small></li>
-  
-    <li><a href="/tags/UIStackView/">UIStackView</a><small>1</small></li>
-  
-    <li><a href="/tags/WebSocket/">WebSocket</a><small>1</small></li>
-  
-    <li><a href="/tags/git/">git</a><small>1</small></li>
-  
-    <li><a href="/tags/iOS/">iOS</a><small>1</small></li>
-  
-    <li><a href="/tags/iOS-10-3/">iOS 10.3</a><small>1</small></li>
-  
-    <li><a href="/tags/pod/">pod</a><small>1</small></li>
-  
-    <li><a href="/tags/spec/">spec</a><small>1</small></li>
-  
-    <li><a href="/tags/trunk/">trunk</a><small>1</small></li>
-  
-    <li><a href="/tags/入坑/">入坑</a><small>1</small></li>
-  
-    <li><a href="/tags/框架/">框架</a><small>1</small></li>
-  
-    <li><a href="/tags/规则/">规则</a><small>3</small></li>
-  
-  </ul>
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recientes
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Socket搭建即时通讯服务器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-16T03:45:00.000Z">2018-11-16</time></div>
+                    <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="has-link-black-ter is-size-6">Socket搭建即时通讯服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Socket学习笔记/">Socket学习笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/10/Realm在iOS中的简单使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Realm在iOS中的简单使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-10T02:46:40.000Z">2018-08-10</time></div>
+                    <a href="/2018/08/10/Realm在iOS中的简单使用/" class="has-link-black-ter is-size-6">Realm在iOS中的简单使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库基础/">数据库基础</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="发布开源框架到CocoaPods入坑指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-06-29T12:06:20.000Z">2018-06-29</time></div>
+                    <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="has-link-black-ter is-size-6">发布开源框架到CocoaPods入坑指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/组件化开发/">组件化开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="iOS神技之动态更换APP的Icon图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-16T12:18:00.000Z">2018-03-16</time></div>
+                    <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="has-link-black-ter is-size-6">iOS神技之动态更换APP的Icon图</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Swift高阶功能/">Swift高阶功能</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SwiftLint代码规范属性说明03">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-10T12:04:54.000Z">2018-03-10</time></div>
+                    <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="has-link-black-ter is-size-6">SwiftLint代码规范属性说明03</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
 </div>
 
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2018 John Doe
-  
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archivos
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
 </div>
-<div class="clearfix"></div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-<span id="busuanzi_container_site_pv">
-  本站总访问量<span id="busuanzi_value_site_pv"></span>次
-</span>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Etiquetas
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">6</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Socket搭建即时通讯服务器" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2018 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
 </footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
 
 
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
 
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
 </script>
 
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Entradas',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
 </html>

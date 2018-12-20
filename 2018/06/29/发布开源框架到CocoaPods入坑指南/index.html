@@ -1,72 +1,169 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  <title>发布开源框架到CocoaPods入坑指南 | Hexo</title>
-  <meta name="author" content="John Doe">
-  
-  <meta name="description" content="在开发过程中一定会用到一些第三方框架, 只要安装了CocoaPods, 然后通过pod install命令, 就可以集成框架到项目中了
-可是如果想要把自己的框架或者组件也开源出去, 让别人也可以使用, 那该如何入手 ?
-对于CocoaPods还不是很了解的或者没有安装的童鞋, 可自行百度或者参考用CocoaPods做程序的依赖">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+<title>发布开源框架到CocoaPods入坑指南 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="发布开源框架到CocoaPods入坑指南">
-  <meta property="og:site_name" content="Hexo">
 
-  
-    <meta property="og:image" content="">
-  
 
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="https://oindk07nf.qussl.com/atom-one-dark.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="https://oindk07nf.qussl.com/style.css?v=20170717" media="screen" type="text/css">
-  <link rel="stylesheet" href="https://oindk07nf.qussl.com/animation.css?v=7" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
+    <meta name="description" content="在开发过程中一定会用到一些第三方框架, 只要安装了CocoaPods, 然后通过pod install命令, 就可以集成框架到项目中了 可是如果想要把自己的框架或者组件也开源出去, 让别人也可以使用, 那该如何入手 ? 对于CocoaPods还不是很了解的或者没有安装的童鞋, 可自行百度或者参考用CocoaPods做程序的依赖">
+<meta name="keywords" content="CocoaPods,pod,trunk,spec,git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="发布开源框架到CocoaPods入坑指南">
+<meta property="og:url" content="http://yoursite.com/2018/06/29/发布开源框架到CocoaPods入坑指南/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在开发过程中一定会用到一些第三方框架, 只要安装了CocoaPods, 然后通过pod install命令, 就可以集成框架到项目中了 可是如果想要把自己的框架或者组件也开源出去, 让别人也可以使用, 那该如何入手 ? 对于CocoaPods还不是很了解的或者没有安装的童鞋, 可自行百度或者参考用CocoaPods做程序的依赖">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://p7hfnfk6u.bkt.clouddn.com/creatGitHub.png">
+<meta property="og:image" content="http://p7hfnfk6u.bkt.clouddn.com/Snip20180629_1.png">
+<meta property="og:image" content="http://p7hfnfk6u.bkt.clouddn.com/podspec.png">
+<meta property="og:image" content="http://p7hfnfk6u.bkt.clouddn.com/specSuccess.png">
+<meta property="og:image" content="http://p7hfnfk6u.bkt.clouddn.com/podSearch.png">
+<meta property="og:updated_time" content="2018-12-18T15:26:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="发布开源框架到CocoaPods入坑指南">
+<meta name="twitter:description" content="在开发过程中一定会用到一些第三方框架, 只要安装了CocoaPods, 然后通过pod install命令, 就可以集成框架到项目中了 可是如果想要把自己的框架或者组件也开源出去, 让别人也可以使用, 那该如何入手 ? 对于CocoaPods还不是很了解的或者没有安装的童鞋, 可自行百度或者参考用CocoaPods做程序的依赖">
+<meta name="twitter:image" content="http://p7hfnfk6u.bkt.clouddn.com/creatGitHub.png">
 
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
 </head>
-</html>
-
-<body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Hexo</a></h1>
-  <h2><a href="/"></a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="发布开源框架到CocoaPods入坑指南" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
 </nav>
-<div class="clearfix"></div>
-</header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-06-29T12:06:20.000Z"><a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/">2018-06-29</a></time>
-      
-      
-  
-    <h1 class="title">发布开源框架到CocoaPods入坑指南</h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <ul>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-06-29T12:06:20.000Z">2018-06-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/组件化开发/">组件化开发</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    20 minutes read (About 2938 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                发布开源框架到CocoaPods入坑指南
+            
+        </h1>
+        <div class="content">
+            <ul>
 <li>在开发过程中一定会用到一些第三方框架, 只要安装了<code>CocoaPods</code>, 然后通过<code>pod install</code>命令, 就可以集成框架到项目中了</li>
 <li>可是如果想要把自己的框架或者组件也开源出去, 让别人也可以使用, 那该如何入手 ?</li>
 <li>对于<code>CocoaPods</code>还不是很了解的或者没有安装的童鞋, 可自行百度或者参考<a href="http://blog.devtang.com/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/" target="_blank" rel="noopener">用CocoaPods做程序的依赖</a></li>
@@ -82,7 +179,7 @@
 <li>使用<code>git</code>管理工具我们这里暂不赘述, 不懂得可以自行百度</li>
 <li>终端使用<code>git</code>命令上传, 主要命令如下</li>
 </ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//cd到当前文件夹</span></span><br><span class="line"><span class="comment">// 创建本地仓库</span></span><br><span class="line">git init</span><br><span class="line"><span class="comment">// 添加名称为origin的远程连接</span></span><br><span class="line">git remote add origin '你的github项目地址'</span><br><span class="line"><span class="comment">// 将本地代码加入本地仓库里</span></span><br><span class="line">git add .</span><br><span class="line"><span class="comment">// 提交修改到本地仓库</span></span><br><span class="line">git commit -m '你的修改记录'</span><br><span class="line"><span class="comment">// 推送master分支的代码到名称为origin的远程仓库</span></span><br><span class="line">git push origin master</span><br><span class="line"><span class="comment">//本地打标签备份</span></span><br><span class="line">git tag <span class="string">"v0.0.1"</span></span><br><span class="line"><span class="comment">//提交标签</span></span><br><span class="line">git push --tags</span><br><span class="line"><span class="comment">//删除本地标签</span></span><br><span class="line">git tag -d 标签名称</span><br><span class="line"><span class="comment">//删除远程标签</span></span><br><span class="line">git push origin: 标签名称</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//cd到当前文件夹</span></span><br><span class="line"><span class="hljs-comment">// 创建本地仓库</span></span><br><span class="line">git init</span><br><span class="line"><span class="hljs-comment">// 添加名称为origin的远程连接</span></span><br><span class="line">git remote add origin '你的github项目地址'</span><br><span class="line"><span class="hljs-comment">// 将本地代码加入本地仓库里</span></span><br><span class="line">git add .</span><br><span class="line"><span class="hljs-comment">// 提交修改到本地仓库</span></span><br><span class="line">git commit -m '你的修改记录'</span><br><span class="line"><span class="hljs-comment">// 推送master分支的代码到名称为origin的远程仓库</span></span><br><span class="line">git push origin master</span><br><span class="line"><span class="hljs-comment">//本地打标签备份</span></span><br><span class="line">git tag <span class="hljs-string">"v0.0.1"</span></span><br><span class="line"><span class="hljs-comment">//提交标签</span></span><br><span class="line">git push --tags</span><br><span class="line"><span class="hljs-comment">//删除本地标签</span></span><br><span class="line">git tag -d 标签名称</span><br><span class="line"><span class="hljs-comment">//删除远程标签</span></span><br><span class="line">git push origin: 标签名称</span><br></pre></td></tr></table></figure>
 <h3 id="使用CocoaPods"><a href="#使用CocoaPods" class="headerlink" title="使用CocoaPods"></a>使用CocoaPods</h3><h4 id="检索第三方框架"><a href="#检索第三方框架" class="headerlink" title="检索第三方框架"></a>检索第三方框架</h4><ul>
 <li>使用命令<code>pod search xxx</code></li>
 <li>从本地缓存的–第三方框架描述信息–生成的检索文件中检索到响应的框架信息</li>
@@ -117,14 +214,14 @@
 </ul>
 </li>
 </ul>
-<h4 id="CocoaPods相关操作"><a href="#CocoaPods相关操作" class="headerlink" title="CocoaPods相关操作"></a>CocoaPods相关操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//创建Podfile文件</span><br><span class="line">pod init</span><br><span class="line">//搜索框架</span><br><span class="line">pod search</span><br><span class="line">//安装框架</span><br><span class="line">pod install</span><br><span class="line">//更新框架</span><br><span class="line">pod update</span><br><span class="line"></span><br><span class="line">//初始化(下载服务器中所有的第三方框架信息缓存到电脑本地)</span><br><span class="line">pod setup</span><br><span class="line">//查看第三方框架仓库源</span><br><span class="line">pod repo</span><br><span class="line">//移除仓库源</span><br><span class="line">pod repo remove master</span><br><span class="line">//添加仓库源</span><br><span class="line">//pod repo add master https://xxxx....</span><br></pre></td></tr></table></figure>
-<h4 id="CocoaPods相关路径"><a href="#CocoaPods相关路径" class="headerlink" title="CocoaPods相关路径"></a><code>CocoaPods</code>相关路径</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//索引缓存路径</span><br><span class="line">//如果发现框架信息本地已经缓存, 但是就是无法搜索框架, 可以删除这个索引文件, 重新生成</span><br><span class="line"> ~/Library/Caches/CocoaPods/</span><br><span class="line"> </span><br><span class="line"> //pod命令安装路径</span><br><span class="line"> /usr/local/bin</span><br><span class="line"> </span><br><span class="line"> //pod框架索引信息缓存路径</span><br><span class="line"> /Users/apple/.cocoapods/repos/master</span><br></pre></td></tr></table></figure>
+<h4 id="CocoaPods相关操作"><a href="#CocoaPods相关操作" class="headerlink" title="CocoaPods相关操作"></a>CocoaPods相关操作</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//创建Podfile文件</span><br><span class="line">pod init</span><br><span class="line">//搜索框架</span><br><span class="line">pod search</span><br><span class="line">//安装框架</span><br><span class="line">pod install</span><br><span class="line">//更新框架</span><br><span class="line">pod update</span><br><span class="line"></span><br><span class="line">//初始化(下载服务器中所有的第三方框架信息缓存到电脑本地)</span><br><span class="line">pod setup</span><br><span class="line">//查看第三方框架仓库源</span><br><span class="line">pod repo</span><br><span class="line">//移除仓库源</span><br><span class="line">pod repo remove master</span><br><span class="line">//添加仓库源</span><br><span class="line">//pod repo add master https://xxxx....</span><br></pre></td></tr></table></figure>
+<h4 id="CocoaPods相关路径"><a href="#CocoaPods相关路径" class="headerlink" title="CocoaPods相关路径"></a><code>CocoaPods</code>相关路径</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//索引缓存路径</span><br><span class="line">//如果发现框架信息本地已经缓存, 但是就是无法搜索框架, 可以删除这个索引文件, 重新生成</span><br><span class="line"> ~/Library/Caches/CocoaPods/</span><br><span class="line"> </span><br><span class="line"> //pod命令安装路径</span><br><span class="line"> /usr/local/bin</span><br><span class="line"> </span><br><span class="line"> //pod框架索引信息缓存路径</span><br><span class="line"> /Users/apple/.cocoapods/repos/master</span><br></pre></td></tr></table></figure>
 <h3 id="创建Podspec描述文件"><a href="#创建Podspec描述文件" class="headerlink" title="创建Podspec描述文件"></a>创建Podspec描述文件</h3><ul>
 <li>该文件为<code>Cocoapods</code>依赖库的描述文件，每个<code>Cocoapods</code>依赖库必须有且仅有那么一个描述文件</li>
 <li>简单地讲就是让<code>CocoaPods</code>搜索引擎知道你的代码的作者、版本号、源代码地址、依赖库等信息的文件</li>
 <li>文件名称要和我们想创建的依赖库名称保持一致</li>
 </ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pod spec create 框架名字</span><br><span class="line"></span><br><span class="line"><span class="comment">// 示例:</span></span><br><span class="line">pod spec create TitanModel</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pod spec create 框架名字</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 示例:</span></span><br><span class="line">pod spec create TitanModel</span><br></pre></td></tr></table></figure>
 <ul>
 <li>该命令将在本目录产生一个名为<code>TitanModel.podspec</code>文件</li>
 <li>可用<code>Sublime Text</code>或者<code>Atom</code>打开该文件，里面已经有非常丰富的说明文档, 但是很多都是我们不需要的</li>
@@ -132,7 +229,7 @@
 <li>下面介绍如何声明第三方库的代码目录和资源目录，还有该第三方库所依赖<code>ios</code>核心框架和第三方库</li>
 <li>去掉文件中的一些注释信息, 可以看到也就剩下以下内容了</li>
 </ul>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">Pod::Spec.new <span class="keyword">do</span> <span class="params">|s|</span></span><br><span class="line">    s.name          = <span class="string">'TitanModel'</span> <span class="comment">#项目名</span></span><br><span class="line">    s.version       = <span class="string">'0.1.0'</span> <span class="comment">#相应的版本号</span></span><br><span class="line">    s.summary       = <span class="string">'A short description of YJDemoSDK.'</span> <span class="comment">#简述</span></span><br><span class="line">    s.description   = &lt;&lt;‐ DESC <span class="comment">#详细描述</span></span><br><span class="line">    <span class="symbol">TODO:</span> Add long description of the pod here.</span><br><span class="line">                      DESC</span><br><span class="line">    s.homepage      = <span class="string">'https://github.com/CoderTitan/TitanModel'</span> <span class="comment">#项目主页</span></span><br><span class="line">    s.license       = &#123; <span class="symbol">:type</span> =&gt; <span class="string">'MIT'</span>, <span class="symbol">:file</span> =&gt; <span class="string">'LICENSE'</span> &#125; <span class="comment">#开源协议</span></span><br><span class="line">    s.author        = &#123; <span class="string">'CoderTitan'</span> =&gt; <span class="string">'quanjunt@163.com'</span> &#125; <span class="comment">#作者</span></span><br><span class="line">    s.platform      = <span class="symbol">:ios</span>, <span class="string">'8.0'</span> <span class="comment">#支持的平台</span></span><br><span class="line">    s.requires_arc  = <span class="literal">true</span> <span class="comment">#arc和mrc选项</span></span><br><span class="line">    s.libraries     = <span class="string">'z'</span>, <span class="string">'sqlite3'</span> <span class="comment">#表示依赖的系统类库，比如libz.dylib等</span></span><br><span class="line">    s.frameworks    = <span class="string">'UIKit'</span>,<span class="string">'AVFoundation'</span> <span class="comment">#表示依赖系统的框架</span></span><br><span class="line">    s.ios.vendored_frameworks = <span class="string">'TKBase/TKBase.framework'</span> <span class="comment"># 依赖的第三方/自己的framework</span></span><br><span class="line">    s.vendored_libraries = <span class="string">'Library/Classes/libWeChatSDK.a'</span> <span class="comment">#表示依赖第三方/自己的静态库（比如libWeChatSDK.a）</span></span><br><span class="line">    <span class="comment">#依赖的第三方的或者自己的静态库文件必须以lib为前缀进行命名，否则会出现找不到的情况，这一点非常重要</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#平台信息</span></span><br><span class="line">    s.platform      = <span class="symbol">:ios</span>, <span class="string">'7.0'</span></span><br><span class="line">    s.ios.deployment_target = <span class="string">'7.0'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#文件配置项</span></span><br><span class="line">    s.source        = &#123; <span class="symbol">:git</span> =&gt; <span class="string">'https://github.com/CoderTitan/TitanModel.git'</span>, <span class="symbol">:tag</span> =&gt; s.version.to_s &#125;</span><br><span class="line">    <span class="comment">#配置项目的目标路径，如果不是本地开发，pod init/update会从这个路去拉去代码</span></span><br><span class="line"></span><br><span class="line">    s.source_files = <span class="string">'TitanModel/Classes/**/*'</span> <span class="comment">#你的源码位置</span></span><br><span class="line">    s.resources     = [<span class="string">'TitanModel/Assets/*'</span>] <span class="comment">#资源，比如图片，音频文件等</span></span><br><span class="line">    s.public_header_files = <span class="string">'TitanModel/Classes/TitanModel.h'</span>   <span class="comment">#需要对外开放的头文件</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#依赖的项目内容 可以多个</span></span><br><span class="line">    s.dependency <span class="string">'MJExtension'</span></span><br><span class="line">    s.dependency <span class="string">'AFNetworking'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">Pod::Spec.new <span class="hljs-keyword">do</span> <span class="hljs-params">|s|</span></span><br><span class="line">    s.name          = <span class="hljs-string">'TitanModel'</span> <span class="hljs-comment">#项目名</span></span><br><span class="line">    s.version       = <span class="hljs-string">'0.1.0'</span> <span class="hljs-comment">#相应的版本号</span></span><br><span class="line">    s.summary       = <span class="hljs-string">'A short description of YJDemoSDK.'</span> <span class="hljs-comment">#简述</span></span><br><span class="line">    s.description   = &lt;&lt;‐ DESC <span class="hljs-comment">#详细描述</span></span><br><span class="line">    <span class="hljs-symbol">TODO:</span> Add long description of the pod here.</span><br><span class="line">                      DESC</span><br><span class="line">    s.homepage      = <span class="hljs-string">'https://github.com/CoderTitan/TitanModel'</span> <span class="hljs-comment">#项目主页</span></span><br><span class="line">    s.license       = &#123; <span class="hljs-symbol">:type</span> =&gt; <span class="hljs-string">'MIT'</span>, <span class="hljs-symbol">:file</span> =&gt; <span class="hljs-string">'LICENSE'</span> &#125; <span class="hljs-comment">#开源协议</span></span><br><span class="line">    s.author        = &#123; <span class="hljs-string">'CoderTitan'</span> =&gt; <span class="hljs-string">'quanjunt@163.com'</span> &#125; <span class="hljs-comment">#作者</span></span><br><span class="line">    s.platform      = <span class="hljs-symbol">:ios</span>, <span class="hljs-string">'8.0'</span> <span class="hljs-comment">#支持的平台</span></span><br><span class="line">    s.requires_arc  = <span class="hljs-literal">true</span> <span class="hljs-comment">#arc和mrc选项</span></span><br><span class="line">    s.libraries     = <span class="hljs-string">'z'</span>, <span class="hljs-string">'sqlite3'</span> <span class="hljs-comment">#表示依赖的系统类库，比如libz.dylib等</span></span><br><span class="line">    s.frameworks    = <span class="hljs-string">'UIKit'</span>,<span class="hljs-string">'AVFoundation'</span> <span class="hljs-comment">#表示依赖系统的框架</span></span><br><span class="line">    s.ios.vendored_frameworks = <span class="hljs-string">'TKBase/TKBase.framework'</span> <span class="hljs-comment"># 依赖的第三方/自己的framework</span></span><br><span class="line">    s.vendored_libraries = <span class="hljs-string">'Library/Classes/libWeChatSDK.a'</span> <span class="hljs-comment">#表示依赖第三方/自己的静态库（比如libWeChatSDK.a）</span></span><br><span class="line">    <span class="hljs-comment">#依赖的第三方的或者自己的静态库文件必须以lib为前缀进行命名，否则会出现找不到的情况，这一点非常重要</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">#平台信息</span></span><br><span class="line">    s.platform      = <span class="hljs-symbol">:ios</span>, <span class="hljs-string">'7.0'</span></span><br><span class="line">    s.ios.deployment_target = <span class="hljs-string">'7.0'</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">#文件配置项</span></span><br><span class="line">    s.source        = &#123; <span class="hljs-symbol">:git</span> =&gt; <span class="hljs-string">'https://github.com/CoderTitan/TitanModel.git'</span>, <span class="hljs-symbol">:tag</span> =&gt; s.version.to_s &#125;</span><br><span class="line">    <span class="hljs-comment">#配置项目的目标路径，如果不是本地开发，pod init/update会从这个路去拉去代码</span></span><br><span class="line"></span><br><span class="line">    s.source_files = <span class="hljs-string">'TitanModel/Classes/**/*'</span> <span class="hljs-comment">#你的源码位置</span></span><br><span class="line">    s.resources     = [<span class="hljs-string">'TitanModel/Assets/*'</span>] <span class="hljs-comment">#资源，比如图片，音频文件等</span></span><br><span class="line">    s.public_header_files = <span class="hljs-string">'TitanModel/Classes/TitanModel.h'</span>   <span class="hljs-comment">#需要对外开放的头文件</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">#依赖的项目内容 可以多个</span></span><br><span class="line">    s.dependency <span class="hljs-string">'MJExtension'</span></span><br><span class="line">    s.dependency <span class="hljs-string">'AFNetworking'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>s.name</code>：名称，<code>pod search</code>搜索的关键词,注意这里一定要和<code>.podspec</code>的名称一样,否则报错</li>
 <li><code>s.version</code>：版本号，<code>to_s</code>：返回一个字符串</li>
@@ -154,7 +251,7 @@
 <blockquote>
 <p><code>source_files</code>写法及含义</p>
 </blockquote>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"TitanModel"</span></span><br><span class="line"><span class="string">"Classes/**/*.&#123;h,m&#125;"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">"TitanModel"</span></span><br><span class="line"><span class="hljs-string">"Classes/**/*.&#123;h,m&#125;"</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>*</code>表示匹配所有文件</li>
 <li><code>*.{h,m}</code>表示匹配所有以<code>.h</code>和<code>.m</code>结尾的文件</li>
@@ -164,39 +261,39 @@
 <li>因为<code>cocoapods</code>是依赖<code>tag</code>版本的,所以必须打<code>tag</code>,以后再次更新只需要把你的项目打一个<code>tag</code>，然后修改<code>.podspec</code>文件中的版本接着提交到<code>cocoapods</code>官方就可以了</li>
 <li>要注意的是, 这里提交的版本号要和<code>TitanModel.podspec</code>文件中的版本号一致</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag &quot;v0.0.1&quot;  </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag &quot;v0.0.1&quot;  </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
 <h3 id="上传Podspec"><a href="#上传Podspec" class="headerlink" title="上传Podspec"></a>上传<code>Podspec</code></h3><ul>
 <li><code>Podspec</code>修改完成后, 上传到服务器时, 我们需要使用<code>trunk</code>进行上传</li>
 <li>首先要注册<code>trunk</code>, 在注册<code>trunk</code>之前，我们需要确认当前的<code>CocoaPods</code>版本是否足够新。<code>trunk</code>需要<code>pod</code>在<code>0.33</code>及以上版本，如果你不满足要求, 需要重新安装<code>pod</code></li>
 <li>更新结束后，我们开始注册<code>trunk</code>, 可参考官方文档<a href="https://guides.cocoapods.org/making/getting-setup-with-trunk.html" target="_blank" rel="noopener">Getting setup with Trunk</a></li>
 <li>终端输入以下命令</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pod trunk register 邮箱地址 &apos;用户名&apos; --description=&apos;描述&apos;</span><br><span class="line"></span><br><span class="line">// 示例</span><br><span class="line">pod trunk register quanjunt@163.com &apos;CoderTitan&apos; --description=&apos;macbook&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pod trunk register 邮箱地址 &apos;用户名&apos; --description=&apos;描述&apos;</span><br><span class="line"></span><br><span class="line">// 示例</span><br><span class="line">pod trunk register quanjunt@163.com &apos;CoderTitan&apos; --description=&apos;macbook&apos;</span><br></pre></td></tr></table></figure>
 <p>执行该命令后, 你的邮箱会受到一封邮件, 但是邮件要到垃圾邮件中才能找到, 打开邮件找到邮件中的网址并打开</p>
 <p><img src="http://p7hfnfk6u.bkt.clouddn.com/Snip20180629_1.png" alt="image"></p>
 <p>如果打开邮件中的链接和下面的页面一样, 则表示注册成功</p>
 <p><img src="http://p7hfnfk6u.bkt.clouddn.com/podspec.png" alt="注册成功"></p>
 <p>最后输入如下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk push TitanModel.podspec</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk push TitanModel.podspec</span><br></pre></td></tr></table></figure>
 <p>时间较长，耐性等待，大概5-10分钟, 成功后结果如下</p>
 <p><img src="http://p7hfnfk6u.bkt.clouddn.com/specSuccess.png" alt="trunk"></p>
 <ul>
 <li>上面图片中可以看到执行了<code>Updating spec repo master</code>命令, 该命令主要就是更新本地的<code>Specs</code>文件</li>
 <li>查看文件夹位置, 打开访达文件夹, <code>Shift+command+G</code>快捷键, 打开前往文件夹操作, 输入如下目录即可查看</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.cocoapods/repos/master/Specs</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.cocoapods/repos/master/Specs</span><br></pre></td></tr></table></figure>
 <h3 id="测试自己的cocoapods"><a href="#测试自己的cocoapods" class="headerlink" title="测试自己的cocoapods"></a>测试自己的cocoapods</h3><ul>
 <li>终端输入<code>pod search TitanModel</code>查看</li>
 <li>但是如果输入上述命令后, 终端输出如下错误</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[!] Unable to find a pod with name, author, summary, or description matching `TitanModel`</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[!] Unable to find a pod with name, author, summary, or description matching `TitanModel`</span><br></pre></td></tr></table></figure>
 <p>这是因为你的框架已经上传, 但是你的本地的搜索文件<code>search_index.json</code>没有更新, 所以搜索不到, 可以执行下面命令删除<code>search_index.json</code>文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm ~/Library/Caches/CocoaPods/search_index.json</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm ~/Library/Caches/CocoaPods/search_index.json</span><br></pre></td></tr></table></figure>
 <ul>
 <li>也可以直接找到该文件删除</li>
 <li>查看文件夹位置, 打开访达文件夹, <code>Shift+command+G</code>快捷键, 打开前往文件夹操作, 输入如下目录即可查看</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/Library/Caches/CocoaPods/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/Library/Caches/CocoaPods/</span><br></pre></td></tr></table></figure>
 <div class="note success"><p>搜索成功</p></div>
 
 <p><img src="http://p7hfnfk6u.bkt.clouddn.com/podSearch.png" alt="search"></p>
@@ -204,229 +301,1537 @@
 <li>设置版本号的时候一般有两种方式, 一种是前面带<code>v</code>的, 如: <code>v0.0.1</code>;另 一种是前面不带<code>v</code>的, 如:<code>0.0.1</code></li>
 <li>因为<code>v</code>而导致的报错</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">warning: Could not find remote branch 0.0.1 to clone.</span><br><span class="line"></span><br><span class="line">fatal: Remote branch 0.0.1 not found in upstream origin</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">warning: Could not find remote branch 0.0.1 to clone.</span><br><span class="line"></span><br><span class="line">fatal: Remote branch 0.0.1 not found in upstream origin</span><br></pre></td></tr></table></figure>
 <p>为解决以上问题, 设置版本号的方式和<code>spec</code>文件内的版本号方式一定要一致</p>
 <h4 id="不带v方式"><a href="#不带v方式" class="headerlink" title="不带v方式:"></a>不带v方式:</h4><p>设置版本号时:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 这里设置时, 不要带v</span><br><span class="line">git tag &apos;0.0.1&apos;  </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
-<p><code>spec</code>文件中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//这里不要带v</span><br><span class="line">s.version = &quot;0.0.2&quot;</span><br><span class="line">s.source = &#123; :git =&gt; &quot;https://github.com/CoderTitan/TitanModell.git&quot;, :tag =&gt; s.version &#125;</span><br><span class="line">//这里的tag也可以设置成具体的版本号, 只要与上面一样就好</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 这里设置时, 不要带v</span><br><span class="line">git tag &apos;0.0.1&apos;  </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+<p><code>spec</code>文件中<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//这里不要带v</span><br><span class="line">s.version = &quot;0.0.2&quot;</span><br><span class="line">s.source = &#123; :git =&gt; &quot;https://github.com/CoderTitan/TitanModell.git&quot;, :tag =&gt; s.version &#125;</span><br><span class="line">//这里的tag也可以设置成具体的版本号, 只要与上面一样就好</span><br></pre></td></tr></table></figure></p>
 <h4 id="带v方式"><a href="#带v方式" class="headerlink" title="带v方式:"></a>带v方式:</h4><p>设置版本号时:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 这里设置时, 要带v</span><br><span class="line">git tag &apos;v0.0.1&apos;  </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 这里设置时, 要带v</span><br><span class="line">git tag &apos;v0.0.1&apos;  </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
 <p><code>spec</code>文件中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//这里要带v</span><br><span class="line">s.version = &quot;v0.0.2&quot;</span><br><span class="line">s.source = &#123; :git =&gt; &quot;https://github.com/CoderTitan/TitanModell.git&quot;, :tag =&gt; &quot;v#&#123;s.version&#125; &#125;</span><br><span class="line">//这里的tag也可以设置成具体的版本号, 只要与上面一样就好</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//这里要带v</span><br><span class="line">s.version = &quot;v0.0.2&quot;</span><br><span class="line">s.source = &#123; :git =&gt; &quot;https://github.com/CoderTitan/TitanModell.git&quot;, :tag =&gt; &quot;v#&#123;s.version&#125; &#125;</span><br><span class="line">//这里的tag也可以设置成具体的版本号, 只要与上面一样就好</span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>最后对上述涉及到的终端命令做一个简单的总结</p>
 <h3 id="终端命令"><a href="#终端命令" class="headerlink" title="终端命令"></a>终端命令</h3><ol>
 <li>开源库发布之后，需要给项目打上<code>tag</code></li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag &quot;0.0.1&quot;  </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag &quot;0.0.1&quot;  </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li>进入到项目根目录下，创建<code>podspec</code>文件</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec create TitanModel</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec create TitanModel</span><br></pre></td></tr></table></figure>
 <ol start="3">
 <li>编辑<code>podspec</code>文件中的相关信息，有两个比较重要的地方<code>s.source</code>和<code>s.source_files</code>, 修改完成后, 验证是否有误</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint TitanModel.podspec</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint TitanModel.podspec</span><br></pre></td></tr></table></figure>
 <ol start="4">
 <li>注册<code>pod trunk</code></li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk register orta@cocoapods.org &apos;Orta Therox&apos; --description=&apos;macbook air&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk register orta@cocoapods.org &apos;Orta Therox&apos; --description=&apos;macbook air&apos;</span><br></pre></td></tr></table></figure>
 <ol start="5">
 <li>发布到<code>trunk</code></li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk push TitanModel.podspec</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk push TitanModel.podspec</span><br></pre></td></tr></table></figure>
 <ol start="6">
 <li>搜索发布的框架</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod search TitanModel</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod search TitanModel</span><br></pre></td></tr></table></figure>
 
-      
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/CocoaPods/">CocoaPods</a>, <a class="has-link-grey -link" href="/tags/git/">git</a>, <a class="has-link-grey -link" href="/tags/pod/">pod</a>, <a class="has-link-grey -link" href="/tags/spec/">spec</a>, <a class="has-link-grey -link" href="/tags/trunk/">trunk</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
-    <footer>
-      
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-  
-  <div class="categories">
-    <a href="/categories/组件化开发/">组件化开发</a>
-  </div>
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/08/10/Realm在iOS中的简单使用/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Realm在iOS中的简单使用</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/03/16/iOS神技之动态更换APP的Icon图/">
+                <span class="level-item">iOS神技之动态更换APP的Icon图</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="SooLe">
+                    
+                    <p class="is-size-4 is-block">
+                        SooLe
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        iOS
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>shenzhen</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Entradas
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        13
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categorias
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        9
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Etiquetas
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/arthurtop">
+                SEGUIR</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/arthurtop">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://weibo.com/3935895096677821">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://www.jianshu.com/u/cda07f394e73">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://juejin.im/user/5ac98725f265da23830b263b">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/arthurtop" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://github.com/arthurtop</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categorias
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Hexo博客/">
+            <span class="level-start">
+                <span class="level-item">Hexo博客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Socket学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Socket学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SwiftLint/">
+            <span class="level-start">
+                <span class="level-item">SwiftLint</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Swift学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift高阶功能/">
+            <span class="level-start">
+                <span class="level-item">Swift高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS动画/">
+            <span class="level-start">
+                <span class="level-item">iOS动画</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS高阶功能/">
+            <span class="level-start">
+                <span class="level-item">iOS高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数据库基础/">
+            <span class="level-start">
+                <span class="level-item">数据库基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/组件化开发/">
+            <span class="level-start">
+                <span class="level-item">组件化开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Nube de etiquetas
+        </h3>
+        <a href="/tags/AppIcon/" style="font-size: 10px;">AppIcon</a> <a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/CoreAnimation/" style="font-size: 10px;">CoreAnimation</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Homebrew/" style="font-size: 10px;">Homebrew</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Socket/" style="font-size: 10px;">Socket</a> <a href="/tags/Socket-IO/" style="font-size: 10px;">Socket.IO</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/Swift4-0/" style="font-size: 10px;">Swift4.0</a> <a href="/tags/SwiftLint/" style="font-size: 16.67px;">SwiftLint</a> <a href="/tags/UIStackView/" style="font-size: 10px;">UIStackView</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS-10-3/" style="font-size: 10px;">iOS 10.3</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/spec/" style="font-size: 10px;">spec</a> <a href="/tags/trunk/" style="font-size: 10px;">trunk</a> <a href="/tags/入坑/" style="font-size: 10px;">入坑</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/规则/" style="font-size: 13.33px;">规则</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recientes
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Socket搭建即时通讯服务器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-16T03:45:00.000Z">2018-11-16</time></div>
+                    <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="has-link-black-ter is-size-6">Socket搭建即时通讯服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Socket学习笔记/">Socket学习笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/10/Realm在iOS中的简单使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Realm在iOS中的简单使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-10T02:46:40.000Z">2018-08-10</time></div>
+                    <a href="/2018/08/10/Realm在iOS中的简单使用/" class="has-link-black-ter is-size-6">Realm在iOS中的简单使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库基础/">数据库基础</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="发布开源框架到CocoaPods入坑指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-06-29T12:06:20.000Z">2018-06-29</time></div>
+                    <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="has-link-black-ter is-size-6">发布开源框架到CocoaPods入坑指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/组件化开发/">组件化开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="iOS神技之动态更换APP的Icon图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-16T12:18:00.000Z">2018-03-16</time></div>
+                    <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="has-link-black-ter is-size-6">iOS神技之动态更换APP的Icon图</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Swift高阶功能/">Swift高阶功能</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SwiftLint代码规范属性说明03">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-10T12:04:54.000Z">2018-03-10</time></div>
+                    <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="has-link-black-ter is-size-6">SwiftLint代码规范属性说明03</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
 
         
-  
-  <div class="tags">
-    <a href="/tags/CocoaPods/">CocoaPods</a>, <a href="/tags/pod/">pod</a>, <a href="/tags/trunk/">trunk</a>, <a href="/tags/spec/">spec</a>, <a href="/tags/git/">git</a>
-  </div>
-
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archivos
+        </h3>
+        <ul class="menu-list">
         
-  <div class="addthis addthis_toolbox addthis_default_style">
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Etiquetas
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">6</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
     
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-<section id="comment">
-  <h1 class="title">Comments</h1>
-
-  
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="http://yoursite.com/2018/06/29/发布开源框架到CocoaPods入坑指南/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
-  
-</section>
-
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:yoursite.com">
-  </form>
 </div>
 
-  
-<div class="widget tag">
-  <h3 class="title">Categories</h3>
-  <ul class="entry">
-  
-    <li><a href="/categories/Hexo博客/">Hexo博客</a><small>1</small></li>
-  
-    <li><a href="/categories/Socket学习笔记/">Socket学习笔记</a><small>1</small></li>
-  
-    <li><a href="/categories/SwiftLint/">SwiftLint</a><small>4</small></li>
-  
-    <li><a href="/categories/Swift学习笔记/">Swift学习笔记</a><small>1</small></li>
-  
-    <li><a href="/categories/Swift高阶功能/">Swift高阶功能</a><small>2</small></li>
-  
-    <li><a href="/categories/iOS动画/">iOS动画</a><small>1</small></li>
-  
-    <li><a href="/categories/iOS高阶功能/">iOS高阶功能</a><small>1</small></li>
-  
-    <li><a href="/categories/数据库基础/">数据库基础</a><small>1</small></li>
-  
-    <li><a href="/categories/组件化开发/">组件化开发</a><small>1</small></li>
-  
-  </ul>
-</div>
+                
 
 
-  
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/AppIcon/">AppIcon</a><small>1</small></li>
-  
-    <li><a href="/tags/CocoaPods/">CocoaPods</a><small>1</small></li>
-  
-    <li><a href="/tags/CoreAnimation/">CoreAnimation</a><small>1</small></li>
-  
-    <li><a href="/tags/Error/">Error</a><small>1</small></li>
-  
-    <li><a href="/tags/Github/">Github</a><small>1</small></li>
-  
-    <li><a href="/tags/HTTPS/">HTTPS</a><small>1</small></li>
-  
-    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
-  
-    <li><a href="/tags/Homebrew/">Homebrew</a><small>1</small></li>
-  
-    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
-  
-    <li><a href="/tags/Objective-C/">Objective-C</a><small>1</small></li>
-  
-    <li><a href="/tags/Realm/">Realm</a><small>1</small></li>
-  
-    <li><a href="/tags/Socket/">Socket</a><small>1</small></li>
-  
-    <li><a href="/tags/Socket-IO/">Socket.IO</a><small>1</small></li>
-  
-    <li><a href="/tags/Swift/">Swift</a><small>6</small></li>
-  
-    <li><a href="/tags/Swift4-0/">Swift4.0</a><small>1</small></li>
-  
-    <li><a href="/tags/SwiftLint/">SwiftLint</a><small>4</small></li>
-  
-    <li><a href="/tags/UIStackView/">UIStackView</a><small>1</small></li>
-  
-    <li><a href="/tags/WebSocket/">WebSocket</a><small>1</small></li>
-  
-    <li><a href="/tags/git/">git</a><small>1</small></li>
-  
-    <li><a href="/tags/iOS/">iOS</a><small>1</small></li>
-  
-    <li><a href="/tags/iOS-10-3/">iOS 10.3</a><small>1</small></li>
-  
-    <li><a href="/tags/pod/">pod</a><small>1</small></li>
-  
-    <li><a href="/tags/spec/">spec</a><small>1</small></li>
-  
-    <li><a href="/tags/trunk/">trunk</a><small>1</small></li>
-  
-    <li><a href="/tags/入坑/">入坑</a><small>1</small></li>
-  
-    <li><a href="/tags/框架/">框架</a><small>1</small></li>
-  
-    <li><a href="/tags/规则/">规则</a><small>3</small></li>
-  
-  </ul>
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recientes
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Socket搭建即时通讯服务器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-16T03:45:00.000Z">2018-11-16</time></div>
+                    <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="has-link-black-ter is-size-6">Socket搭建即时通讯服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Socket学习笔记/">Socket学习笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/10/Realm在iOS中的简单使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Realm在iOS中的简单使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-10T02:46:40.000Z">2018-08-10</time></div>
+                    <a href="/2018/08/10/Realm在iOS中的简单使用/" class="has-link-black-ter is-size-6">Realm在iOS中的简单使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库基础/">数据库基础</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="发布开源框架到CocoaPods入坑指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-06-29T12:06:20.000Z">2018-06-29</time></div>
+                    <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="has-link-black-ter is-size-6">发布开源框架到CocoaPods入坑指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/组件化开发/">组件化开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="iOS神技之动态更换APP的Icon图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-16T12:18:00.000Z">2018-03-16</time></div>
+                    <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="has-link-black-ter is-size-6">iOS神技之动态更换APP的Icon图</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Swift高阶功能/">Swift高阶功能</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SwiftLint代码规范属性说明03">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-10T12:04:54.000Z">2018-03-10</time></div>
+                    <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="has-link-black-ter is-size-6">SwiftLint代码规范属性说明03</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
 </div>
 
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2018 John Doe
-  
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archivos
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
 </div>
-<div class="clearfix"></div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-<span id="busuanzi_container_site_pv">
-  本站总访问量<span id="busuanzi_value_site_pv"></span>次
-</span>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Etiquetas
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">6</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="发布开源框架到CocoaPods入坑指南" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2018 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
 </footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
 
 
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
 
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
 </script>
 
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Entradas',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
 </html>

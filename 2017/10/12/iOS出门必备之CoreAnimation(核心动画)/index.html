@@ -1,73 +1,166 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  <title>iOS出门必备之CoreAnimation(核心动画) | Hexo</title>
-  <meta name="author" content="John Doe">
-  
-  <meta name="description" content="前段时间接触到了一个牛逼的动画框架POP,本来想来装装逼,突然发现,苹果大大的CoreAnimation我还不会用呢!
-依稀记得乔帮主在2007年的WWDC大会上亲自为你演示Core Animation的强大：点击查看视频(不好意思,又装逼了)
-言归正传,我只是来温习一下CoreAnimation,还望路过的大神不要吐槽我太low
-GitHub项目地址">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+<title>iOS出门必备之CoreAnimation(核心动画) - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="iOS出门必备之CoreAnimation(核心动画)">
-  <meta property="og:site_name" content="Hexo">
 
-  
-    <meta property="og:image" content="">
-  
 
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="https://oindk07nf.qussl.com/atom-one-dark.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="https://oindk07nf.qussl.com/style.css?v=20170717" media="screen" type="text/css">
-  <link rel="stylesheet" href="https://oindk07nf.qussl.com/animation.css?v=7" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
+    <meta name="description" content="前段时间接触到了一个牛逼的动画框架POP,本来想来装装逼,突然发现,苹果大大的CoreAnimation我还不会用呢! 依稀记得乔帮主在2007年的WWDC大会上亲自为你演示Core Animation的强大：点击查看视频(不好意思,又装逼了) 言归正传,我只是来温习一下CoreAnimation,还望路过的大神不要吐槽我太low GitHub项目地址">
+<meta name="keywords" content="Swift,CoreAnimation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS出门必备之CoreAnimation(核心动画)">
+<meta property="og:url" content="http://yoursite.com/2017/10/12/iOS出门必备之CoreAnimation(核心动画)/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前段时间接触到了一个牛逼的动画框架POP,本来想来装装逼,突然发现,苹果大大的CoreAnimation我还不会用呢! 依稀记得乔帮主在2007年的WWDC大会上亲自为你演示Core Animation的强大：点击查看视频(不好意思,又装逼了) 言归正传,我只是来温习一下CoreAnimation,还望路过的大神不要吐槽我太low GitHub项目地址">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-7bc6a9dcfc3ff80f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-48e5ec518c8f535e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:updated_time" content="2018-12-18T15:26:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS出门必备之CoreAnimation(核心动画)">
+<meta name="twitter:description" content="前段时间接触到了一个牛逼的动画框架POP,本来想来装装逼,突然发现,苹果大大的CoreAnimation我还不会用呢! 依稀记得乔帮主在2007年的WWDC大会上亲自为你演示Core Animation的强大：点击查看视频(不好意思,又装逼了) 言归正传,我只是来温习一下CoreAnimation,还望路过的大神不要吐槽我太low GitHub项目地址">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4122543-7bc6a9dcfc3ff80f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
 
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
 </head>
-</html>
-
-<body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Hexo</a></h1>
-  <h2><a href="/"></a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="iOS出门必备之CoreAnimation(核心动画)" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
 </nav>
-<div class="clearfix"></div>
-</header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2017-10-12T11:48:28.000Z"><a href="/2017/10/12/iOS出门必备之CoreAnimation(核心动画)/">2017-10-12</a></time>
-      
-      
-  
-    <h1 class="title">iOS出门必备之CoreAnimation(核心动画)</h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <ul>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-10-12T11:48:28.000Z">2017-10-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/iOS动画/">iOS动画</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    25 minutes read (About 3691 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                iOS出门必备之CoreAnimation(核心动画)
+            
+        </h1>
+        <div class="content">
+            <ul>
 <li>前段时间接触到了一个牛逼的动画框架<a href="https://github.com/facebook/pop" target="_blank" rel="noopener">POP</a>,本来想来装装逼,突然发现,苹果大大的CoreAnimation我还不会用呢!</li>
 <li>依稀记得乔帮主在2007年的WWDC大会上亲自为你演示Core Animation的强大：<a href="http://v.youku.com/v_show/id_XMzQ2MTcwNDQ0.html" target="_blank" rel="noopener">点击查看视频</a>(不好意思,又装逼了)</li>
 <li>言归正传,我只是来温习一下CoreAnimation,还望路过的大神不要吐槽我太low</li>
@@ -100,33 +193,33 @@ GitHub项目地址">
 <li>图形会恢复到动画执行前的状态。如果想让图层保持显示动画执行后的状态，那就设置为false，不过还要设置<code>fillMode</code>为<code>kCAFillModeForwards</code></li>
 </ul>
 <p><strong>2). timingFunction：控制动画运行的节奏</strong></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** timingFunction可选的值 **/</span></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCAMediaTimingFunctionLinear: String</span><br><span class="line"><span class="comment">//1.(匀速): 在整个动画时间内动画都是以一个相同的速度来改变</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCAMediaTimingFunctionEaseIn: String</span><br><span class="line"><span class="comment">//2. (渐进): 缓慢进入, 加速离开</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCAMediaTimingFunctionEaseOut: String</span><br><span class="line"><span class="comment">//3. (渐出): 快速进入, 减速离开</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCAMediaTimingFunctionEaseInEaseOut: String</span><br><span class="line"><span class="comment">//4. (渐进渐出): 缓慢进入, 中间加速, 减速离开</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="number">3.0</span>, *)</span><br><span class="line">public let kCAMediaTimingFunctionDefault: String</span><br><span class="line"><span class="comment">//5. (默认): 效果基本等同于EaseOut(渐出)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/** timingFunction可选的值 **/</span></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCAMediaTimingFunctionLinear: String</span><br><span class="line"><span class="hljs-comment">//1.(匀速): 在整个动画时间内动画都是以一个相同的速度来改变</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCAMediaTimingFunctionEaseIn: String</span><br><span class="line"><span class="hljs-comment">//2. (渐进): 缓慢进入, 加速离开</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCAMediaTimingFunctionEaseOut: String</span><br><span class="line"><span class="hljs-comment">//3. (渐出): 快速进入, 减速离开</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCAMediaTimingFunctionEaseInEaseOut: String</span><br><span class="line"><span class="hljs-comment">//4. (渐进渐出): 缓慢进入, 中间加速, 减速离开</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="hljs-number">3.0</span>, *)</span><br><span class="line">public let kCAMediaTimingFunctionDefault: String</span><br><span class="line"><span class="hljs-comment">//5. (默认): 效果基本等同于EaseOut(渐出)</span></span><br></pre></td></tr></table></figure>
 <p><strong>3). fillMode决定当前对象在非active时间段的行为。</strong></p>
 <ul>
 <li>要想fillMode有效，需设置removedOnCompletion = false</li>
 <li>fillMode可选的值</li>
 </ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* `fillMode' options. */</span></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCAFillModeForwards: String</span><br><span class="line"><span class="comment">//1. 当动画结束后，layer会一直保持着动画最后的状态</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCAFillModeBackwards: String</span><br><span class="line"><span class="comment">//2. 设置为该值，将会立即执行动画的第一帧，不论是否设置了 beginTime属性。观察发现，设置该值，刚开始视图不见，还不知道应用在哪里</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCAFillModeBoth: String</span><br><span class="line"><span class="comment">//3. 该值是 kCAFillModeForwards 和 kCAFillModeBackwards的组合状态; 动画加入后开始之前，layer便处于动画初始状态，动画结束后layer保持动画最后的状态</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCAFillModeRemoved: String</span><br><span class="line"><span class="comment">//4. 默认值，动画将在设置的 beginTime 开始执行（如没有设置beginTime属性，则动画立即执行），动画执行完成后会将layer的改变恢复原状</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* `fillMode' options. */</span></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCAFillModeForwards: String</span><br><span class="line"><span class="hljs-comment">//1. 当动画结束后，layer会一直保持着动画最后的状态</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCAFillModeBackwards: String</span><br><span class="line"><span class="hljs-comment">//2. 设置为该值，将会立即执行动画的第一帧，不论是否设置了 beginTime属性。观察发现，设置该值，刚开始视图不见，还不知道应用在哪里</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCAFillModeBoth: String</span><br><span class="line"><span class="hljs-comment">//3. 该值是 kCAFillModeForwards 和 kCAFillModeBackwards的组合状态; 动画加入后开始之前，layer便处于动画初始状态，动画结束后layer保持动画最后的状态</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCAFillModeRemoved: String</span><br><span class="line"><span class="hljs-comment">//4. 默认值，动画将在设置的 beginTime 开始执行（如没有设置beginTime属性，则动画立即执行），动画执行完成后会将layer的改变恢复原状</span></span><br></pre></td></tr></table></figure>
 <p><strong>4). <code>delegate</code>：动画代理，用来监听动画的执行过程</strong></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public protocol <span class="built_in">CAAnimationDelegate</span> : <span class="built_in">NSObjectProtocol</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 动画开始执行的时候触发这个方法</span></span><br><span class="line">    @available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">    optional public func animationDidStart(_ anim: <span class="built_in">CAAnimation</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 动画执行完毕的时候触发这个方法</span></span><br><span class="line">    @available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">    optional public func animationDidStop(_ anim: <span class="built_in">CAAnimation</span>, finished flag: Bool)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public protocol <span class="hljs-built_in">CAAnimationDelegate</span> : <span class="hljs-built_in">NSObjectProtocol</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 动画开始执行的时候触发这个方法</span></span><br><span class="line">    @available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">    optional public func animationDidStart(_ anim: <span class="hljs-built_in">CAAnimation</span>)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 动画执行完毕的时候触发这个方法</span></span><br><span class="line">    @available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">    optional public func animationDidStop(_ anim: <span class="hljs-built_in">CAAnimation</span>, finished flag: Bool)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>5). 其他相关属性</strong></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">duration    动画的时长</span><br><span class="line">repeatCount    重复的次数。不停重复设置为 HUGE_VALF</span><br><span class="line">repeatDuration    设置动画的时间。在该时间内动画一直执行，不计次数。</span><br><span class="line">beginTime    指定动画开始的时间。从开始延迟几秒的话，设置为【<span class="built_in">CACurrentMediaTime</span>() + 秒数】 的方式</span><br><span class="line">timingFunction    设置动画的速度变化</span><br><span class="line">autoreverses    动画结束时是否执行逆动画</span><br><span class="line">fromValue    所改变属性的起始值(Swift中为Any类型,OC中要包装成<span class="built_in">NSValue</span>对象)</span><br><span class="line">toValue    所改变属性的结束时的值(类型与fromValue相同)</span><br><span class="line">byValue    所改变属性相同起始值的改变量(类型与fromValue相同)</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">duration    动画的时长</span><br><span class="line">repeatCount    重复的次数。不停重复设置为 HUGE_VALF</span><br><span class="line">repeatDuration    设置动画的时间。在该时间内动画一直执行，不计次数。</span><br><span class="line">beginTime    指定动画开始的时间。从开始延迟几秒的话，设置为【<span class="hljs-built_in">CACurrentMediaTime</span>() + 秒数】 的方式</span><br><span class="line">timingFunction    设置动画的速度变化</span><br><span class="line">autoreverses    动画结束时是否执行逆动画</span><br><span class="line">fromValue    所改变属性的起始值(Swift中为Any类型,OC中要包装成<span class="hljs-built_in">NSValue</span>对象)</span><br><span class="line">toValue    所改变属性的结束时的值(类型与fromValue相同)</span><br><span class="line">byValue    所改变属性相同起始值的改变量(类型与fromValue相同)</span><br></pre></td></tr></table></figure>
 <h2 id="CABasicAnimation"><a href="#CABasicAnimation" class="headerlink" title="CABasicAnimation"></a>CABasicAnimation</h2><ul>
 <li>CABasicAnimation是CAPropertyAnimation的子类，使用它可以实现一些基本的动画效果，它可以让CALayer的某个属性从某个值渐变到另一个值。下面就用CABasicAnimation实现几个简单的动画</li>
 </ul>
-<h3 id="平移动画"><a href="#平移动画" class="headerlink" title="平移动画"></a>平移动画</h3><h4 id="方法一-改变label的position"><a href="#方法一-改变label的position" class="headerlink" title="方法一: 改变label的position"></a>方法一: 改变label的position</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let caBasic = <span class="built_in">CABasicAnimation</span>(keyPath: <span class="string">"position"</span>)</span><br><span class="line">caBasic.duration = <span class="number">2</span></span><br><span class="line">caBasic.fromValue = redLabel.layer.position</span><br><span class="line">caBasic.toValue = <span class="built_in">CGPoint</span>(x: kScreenWidth - <span class="number">50</span>, y: <span class="number">200</span>)</span><br><span class="line">caBasic.delegate = <span class="keyword">self</span></span><br><span class="line">caBasic.isRemovedOnCompletion = <span class="literal">false</span></span><br><span class="line">caBasic.fillMode = kCAFillModeForwards</span><br><span class="line">redLabel.layer.add(caBasic, forKey: <span class="string">"redLabel1"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="平移动画"><a href="#平移动画" class="headerlink" title="平移动画"></a>平移动画</h3><h4 id="方法一-改变label的position"><a href="#方法一-改变label的position" class="headerlink" title="方法一: 改变label的position"></a>方法一: 改变label的position</h4><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let caBasic = <span class="hljs-built_in">CABasicAnimation</span>(keyPath: <span class="hljs-string">"position"</span>)</span><br><span class="line">caBasic.duration = <span class="hljs-number">2</span></span><br><span class="line">caBasic.fromValue = redLabel.layer.position</span><br><span class="line">caBasic.toValue = <span class="hljs-built_in">CGPoint</span>(x: kScreenWidth - <span class="hljs-number">50</span>, y: <span class="hljs-number">200</span>)</span><br><span class="line">caBasic.delegate = <span class="hljs-keyword">self</span></span><br><span class="line">caBasic.isRemovedOnCompletion = <span class="hljs-literal">false</span></span><br><span class="line">caBasic.fillMode = kCAFillModeForwards</span><br><span class="line">redLabel.layer.add(caBasic, forKey: <span class="hljs-string">"redLabel1"</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>初始化方法中是@”position”，说明要修改的是CALayer的position属性，也就是会执行平移动画</li>
 <li>默认情况下，动画执行完毕后，动画会自动从CALayer上移除，CALayer又会回到原来的状态。为了保持动画执行后的状态，可以加入第6、7行代码</li>
 <li>第8行后面的@”redLabel1”是给动画对象起个名称，以后可以调用CALayer的removeAnimationForKey:方法根据动画名称停止相应的动画</li>
 <li>遵循的代理方法</li>
 </ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">extension ViewController: <span class="built_in">CAAnimationDelegate</span> &#123;</span><br><span class="line">    <span class="comment">//开始执行</span></span><br><span class="line">    func animationDidStart(_ anim: <span class="built_in">CAAnimation</span>) &#123;</span><br><span class="line">        print(<span class="string">"开始动画--layer:"</span>, redLabel.layer.position)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//结束之行</span></span><br><span class="line">    func animationDidStop(_ anim: <span class="built_in">CAAnimation</span>, finished flag: Bool) &#123;</span><br><span class="line">        print(<span class="string">"结束动画--layer:"</span>, redLabel.layer.position)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//打印结果为:</span></span><br><span class="line"><span class="comment">//开始动画--layer: (35.0, 213.0)</span></span><br><span class="line"><span class="comment">//结束动画--layer: (35.0, 213.0)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">extension ViewController: <span class="hljs-built_in">CAAnimationDelegate</span> &#123;</span><br><span class="line">    <span class="hljs-comment">//开始执行</span></span><br><span class="line">    func animationDidStart(_ anim: <span class="hljs-built_in">CAAnimation</span>) &#123;</span><br><span class="line">        print(<span class="hljs-string">"开始动画--layer:"</span>, redLabel.layer.position)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">//结束之行</span></span><br><span class="line">    func animationDidStop(_ anim: <span class="hljs-built_in">CAAnimation</span>, finished flag: Bool) &#123;</span><br><span class="line">        print(<span class="hljs-string">"结束动画--layer:"</span>, redLabel.layer.position)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//打印结果为:</span></span><br><span class="line"><span class="hljs-comment">//开始动画--layer: (35.0, 213.0)</span></span><br><span class="line"><span class="hljs-comment">//结束动画--layer: (35.0, 213.0)</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>从打印信息可以看出，实际上，动画执行完毕后，并没有真正改变CALayer的position属性的值！</p>
 </blockquote>
-<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二."></a>方法二.</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> let basic = <span class="built_in">CABasicAnimation</span>(keyPath: <span class="string">"transform"</span>)</span><br><span class="line">basic.duration = <span class="number">2</span></span><br><span class="line">let form = <span class="built_in">CATransform3DMakeTranslation</span>(<span class="number">350</span>, <span class="number">400</span>, <span class="number">0</span>)</span><br><span class="line">basic.toValue = form</span><br><span class="line">blueLabel.layer.add(basic, forKey: <span class="string">"blueLabel"</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="旋转动画"><a href="#旋转动画" class="headerlink" title="旋转动画"></a>旋转动画</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let basic1 = <span class="built_in">CABasicAnimation</span>(keyPath: <span class="string">"transform"</span>)</span><br><span class="line">basic1.duration = <span class="number">1</span></span><br><span class="line">basic1.toValue = <span class="built_in">CATransform3DMakeRotation</span>(<span class="number">0.25</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">basic1.isRemovedOnCompletion = <span class="literal">false</span></span><br><span class="line">basic1.fillMode = kCAFillModeForwards</span><br><span class="line">blueLabel.layer.add(basic1, forKey: <span class="string">"basic1"</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二."></a>方法二.</h4><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> let basic = <span class="hljs-built_in">CABasicAnimation</span>(keyPath: <span class="hljs-string">"transform"</span>)</span><br><span class="line">basic.duration = <span class="hljs-number">2</span></span><br><span class="line">let form = <span class="hljs-built_in">CATransform3DMakeTranslation</span>(<span class="hljs-number">350</span>, <span class="hljs-number">400</span>, <span class="hljs-number">0</span>)</span><br><span class="line">basic.toValue = form</span><br><span class="line">blueLabel.layer.add(basic, forKey: <span class="hljs-string">"blueLabel"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="旋转动画"><a href="#旋转动画" class="headerlink" title="旋转动画"></a>旋转动画</h3><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let basic1 = <span class="hljs-built_in">CABasicAnimation</span>(keyPath: <span class="hljs-string">"transform"</span>)</span><br><span class="line">basic1.duration = <span class="hljs-number">1</span></span><br><span class="line">basic1.toValue = <span class="hljs-built_in">CATransform3DMakeRotation</span>(<span class="hljs-number">0.25</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)</span><br><span class="line">basic1.isRemovedOnCompletion = <span class="hljs-literal">false</span></span><br><span class="line">basic1.fillMode = kCAFillModeForwards</span><br><span class="line">blueLabel.layer.add(basic1, forKey: <span class="hljs-string">"basic1"</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>可以不用设置fromValue，这里只设置了toValue</li>
 </ul>
@@ -134,7 +227,7 @@ GitHub项目地址">
 <li>CALayer的宽度从0.5倍变为2倍</li>
 <li>CALayer的高度从0.5倍变为1.5倍</li>
 </ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let basic1 = <span class="built_in">CABasicAnimation</span>(keyPath: <span class="string">"transform"</span>)</span><br><span class="line">basic1.duration = <span class="number">1</span></span><br><span class="line">basic1.toValue = <span class="built_in">CATransform3DMakeScale</span>(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">1</span>)</span><br><span class="line">basic1.toValue = <span class="built_in">CATransform3DMakeScale</span>(<span class="number">2</span>, <span class="number">1.5</span>, <span class="number">1</span>)</span><br><span class="line">basic1.isRemovedOnCompletion = <span class="literal">false</span></span><br><span class="line">basic1.fillMode = kCAFillModeForwards</span><br><span class="line">blueLabel.layer.add(basic1, forKey: <span class="string">"basic1"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let basic1 = <span class="hljs-built_in">CABasicAnimation</span>(keyPath: <span class="hljs-string">"transform"</span>)</span><br><span class="line">basic1.duration = <span class="hljs-number">1</span></span><br><span class="line">basic1.toValue = <span class="hljs-built_in">CATransform3DMakeScale</span>(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">1</span>)</span><br><span class="line">basic1.toValue = <span class="hljs-built_in">CATransform3DMakeScale</span>(<span class="hljs-number">2</span>, <span class="hljs-number">1.5</span>, <span class="hljs-number">1</span>)</span><br><span class="line">basic1.isRemovedOnCompletion = <span class="hljs-literal">false</span></span><br><span class="line">basic1.fillMode = kCAFillModeForwards</span><br><span class="line">blueLabel.layer.add(basic1, forKey: <span class="hljs-string">"basic1"</span>)</span><br></pre></td></tr></table></figure>
 <blockquote>
 </blockquote>
 <ul>
@@ -224,14 +317,14 @@ GitHub项目地址">
 </li>
 <li><code>CABasicAnimation</code>可看做是只有2个关键帧的<code>CAKeyframeAnimation</code></li>
 </ul>
-<h3 id="values方式"><a href="#values方式" class="headerlink" title="values方式"></a>values方式</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let key = <span class="built_in">CAKeyframeAnimation</span>(keyPath: <span class="string">"position"</span>)</span><br><span class="line">key.duration = <span class="number">3</span></span><br><span class="line">key.repeatCount = HUGE <span class="comment">//无线循环</span></span><br><span class="line">key.calculationMode = kCAAnimationPaced</span><br><span class="line">key.values = [redLabel.frame.origin, <span class="built_in">CGPoint</span>(x: <span class="number">180</span>, y: <span class="number">70</span>), <span class="built_in">CGPoint</span>(x: <span class="number">180</span>, y: <span class="number">200</span>), redLabel.frame.origin]</span><br><span class="line">key.keyTimes = [<span class="built_in">NSNumber</span>(value: <span class="number">0.0</span>), <span class="built_in">NSNumber</span>(value: <span class="number">0.6</span>), <span class="built_in">NSNumber</span>(value: <span class="number">0.7</span>), <span class="built_in">NSNumber</span>(value: <span class="number">0.8</span>)]</span><br><span class="line">redLabel.layer.add(key, forKey: <span class="string">"key"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="values方式"><a href="#values方式" class="headerlink" title="values方式"></a>values方式</h3><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let key = <span class="hljs-built_in">CAKeyframeAnimation</span>(keyPath: <span class="hljs-string">"position"</span>)</span><br><span class="line">key.duration = <span class="hljs-number">3</span></span><br><span class="line">key.repeatCount = HUGE <span class="hljs-comment">//无线循环</span></span><br><span class="line">key.calculationMode = kCAAnimationPaced</span><br><span class="line">key.values = [redLabel.frame.origin, <span class="hljs-built_in">CGPoint</span>(x: <span class="hljs-number">180</span>, y: <span class="hljs-number">70</span>), <span class="hljs-built_in">CGPoint</span>(x: <span class="hljs-number">180</span>, y: <span class="hljs-number">200</span>), redLabel.frame.origin]</span><br><span class="line">key.keyTimes = [<span class="hljs-built_in">NSNumber</span>(value: <span class="hljs-number">0.0</span>), <span class="hljs-built_in">NSNumber</span>(value: <span class="hljs-number">0.6</span>), <span class="hljs-built_in">NSNumber</span>(value: <span class="hljs-number">0.7</span>), <span class="hljs-built_in">NSNumber</span>(value: <span class="hljs-number">0.8</span>)]</span><br><span class="line">redLabel.layer.add(key, forKey: <span class="hljs-string">"key"</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="CASpringAnimation"><a href="#CASpringAnimation" class="headerlink" title="CASpringAnimation"></a>CASpringAnimation</h2><ul>
 <li><code>CASpringAnimation</code>是iOS 9 新出的</li>
 <li><code>CASpringAnimation</code> 继承于<code>CABaseAnimation</code></li>
 <li><code>CASpringAnimation</code>是苹果专门解决开发者关于弹簧动画的这个需求而封装的类。</li>
 </ul>
-<h3 id="CASpringAnimation相关属性"><a href="#CASpringAnimation相关属性" class="headerlink" title="CASpringAnimation相关属性"></a>CASpringAnimation相关属性</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 质量，影响图层运动时的弹簧惯性，质量越大，弹簧拉伸和压缩的幅度越大, 默认值: 1</span></span><br><span class="line">open var mass: <span class="built_in">CGFloat</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2. 刚度系数(劲度系数/弹性系数)，刚度系数越大，形变产生的力就越大，运动越快(默认值: 100)</span></span><br><span class="line">open var stiffness: <span class="built_in">CGFloat</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//3. 阻尼系数，阻止弹簧伸缩的系数，阻尼系数越大，停止越快(默认值: 10)</span></span><br><span class="line">open var damping: <span class="built_in">CGFloat</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//4. 初始速率，动画视图的初始速度大小, 默认0</span></span><br><span class="line"><span class="comment">//速率为正数时，速度方向与运动方向一致，速率为负数时，速度方向与运动方向相反(默认值: 0)</span></span><br><span class="line">open var initialVelocity: <span class="built_in">CGFloat</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//5. 估算时间 返回弹簧动画到停止时的估算时间，根据当前的动画参数估算(只读)</span></span><br><span class="line">open var settlingDuration: <span class="built_in">CFTimeInterval</span> &#123; get &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let spring = <span class="built_in">CASpringAnimation</span>(keyPath: <span class="string">"position.y"</span>)</span><br><span class="line">spring.mass = <span class="number">5</span></span><br><span class="line">spring.stiffness = <span class="number">100</span></span><br><span class="line">spring.damping = <span class="number">5</span></span><br><span class="line">spring.initialVelocity = <span class="number">2</span></span><br><span class="line">spring.fromValue = blueLabel.layer.position.y</span><br><span class="line">spring.toValue = kScreenHeight - <span class="number">150</span></span><br><span class="line">spring.duration = spring.settlingDuration</span><br><span class="line">blueLabel.layer.add(spring, forKey: <span class="string">"spring"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="CASpringAnimation相关属性"><a href="#CASpringAnimation相关属性" class="headerlink" title="CASpringAnimation相关属性"></a>CASpringAnimation相关属性</h3><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//1. 质量，影响图层运动时的弹簧惯性，质量越大，弹簧拉伸和压缩的幅度越大, 默认值: 1</span></span><br><span class="line">open var mass: <span class="hljs-built_in">CGFloat</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//2. 刚度系数(劲度系数/弹性系数)，刚度系数越大，形变产生的力就越大，运动越快(默认值: 100)</span></span><br><span class="line">open var stiffness: <span class="hljs-built_in">CGFloat</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//3. 阻尼系数，阻止弹簧伸缩的系数，阻尼系数越大，停止越快(默认值: 10)</span></span><br><span class="line">open var damping: <span class="hljs-built_in">CGFloat</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//4. 初始速率，动画视图的初始速度大小, 默认0</span></span><br><span class="line"><span class="hljs-comment">//速率为正数时，速度方向与运动方向一致，速率为负数时，速度方向与运动方向相反(默认值: 0)</span></span><br><span class="line">open var initialVelocity: <span class="hljs-built_in">CGFloat</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//5. 估算时间 返回弹簧动画到停止时的估算时间，根据当前的动画参数估算(只读)</span></span><br><span class="line">open var settlingDuration: <span class="hljs-built_in">CFTimeInterval</span> &#123; get &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let spring = <span class="hljs-built_in">CASpringAnimation</span>(keyPath: <span class="hljs-string">"position.y"</span>)</span><br><span class="line">spring.mass = <span class="hljs-number">5</span></span><br><span class="line">spring.stiffness = <span class="hljs-number">100</span></span><br><span class="line">spring.damping = <span class="hljs-number">5</span></span><br><span class="line">spring.initialVelocity = <span class="hljs-number">2</span></span><br><span class="line">spring.fromValue = blueLabel.layer.position.y</span><br><span class="line">spring.toValue = kScreenHeight - <span class="hljs-number">150</span></span><br><span class="line">spring.duration = spring.settlingDuration</span><br><span class="line">blueLabel.layer.add(spring, forKey: <span class="hljs-string">"spring"</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="CAAnimationGroup动画组"><a href="#CAAnimationGroup动画组" class="headerlink" title="CAAnimationGroup动画组"></a>CAAnimationGroup动画组</h2><ul>
 <li>是CAAnimation的子类，可以保存一组动画对象，将CAAnimationGroup对象加入层后，组中所有动画对象可以同时并发运行</li>
 <li>属性说明：<ul>
@@ -243,7 +336,7 @@ GitHub项目地址">
 <h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例:"></a>代码示例:</h3><ul>
 <li>同时执行：平移、缩放、位移动画 -&gt; 使用动画组</li>
 </ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//动画组</span></span><br><span class="line">fileprivate func getCAAnimationGroup()&#123;</span><br><span class="line">    <span class="comment">//0. 初始化动画组</span></span><br><span class="line">    let group = <span class="built_in">CAAnimationGroup</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//1. 平移动画</span></span><br><span class="line">    let basic1 = <span class="built_in">CABasicAnimation</span>(keyPath: <span class="string">"position"</span>)</span><br><span class="line">    basic1.fromValue = blueLabel.layer.position</span><br><span class="line">    basic1.toValue = <span class="built_in">CGPoint</span>(x: <span class="built_in">CGFloat</span>(arc4random_uniform(<span class="number">200</span>)), y: <span class="built_in">CGFloat</span>(arc4random_uniform(<span class="number">500</span>)))</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2. 缩放动画</span></span><br><span class="line">    let basic2 = <span class="built_in">CABasicAnimation</span>(keyPath: <span class="string">"transform.scale"</span>)</span><br><span class="line">    var scale: <span class="built_in">CGFloat</span> = <span class="number">0.1</span></span><br><span class="line">    scale = scale &lt; <span class="number">1</span> ? <span class="number">1.5</span> : <span class="number">0.5</span></span><br><span class="line">    basic2.toValue = scale</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//3. 旋转动画</span></span><br><span class="line">    let basic3 = <span class="built_in">CABasicAnimation</span>(keyPath: <span class="string">"transform.rotation"</span>)</span><br><span class="line">    basic3.toValue = <span class="built_in">CGFloat</span>(arc4random_uniform(<span class="number">360</span>)) / <span class="number">180.0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//4. 添加到动画组</span></span><br><span class="line">    group.animations = [basic1, basic2, basic3]</span><br><span class="line">    <span class="comment">//取消反弹</span></span><br><span class="line">    group.isRemovedOnCompletion = <span class="literal">false</span></span><br><span class="line">    group.fillMode = kCAFillModeForwards</span><br><span class="line">    group.duration = <span class="number">0.5</span></span><br><span class="line">    blueLabel.layer.add(group, forKey: <span class="string">"group"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//动画组</span></span><br><span class="line">fileprivate func getCAAnimationGroup()&#123;</span><br><span class="line">    <span class="hljs-comment">//0. 初始化动画组</span></span><br><span class="line">    let group = <span class="hljs-built_in">CAAnimationGroup</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">//1. 平移动画</span></span><br><span class="line">    let basic1 = <span class="hljs-built_in">CABasicAnimation</span>(keyPath: <span class="hljs-string">"position"</span>)</span><br><span class="line">    basic1.fromValue = blueLabel.layer.position</span><br><span class="line">    basic1.toValue = <span class="hljs-built_in">CGPoint</span>(x: <span class="hljs-built_in">CGFloat</span>(arc4random_uniform(<span class="hljs-number">200</span>)), y: <span class="hljs-built_in">CGFloat</span>(arc4random_uniform(<span class="hljs-number">500</span>)))</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">//2. 缩放动画</span></span><br><span class="line">    let basic2 = <span class="hljs-built_in">CABasicAnimation</span>(keyPath: <span class="hljs-string">"transform.scale"</span>)</span><br><span class="line">    var scale: <span class="hljs-built_in">CGFloat</span> = <span class="hljs-number">0.1</span></span><br><span class="line">    scale = scale &lt; <span class="hljs-number">1</span> ? <span class="hljs-number">1.5</span> : <span class="hljs-number">0.5</span></span><br><span class="line">    basic2.toValue = scale</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">//3. 旋转动画</span></span><br><span class="line">    let basic3 = <span class="hljs-built_in">CABasicAnimation</span>(keyPath: <span class="hljs-string">"transform.rotation"</span>)</span><br><span class="line">    basic3.toValue = <span class="hljs-built_in">CGFloat</span>(arc4random_uniform(<span class="hljs-number">360</span>)) / <span class="hljs-number">180.0</span></span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">//4. 添加到动画组</span></span><br><span class="line">    group.animations = [basic1, basic2, basic3]</span><br><span class="line">    <span class="hljs-comment">//取消反弹</span></span><br><span class="line">    group.isRemovedOnCompletion = <span class="hljs-literal">false</span></span><br><span class="line">    group.fillMode = kCAFillModeForwards</span><br><span class="line">    group.duration = <span class="hljs-number">0.5</span></span><br><span class="line">    blueLabel.layer.add(group, forKey: <span class="hljs-string">"group"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="转场动画——CATransition"><a href="#转场动画——CATransition" class="headerlink" title="转场动画——CATransition"></a>转场动画——CATransition</h2><ul>
 <li><code>CATransition</code>是<code>CAAnimation</code>的子类，用于做转场动画，能够为layer层提供移出屏幕和移入屏幕的动画效果。</li>
 <li>iOS比Mac OS X的转场动画效果少一点<br><code>UINavigationController</code>就是通过<code>CATransition</code>实现了将控制器的视图推入屏幕的动画效果</li>
@@ -255,14 +348,14 @@ GitHub项目地址">
 </ul>
 </li>
 </ul>
-<h3 id="type和subtype属性说明"><a href="#type和subtype属性说明" class="headerlink" title="type和subtype属性说明"></a><code>type</code>和<code>subtype</code>属性说明</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* type类型 */</span></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCATransitionFade: String</span><br><span class="line"><span class="comment">//交叉淡化过渡</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCATransitionMoveIn: String</span><br><span class="line"><span class="comment">//新视图移到旧视图上面</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCATransitionPush: String</span><br><span class="line"><span class="comment">//新视图把旧视图推出去</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCATransitionReveal: String</span><br><span class="line"><span class="comment">//将旧视图移开,显示下面的新视图</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* subtypes类型 */</span></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCATransitionFromRight: String</span><br><span class="line"><span class="comment">//从右侧转场</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCATransitionFromLeft: String</span><br><span class="line"><span class="comment">//从左侧转场</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCATransitionFromTop: String</span><br><span class="line"><span class="comment">//从上部转场</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="number">2.0</span>, *)</span><br><span class="line">public let kCATransitionFromBottom: String</span><br><span class="line"><span class="comment">//从底部转场</span></span><br></pre></td></tr></table></figure>
+<h3 id="type和subtype属性说明"><a href="#type和subtype属性说明" class="headerlink" title="type和subtype属性说明"></a><code>type</code>和<code>subtype</code>属性说明</h3><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* type类型 */</span></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCATransitionFade: String</span><br><span class="line"><span class="hljs-comment">//交叉淡化过渡</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCATransitionMoveIn: String</span><br><span class="line"><span class="hljs-comment">//新视图移到旧视图上面</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCATransitionPush: String</span><br><span class="line"><span class="hljs-comment">//新视图把旧视图推出去</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCATransitionReveal: String</span><br><span class="line"><span class="hljs-comment">//将旧视图移开,显示下面的新视图</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/* subtypes类型 */</span></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCATransitionFromRight: String</span><br><span class="line"><span class="hljs-comment">//从右侧转场</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCATransitionFromLeft: String</span><br><span class="line"><span class="hljs-comment">//从左侧转场</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCATransitionFromTop: String</span><br><span class="line"><span class="hljs-comment">//从上部转场</span></span><br><span class="line"></span><br><span class="line">@available(iOS <span class="hljs-number">2.0</span>, *)</span><br><span class="line">public let kCATransitionFromBottom: String</span><br><span class="line"><span class="hljs-comment">//从底部转场</span></span><br></pre></td></tr></table></figure>
 <div class="note warning"><p> 注意：</p></div>
 
 <ul>
 <li>除了上述四种效果之外,还有很多私有API效果，使用的时候要小心，可能会导致app审核不被通过</li>
 <li>使用的时候要以字符串的形式</li>
 </ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cube     <span class="comment">//立方体翻滚效果</span></span><br><span class="line">oglFlip  <span class="comment">//上下左右翻转效果</span></span><br><span class="line">suckEffect   <span class="comment">//收缩效果，如一块布被抽走(不支持过渡方向)</span></span><br><span class="line">rippleEffect <span class="comment">//滴水效果(不支持过渡方向)</span></span><br><span class="line">pageCurl     <span class="comment">//向上翻页效果</span></span><br><span class="line">pageUnCurl   <span class="comment">//向下翻页效果</span></span><br><span class="line">cameraIrisHollowOpen  <span class="comment">//相机镜头打开效果(不支持过渡方向)</span></span><br><span class="line">cameraIrisHollowClose <span class="comment">//相机镜头关上效果(不支持过渡方向)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cube     <span class="hljs-comment">//立方体翻滚效果</span></span><br><span class="line">oglFlip  <span class="hljs-comment">//上下左右翻转效果</span></span><br><span class="line">suckEffect   <span class="hljs-comment">//收缩效果，如一块布被抽走(不支持过渡方向)</span></span><br><span class="line">rippleEffect <span class="hljs-comment">//滴水效果(不支持过渡方向)</span></span><br><span class="line">pageCurl     <span class="hljs-comment">//向上翻页效果</span></span><br><span class="line">pageUnCurl   <span class="hljs-comment">//向下翻页效果</span></span><br><span class="line">cameraIrisHollowOpen  <span class="hljs-comment">//相机镜头打开效果(不支持过渡方向)</span></span><br><span class="line">cameraIrisHollowClose <span class="hljs-comment">//相机镜头关上效果(不支持过渡方向)</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>效果参考</p>
 </blockquote>
@@ -270,9 +363,9 @@ GitHub项目地址">
 <h3 id="代码示例-1"><a href="#代码示例-1" class="headerlink" title="代码示例:"></a>代码示例:</h3><ul>
 <li>展示立方体翻滚效果的图片浏览</li>
 </ul>
-<h4 id="初始化变量"><a href="#初始化变量" class="headerlink" title="初始化变量"></a>初始化变量</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化变量</span></span><br><span class="line">fileprivate var imageView = <span class="built_in">UIImageView</span>(frame: <span class="built_in">UIScreen</span>.main.bounds)</span><br><span class="line">fileprivate var currentIndex = <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<h4 id="需要在viewDidLoad中调用一下方法"><a href="#需要在viewDidLoad中调用一下方法" class="headerlink" title="需要在viewDidLoad中调用一下方法"></a>需要在<code>viewDidLoad</code>中调用一下方法</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//转场动画</span></span><br><span class="line">    fileprivate func imageCATransition()&#123;</span><br><span class="line">        <span class="comment">//0.初始化ImageView</span></span><br><span class="line">        imageView.isUserInteractionEnabled = <span class="literal">true</span></span><br><span class="line">        imageView.image = <span class="built_in">UIImage</span>(named: <span class="string">"0.jpg"</span>)</span><br><span class="line">        view.addSubview(imageView)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//1. 添加滑动手势</span></span><br><span class="line">        let left = <span class="built_in">UISwipeGestureRecognizer</span>(target: <span class="keyword">self</span>, action: <span class="meta">#selector(leftSwipe(gesture:)))</span></span><br><span class="line">        left.direction = .left</span><br><span class="line">        imageView.addGestureRecognizer(left)</span><br><span class="line">        let right = <span class="built_in">UISwipeGestureRecognizer</span>(target: <span class="keyword">self</span>, action: <span class="meta">#selector(rightSwipe(gesture:)))</span></span><br><span class="line">        right.direction = .right</span><br><span class="line">        imageView.addGestureRecognizer(right)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="滑动后执行的方法"><a href="#滑动后执行的方法" class="headerlink" title="滑动后执行的方法"></a>滑动后执行的方法</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//MARK: 手势相关方法</span></span><br><span class="line"><span class="comment">//左滑</span></span><br><span class="line">@objc fileprivate func leftSwipe(gesture: <span class="built_in">UIGestureRecognizer</span>) &#123;</span><br><span class="line">    print(<span class="string">"左滑动"</span>)</span><br><span class="line">    transitionAnimation(isNext: <span class="literal">true</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//右滑</span></span><br><span class="line">@objc fileprivate func rightSwipe(gesture: <span class="built_in">UIGestureRecognizer</span>) &#123;</span><br><span class="line">    print(<span class="string">"右滑动"</span>)</span><br><span class="line">    transitionAnimation(isNext: <span class="literal">false</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置转场动画</span></span><br><span class="line">fileprivate func transitionAnimation(isNext: Bool)&#123;</span><br><span class="line">    let transition = <span class="built_in">CATransition</span>()</span><br><span class="line">    transition.type = kCATransitionFade</span><br><span class="line">    transition.subtype = isNext ? kCATransitionFromRight : kCATransitionFromLeft</span><br><span class="line">    transition.duration = <span class="number">1</span></span><br><span class="line">    imageView.image = getImage(isNext)</span><br><span class="line">    imageView.layer.add(transition, forKey: <span class="string">"transition"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取下/上一张图片</span></span><br><span class="line">fileprivate func getImage(_ isNext: Bool) -&gt; <span class="built_in">UIImage</span> &#123;</span><br><span class="line">    currentIndex = isNext ? currentIndex + <span class="number">1</span> : currentIndex - <span class="number">1</span></span><br><span class="line">    currentIndex = currentIndex &lt; <span class="number">0</span> ? <span class="number">7</span> : currentIndex</span><br><span class="line">    currentIndex = currentIndex &gt; <span class="number">7</span> ? <span class="number">0</span> : currentIndex</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">UIImage</span>(named: <span class="string">"\(currentIndex)"</span> + <span class="string">".jpg"</span>)!</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="初始化变量"><a href="#初始化变量" class="headerlink" title="初始化变量"></a>初始化变量</h4><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//初始化变量</span></span><br><span class="line">fileprivate var imageView = <span class="hljs-built_in">UIImageView</span>(frame: <span class="hljs-built_in">UIScreen</span>.main.bounds)</span><br><span class="line">fileprivate var currentIndex = <span class="hljs-number">0</span></span><br></pre></td></tr></table></figure>
+<h4 id="需要在viewDidLoad中调用一下方法"><a href="#需要在viewDidLoad中调用一下方法" class="headerlink" title="需要在viewDidLoad中调用一下方法"></a>需要在<code>viewDidLoad</code>中调用一下方法</h4><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//转场动画</span></span><br><span class="line">    fileprivate func imageCATransition()&#123;</span><br><span class="line">        <span class="hljs-comment">//0.初始化ImageView</span></span><br><span class="line">        imageView.isUserInteractionEnabled = <span class="hljs-literal">true</span></span><br><span class="line">        imageView.image = <span class="hljs-built_in">UIImage</span>(named: <span class="hljs-string">"0.jpg"</span>)</span><br><span class="line">        view.addSubview(imageView)</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment">//1. 添加滑动手势</span></span><br><span class="line">        let left = <span class="hljs-built_in">UISwipeGestureRecognizer</span>(target: <span class="hljs-keyword">self</span>, action: <span class="hljs-meta">#selector(leftSwipe(gesture:)))</span></span><br><span class="line">        left.direction = .left</span><br><span class="line">        imageView.addGestureRecognizer(left)</span><br><span class="line">        let right = <span class="hljs-built_in">UISwipeGestureRecognizer</span>(target: <span class="hljs-keyword">self</span>, action: <span class="hljs-meta">#selector(rightSwipe(gesture:)))</span></span><br><span class="line">        right.direction = .right</span><br><span class="line">        imageView.addGestureRecognizer(right)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="滑动后执行的方法"><a href="#滑动后执行的方法" class="headerlink" title="滑动后执行的方法"></a>滑动后执行的方法</h4><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//MARK: 手势相关方法</span></span><br><span class="line"><span class="hljs-comment">//左滑</span></span><br><span class="line">@objc fileprivate func leftSwipe(gesture: <span class="hljs-built_in">UIGestureRecognizer</span>) &#123;</span><br><span class="line">    print(<span class="hljs-string">"左滑动"</span>)</span><br><span class="line">    transitionAnimation(isNext: <span class="hljs-literal">true</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">//右滑</span></span><br><span class="line">@objc fileprivate func rightSwipe(gesture: <span class="hljs-built_in">UIGestureRecognizer</span>) &#123;</span><br><span class="line">    print(<span class="hljs-string">"右滑动"</span>)</span><br><span class="line">    transitionAnimation(isNext: <span class="hljs-literal">false</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//设置转场动画</span></span><br><span class="line">fileprivate func transitionAnimation(isNext: Bool)&#123;</span><br><span class="line">    let transition = <span class="hljs-built_in">CATransition</span>()</span><br><span class="line">    transition.type = kCATransitionFade</span><br><span class="line">    transition.subtype = isNext ? kCATransitionFromRight : kCATransitionFromLeft</span><br><span class="line">    transition.duration = <span class="hljs-number">1</span></span><br><span class="line">    imageView.image = getImage(isNext)</span><br><span class="line">    imageView.layer.add(transition, forKey: <span class="hljs-string">"transition"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//获取下/上一张图片</span></span><br><span class="line">fileprivate func getImage(_ isNext: Bool) -&gt; <span class="hljs-built_in">UIImage</span> &#123;</span><br><span class="line">    currentIndex = isNext ? currentIndex + <span class="hljs-number">1</span> : currentIndex - <span class="hljs-number">1</span></span><br><span class="line">    currentIndex = currentIndex &lt; <span class="hljs-number">0</span> ? <span class="hljs-number">7</span> : currentIndex</span><br><span class="line">    currentIndex = currentIndex &gt; <span class="hljs-number">7</span> ? <span class="hljs-number">0</span> : currentIndex</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-built_in">UIImage</span>(named: <span class="hljs-string">"\(currentIndex)"</span> + <span class="hljs-string">".jpg"</span>)!</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
 <li>核心动画给我们展示的只是一个假象，layer的的frame、bounds、position并不会在动画完毕之后发生改变。</li>
 <li>UIView封装的动画，会使会真实修改view的一些属性</li>
@@ -281,194 +374,1502 @@ GitHub项目地址">
 <li>如有不足之处,还望路过的大神多多指教</li>
 </ul>
 
-      
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/CoreAnimation/">CoreAnimation</a>, <a class="has-link-grey -link" href="/tags/Swift/">Swift</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
-    <footer>
-      
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-  
-  <div class="categories">
-    <a href="/categories/iOS动画/">iOS动画</a>
-  </div>
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/02/07/Xcode代码规范之SwiftLint配置/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Xcode代码规范之SwiftLint配置</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2017/08/25/升级Swift4.0遇到的坑/">
+                <span class="level-item">升级Swift4.0遇到的坑</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="SooLe">
+                    
+                    <p class="is-size-4 is-block">
+                        SooLe
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        iOS
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>shenzhen</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Entradas
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        13
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categorias
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        9
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Etiquetas
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/arthurtop">
+                SEGUIR</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/arthurtop">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://weibo.com/3935895096677821">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://www.jianshu.com/u/cda07f394e73">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://juejin.im/user/5ac98725f265da23830b263b">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/arthurtop" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://github.com/arthurtop</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categorias
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Hexo博客/">
+            <span class="level-start">
+                <span class="level-item">Hexo博客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Socket学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Socket学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SwiftLint/">
+            <span class="level-start">
+                <span class="level-item">SwiftLint</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Swift学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift高阶功能/">
+            <span class="level-start">
+                <span class="level-item">Swift高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS动画/">
+            <span class="level-start">
+                <span class="level-item">iOS动画</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS高阶功能/">
+            <span class="level-start">
+                <span class="level-item">iOS高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数据库基础/">
+            <span class="level-start">
+                <span class="level-item">数据库基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/组件化开发/">
+            <span class="level-start">
+                <span class="level-item">组件化开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Nube de etiquetas
+        </h3>
+        <a href="/tags/AppIcon/" style="font-size: 10px;">AppIcon</a> <a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/CoreAnimation/" style="font-size: 10px;">CoreAnimation</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Homebrew/" style="font-size: 10px;">Homebrew</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Socket/" style="font-size: 10px;">Socket</a> <a href="/tags/Socket-IO/" style="font-size: 10px;">Socket.IO</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/Swift4-0/" style="font-size: 10px;">Swift4.0</a> <a href="/tags/SwiftLint/" style="font-size: 16.67px;">SwiftLint</a> <a href="/tags/UIStackView/" style="font-size: 10px;">UIStackView</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS-10-3/" style="font-size: 10px;">iOS 10.3</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/spec/" style="font-size: 10px;">spec</a> <a href="/tags/trunk/" style="font-size: 10px;">trunk</a> <a href="/tags/入坑/" style="font-size: 10px;">入坑</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/规则/" style="font-size: 13.33px;">规则</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recientes
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Socket搭建即时通讯服务器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-16T03:45:00.000Z">2018-11-16</time></div>
+                    <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="has-link-black-ter is-size-6">Socket搭建即时通讯服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Socket学习笔记/">Socket学习笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/10/Realm在iOS中的简单使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Realm在iOS中的简单使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-10T02:46:40.000Z">2018-08-10</time></div>
+                    <a href="/2018/08/10/Realm在iOS中的简单使用/" class="has-link-black-ter is-size-6">Realm在iOS中的简单使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库基础/">数据库基础</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="发布开源框架到CocoaPods入坑指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-06-29T12:06:20.000Z">2018-06-29</time></div>
+                    <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="has-link-black-ter is-size-6">发布开源框架到CocoaPods入坑指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/组件化开发/">组件化开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="iOS神技之动态更换APP的Icon图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-16T12:18:00.000Z">2018-03-16</time></div>
+                    <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="has-link-black-ter is-size-6">iOS神技之动态更换APP的Icon图</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Swift高阶功能/">Swift高阶功能</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SwiftLint代码规范属性说明03">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-10T12:04:54.000Z">2018-03-10</time></div>
+                    <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="has-link-black-ter is-size-6">SwiftLint代码规范属性说明03</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
 
         
-  
-  <div class="tags">
-    <a href="/tags/Swift/">Swift</a>, <a href="/tags/CoreAnimation/">CoreAnimation</a>
-  </div>
-
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archivos
+        </h3>
+        <ul class="menu-list">
         
-  <div class="addthis addthis_toolbox addthis_default_style">
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Etiquetas
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">6</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
     
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-<section id="comment">
-  <h1 class="title">Comments</h1>
-
-  
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="http://yoursite.com/2017/10/12/iOS出门必备之CoreAnimation(核心动画)/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
-  
-</section>
-
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:yoursite.com">
-  </form>
 </div>
 
-  
-<div class="widget tag">
-  <h3 class="title">Categories</h3>
-  <ul class="entry">
-  
-    <li><a href="/categories/Hexo博客/">Hexo博客</a><small>1</small></li>
-  
-    <li><a href="/categories/Socket学习笔记/">Socket学习笔记</a><small>1</small></li>
-  
-    <li><a href="/categories/SwiftLint/">SwiftLint</a><small>4</small></li>
-  
-    <li><a href="/categories/Swift学习笔记/">Swift学习笔记</a><small>1</small></li>
-  
-    <li><a href="/categories/Swift高阶功能/">Swift高阶功能</a><small>2</small></li>
-  
-    <li><a href="/categories/iOS动画/">iOS动画</a><small>1</small></li>
-  
-    <li><a href="/categories/iOS高阶功能/">iOS高阶功能</a><small>1</small></li>
-  
-    <li><a href="/categories/数据库基础/">数据库基础</a><small>1</small></li>
-  
-    <li><a href="/categories/组件化开发/">组件化开发</a><small>1</small></li>
-  
-  </ul>
-</div>
+                
 
 
-  
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/AppIcon/">AppIcon</a><small>1</small></li>
-  
-    <li><a href="/tags/CocoaPods/">CocoaPods</a><small>1</small></li>
-  
-    <li><a href="/tags/CoreAnimation/">CoreAnimation</a><small>1</small></li>
-  
-    <li><a href="/tags/Error/">Error</a><small>1</small></li>
-  
-    <li><a href="/tags/Github/">Github</a><small>1</small></li>
-  
-    <li><a href="/tags/HTTPS/">HTTPS</a><small>1</small></li>
-  
-    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
-  
-    <li><a href="/tags/Homebrew/">Homebrew</a><small>1</small></li>
-  
-    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
-  
-    <li><a href="/tags/Objective-C/">Objective-C</a><small>1</small></li>
-  
-    <li><a href="/tags/Realm/">Realm</a><small>1</small></li>
-  
-    <li><a href="/tags/Socket/">Socket</a><small>1</small></li>
-  
-    <li><a href="/tags/Socket-IO/">Socket.IO</a><small>1</small></li>
-  
-    <li><a href="/tags/Swift/">Swift</a><small>6</small></li>
-  
-    <li><a href="/tags/Swift4-0/">Swift4.0</a><small>1</small></li>
-  
-    <li><a href="/tags/SwiftLint/">SwiftLint</a><small>4</small></li>
-  
-    <li><a href="/tags/UIStackView/">UIStackView</a><small>1</small></li>
-  
-    <li><a href="/tags/WebSocket/">WebSocket</a><small>1</small></li>
-  
-    <li><a href="/tags/git/">git</a><small>1</small></li>
-  
-    <li><a href="/tags/iOS/">iOS</a><small>1</small></li>
-  
-    <li><a href="/tags/iOS-10-3/">iOS 10.3</a><small>1</small></li>
-  
-    <li><a href="/tags/pod/">pod</a><small>1</small></li>
-  
-    <li><a href="/tags/spec/">spec</a><small>1</small></li>
-  
-    <li><a href="/tags/trunk/">trunk</a><small>1</small></li>
-  
-    <li><a href="/tags/入坑/">入坑</a><small>1</small></li>
-  
-    <li><a href="/tags/框架/">框架</a><small>1</small></li>
-  
-    <li><a href="/tags/规则/">规则</a><small>3</small></li>
-  
-  </ul>
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recientes
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Socket搭建即时通讯服务器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-16T03:45:00.000Z">2018-11-16</time></div>
+                    <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="has-link-black-ter is-size-6">Socket搭建即时通讯服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Socket学习笔记/">Socket学习笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/10/Realm在iOS中的简单使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Realm在iOS中的简单使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-10T02:46:40.000Z">2018-08-10</time></div>
+                    <a href="/2018/08/10/Realm在iOS中的简单使用/" class="has-link-black-ter is-size-6">Realm在iOS中的简单使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库基础/">数据库基础</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="发布开源框架到CocoaPods入坑指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-06-29T12:06:20.000Z">2018-06-29</time></div>
+                    <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="has-link-black-ter is-size-6">发布开源框架到CocoaPods入坑指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/组件化开发/">组件化开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="iOS神技之动态更换APP的Icon图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-16T12:18:00.000Z">2018-03-16</time></div>
+                    <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="has-link-black-ter is-size-6">iOS神技之动态更换APP的Icon图</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Swift高阶功能/">Swift高阶功能</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SwiftLint代码规范属性说明03">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-10T12:04:54.000Z">2018-03-10</time></div>
+                    <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="has-link-black-ter is-size-6">SwiftLint代码规范属性说明03</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
 </div>
 
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2018 John Doe
-  
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archivos
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
 </div>
-<div class="clearfix"></div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-<span id="busuanzi_container_site_pv">
-  本站总访问量<span id="busuanzi_value_site_pv"></span>次
-</span>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Etiquetas
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">6</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="iOS出门必备之CoreAnimation(核心动画)" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2018 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
 </footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
 
 
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
 
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
 </script>
 
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Entradas',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
 </html>

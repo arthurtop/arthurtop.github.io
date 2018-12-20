@@ -1,75 +1,163 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  <title>SwiftLint代码规范属性说明03 | Hexo</title>
-  <meta name="author" content="John Doe">
-  
-  <meta name="description" content="这篇文章是继前两篇文章的继续更新
-Xcode代码规范之SwiftLint配置–这篇文章对SwiftLint进行了简单介绍和针对Xcode的相关配置
-SwiftLint代码规范属性说明01–这里介绍了上半部分的相关属性的介绍
-SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性的介绍
+    <meta charset="utf-8">
+<title>SwiftLint代码规范属性说明03 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-下面来具体介绍一下SwiftLint的其他的代码规则的相关说明">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="SwiftLint代码规范属性说明03">
-  <meta property="og:site_name" content="Hexo">
 
-  
-    <meta property="og:image" content="">
-  
+    <meta name="description" content="这篇文章是继前两篇文章的继续更新 Xcode代码规范之SwiftLint配置–这篇文章对SwiftLint进行了简单介绍和针对Xcode的相关配置 SwiftLint代码规范属性说明01–这里介绍了上半部分的相关属性的介绍 SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性的介绍  下面来具体介绍一下SwiftLint的其他的代码规则的相关说明">
+<meta name="keywords" content="Swift,SwiftLint,规则">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SwiftLint代码规范属性说明03">
+<meta property="og:url" content="http://yoursite.com/2018/03/10/SwiftLint代码规范属性说明03/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这篇文章是继前两篇文章的继续更新 Xcode代码规范之SwiftLint配置–这篇文章对SwiftLint进行了简单介绍和针对Xcode的相关配置 SwiftLint代码规范属性说明01–这里介绍了上半部分的相关属性的介绍 SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性的介绍  下面来具体介绍一下SwiftLint的其他的代码规则的相关说明">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-18T15:26:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SwiftLint代码规范属性说明03">
+<meta name="twitter:description" content="这篇文章是继前两篇文章的继续更新 Xcode代码规范之SwiftLint配置–这篇文章对SwiftLint进行了简单介绍和针对Xcode的相关配置 SwiftLint代码规范属性说明01–这里介绍了上半部分的相关属性的介绍 SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性的介绍  下面来具体介绍一下SwiftLint的其他的代码规则的相关说明">
 
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="https://oindk07nf.qussl.com/atom-one-dark.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="https://oindk07nf.qussl.com/style.css?v=20170717" media="screen" type="text/css">
-  <link rel="stylesheet" href="https://oindk07nf.qussl.com/animation.css?v=7" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
 
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
 </head>
-</html>
-
-<body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Hexo</a></h1>
-  <h2><a href="/"></a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="SwiftLint代码规范属性说明03" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
 </nav>
-<div class="clearfix"></div>
-</header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-03-10T12:04:54.000Z"><a href="/2018/03/10/SwiftLint代码规范属性说明03/">2018-03-10</a></time>
-      
-      
-  
-    <h1 class="title">SwiftLint代码规范属性说明03</h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <ul>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-03-10T12:04:54.000Z">2018-03-10</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    20 minutes read (About 3037 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                SwiftLint代码规范属性说明03
+            
+        </h1>
+        <div class="content">
+            <ul>
 <li>这篇文章是继前两篇文章的继续更新</li>
 <li><a href="https://www.titanjun.top/2018/02/07/Xcode%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E4%B9%8BSwiftLint%E9%85%8D%E7%BD%AE/" target="_blank" rel="noopener">Xcode代码规范之SwiftLint配置</a>–这篇文章对SwiftLint进行了简单介绍和针对Xcode的相关配置</li>
 <li><a href="https://www.titanjun.top/2018/03/03/SwiftLint%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B1%9E%E6%80%A7%E8%AF%B4%E6%98%8E01/" target="_blank" rel="noopener">SwiftLint代码规范属性说明01</a>–这里介绍了上半部分的相关属性的介绍</li>
@@ -99,7 +187,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//应该是这样</span></span><br><span class="line"><span class="keyword">switch</span> someBool &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="literal">true</span>: <span class="comment">// case 1</span></span><br><span class="line">    print('red')</span><br><span class="line"><span class="keyword">case</span> <span class="literal">false</span>:</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">case</span> let .someEnum(val) = someFunc() &#123;</span><br><span class="line">        print('blue')</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//而不是这样</span></span><br><span class="line"><span class="keyword">switch</span> someBool &#123;</span><br><span class="line">    ↓<span class="keyword">case</span> <span class="literal">true</span>:</span><br><span class="line">         print('red')</span><br><span class="line">    ↓<span class="keyword">case</span> <span class="literal">false</span>:</span><br><span class="line">         print('blue')</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//应该是这样</span></span><br><span class="line"><span class="hljs-keyword">switch</span> someBool &#123;</span><br><span class="line"><span class="hljs-keyword">case</span> <span class="hljs-literal">true</span>: <span class="hljs-comment">// case 1</span></span><br><span class="line">    print('red')</span><br><span class="line"><span class="hljs-keyword">case</span> <span class="hljs-literal">false</span>:</span><br><span class="line">    <span class="hljs-keyword">if</span> <span class="hljs-keyword">case</span> let .someEnum(val) = someFunc() &#123;</span><br><span class="line">        print('blue')</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//而不是这样</span></span><br><span class="line"><span class="hljs-keyword">switch</span> someBool &#123;</span><br><span class="line">    ↓<span class="hljs-keyword">case</span> <span class="hljs-literal">true</span>:</span><br><span class="line">         print('red')</span><br><span class="line">    ↓<span class="hljs-keyword">case</span> <span class="hljs-literal">false</span>:</span><br><span class="line">         print('blue')</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="规则102-switch-case-on-newline"><a href="#规则102-switch-case-on-newline" class="headerlink" title="规则102: switch_case_on_newline"></a>规则102: switch_case_on_newline</h3><p>在switch语法里， case应该总是在一个新行上面</p>
 <table>
 <thead>
@@ -120,7 +208,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// swiftlint表示会触发warning</span></span><br><span class="line">    <span class="keyword">switch</span> type &#123;</span><br><span class="line">    <span class="keyword">case</span> .value1: print(<span class="string">"1"</span>)...................在同一行错</span><br><span class="line">    <span class="keyword">case</span> .value2: print(<span class="string">"2"</span>)...................在同一行错</span><br><span class="line">    <span class="keyword">default</span>: print(<span class="string">"3"</span>)...................在同一行错</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// 不会触发warning</span></span><br><span class="line">    <span class="keyword">switch</span> type &#123;</span><br><span class="line">    <span class="keyword">case</span> .value1:</span><br><span class="line">        print(<span class="string">"1"</span>)</span><br><span class="line">    <span class="keyword">case</span> .value2:</span><br><span class="line">        print(<span class="string">"2"</span>)</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        print(<span class="string">"3"</span>)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// swiftlint表示会触发warning</span></span><br><span class="line">    <span class="hljs-keyword">switch</span> type &#123;</span><br><span class="line">    <span class="hljs-keyword">case</span> .value1: print(<span class="hljs-string">"1"</span>)...................在同一行错</span><br><span class="line">    <span class="hljs-keyword">case</span> .value2: print(<span class="hljs-string">"2"</span>)...................在同一行错</span><br><span class="line">    <span class="hljs-keyword">default</span>: print(<span class="hljs-string">"3"</span>)...................在同一行错</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/// 不会触发warning</span></span><br><span class="line">    <span class="hljs-keyword">switch</span> type &#123;</span><br><span class="line">    <span class="hljs-keyword">case</span> .value1:</span><br><span class="line">        print(<span class="hljs-string">"1"</span>)</span><br><span class="line">    <span class="hljs-keyword">case</span> .value2:</span><br><span class="line">        print(<span class="hljs-string">"2"</span>)</span><br><span class="line">    <span class="hljs-keyword">default</span>:</span><br><span class="line">        print(<span class="hljs-string">"3"</span>)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h3 id="规则103-syntactic-sugar"><a href="#规则103-syntactic-sugar" class="headerlink" title="规则103: syntactic_sugar"></a>规则103: syntactic_sugar</h3><p>swiftlint推荐使用速记语法糖， 例如 [Int] 代替 Array, 强烈建议推荐使用</p>
 <table>
 <thead>
@@ -141,7 +229,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 触发warning</span></span><br><span class="line">    let myArray: Array&lt;Int&gt; = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">    print(myArray)</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// 正确写法，不会触发warning</span></span><br><span class="line">    let myArray: [Int] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">    print(myArray)</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// 触发warning</span></span><br><span class="line">    let myArray: Array&lt;Int&gt; = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]</span><br><span class="line">    print(myArray)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/// 正确写法，不会触发warning</span></span><br><span class="line">    let myArray: [Int] = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]</span><br><span class="line">    print(myArray)</span><br></pre></td></tr></table></figure>
 <h3 id="规则104-todo"><a href="#规则104-todo" class="headerlink" title="规则104: todo"></a>规则104: todo</h3><p>TODO 和 FIXME 应该避免使用， 使用“notaTODO 和 notaFIXME”代替。另外， 和 MARK 标记不同的是， “notaTODO 和 notaFIXME”没有空格要求</p>
 <table>
 <thead>
@@ -181,7 +269,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//推荐使用</span></span><br><span class="line">foo.map &#123; $<span class="number">0</span> + <span class="number">1</span> &#125;</span><br><span class="line">foo.reduce(<span class="number">0</span>) &#123; $<span class="number">0</span> + <span class="number">1</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不推荐使用</span></span><br><span class="line">foo.map(&#123; $<span class="number">0</span> + <span class="number">1</span> &#125;)</span><br><span class="line">↓foo.reduce(<span class="number">0</span>, combine: &#123; $<span class="number">0</span> + <span class="number">1</span> &#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//推荐使用</span></span><br><span class="line">foo.map &#123; $<span class="hljs-number">0</span> + <span class="hljs-number">1</span> &#125;</span><br><span class="line">foo.reduce(<span class="hljs-number">0</span>) &#123; $<span class="hljs-number">0</span> + <span class="hljs-number">1</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//不推荐使用</span></span><br><span class="line">foo.map(&#123; $<span class="hljs-number">0</span> + <span class="hljs-number">1</span> &#125;)</span><br><span class="line">↓foo.reduce(<span class="hljs-number">0</span>, combine: &#123; $<span class="hljs-number">0</span> + <span class="hljs-number">1</span> &#125;)</span><br></pre></td></tr></table></figure>
 <h3 id="规则106-trailing-comma"><a href="#规则106-trailing-comma" class="headerlink" title="规则106: trailing_comma"></a>规则106: trailing_comma</h3><p>…<br>这个属性主要针对数组和字典最后一个元素, 不建议在最后一个元素会面加逗号</p>
 <table>
 <thead>
@@ -202,7 +290,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 数组这样写是没有任何问题的, 但是最后一个元素3后面加了一个逗号“,”尽管这样不会报错，但是这会让程序的可读性变差</span></span><br><span class="line">let ages = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,]</span><br><span class="line">let person = [<span class="string">"XingYun"</span>: <span class="number">98</span>, <span class="string">"JinGang"</span>: <span class="number">128</span>, <span class="string">"LangKe"</span>: <span class="number">18</span>,]</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 使用swiftlint的trailing_comma规则后，就会报warning， 所以正确的写法不应该加上这个“,”</span></span><br><span class="line">let ages = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">let person = [<span class="string">"XingYun"</span>: <span class="number">98</span>, <span class="string">"JinGang"</span>: <span class="number">128</span>, <span class="string">"LangKe"</span>: <span class="number">18</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// 数组这样写是没有任何问题的, 但是最后一个元素3后面加了一个逗号“,”尽管这样不会报错，但是这会让程序的可读性变差</span></span><br><span class="line">let ages = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>,]</span><br><span class="line">let person = [<span class="hljs-string">"XingYun"</span>: <span class="hljs-number">98</span>, <span class="hljs-string">"JinGang"</span>: <span class="hljs-number">128</span>, <span class="hljs-string">"LangKe"</span>: <span class="hljs-number">18</span>,]</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 使用swiftlint的trailing_comma规则后，就会报warning， 所以正确的写法不应该加上这个“,”</span></span><br><span class="line">let ages = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]</span><br><span class="line">let person = [<span class="hljs-string">"XingYun"</span>: <span class="hljs-number">98</span>, <span class="hljs-string">"JinGang"</span>: <span class="hljs-number">128</span>, <span class="hljs-string">"LangKe"</span>: <span class="hljs-number">18</span>]</span><br></pre></td></tr></table></figure>
 <h3 id="规则107-trailing-newline"><a href="#规则107-trailing-newline" class="headerlink" title="规则107: trailing_newline"></a>规则107: trailing_newline</h3><p>文件（属性、方法）结束的的时候（“}”之前）， 应该有一个空格新行，但这里要注意的是</p>
 <table>
 <thead>
@@ -223,7 +311,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 空一行，不会触发警告</span></span><br><span class="line">nonTriggeringExamples: [</span><br><span class="line">    <span class="string">"let a = 0\n"</span></span><br><span class="line">],</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 下面会触发警告</span></span><br><span class="line">triggeringExamples: [</span><br><span class="line">    <span class="string">"let a = 0"</span>,   <span class="comment">/// 不空行，会触发警告（实际上，我试过，不会触发警告）</span></span><br><span class="line">    <span class="string">"let a = 0\n\n"</span>   <span class="comment">/// 空两行， 会触发警告（实际上，我试过，会触发警告，但是触发的是vertical_whitespace警告而不是trailing_newline）</span></span><br><span class="line">],</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 说说这里，它要求改正为都空一行，虽然这样code看起来很轻松，但如果定义变量或常量太多，就太分散了（值得说的是，就算不空行也不会触发trailing_newline, 应该刚才也已经说了，这个属性只是说“应该”，而不是必须）</span></span><br><span class="line">corrections: [</span><br><span class="line">    <span class="string">"let a = 0"</span>: <span class="string">"let a = 0\n"</span>,</span><br><span class="line">    <span class="string">"let b = 0\n\n"</span>: <span class="string">"let b = 0\n"</span>,</span><br><span class="line">    <span class="string">"let c = 0\n\n\n\n"</span>: <span class="string">"let c = 0\n"</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// 空一行，不会触发警告</span></span><br><span class="line">nonTriggeringExamples: [</span><br><span class="line">    <span class="hljs-string">"let a = 0\n"</span></span><br><span class="line">],</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 下面会触发警告</span></span><br><span class="line">triggeringExamples: [</span><br><span class="line">    <span class="hljs-string">"let a = 0"</span>,   <span class="hljs-comment">/// 不空行，会触发警告（实际上，我试过，不会触发警告）</span></span><br><span class="line">    <span class="hljs-string">"let a = 0\n\n"</span>   <span class="hljs-comment">/// 空两行， 会触发警告（实际上，我试过，会触发警告，但是触发的是vertical_whitespace警告而不是trailing_newline）</span></span><br><span class="line">],</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 说说这里，它要求改正为都空一行，虽然这样code看起来很轻松，但如果定义变量或常量太多，就太分散了（值得说的是，就算不空行也不会触发trailing_newline, 应该刚才也已经说了，这个属性只是说“应该”，而不是必须）</span></span><br><span class="line">corrections: [</span><br><span class="line">    <span class="hljs-string">"let a = 0"</span>: <span class="hljs-string">"let a = 0\n"</span>,</span><br><span class="line">    <span class="hljs-string">"let b = 0\n\n"</span>: <span class="hljs-string">"let b = 0\n"</span>,</span><br><span class="line">    <span class="hljs-string">"let c = 0\n\n\n\n"</span>: <span class="hljs-string">"let c = 0\n"</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <h3 id="规则108-trailing-semicolon"><a href="#规则108-trailing-semicolon" class="headerlink" title="规则108: trailing_semicolon"></a>规则108: trailing_semicolon</h3><p>尽管在变量或常量赋值之后加不加分号在swift中没有硬性的要求，但是为了使code style更swift化，所以尽量或者绝对不要加“;”</p>
 <table>
 <thead>
@@ -263,7 +351,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 下面这个例子不会触发警告，但是一旦其中有一个空行就会触发警告trailing_whitespace, 这和vertical_whitespace实质上有些冲突，vertical_whitespace要求两行code之间不超过1行，要么没有空行，要么只有1行，而trailing_whitespace要求没有空行！！！</span></span><br><span class="line"><span class="keyword">class</span> ViewController: <span class="built_in">UIViewController</span> &#123;</span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">    let a = <span class="number">0</span></span><br><span class="line">    let b = <span class="number">1</span></span><br><span class="line">    let c = <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line">func chenlong() -&gt; Void &#123;</span><br><span class="line">    let a = <span class="number">0</span></span><br><span class="line">    print(a)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// 下面这个例子不会触发警告，但是一旦其中有一个空行就会触发警告trailing_whitespace, 这和vertical_whitespace实质上有些冲突，vertical_whitespace要求两行code之间不超过1行，要么没有空行，要么只有1行，而trailing_whitespace要求没有空行！！！</span></span><br><span class="line"><span class="hljs-keyword">class</span> ViewController: <span class="hljs-built_in">UIViewController</span> &#123;</span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>.viewDidLoad()</span><br><span class="line">    let a = <span class="hljs-number">0</span></span><br><span class="line">    let b = <span class="hljs-number">1</span></span><br><span class="line">    let c = <span class="hljs-number">2</span></span><br><span class="line">&#125;</span><br><span class="line">func chenlong() -&gt; Void &#123;</span><br><span class="line">    let a = <span class="hljs-number">0</span></span><br><span class="line">    print(a)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="规则110-type-body-length"><a href="#规则110-type-body-length" class="headerlink" title="规则110: type_body_length"></a>规则110: type_body_length</h3><p>类型体长度。类型体长度不应该跨越太多行， 超过200行给warning，超过350行给error。一般是大括号或者括号内, 比如定义一个enum或struct</p>
 <table>
 <thead>
@@ -322,7 +410,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line"><span class="keyword">case</span> .bar:</span><br><span class="line">    <span class="keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    <span class="keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line"><span class="keyword">case</span> .bar:</span><br><span class="line">    something()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line"><span class="keyword">case</span> .bar:</span><br><span class="line"><span class="comment">//这里已经有方法调用了</span></span><br><span class="line">    something()</span><br><span class="line">    ↓<span class="keyword">break</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//不会触发warning</span></span><br><span class="line"><span class="hljs-keyword">switch</span> foo &#123;</span><br><span class="line"><span class="hljs-keyword">case</span> .bar:</span><br><span class="line">    <span class="hljs-keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">switch</span> foo &#123;</span><br><span class="line"><span class="hljs-keyword">default</span>:</span><br><span class="line">    <span class="hljs-keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">switch</span> foo &#123;</span><br><span class="line"><span class="hljs-keyword">case</span> .bar:</span><br><span class="line">    something()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//会触发warning</span></span><br><span class="line"><span class="hljs-keyword">switch</span> foo &#123;</span><br><span class="line"><span class="hljs-keyword">case</span> .bar:</span><br><span class="line"><span class="hljs-comment">//这里已经有方法调用了</span></span><br><span class="line">    something()</span><br><span class="line">    ↓<span class="hljs-keyword">break</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="规则113-unneeded-parentheses-in-closure-argument"><a href="#规则113-unneeded-parentheses-in-closure-argument" class="headerlink" title="规则113: unneeded_parentheses_in_closure_argument"></a>规则113: unneeded_parentheses_in_closure_argument</h3><p>…<br>在定义或使用闭包时,闭包参数不建议使用括号()</p>
 <table>
 <thead>
@@ -343,7 +431,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//建议</span></span><br><span class="line">let foo = &#123; (bar: Int) <span class="keyword">in</span> &#125;</span><br><span class="line">let foo = &#123; bar, _  <span class="keyword">in</span> &#125;</span><br><span class="line">let foo = &#123; bar <span class="keyword">in</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不建议</span></span><br><span class="line">call(arg: &#123; ↓(bar) <span class="keyword">in</span> &#125;)</span><br><span class="line">call(arg: &#123; ↓(bar, _) <span class="keyword">in</span> &#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//建议</span></span><br><span class="line">let foo = &#123; (bar: Int) <span class="hljs-keyword">in</span> &#125;</span><br><span class="line">let foo = &#123; bar, _  <span class="hljs-keyword">in</span> &#125;</span><br><span class="line">let foo = &#123; bar <span class="hljs-keyword">in</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//不建议</span></span><br><span class="line">call(arg: &#123; ↓(bar) <span class="hljs-keyword">in</span> &#125;)</span><br><span class="line">call(arg: &#123; ↓(bar, _) <span class="hljs-keyword">in</span> &#125;)</span><br></pre></td></tr></table></figure>
 <h3 id="规则114-unused-closure-parameter"><a href="#规则114-unused-closure-parameter" class="headerlink" title="规则114: unused_closure_parameter"></a>规则114: unused_closure_parameter</h3><p>swiftlint建议最好把不使用的闭包参数使用 “_”代替</p>
 <table>
 <thead>
@@ -364,7 +452,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map &#123; number <span class="keyword">in</span></span><br><span class="line"> number + <span class="number">1</span> </span><br><span class="line">&#125;</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map &#123; _ <span class="keyword">in</span></span><br><span class="line"> <span class="number">3</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map &#123; ↓number <span class="keyword">in</span></span><br><span class="line"> <span class="keyword">return</span> <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map &#123; ↓number <span class="keyword">in</span></span><br><span class="line"> <span class="keyword">return</span> numberWithSuffix</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//不会触发warning</span></span><br><span class="line">[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>].map &#123; number <span class="hljs-keyword">in</span></span><br><span class="line"> number + <span class="hljs-number">1</span> </span><br><span class="line">&#125;</span><br><span class="line">[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>].map &#123; _ <span class="hljs-keyword">in</span></span><br><span class="line"> <span class="hljs-number">3</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//会触发warning</span></span><br><span class="line">[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>].map &#123; ↓number <span class="hljs-keyword">in</span></span><br><span class="line"> <span class="hljs-keyword">return</span> <span class="hljs-number">3</span></span><br><span class="line">&#125;</span><br><span class="line">[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>].map &#123; ↓number <span class="hljs-keyword">in</span></span><br><span class="line"> <span class="hljs-keyword">return</span> numberWithSuffix</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="规则115-unused-enumerated"><a href="#规则115-unused-enumerated" class="headerlink" title="规则115: unused_enumerated"></a>规则115: unused_enumerated</h3><p>在for遍历数组时, 如有未使用的索引,不建议使用.enumerated()</p>
 <table>
 <thead>
@@ -385,7 +473,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line"><span class="keyword">for</span> (idx, foo) <span class="keyword">in</span> bar.enumerated() &#123; &#125;</span><br><span class="line"><span class="keyword">for</span> (_, foo) <span class="keyword">in</span> bar.enumerated().something() &#123; &#125;</span><br><span class="line"><span class="keyword">for</span> (_, foo) <span class="keyword">in</span> bar.something() &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line"><span class="keyword">for</span> (↓_, foo) <span class="keyword">in</span> bar.enumerated() &#123; &#125;</span><br><span class="line"><span class="keyword">for</span> (↓_, foo) <span class="keyword">in</span> abc.bar.enumerated() &#123; &#125;</span><br><span class="line"><span class="keyword">for</span> (↓_, foo) <span class="keyword">in</span> abc.something().enumerated() &#123; &#125;</span><br><span class="line"><span class="keyword">for</span> (idx, ↓_) <span class="keyword">in</span> bar.enumerated() &#123; &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//不会触发warning</span></span><br><span class="line"><span class="hljs-keyword">for</span> (idx, foo) <span class="hljs-keyword">in</span> bar.enumerated() &#123; &#125;</span><br><span class="line"><span class="hljs-keyword">for</span> (_, foo) <span class="hljs-keyword">in</span> bar.enumerated().something() &#123; &#125;</span><br><span class="line"><span class="hljs-keyword">for</span> (_, foo) <span class="hljs-keyword">in</span> bar.something() &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//会触发warning</span></span><br><span class="line"><span class="hljs-keyword">for</span> (↓_, foo) <span class="hljs-keyword">in</span> bar.enumerated() &#123; &#125;</span><br><span class="line"><span class="hljs-keyword">for</span> (↓_, foo) <span class="hljs-keyword">in</span> abc.bar.enumerated() &#123; &#125;</span><br><span class="line"><span class="hljs-keyword">for</span> (↓_, foo) <span class="hljs-keyword">in</span> abc.something().enumerated() &#123; &#125;</span><br><span class="line"><span class="hljs-keyword">for</span> (idx, ↓_) <span class="hljs-keyword">in</span> bar.enumerated() &#123; &#125;</span><br></pre></td></tr></table></figure>
 <h3 id="规则116-unused-optional-binding"><a href="#规则116-unused-optional-binding" class="headerlink" title="规则116: unused_optional_binding"></a>规则116: unused_optional_binding</h3><p>在使用if判断某变量是否为nil的时候, 不建议使用下划线(_)</p>
 <table>
 <thead>
@@ -406,7 +494,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line"><span class="keyword">if</span> let bar = Foo.optionalValue &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line"><span class="keyword">if</span> let ↓_ = Foo.optionalValue &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> let a = Foo.optionalValue, let ↓_ = Foo.optionalValue2 &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//不会触发warning</span></span><br><span class="line"><span class="hljs-keyword">if</span> let bar = Foo.optionalValue &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//会触发warning</span></span><br><span class="line"><span class="hljs-keyword">if</span> let ↓_ = Foo.optionalValue &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">if</span> let a = Foo.optionalValue, let ↓_ = Foo.optionalValue2 &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="规则117-valid-ibinspectable"><a href="#规则117-valid-ibinspectable" class="headerlink" title="规则117: valid_ibinspectable"></a>规则117: valid_ibinspectable</h3><p>@IBInspectable在swiftlint中的使用需要注意， 第一必须是变量， 第二必须要有指定的类型，如果指定的类型是可选类型或者隐式类型，则目前官方只支持以下几种类型：</p>
 <p>String, NSString, UIColor, NSColor, UIImage, NSImage.</p>
 <table>
@@ -428,7 +516,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 指定为变量var， 类型为String？和String！</span></span><br><span class="line">@IBInspectable private var yyy: String?</span><br><span class="line">@IBInspectable private var zzz: String!</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 如果写成这样，编译能通过，但是会触发警告, 因为swiftlint暂不支持Int可选和隐式类型:</span></span><br><span class="line">@IBInspectable private var dddl: Int!</span><br><span class="line">@IBInspectable private var eeel: Int?</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 如果指定的类型不是可选类型， 就应该初始化，否则系统不允许，会报错所在的类没有初始化</span></span><br><span class="line">对：</span><br><span class="line">@IBInspectable private var counts: Int = <span class="number">0</span></span><br><span class="line">系统报错：</span><br><span class="line">@IBInspectable private var counts: Int</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// 指定为变量var， 类型为String？和String！</span></span><br><span class="line">@IBInspectable private var yyy: String?</span><br><span class="line">@IBInspectable private var zzz: String!</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 如果写成这样，编译能通过，但是会触发警告, 因为swiftlint暂不支持Int可选和隐式类型:</span></span><br><span class="line">@IBInspectable private var dddl: Int!</span><br><span class="line">@IBInspectable private var eeel: Int?</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 如果指定的类型不是可选类型， 就应该初始化，否则系统不允许，会报错所在的类没有初始化</span></span><br><span class="line">对：</span><br><span class="line">@IBInspectable private var counts: Int = <span class="hljs-number">0</span></span><br><span class="line">系统报错：</span><br><span class="line">@IBInspectable private var counts: Int</span><br></pre></td></tr></table></figure>
 <h3 id="规则118-vertical-parameter-alignment"><a href="#规则118-vertical-parameter-alignment" class="headerlink" title="规则118: vertical_parameter_alignment"></a>规则118: vertical_parameter_alignment</h3><p>垂直方向上的参数对齐。当函数参数有多行的时候， 函数参数在垂直方向上应该对齐（参数换行的时候左边对齐）</p>
 <table>
 <thead>
@@ -449,7 +537,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line">func validateFunction(_ file: File, kind: SwiftDeclarationKind,</span><br><span class="line">                      dictionary: [String: SourceKitRepresentable]) &#123; &#125;</span><br><span class="line">                      </span><br><span class="line">func validateFunction(_ file: File, kind: SwiftDeclarationKind,</span><br><span class="line">                      dictionary: [String: SourceKitRepresentable])</span><br><span class="line">                      -&gt; [StyleViolation]</span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line">func validateFunction(_ file: File, kind: SwiftDeclarationKind,</span><br><span class="line">                  ↓dictionary: [String: SourceKitRepresentable]) &#123; &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//不会触发warning</span></span><br><span class="line">func validateFunction(_ file: File, kind: SwiftDeclarationKind,</span><br><span class="line">                      dictionary: [String: SourceKitRepresentable]) &#123; &#125;</span><br><span class="line">                      </span><br><span class="line">func validateFunction(_ file: File, kind: SwiftDeclarationKind,</span><br><span class="line">                      dictionary: [String: SourceKitRepresentable])</span><br><span class="line">                      -&gt; [StyleViolation]</span><br><span class="line"><span class="hljs-comment">//会触发warning</span></span><br><span class="line">func validateFunction(_ file: File, kind: SwiftDeclarationKind,</span><br><span class="line">                  ↓dictionary: [String: SourceKitRepresentable]) &#123; &#125;</span><br></pre></td></tr></table></figure>
 <h3 id="规则119-vertical-parameter-alignment-on-call"><a href="#规则119-vertical-parameter-alignment-on-call" class="headerlink" title="规则119: vertical_parameter_alignment_on_call"></a>规则119: vertical_parameter_alignment_on_call</h3><p>当调用多个参数的函数时,如果参数多行显示,则应该垂直对齐</p>
 <table>
 <thead>
@@ -470,7 +558,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line">foo(param1: <span class="number">1</span>, param2: bar</span><br><span class="line">    param3: <span class="literal">false</span>, param4: <span class="literal">true</span>)</span><br><span class="line">foo(param1: <span class="number">1</span>, param2: bar)</span><br><span class="line">foo(param1: <span class="number">1</span>, param2: bar</span><br><span class="line">    param3: <span class="literal">false</span>,</span><br><span class="line">    param4: <span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line">foo(param1: <span class="number">1</span>, param2: bar</span><br><span class="line">                ↓param3: <span class="literal">false</span>, param4: <span class="literal">true</span>)</span><br><span class="line">                </span><br><span class="line">foo(param1: <span class="number">1</span>, param2: bar</span><br><span class="line"> ↓param3: <span class="literal">false</span>, param4: <span class="literal">true</span>)</span><br><span class="line"> </span><br><span class="line">foo(param1: <span class="number">1</span>, param2: bar</span><br><span class="line">       ↓param3: <span class="literal">false</span>,</span><br><span class="line">       ↓param4: <span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//不会触发warning</span></span><br><span class="line">foo(param1: <span class="hljs-number">1</span>, param2: bar</span><br><span class="line">    param3: <span class="hljs-literal">false</span>, param4: <span class="hljs-literal">true</span>)</span><br><span class="line">foo(param1: <span class="hljs-number">1</span>, param2: bar)</span><br><span class="line">foo(param1: <span class="hljs-number">1</span>, param2: bar</span><br><span class="line">    param3: <span class="hljs-literal">false</span>,</span><br><span class="line">    param4: <span class="hljs-literal">true</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//会触发warning</span></span><br><span class="line">foo(param1: <span class="hljs-number">1</span>, param2: bar</span><br><span class="line">                ↓param3: <span class="hljs-literal">false</span>, param4: <span class="hljs-literal">true</span>)</span><br><span class="line">                </span><br><span class="line">foo(param1: <span class="hljs-number">1</span>, param2: bar</span><br><span class="line"> ↓param3: <span class="hljs-literal">false</span>, param4: <span class="hljs-literal">true</span>)</span><br><span class="line"> </span><br><span class="line">foo(param1: <span class="hljs-number">1</span>, param2: bar</span><br><span class="line">       ↓param3: <span class="hljs-literal">false</span>,</span><br><span class="line">       ↓param4: <span class="hljs-literal">true</span>)</span><br></pre></td></tr></table></figure>
 <h3 id="规则120-vertical-whitespace"><a href="#规则120-vertical-whitespace" class="headerlink" title="规则120: vertical_whitespace"></a>规则120: vertical_whitespace</h3><p>垂直方向上的空格行，限制为一行（注释除外）</p>
 <table>
 <thead>
@@ -491,7 +579,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 没有空格， nonTriggerWarning</span></span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">    let aaa = <span class="number">0</span></span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line"><span class="comment">/// 有一行空格, nonTriggerWarning</span></span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">    let aaa = <span class="number">0</span></span><br><span class="line">    ...........................<span class="number">.1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// &gt;=2行，就会触发警告</span></span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">    let aaa = <span class="number">0</span></span><br><span class="line">   ............................<span class="number">.1</span></span><br><span class="line">   ............................<span class="number">.2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// 没有空格， nonTriggerWarning</span></span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>.viewDidLoad()</span><br><span class="line">    let aaa = <span class="hljs-number">0</span></span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 有一行空格, nonTriggerWarning</span></span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>.viewDidLoad()</span><br><span class="line">    let aaa = <span class="hljs-number">0</span></span><br><span class="line">    ...........................<span class="hljs-number">.1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// &gt;=2行，就会触发警告</span></span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>.viewDidLoad()</span><br><span class="line">    let aaa = <span class="hljs-number">0</span></span><br><span class="line">   ............................<span class="hljs-number">.1</span></span><br><span class="line">   ............................<span class="hljs-number">.2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="规则121-void-return"><a href="#规则121-void-return" class="headerlink" title="规则121: void_return"></a>规则121: void_return</h3><p>多余的返回值为空， 在函数声明的时候，返回值为空是多余的。定义常量或者变量的时候可以</p>
 <table>
 <thead>
@@ -512,7 +600,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 这个属性要求这样写， 返回值为空省略</span></span><br><span class="line">func XingYun() &#123;</span><br><span class="line">    print(<span class="string">"titan"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 这个属性要求别这样写，否则会有warning（但是我在swift 3.0上测试并没有触发warning）</span></span><br><span class="line">func XingYun() -&gt; Void &#123;</span><br><span class="line">    print(<span class="string">"titan"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// 这个属性要求这样写， 返回值为空省略</span></span><br><span class="line">func XingYun() &#123;</span><br><span class="line">    print(<span class="hljs-string">"titan"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 这个属性要求别这样写，否则会有warning（但是我在swift 3.0上测试并没有触发warning）</span></span><br><span class="line">func XingYun() -&gt; Void &#123;</span><br><span class="line">    print(<span class="hljs-string">"titan"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="规则122-weak-delegate"><a href="#规则122-weak-delegate" class="headerlink" title="规则122: weak_delegate"></a>规则122: weak_delegate</h3><p>代理应该写成weak类型（弱代理）来避免循环引用</p>
 <table>
 <thead>
@@ -533,7 +621,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 1.1 编译通过</span></span><br><span class="line"><span class="keyword">class</span> Langke &#123;</span><br><span class="line">    var chenlong: <span class="built_in">NSObjectProtocol</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 1.2 编译通过，但是触发swiftlint的 weak_delegate警告， 原因是变量名 myDelegate 中有 delegate 关键字，这属于名字滥用</span></span><br><span class="line"><span class="keyword">class</span> Langke &#123;</span><br><span class="line">    var myDelegate: <span class="built_in">NSObjectProtocol</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 1.3 编译通过， 不会触发警告， 原因是在 var 关键字前面加了 weak</span></span><br><span class="line"><span class="keyword">class</span> Langke &#123;</span><br><span class="line">    <span class="keyword">weak</span> var myDelegate: <span class="built_in">NSObjectProtocol</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/// 2.1 编译通过，但是触发 weak_delegate 警告，原因是 scrollDelegate 中 Delegate 放在了最后， 被理解成了代理</span></span><br><span class="line"><span class="keyword">class</span> Langke &#123;</span><br><span class="line">    var scrollDelegate: <span class="built_in">UIScrollViewDelegate</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 2.2 编译通过， 既然变量名被理解成了代理， 那为了类似防止循环引用， 应该加关键字 weak</span></span><br><span class="line"><span class="keyword">class</span> Langke &#123;</span><br><span class="line">    <span class="keyword">weak</span> var scrollDelegate: <span class="built_in">UIScrollViewDelegate</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 编译通过， 不会触发警告， 因为delegate放在了前面， 没有被理解成代理</span></span><br><span class="line"><span class="keyword">class</span> Langke &#123;</span><br><span class="line">    var delegateScroll: <span class="built_in">UIScrollViewDelegate</span>?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// 1.1 编译通过</span></span><br><span class="line"><span class="hljs-keyword">class</span> Langke &#123;</span><br><span class="line">    var chenlong: <span class="hljs-built_in">NSObjectProtocol</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 1.2 编译通过，但是触发swiftlint的 weak_delegate警告， 原因是变量名 myDelegate 中有 delegate 关键字，这属于名字滥用</span></span><br><span class="line"><span class="hljs-keyword">class</span> Langke &#123;</span><br><span class="line">    var myDelegate: <span class="hljs-built_in">NSObjectProtocol</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 1.3 编译通过， 不会触发警告， 原因是在 var 关键字前面加了 weak</span></span><br><span class="line"><span class="hljs-keyword">class</span> Langke &#123;</span><br><span class="line">    <span class="hljs-keyword">weak</span> var myDelegate: <span class="hljs-built_in">NSObjectProtocol</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 2.1 编译通过，但是触发 weak_delegate 警告，原因是 scrollDelegate 中 Delegate 放在了最后， 被理解成了代理</span></span><br><span class="line"><span class="hljs-keyword">class</span> Langke &#123;</span><br><span class="line">    var scrollDelegate: <span class="hljs-built_in">UIScrollViewDelegate</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 2.2 编译通过， 既然变量名被理解成了代理， 那为了类似防止循环引用， 应该加关键字 weak</span></span><br><span class="line"><span class="hljs-keyword">class</span> Langke &#123;</span><br><span class="line">    <span class="hljs-keyword">weak</span> var scrollDelegate: <span class="hljs-built_in">UIScrollViewDelegate</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 编译通过， 不会触发警告， 因为delegate放在了前面， 没有被理解成代理</span></span><br><span class="line"><span class="hljs-keyword">class</span> Langke &#123;</span><br><span class="line">    var delegateScroll: <span class="hljs-built_in">UIScrollViewDelegate</span>?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="规则123-xctfail-message"><a href="#规则123-xctfail-message" class="headerlink" title="规则123: xctfail_message"></a>规则123: xctfail_message</h3><p>单元测试中,XCTFail调用应该包括声明描述</p>
 <table>
 <thead>
@@ -573,7 +661,7 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 </tbody>
 </table>
 <p>代码示例:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line"><span class="keyword">if</span> foo == <span class="number">42</span> &#123;&#125;</span><br><span class="line"><span class="keyword">if</span> foo &lt;= <span class="number">42.42</span> &#123;&#125;</span><br><span class="line">guard foo &gt;= <span class="number">42</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">guard foo != <span class="string">"str str"</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line">↓<span class="keyword">if</span> <span class="number">42</span> == foo &#123;&#125;</span><br><span class="line">↓<span class="keyword">if</span> <span class="number">42.42</span> &gt;= foo &#123;&#125;</span><br><span class="line">↓guard <span class="number">42</span> &lt;= foo <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">↓guard <span class="string">"str str"</span> != foo <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">↓<span class="keyword">while</span> <span class="number">10</span> &gt; foo &#123; &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//不会触发warning</span></span><br><span class="line"><span class="hljs-keyword">if</span> foo == <span class="hljs-number">42</span> &#123;&#125;</span><br><span class="line"><span class="hljs-keyword">if</span> foo &lt;= <span class="hljs-number">42.42</span> &#123;&#125;</span><br><span class="line">guard foo &gt;= <span class="hljs-number">42</span> <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line">guard foo != <span class="hljs-string">"str str"</span> <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//会触发warning</span></span><br><span class="line">↓<span class="hljs-keyword">if</span> <span class="hljs-number">42</span> == foo &#123;&#125;</span><br><span class="line">↓<span class="hljs-keyword">if</span> <span class="hljs-number">42.42</span> &gt;= foo &#123;&#125;</span><br><span class="line">↓guard <span class="hljs-number">42</span> &lt;= foo <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line">↓guard <span class="hljs-string">"str str"</span> != foo <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line">↓<span class="hljs-keyword">while</span> <span class="hljs-number">10</span> &gt; foo &#123; &#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>文中如有不足之处请多指教</p>
 </blockquote>
@@ -581,194 +669,1502 @@ SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性
 <p>持续更新中…..</p>
 </blockquote>
 
-      
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Swift/">Swift</a>, <a class="has-link-grey -link" href="/tags/SwiftLint/">SwiftLint</a>, <a class="has-link-grey -link" href="/tags/规则/">规则</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
-    <footer>
-      
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-  
-  <div class="categories">
-    <a href="/categories/SwiftLint/">SwiftLint</a>
-  </div>
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/03/16/iOS神技之动态更换APP的Icon图/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">iOS神技之动态更换APP的Icon图</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/03/10/SwiftLint代码规范属性说明02/">
+                <span class="level-item">SwiftLint代码规范属性说明02</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="SooLe">
+                    
+                    <p class="is-size-4 is-block">
+                        SooLe
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        iOS
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>shenzhen</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Entradas
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        13
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categorias
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        9
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Etiquetas
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/arthurtop">
+                SEGUIR</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/arthurtop">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://weibo.com/3935895096677821">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://www.jianshu.com/u/cda07f394e73">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://juejin.im/user/5ac98725f265da23830b263b">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/arthurtop" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://github.com/arthurtop</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categorias
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Hexo博客/">
+            <span class="level-start">
+                <span class="level-item">Hexo博客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Socket学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Socket学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SwiftLint/">
+            <span class="level-start">
+                <span class="level-item">SwiftLint</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Swift学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift高阶功能/">
+            <span class="level-start">
+                <span class="level-item">Swift高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS动画/">
+            <span class="level-start">
+                <span class="level-item">iOS动画</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS高阶功能/">
+            <span class="level-start">
+                <span class="level-item">iOS高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数据库基础/">
+            <span class="level-start">
+                <span class="level-item">数据库基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/组件化开发/">
+            <span class="level-start">
+                <span class="level-item">组件化开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Nube de etiquetas
+        </h3>
+        <a href="/tags/AppIcon/" style="font-size: 10px;">AppIcon</a> <a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/CoreAnimation/" style="font-size: 10px;">CoreAnimation</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Homebrew/" style="font-size: 10px;">Homebrew</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Socket/" style="font-size: 10px;">Socket</a> <a href="/tags/Socket-IO/" style="font-size: 10px;">Socket.IO</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/Swift4-0/" style="font-size: 10px;">Swift4.0</a> <a href="/tags/SwiftLint/" style="font-size: 16.67px;">SwiftLint</a> <a href="/tags/UIStackView/" style="font-size: 10px;">UIStackView</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS-10-3/" style="font-size: 10px;">iOS 10.3</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/spec/" style="font-size: 10px;">spec</a> <a href="/tags/trunk/" style="font-size: 10px;">trunk</a> <a href="/tags/入坑/" style="font-size: 10px;">入坑</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/规则/" style="font-size: 13.33px;">规则</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recientes
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Socket搭建即时通讯服务器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-16T03:45:00.000Z">2018-11-16</time></div>
+                    <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="has-link-black-ter is-size-6">Socket搭建即时通讯服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Socket学习笔记/">Socket学习笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/10/Realm在iOS中的简单使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Realm在iOS中的简单使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-10T02:46:40.000Z">2018-08-10</time></div>
+                    <a href="/2018/08/10/Realm在iOS中的简单使用/" class="has-link-black-ter is-size-6">Realm在iOS中的简单使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库基础/">数据库基础</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="发布开源框架到CocoaPods入坑指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-06-29T12:06:20.000Z">2018-06-29</time></div>
+                    <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="has-link-black-ter is-size-6">发布开源框架到CocoaPods入坑指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/组件化开发/">组件化开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="iOS神技之动态更换APP的Icon图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-16T12:18:00.000Z">2018-03-16</time></div>
+                    <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="has-link-black-ter is-size-6">iOS神技之动态更换APP的Icon图</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Swift高阶功能/">Swift高阶功能</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SwiftLint代码规范属性说明03">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-10T12:04:54.000Z">2018-03-10</time></div>
+                    <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="has-link-black-ter is-size-6">SwiftLint代码规范属性说明03</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
 
         
-  
-  <div class="tags">
-    <a href="/tags/Swift/">Swift</a>, <a href="/tags/SwiftLint/">SwiftLint</a>, <a href="/tags/规则/">规则</a>
-  </div>
-
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archivos
+        </h3>
+        <ul class="menu-list">
         
-  <div class="addthis addthis_toolbox addthis_default_style">
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Etiquetas
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">6</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
     
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-<section id="comment">
-  <h1 class="title">Comments</h1>
-
-  
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="http://yoursite.com/2018/03/10/SwiftLint代码规范属性说明03/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
-  
-</section>
-
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:yoursite.com">
-  </form>
 </div>
 
-  
-<div class="widget tag">
-  <h3 class="title">Categories</h3>
-  <ul class="entry">
-  
-    <li><a href="/categories/Hexo博客/">Hexo博客</a><small>1</small></li>
-  
-    <li><a href="/categories/Socket学习笔记/">Socket学习笔记</a><small>1</small></li>
-  
-    <li><a href="/categories/SwiftLint/">SwiftLint</a><small>4</small></li>
-  
-    <li><a href="/categories/Swift学习笔记/">Swift学习笔记</a><small>1</small></li>
-  
-    <li><a href="/categories/Swift高阶功能/">Swift高阶功能</a><small>2</small></li>
-  
-    <li><a href="/categories/iOS动画/">iOS动画</a><small>1</small></li>
-  
-    <li><a href="/categories/iOS高阶功能/">iOS高阶功能</a><small>1</small></li>
-  
-    <li><a href="/categories/数据库基础/">数据库基础</a><small>1</small></li>
-  
-    <li><a href="/categories/组件化开发/">组件化开发</a><small>1</small></li>
-  
-  </ul>
-</div>
+                
 
 
-  
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/AppIcon/">AppIcon</a><small>1</small></li>
-  
-    <li><a href="/tags/CocoaPods/">CocoaPods</a><small>1</small></li>
-  
-    <li><a href="/tags/CoreAnimation/">CoreAnimation</a><small>1</small></li>
-  
-    <li><a href="/tags/Error/">Error</a><small>1</small></li>
-  
-    <li><a href="/tags/Github/">Github</a><small>1</small></li>
-  
-    <li><a href="/tags/HTTPS/">HTTPS</a><small>1</small></li>
-  
-    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
-  
-    <li><a href="/tags/Homebrew/">Homebrew</a><small>1</small></li>
-  
-    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
-  
-    <li><a href="/tags/Objective-C/">Objective-C</a><small>1</small></li>
-  
-    <li><a href="/tags/Realm/">Realm</a><small>1</small></li>
-  
-    <li><a href="/tags/Socket/">Socket</a><small>1</small></li>
-  
-    <li><a href="/tags/Socket-IO/">Socket.IO</a><small>1</small></li>
-  
-    <li><a href="/tags/Swift/">Swift</a><small>6</small></li>
-  
-    <li><a href="/tags/Swift4-0/">Swift4.0</a><small>1</small></li>
-  
-    <li><a href="/tags/SwiftLint/">SwiftLint</a><small>4</small></li>
-  
-    <li><a href="/tags/UIStackView/">UIStackView</a><small>1</small></li>
-  
-    <li><a href="/tags/WebSocket/">WebSocket</a><small>1</small></li>
-  
-    <li><a href="/tags/git/">git</a><small>1</small></li>
-  
-    <li><a href="/tags/iOS/">iOS</a><small>1</small></li>
-  
-    <li><a href="/tags/iOS-10-3/">iOS 10.3</a><small>1</small></li>
-  
-    <li><a href="/tags/pod/">pod</a><small>1</small></li>
-  
-    <li><a href="/tags/spec/">spec</a><small>1</small></li>
-  
-    <li><a href="/tags/trunk/">trunk</a><small>1</small></li>
-  
-    <li><a href="/tags/入坑/">入坑</a><small>1</small></li>
-  
-    <li><a href="/tags/框架/">框架</a><small>1</small></li>
-  
-    <li><a href="/tags/规则/">规则</a><small>3</small></li>
-  
-  </ul>
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recientes
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Socket搭建即时通讯服务器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-16T03:45:00.000Z">2018-11-16</time></div>
+                    <a href="/2018/11/16/Socket搭建即时通讯服务器/" class="has-link-black-ter is-size-6">Socket搭建即时通讯服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Socket学习笔记/">Socket学习笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/10/Realm在iOS中的简单使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Realm在iOS中的简单使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-10T02:46:40.000Z">2018-08-10</time></div>
+                    <a href="/2018/08/10/Realm在iOS中的简单使用/" class="has-link-black-ter is-size-6">Realm在iOS中的简单使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库基础/">数据库基础</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="发布开源框架到CocoaPods入坑指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-06-29T12:06:20.000Z">2018-06-29</time></div>
+                    <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="has-link-black-ter is-size-6">发布开源框架到CocoaPods入坑指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/组件化开发/">组件化开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="iOS神技之动态更换APP的Icon图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-16T12:18:00.000Z">2018-03-16</time></div>
+                    <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="has-link-black-ter is-size-6">iOS神技之动态更换APP的Icon图</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Swift高阶功能/">Swift高阶功能</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SwiftLint代码规范属性说明03">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-10T12:04:54.000Z">2018-03-10</time></div>
+                    <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="has-link-black-ter is-size-6">SwiftLint代码规范属性说明03</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
 </div>
 
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2018 John Doe
-  
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archivos
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
 </div>
-<div class="clearfix"></div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-<span id="busuanzi_container_site_pv">
-  本站总访问量<span id="busuanzi_value_site_pv"></span>次
-</span>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Etiquetas
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">6</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="SwiftLint代码规范属性说明03" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2018 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
 </footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
 
 
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
 
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
 </script>
 
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Entradas',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
 </html>
