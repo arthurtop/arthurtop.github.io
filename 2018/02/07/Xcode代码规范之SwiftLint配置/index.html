@@ -1,0 +1,397 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Xcode代码规范之SwiftLint配置 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="前言
+最近公司大佬考虑将项目代码规范化, 然而自Xcode9之后,Xcode的插件基本处于废弃的状态大部分插件都是在一年前就停止更新了;
+于是在谷歌找到了一款强大的代码规范工具SwiftLint
+SwiftLint是 Realm 推出的一款 Swift 代码规范检查工具, SwiftLint 基于 Github 公布的 Swift 代码规范进行代码检查，并且能够很好的和 Xcode 整合
+Github 公布的 Swift 代码规范–原文
+Github 公布的 Swift 代码规范–中文
+配置好所有的设置之后，在 Xcode 中执行编译时，SwiftLint 会自动运行检查，不符合规范的代码会通过警告或者 红色错误 的形式指示出来
+支持自定义规则,可禁用或者开启某一些规则">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Xcode代码规范之SwiftLint配置">
+  <meta property="og:site_name" content="Hexo">
+
+  
+    <meta property="og:image" content="">
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/atom-one-dark.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/style.css?v=20170717" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/animation.css?v=7" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-02-07T07:34:34.000Z"><a href="/2018/02/07/Xcode代码规范之SwiftLint配置/">2018-02-07</a></time>
+      
+      
+  
+    <h1 class="title">Xcode代码规范之SwiftLint配置</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>最近公司大佬考虑将项目代码规范化, 然而自Xcode9之后,Xcode的插件基本处于废弃的状态大部分插件都是在一年前就停止更新了;</li>
+<li>于是在谷歌找到了一款强大的代码规范工具<a href="https://github.com/realm/SwiftLint" target="_blank" rel="noopener">SwiftLint</a></li>
+<li><a href="https://github.com/realm/SwiftLint" target="_blank" rel="noopener">SwiftLint</a>是 <a href="https://realm.io/" target="_blank" rel="noopener">Realm</a> 推出的一款 Swift 代码规范检查工具, SwiftLint 基于 <a href="https://github.com/Artwalk/swift-style-guide/blob/master/README_CN.md" target="_blank" rel="noopener">Github 公布的 Swift 代码规范</a>进行代码检查，并且能够很好的和 Xcode 整合</li>
+<li><a href="https://github.com/github/swift-style-guide" target="_blank" rel="noopener">Github 公布的 Swift 代码规范–原文</a></li>
+<li><a href="https://github.com/Artwalk/swift-style-guide/blob/master/README_CN.md" target="_blank" rel="noopener">Github 公布的 Swift 代码规范–中文</a></li>
+<li>配置好所有的设置之后，在 Xcode 中执行编译时，SwiftLint 会自动运行检查，不符合规范的代码会通过警告或者 红色错误 的形式指示出来</li>
+<li>支持自定义规则,可禁用或者开启某一些规则</li>
+</ul>
+<a id="more"></a>
+<h2 id="安装SwiftLint"><a href="#安装SwiftLint" class="headerlink" title="安装SwiftLint"></a>安装SwiftLint</h2><ul>
+<li>SwiftLint目前有三种安装方式可供选择,可以根据自己的项目需要自行选择</li>
+</ul>
+<h3 id="安装全局配置-Homebrew-安装"><a href="#安装全局配置-Homebrew-安装" class="headerlink" title="安装全局配置(Homebrew 安装)"></a>安装全局配置(Homebrew 安装)</h3><h4 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h4><ul>
+<li>Homebrew, Mac系统的包管理器，用于安装NodeJS和一些其他必需的工具软件, 输入以下代码安装:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
+<p>译注：在Max OS X 10.11（El Capitan)版本中，homebrew在安装软件时可能会碰到/usr/local目录不可写的权限问题。可以使用下面的命令修复：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R `whoami` /usr/local</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Homebrew 会自动安装最新版本</li>
+<li>打开终端输入以下代码:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install swiftlint</span><br></pre></td></tr></table></figure>
+<h4 id="安装成功-如下图所示"><a href="#安装成功-如下图所示" class="headerlink" title="安装成功,如下图所示:"></a>安装成功,如下图所示:</h4><p><img src="http://upload-images.jianshu.io/upload_images/4122543-aaabe87320b6b9f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Homebrew 安装"></p>
+<h3 id="使用-CocoaPods-安装"><a href="#使用-CocoaPods-安装" class="headerlink" title="使用 CocoaPods 安装"></a>使用 CocoaPods 安装</h3><ul>
+<li>这种方式只能针对单个项目有效,如果你想要针对不同的项目使用不同的<code>SwiftLint</code> 版本，这是一种很好的解决方案</li>
+<li>需要注意的是使用这种方案会将整个<code>SwiftLint</code>以及他的依赖包的完整资源文件都安装到 Pods/ 目录中去，所以在使用版本管理工具比如 <code>git/svn</code> 时要注意设置忽略相关目录</li>
+<li>CocosPods安装和安装第三方框架一样</li>
+<li>在根目录创建<code>Podfile</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod &apos;SwiftLint&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="使用安装包"><a href="#使用安装包" class="headerlink" title="使用安装包"></a>使用安装包</h3><p><code>SwiftLint</code> 还支持使用 <code>pkg</code> 安装包进行安装，在官方的 Github 页面可以找到最新发布的<a href="https://github.com/realm/SwiftLint/releases/tag/0.17.0" target="_blank" rel="noopener">安装包</a></p>
+<h2 id="查看SwiftLint的全部命令"><a href="#查看SwiftLint的全部命令" class="headerlink" title="查看SwiftLint的全部命令"></a>查看SwiftLint的全部命令</h2><ul>
+<li>等待安装完成，在终端输入 <code>swiftlint help</code> 可以查看所有可用的命令：</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-a9eaa0ae5b92f67b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SwiftLint的所有命令"></p>
+<p><strong>各个命令注释</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查看所有命令</span></span><br><span class="line">swiftlint help</span><br><span class="line"></span><br><span class="line"><span class="comment">//忽略空格导致的警告和错误</span></span><br><span class="line">swiftlint autocorrect</span><br><span class="line"></span><br><span class="line"><span class="comment">//输出所有的警告和错误</span></span><br><span class="line">swiftlint lint</span><br><span class="line"></span><br><span class="line"><span class="comment">//查看所有可获得的规则以及对应的 ID</span></span><br><span class="line">swiftlint rules</span><br><span class="line"></span><br><span class="line"><span class="comment">//产看当前版本号</span></span><br><span class="line">swiftlint version</span><br></pre></td></tr></table></figure>
+<ul>
+<li>我们将目录切换到工程的根目录之下，然后敲击如下命令:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swiftlint autocorrect</span><br></pre></td></tr></table></figure>
+<p>然后我们就会发现，所有的空格符Warning都消失了。这都得益于我们刚刚所进行的命令行操作，它会将已知的能够自动修复的Error和Warning都自动修复，大大的减轻了我们的工作量。</p>
+<h2 id="SwiftLint的使用"><a href="#SwiftLint的使用" class="headerlink" title="SwiftLint的使用"></a>SwiftLint的使用</h2><blockquote>
+<p>安装完成后,需要在Xcode中配置相关设置,才能使 SwiftLint 在 Xcode 中自动检测代码规范。配置也很简单，只需要在 Xcode 的 Build Phases 中新建一个 Run Script Phase 配置项，在里面添加相关代码后,编译即可!</p>
+</blockquote>
+<ul>
+<li>配置代码添加步骤</li>
+<li>需要将相关脚本添加到红色框内</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-9fcfc0ce421210db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="配置代码添加步骤"></p>
+<p><strong>1. 全局安装脚本添加方式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if which swiftlint &gt;/dev/null; then</span><br><span class="line">  swiftlint</span><br><span class="line">else</span><br><span class="line">  echo &quot;warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p><strong>2. CocoaPods安装脚本添加</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;$&#123;PODS_ROOT&#125;/SwiftLint/swiftlint&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里其实是设置了一个自动编译脚本，每次运行编译都会自动执行这个脚本</li>
+<li>如果正确安装了 SwiftLint，就会执行 SwiftLint 中的代码规范检查，如果没有安装，脚本会抛出一个没有安装 SwiftLint 并提示下载的警告，方便提醒团队团队中没有安装的成员。</li>
+<li>当然，你也可以设置为强制要求安装，这时如果没有安装则无法通过编译。只需要在脚本中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;warning: ...&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>之后添加一行代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit 1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这样一来，如果没有安装 SwiftLint，编译时会直接抛出一个编译错误而非警告，提示需要安装 SwiftLint。</li>
+</ul>
+<p><strong>3. 配置完成后,<code>command+B</code>编译</strong></p>
+<ul>
+<li>如果你的是正在开发中的项目, 你可能会发现你的项目提示999+的黄色警告和999+的红色错误</li>
+<li>甚至你会发现甚至一些空格和一些系统的方法和注释也会报错或者警告</li>
+<li><code>SwiftLint</code>默认方法名或者注释不得超过120个字符</li>
+<li><p><img src="http://upload-images.jianshu.io/upload_images/4122543-271410cb5d83bea3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="测试项目"></p>
+</li>
+<li><p>Swift Lint 在完成上述操作之后，便已经生效。但是，如果觉得默认的风格过于严格，或者项目组有另外的要求，Swift Lint 也可以定制相应的风格，或者禁用某些规则。</p>
+</li>
+<li><a href="https://github.com/realm/SwiftLint" target="_blank" rel="noopener">SwiftLint</a> 的全部规则可以在：<a href="https://github.com/realm/SwiftLint/tree/master/Source/SwiftLintFramework/Rules" target="_blank" rel="noopener">Source/SwiftLintFramework/Rules</a> 目录内找到</li>
+<li></li>
+</ul>
+<h2 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h2><ul>
+<li>当你编译过项目后,看到999+的警告和错误,是不是第一反应就是要放弃了,其实不然</li>
+<li>仔细看一下具体的错误，会发现好多都是第三方库的代码规范问题，而且好多问题的级别被设置成为了 error</li>
+<li>第三方库的代码规范问题,这个锅我们可不能背</li>
+<li>这里我们可以做一些配置，让 <code>SwiftLint</code> 在做代码规范检查的时候自动忽略 <code>CocoaPods</code>、<code>Carthage</code> 等包管理器引入的第三方库（当然，手动导入的第三方库也能设置忽略）</li>
+</ul>
+<h3 id="创建配置文件"><a href="#创建配置文件" class="headerlink" title="创建配置文件"></a>创建配置文件</h3><ul>
+<li>首先需要在项目的根目录下新建一个名为 .swiftlint.yml 的配置文件</li>
+<li>打开终端, cd 到项目根目录下</li>
+<li>输入: <code>touch .swiftlint.yml</code></li>
+<li>执行完该命令后, 在文件夹中你可能找不到该yml格式文件,那是因为文件被隐藏了</li>
+<li>关于隐藏/显示隐藏文件(命令一样): <code>command + shift + .</code></li>
+<li>下面我们来认识一下主要的几个配置选项</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">disabled_rules: <span class="meta"># 禁用指定的规则</span></span><br><span class="line">  - colon</span><br><span class="line">  - comma</span><br><span class="line">  - control_statement</span><br><span class="line">opt_in_rules: <span class="meta"># 启用指定的规则</span></span><br><span class="line">  - empty_count</span><br><span class="line">  - missing_docs</span><br><span class="line">  <span class="meta"># 可以通过执行如下指令来查找所有可用的规则:</span></span><br><span class="line">  <span class="meta"># swiftlint rules</span></span><br><span class="line">included: <span class="meta"># 执行 linting 时包含的路径。如果出现这个 `--path` 会被忽略。</span></span><br><span class="line">  - Source</span><br><span class="line">excluded: <span class="meta"># 执行 linting 时忽略的路径。 优先级比 `included` 更高。</span></span><br><span class="line">  - Carthage</span><br><span class="line">  - Pods</span><br><span class="line">  - Source/ExcludedFolder</span><br><span class="line">  - Source/ExcludedFile.swift</span><br></pre></td></tr></table></figure>
+<h3 id="在代码中关闭某个规则"><a href="#在代码中关闭某个规则" class="headerlink" title="在代码中关闭某个规则"></a>在代码中关闭某个规则</h3><p>可以通过在一个源文件中定义一个如下格式的注释来关闭某个规则：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// swiftlint:disable &lt;rule&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在该文件结束之前或者在定义如下格式的匹配注释之前，这条规则都会被禁用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// swiftlint:enable &lt;rule&gt;</span><br></pre></td></tr></table></figure></p>
+<p>例如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// swiftlint:disable opening_brace</span><br><span class="line">func initTakeScreenshot(launchOptions: [AnyHashable: Any]?)&#123;</span><br><span class="line">    // swiftlint:enable opening_brace</span><br><span class="line">    if let options = launchOptions &#123;</span><br><span class="line">        let userInfo = options[UIApplicationLaunchOptionsKey.remoteNotification]</span><br><span class="line">        NotificationCenter.default.post(name: Notification.Name.UIApplicationUserDidTakeScreenshot, object: userInfo)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>规则关闭之前</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-21790882f651fa95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Snip20180207_1.png"></p>
+<p>规则关闭之后<br><img src="http://upload-images.jianshu.io/upload_images/4122543-6ba8e782746c0849.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Snip20180207_2.png"></p>
+<p>也可以通过添加 :previous, :this 或者 :next 来使关闭或者打开某条规则的命令分别应用于前一行，当前或者后一行代码。</p>
+<p>例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// swiftlint:disable:next force_cast</span><br><span class="line">let noWarning = NSNumber() as! Int</span><br><span class="line">let hasWarning = NSNumber() as! Int</span><br><span class="line">let noWarning2 = NSNumber() as! Int // swiftlint:disable:this force_cast</span><br><span class="line">let noWarning3 = NSNumber() as! Int</span><br><span class="line">// swiftlint:disable:previous force_cast</span><br></pre></td></tr></table></figure>
+<h3 id="忽略引入的第三方库"><a href="#忽略引入的第三方库" class="headerlink" title="忽略引入的第三方库"></a>忽略引入的第三方库</h3><ul>
+<li>1). 忽略<code>CocoaPods</code>导入的第三方库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">excluded: </span><br><span class="line">  - Pods</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2). excluded 配置项用来设置忽略代码规范检查的路径，可以指定整个文件夹</li>
+<li>比如如果你的项目使用 Carthage 管理第三方库的话，可以将 Carthage 目录添加到忽略列表：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">excluded: </span><br><span class="line">  - Pods</span><br><span class="line">  - Carthage</span><br></pre></td></tr></table></figure>
+<ul>
+<li>3). 指定精确路径下的文件，通过 - xxxx 的形式列在下面就可以了</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">excluded: # 执行 linting 时忽略的路径。 优先级比 `included` 更高。</span><br><span class="line">  - Source/ExcludedFolder</span><br><span class="line">  - Source/ExcludedFile.swift</span><br></pre></td></tr></table></figure>
+<h3 id="嵌套配置"><a href="#嵌套配置" class="headerlink" title="嵌套配置"></a>嵌套配置</h3><p><code>SwiftLint</code> 支持通过嵌套配置文件的方式来对代码分析过程进行更加细致的控制。</p>
+<ul>
+<li>在你的根 <code>.swiftlint.yml</code> 文件里设置 <code>use_nested_configs: true</code> 值。</li>
+<li>在目录结构必要的地方引入额外的 <code>.swiftlint.yml</code> 文件。</li>
+<li>每个文件被检查时会使用在文件所在目录下的或者父目录的更深层目录下的配置文件。否则根配置文件将会生效。</li>
+<li><code>excluded</code>，<code>included</code>，和 <code>use_nested_configs</code> 在嵌套结构中会被忽略。</li>
+</ul>
+<h3 id="自动更正"><a href="#自动更正" class="headerlink" title="自动更正"></a>自动更正</h3><ul>
+<li><code>SwiftLint</code> 可以自动修正某些错误，磁盘上的文件会被一个修正后的版本覆盖。</li>
+<li>请确保在对文件执行 <code>swiftlint autocorrect</code> 之前有对它们做过备份，否则的话有可能导致重要数据的丢失。</li>
+<li>因为在执行自动更正修改某个文件后很有可能导致之前生成的代码检查信息无效或者不正确，所以当在执行代码更正时标准的检查是无法使用的。</li>
+</ul>
+<h2 id="最后贴上官方示例"><a href="#最后贴上官方示例" class="headerlink" title="最后贴上官方示例"></a>最后贴上官方示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">disabled_rules: # 执行时排除掉的规则</span><br><span class="line">  - colon</span><br><span class="line">  - comma</span><br><span class="line">  - control_statement</span><br><span class="line">opt_in_rules: # 一些规则仅仅是可选的</span><br><span class="line">  - empty_count</span><br><span class="line">  - missing_docs</span><br><span class="line">  # 可以通过执行如下指令来查找所有可用的规则:</span><br><span class="line">  # swiftlint rules</span><br><span class="line">included: # 执行 linting 时包含的路径。如果出现这个 `--path` 会被忽略。</span><br><span class="line">  - Source</span><br><span class="line">excluded: # 执行 linting 时忽略的路径。 优先级比 `included` 更高。</span><br><span class="line">  - Carthage</span><br><span class="line">  - Pods</span><br><span class="line">  - Source/ExcludedFolder</span><br><span class="line">  - Source/ExcludedFile.swift</span><br><span class="line"></span><br><span class="line"># 可配置的规则可以通过这个配置文件来自定义</span><br><span class="line"># 二进制规则可以设置他们的严格程度</span><br><span class="line">force_cast: warning # 隐式</span><br><span class="line">force_try:</span><br><span class="line">  severity: warning # 显式</span><br><span class="line"># 同时有警告和错误等级的规则，可以只设置它的警告等级</span><br><span class="line"># 隐式</span><br><span class="line">line_length: 110</span><br><span class="line"># 可以通过一个数组同时进行隐式设置</span><br><span class="line">type_body_length:</span><br><span class="line">  - 300 # warning</span><br><span class="line">  - 400 # error</span><br><span class="line"># 或者也可以同时进行显式设置</span><br><span class="line">file_length:</span><br><span class="line">  warning: 500</span><br><span class="line">  error: 1200</span><br><span class="line"># 命名规则可以设置最小长度和最大程度的警告/错误</span><br><span class="line"># 此外它们也可以设置排除在外的名字</span><br><span class="line">type_name:</span><br><span class="line">  min_length: 4 # 只是警告</span><br><span class="line">  max_length: # 警告和错误</span><br><span class="line">    warning: 40</span><br><span class="line">    error: 50</span><br><span class="line">  excluded: iPhone # 排除某个名字</span><br><span class="line">variable_name:</span><br><span class="line">  min_length: # 只有最小长度</span><br><span class="line">    error: 4 # 只有错误</span><br><span class="line">  excluded: # 排除某些名字</span><br><span class="line">    - id</span><br><span class="line">    - URL</span><br><span class="line">    - GlobalAPIKey</span><br><span class="line">reporter: &quot;xcode&quot; # 报告类型 (xcode, json, csv, checkstyle)</span><br></pre></td></tr></table></figure>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录:"></a>附录:</h2><blockquote>
+<p>原文链接：<a href="https://github.com/realm/SwiftLint/blob/master/README.md" target="_blank" rel="noopener">https://github.com/realm/SwiftLint/blob/master/README.md</a><br>译文链接：<a href="https://github.com/realm/SwiftLint/blob/master/README_CN.md" target="_blank" rel="noopener">https://github.com/realm/SwiftLint/blob/master/README_CN.md</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/SwiftLint/">SwiftLint</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Swift/">Swift</a>, <a href="/tags/SwiftLint/">SwiftLint</a>, <a href="/tags/Homebrew/">Homebrew</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2018/02/07/Xcode代码规范之SwiftLint配置/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Hexo博客/">Hexo博客</a><small>1</small></li>
+  
+    <li><a href="/categories/Socket学习笔记/">Socket学习笔记</a><small>1</small></li>
+  
+    <li><a href="/categories/SwiftLint/">SwiftLint</a><small>4</small></li>
+  
+    <li><a href="/categories/Swift学习笔记/">Swift学习笔记</a><small>1</small></li>
+  
+    <li><a href="/categories/Swift高阶功能/">Swift高阶功能</a><small>2</small></li>
+  
+    <li><a href="/categories/iOS动画/">iOS动画</a><small>1</small></li>
+  
+    <li><a href="/categories/iOS高阶功能/">iOS高阶功能</a><small>1</small></li>
+  
+    <li><a href="/categories/数据库基础/">数据库基础</a><small>1</small></li>
+  
+    <li><a href="/categories/组件化开发/">组件化开发</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/AppIcon/">AppIcon</a><small>1</small></li>
+  
+    <li><a href="/tags/CocoaPods/">CocoaPods</a><small>1</small></li>
+  
+    <li><a href="/tags/CoreAnimation/">CoreAnimation</a><small>1</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Github/">Github</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTPS/">HTTPS</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Homebrew/">Homebrew</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Objective-C/">Objective-C</a><small>1</small></li>
+  
+    <li><a href="/tags/Realm/">Realm</a><small>1</small></li>
+  
+    <li><a href="/tags/Socket/">Socket</a><small>1</small></li>
+  
+    <li><a href="/tags/Socket-IO/">Socket.IO</a><small>1</small></li>
+  
+    <li><a href="/tags/Swift/">Swift</a><small>6</small></li>
+  
+    <li><a href="/tags/Swift4-0/">Swift4.0</a><small>1</small></li>
+  
+    <li><a href="/tags/SwiftLint/">SwiftLint</a><small>4</small></li>
+  
+    <li><a href="/tags/UIStackView/">UIStackView</a><small>1</small></li>
+  
+    <li><a href="/tags/WebSocket/">WebSocket</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/tags/iOS-10-3/">iOS 10.3</a><small>1</small></li>
+  
+    <li><a href="/tags/pod/">pod</a><small>1</small></li>
+  
+    <li><a href="/tags/spec/">spec</a><small>1</small></li>
+  
+    <li><a href="/tags/trunk/">trunk</a><small>1</small></li>
+  
+    <li><a href="/tags/入坑/">入坑</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/规则/">规则</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 John Doe
+  
+</div>
+<div class="clearfix"></div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

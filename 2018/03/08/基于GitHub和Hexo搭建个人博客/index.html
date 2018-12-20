@@ -1,0 +1,390 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>基于GitHub和Hexo搭建个人博客 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="基于GitHub和Hexo搭建个人博客">
+  <meta property="og:site_name" content="Hexo">
+
+  
+    <meta property="og:image" content="">
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/atom-one-dark.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/style.css?v=20170717" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/animation.css?v=7" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-03-08T12:13:00.000Z"><a href="/2018/03/08/基于GitHub和Hexo搭建个人博客/">2018-03-08</a></time>
+      
+      
+  
+    <h1 class="title">基于GitHub和Hexo搭建个人博客</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://p7hfnfk6u.bkt.clouddn.com/Snip20180508_10.png" alt="Hexo博客"></p>
+<a id="more"></a>
+<p>本文是使用Mac电脑, 基于GitHub和Hexo搭建个人博客, 搞了两三天, 反复尝试了无数次, 踩了无数坑搭建起来的, 主要跟大家分享一点小经验, 希望对大家能有帮助!</p>
+<h2 id="github博客简介"><a href="#github博客简介" class="headerlink" title="github博客简介"></a>github博客简介</h2><p>github 是全球最大的社交编程及代码托管网站，GitHub可以托管各种git库，并提供一个web界面，但与其它像SourceForge或Google Code这样的服务不同，GitHub的独特卖点在于从另外一个项目进行分支的简易性。这里着重写如何使用Github的page功能搭建个人博客!</p>
+<blockquote>
+<p>使用github pages服务搭建博客的好处有：</p>
+</blockquote>
+<ul>
+<li>全是静态文件，访问速度快；</li>
+<li>免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台；</li>
+<li>可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；</li>
+<li>数据绝对安全，基于github的版本管理，想恢复到哪个历史版本都行；</li>
+<li>博客内容可以轻松打包、转移、发布到其它平台；</li>
+</ul>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>有一个<a href="https://github.com/login?return_to=%2Fjoin%3Fsource%3Dheader-home" target="_blank" rel="noopener">github账号</a>，没有的话去<a href="https://github.com/join?source=header-home" target="_blank" rel="noopener">GitHub注册</a>一个</li>
+<li>安装了<a href="https://nodejs.org/en/" target="_blank" rel="noopener">node.js</a>、npm，并了解相关基础知识</li>
+<li>安装了git </li>
+</ul>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><ul>
+<li>用来生成静态页面, 到<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>，下载最新版本, 根据提示一路安装即可</li>
+<li><code>Node.js</code>默认会安装 npm</li>
+<li>也可以使用<code>Homebrew</code>进行命令安装, 详情参考<a href="https://reactnative.cn/docs/0.51/getting-started.html#content" target="_blank" rel="noopener">React Native中文网</a>安装方法</li>
+</ul>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><ul>
+<li>用来将本地Hexo内容提交到Github上。下载的Xcode自带Git，这里不再赘述。</li>
+<li>如果没有Xcode可以参考<a href="https://hexo.io/docs/" target="_blank" rel="noopener">Hexo官网</a>上的安装方法</li>
+<li>通用版的<a href="https://www.git-scm.com/download/win" target="_blank" rel="noopener">Git安装</a>, 无法下载的童鞋，可以去网上搜索下载</li>
+</ul>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>当Node.js和Git都安装好后就可以正式安装Hexo了，终端执行如下命令：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install -g hexo</span><br></pre></td></tr></table></figure>
+<p>此时, 会提示你输入管理员密码(电脑密码), 开始安装</p>
+<h2 id="本地搭建-hexo-静态博客"><a href="#本地搭建-hexo-静态博客" class="headerlink" title="本地搭建 hexo 静态博客"></a>本地搭建 hexo 静态博客</h2><ul>
+<li>在电脑中新建一个文件夹, 文件夹名字随意, 如MyBlog</li>
+<li>在终端, cd 进入该文件夹</li>
+<li>终端运行 git, 生成hexo模板，可能要翻墙</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<p> 安装完模板, 安装npm</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>最后, 开启hexo服务器</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>此时，浏览器中打开网址<a href="http://localhost:4000，能看到如下页面：" target="_blank" rel="noopener">http://localhost:4000，能看到如下页面：</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-dfe49f13bcfd743d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="Snip20180303_1.png"></p>
+<h2 id="将博客与Github关联"><a href="#将博客与Github关联" class="headerlink" title="将博客与Github关联"></a>将博客与Github关联</h2><h3 id="在GitHub上配置SSH-key"><a href="#在GitHub上配置SSH-key" class="headerlink" title="在GitHub上配置SSH key"></a>在GitHub上配置SSH key</h3><p>为什么要配置这个呢？因为你提交代码肯定要拥有你的github权限才可以，但是直接使用用户名和密码太不安全了，所以我们使用ssh key来解决本地和服务器的连接问题。</p>
+<h4 id="首先检查本机是否存在的ssh密钥"><a href="#首先检查本机是否存在的ssh密钥" class="headerlink" title="首先检查本机是否存在的ssh密钥"></a>首先检查本机是否存在的ssh密钥</h4><ul>
+<li>如果存在, 直接进行步骤1.3, 否则执行步骤1.2生成新的密钥</li>
+<li>打开终端输入, 注意<code>~/.ssh</code>之间没有空格</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br></pre></td></tr></table></figure>
+<p>如果提示：No such file or directory 说明你是第一次使用git, 或者之前没有安装过SSh密钥</p>
+<h4 id="生成新的ssh-key"><a href="#生成新的ssh-key" class="headerlink" title="生成新的ssh key"></a>生成新的ssh key</h4><p>注意后面添加自己注册GitHub的邮箱地址, 打开终端输入</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"邮件地址"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>输入命令后, 然后连续回车, 默认会在相应路径下（~/.ssh/id_rsa.pub）生成id_rsa和id_rsa.pub两个文件</li>
+<li>打开’访达’, 选择进入文件夹(快捷键Command+Shift+G), 输入~/.ssh, 进入该文件夹</li>
+</ul>
+<h4 id="将ssh-key添加到Github中"><a href="#将ssh-key添加到Github中" class="headerlink" title="将ssh key添加到Github中"></a>将ssh key添加到Github中</h4><p>打开用户目录，找到.ssh\id_rsa.pub文件，记事本打开并复制里面的内容，打开你的github主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key：</p>
+<p>将刚复制的内容粘贴到key那里，title随便填，保存</p>
+<h4 id="测试SSH配置是否成功"><a href="#测试SSH配置是否成功" class="headerlink" title="测试SSH配置是否成功"></a>测试SSH配置是否成功</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<p>如果提示<code>Are you sure you want to continue connecting (yes/no)?</code>，输入<code>yes</code>，然后会看到：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi XXXX! You've successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
+<p>看到这个信息说明SSH已配置成功！</p>
+<h4 id="更改GitHub用户名和邮箱"><a href="#更改GitHub用户名和邮箱" class="headerlink" title="更改GitHub用户名和邮箱"></a>更改GitHub用户名和邮箱</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name XXXX<span class="comment">// 你的github用户名，非昵称</span></span><br><span class="line">$ git config --global user.email  <span class="string">"xxx@qq.com"</span><span class="comment">// 填写你的github注册邮箱</span></span><br></pre></td></tr></table></figure>
+<h3 id="关联Github"><a href="#关联Github" class="headerlink" title="关联Github"></a>关联Github</h3><h4 id="新建XXX-github-io-的项目"><a href="#新建XXX-github-io-的项目" class="headerlink" title="新建XXX.github.io 的项目"></a>新建XXX.github.io 的项目</h4><p> 在 Github 上创建名字为 XXX.github.io 的项目，XXX为必须和自己的 github 用户名一模一样</p>
+<h4 id="修改-config-yml文件配置"><a href="#修改-config-yml文件配置" class="headerlink" title="修改_config.yml文件配置"></a>修改<code>_config.yml</code>文件配置</h4><ul>
+<li>打开本地的 MyBlog 文件夹项目内的_config.yml 配置文件</li>
+<li>将其中的 type 设置为git，repository 是你 github.io 仓库的 git 地址, 如下所示</li>
+<li>此处切记, 每一个毛好的后面都要加一个空格, 垂直方向一定要对齐, 否则可能会报错</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https:<span class="comment">//github.com/CoderTitan/CoderTitan.github.io.git</span></span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<h4 id="将配置文件上传GitHub"><a href="#将配置文件上传GitHub" class="headerlink" title="将配置文件上传GitHub"></a>将配置文件上传GitHub</h4><ul>
+<li>打开终端, cd到MyBlog文件夹下, 以下命令均在MyBlog文件夹下执行</li>
+</ul>
+<p>在blog文件夹目录下执行生成静态页面命令：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate     或者：hexo g</span><br></pre></td></tr></table></figure>
+<p>此时若出现如下报错：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR Local hexo not found <span class="keyword">in</span> ~/blog</span><br><span class="line">ERROR Try runing: 'npm install hexo --save'</span><br></pre></td></tr></table></figure>
+<p>则执行命令：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo --save</span><br></pre></td></tr></table></figure>
+<p>再执行配置命令：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy           或者：hexo d</span><br></pre></td></tr></table></figure>
+<p>报错一: 若执行命令hexo deploy仍然报错：无法连接git或找不到git，则执行如下命令来安装hexo-deployer-git：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>报错二: 若执行命令hexo d报以下错误:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR Plugin load failed: hexo-server</span><br><span class="line"><span class="comment">//或者类似的错误</span></span><br><span class="line">ERROR Plugin load failed: hexo-renderer-sass</span><br></pre></td></tr></table></figure>
+<p>则执行响应的命令:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install hexo-server</span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line">sudo npm install hexo-renderer-sass</span><br></pre></td></tr></table></figure>
+<p>解决玩错误之后, 最后在执行<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>几个注意的地方：</p>
+<ol>
+<li>注册的邮箱一定要验证，否则不会成功；</li>
+<li>仓库名字必须是：<code>username.github.io</code>，其中<code>username</code>是你的用户名；</li>
+<li>仓库创建成功不会立即生效，需要过一段时间，大概10-30分钟，或者更久，我的等了半个小时才生效；</li>
+<li>hexo d命令执行成功后，浏览器中打开网址<code>http://XXX.github.io</code>（将XXX换成你的用户名）能看到和打开http:<code>//localhost:4000</code>时一样的页面</li>
+</ol>
+</blockquote>
+<h2 id="安装theme主题"><a href="#安装theme主题" class="headerlink" title="安装theme主题"></a>安装theme主题</h2><ul>
+<li>搭建好的默认的主题真的是很丑, 所以这里我们先替换一个好看的主题, 大家更可以到<a href="https://hexo.io/themes/" target="_blank" rel="noopener">官方主题</a>去选择自己喜欢的主题样式</li>
+<li>示例主题: <a href="hexo-theme-random">Random</a></li>
+</ul>
+<p>终端cd到 MyBlog 目录下执行如下命令：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="comment">//github.com/stiekel/hexo-theme-random.git themes/random</span></span><br></pre></td></tr></table></figure>
+<p>修改_config.yml中的theme: landscape改为theme: random，然后重新执行hexo g来重新生成</p>
+<p>终端cd到MyBlog目录下执行如下命令(每次部署文章的步骤)：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo clean           <span class="comment">//清除缓存文件 (db.json) 和已生成的静态文件 (public)</span></span><br><span class="line"></span><br><span class="line">hexo g             <span class="comment">//生成缓存和静态文件</span></span><br><span class="line"> </span><br><span class="line">hexo d             <span class="comment">//重新部署到服务器</span></span><br></pre></td></tr></table></figure>
+<h2 id="域名绑定"><a href="#域名绑定" class="headerlink" title="域名绑定"></a>域名绑定</h2><ul>
+<li>现在使用的域名是Github提供的二级域名<code>XXX.github.io</code>，也可以绑定为自己的个性域名。</li>
+<li>购买域名，可以到<a href="https://sg.godaddy.com/zh/" target="_blank" rel="noopener">GoDaddy官网</a>，现在 <code>GoDaddy</code>已经有中文版了，虽然国家显示是新加坡，但不影响使用, 还可使用支付宝支付</li>
+<li>也可以到<a href="https://wanwang.aliyun.com/?utm_content=se_1010380" target="_blank" rel="noopener">阿里万网</a>购买, 我是在万网买的，可直接在其网站做域名解析</li>
+</ul>
+<h3 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h3><p>如果将域名指向一个域名，实现与被指向域名相同的访问效果，需要增加CNAME记录。登录万网，在你购买的域名后边点击：解析, 如下图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-952aa0a8a84a089f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Snip20180303_4.png"></p>
+<p>进入解析页面后点击添加解析, 向你的 DNS 配置中添加 3 条记录, 如下图<br>注意CNAME记录添加的是username.github.io.(不要忘记后面的.), 可能最后一个点不显示(我的就不显示)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-b2435667d603f844.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Snip20180303_5.png"></p>
+<h3 id="设置GitHub配置信息"><a href="#设置GitHub配置信息" class="headerlink" title="设置GitHub配置信息"></a>设置GitHub配置信息</h3><ul>
+<li>打开你的XXX.github.io项目地址, 找到设置页面</li>
+<li>滚动到下方找到<code>GitHub Pages</code>模块, 在<code>Custom domain</code>, 输入你购买的域名, 点击Save保存</li>
+</ul>
+<h3 id="创建CNAME文件"><a href="#创建CNAME文件" class="headerlink" title="创建CNAME文件"></a>创建CNAME文件</h3><ul>
+<li>在/MyBlog/themes/landscape/source目录下新建文件名为：CNAME文件，注意没有后缀名！直接将自己的域名写入</li>
+<li><code>CNAME</code>一定要大写</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在终端cd到该目录下, 然后输入命令, 即可创建该文件</span></span><br><span class="line">touch <span class="built_in">CNAME</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>完成上述步骤后, 终端cd到MyBlog目录下执行如下命令重新部署：</li>
+<li>最后, 等十分钟左右，刷新浏览器，用你自己域名访问下试试</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line"></span><br><span class="line">$ hexo g</span><br><span class="line"></span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
+<blockquote>
+<h4 id="至此也算终于大功告成了-感受一下-https-www-titanjun-top"><a href="#至此也算终于大功告成了-感受一下-https-www-titanjun-top" class="headerlink" title="至此也算终于大功告成了, 感受一下: https://www.titanjun.top"></a>至此也算终于大功告成了, 感受一下: <a href="https://www.titanjun.top" target="_blank" rel="noopener">https://www.titanjun.top</a></h4></blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Hexo博客/">Hexo博客</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Hexo/">Hexo</a>, <a href="/tags/Github/">Github</a>, <a href="/tags/HTTPS/">HTTPS</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2018/03/08/基于GitHub和Hexo搭建个人博客/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Hexo博客/">Hexo博客</a><small>1</small></li>
+  
+    <li><a href="/categories/Socket学习笔记/">Socket学习笔记</a><small>1</small></li>
+  
+    <li><a href="/categories/SwiftLint/">SwiftLint</a><small>4</small></li>
+  
+    <li><a href="/categories/Swift学习笔记/">Swift学习笔记</a><small>1</small></li>
+  
+    <li><a href="/categories/Swift高阶功能/">Swift高阶功能</a><small>2</small></li>
+  
+    <li><a href="/categories/iOS动画/">iOS动画</a><small>1</small></li>
+  
+    <li><a href="/categories/iOS高阶功能/">iOS高阶功能</a><small>1</small></li>
+  
+    <li><a href="/categories/数据库基础/">数据库基础</a><small>1</small></li>
+  
+    <li><a href="/categories/组件化开发/">组件化开发</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/AppIcon/">AppIcon</a><small>1</small></li>
+  
+    <li><a href="/tags/CocoaPods/">CocoaPods</a><small>1</small></li>
+  
+    <li><a href="/tags/CoreAnimation/">CoreAnimation</a><small>1</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Github/">Github</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTPS/">HTTPS</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Homebrew/">Homebrew</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Objective-C/">Objective-C</a><small>1</small></li>
+  
+    <li><a href="/tags/Realm/">Realm</a><small>1</small></li>
+  
+    <li><a href="/tags/Socket/">Socket</a><small>1</small></li>
+  
+    <li><a href="/tags/Socket-IO/">Socket.IO</a><small>1</small></li>
+  
+    <li><a href="/tags/Swift/">Swift</a><small>6</small></li>
+  
+    <li><a href="/tags/Swift4-0/">Swift4.0</a><small>1</small></li>
+  
+    <li><a href="/tags/SwiftLint/">SwiftLint</a><small>4</small></li>
+  
+    <li><a href="/tags/UIStackView/">UIStackView</a><small>1</small></li>
+  
+    <li><a href="/tags/WebSocket/">WebSocket</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/tags/iOS-10-3/">iOS 10.3</a><small>1</small></li>
+  
+    <li><a href="/tags/pod/">pod</a><small>1</small></li>
+  
+    <li><a href="/tags/spec/">spec</a><small>1</small></li>
+  
+    <li><a href="/tags/trunk/">trunk</a><small>1</small></li>
+  
+    <li><a href="/tags/入坑/">入坑</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/规则/">规则</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 John Doe
+  
+</div>
+<div class="clearfix"></div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

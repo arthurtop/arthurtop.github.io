@@ -1,0 +1,341 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>iOS神技之动态更换APP的Icon图 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="在iOS10.3系统发布之前, 众所周知, 在App Store上架的APP如果要更换Icon图, 只能更新版本替换;
+这次苹果却在iOS10.3系统中加入了了更换应用图标的新功能，当应用安装后，开发者可以为应用提供多个应用图标选择。
+用户可以自由的在这些图标之间切换，并及时生效。
+这是因为 10.3 里引入了一个新的 API，它允许在 App 运行的时候，通过代码为 app 更换 icon">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="iOS神技之动态更换APP的Icon图">
+  <meta property="og:site_name" content="Hexo">
+
+  
+    <meta property="og:image" content="">
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/atom-one-dark.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/style.css?v=20170717" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/animation.css?v=7" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-03-16T12:18:00.000Z"><a href="/2018/03/16/iOS神技之动态更换APP的Icon图/">2018-03-16</a></time>
+      
+      
+  
+    <h1 class="title">iOS神技之动态更换APP的Icon图</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <ul>
+<li>在iOS10.3系统发布之前, 众所周知, 在App Store上架的APP如果要更换Icon图, 只能更新版本替换;</li>
+<li>这次苹果却在iOS10.3系统中加入了了更换应用图标的新功能，当应用安装后，开发者可以为应用提供多个应用图标选择。</li>
+<li>用户可以自由的在这些图标之间切换，并及时生效。</li>
+<li>这是因为 10.3 里引入了一个新的 API，它允许在 App 运行的时候，通过代码为 app 更换 icon</li>
+</ul>
+<a id="more"></a>
+<h2 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h2><ul>
+<li>虽然提供了更换的功能，但更换的 icon 是有限制的</li>
+<li>它只能更换项目中提前添加配置好的Icon图</li>
+<li><p>具体可参考demo–<a href="https://github.com/CoderTitan/ChangeIcon" target="_blank" rel="noopener">github项目地址</a></p>
+</li>
+<li><p>这里先看个效果</p>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/4122543-66b9c476748f1937.gif?imageMogr2/auto-orient/strip" alt="更换icon.gif"></p>
+<h3 id="备选Icon"><a href="#备选Icon" class="headerlink" title="备选Icon"></a>备选Icon</h3><ul>
+<li>首先你需要将备选的Icon图添加到项目中,</li>
+<li>注意:<ul>
+<li>图片不要放到<code>Assets.xcassets</code>, 而应该直接放到工程中, 不然可能导致更换Icon时, 找不到图片, 更换失败</li>
+<li>在<code>info.plist</code> 的配置中，图片的文件名应该尽量不带 @2x/@3x 后缀扩展名，而让它自动选择</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/4122543-49f0f45c2657a229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="Snip20180315_1.png"></p>
+<h3 id="配置info-plist文件"><a href="#配置info-plist文件" class="headerlink" title="配置info.plist文件"></a>配置<code>info.plist</code>文件</h3><ul>
+<li>在<code>info.plist</code>文件中，添加对应的<code>CFBundleAlternateIcons</code>的信息</li>
+<li>这里也可以查看<a href="https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009247" target="_blank" rel="noopener">官方的相关介绍</a></li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/4122543-8886cf5e071a1c59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="Snip20180315_2.png"></p>
+<blockquote>
+<p><code>Source Code</code>添加方式如下</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">      &lt;key&gt;CFBundleAlternateIcons&lt;/key&gt;</span><br><span class="line">&lt;dict&gt;</span><br><span class="line">	&lt;key&gt;天天特价&lt;/key&gt;</span><br><span class="line">	&lt;dict&gt;</span><br><span class="line">		&lt;key&gt;CFBundleIconFiles&lt;/key&gt;</span><br><span class="line">		&lt;array&gt;</span><br><span class="line">			&lt;string&gt;天天特价&lt;/string&gt;</span><br><span class="line">		&lt;/array&gt;</span><br><span class="line">		&lt;key&gt;UIPrerenderedIcon&lt;/key&gt;</span><br><span class="line">		&lt;<span class="literal">false</span>/&gt;</span><br><span class="line">	&lt;/dict&gt;</span><br><span class="line">	&lt;key&gt;小房子&lt;/key&gt;</span><br><span class="line">	&lt;dict&gt;</span><br><span class="line">		&lt;key&gt;CFBundleIconFiles&lt;/key&gt;</span><br><span class="line">		&lt;array&gt;</span><br><span class="line">			&lt;string&gt;小房子&lt;/string&gt;</span><br><span class="line">		&lt;/array&gt;</span><br><span class="line">		&lt;key&gt;UIPrerenderedIcon&lt;/key&gt;</span><br><span class="line">		&lt;<span class="literal">false</span>/&gt;</span><br><span class="line">	&lt;/dict&gt;</span><br><span class="line">	&lt;key&gt;小猫&lt;/key&gt;</span><br><span class="line">	&lt;dict&gt;</span><br><span class="line">		&lt;key&gt;CFBundleIconFiles&lt;/key&gt;</span><br><span class="line">		&lt;array&gt;</span><br><span class="line">			&lt;string&gt;小猫&lt;/string&gt;</span><br><span class="line">		&lt;/array&gt;</span><br><span class="line">		&lt;key&gt;UIPrerenderedIcon&lt;/key&gt;</span><br><span class="line">		&lt;<span class="literal">false</span>/&gt;</span><br><span class="line">	&lt;/dict&gt;</span><br><span class="line">	&lt;key&gt;邮件信息&lt;/key&gt;</span><br><span class="line">	&lt;dict&gt;</span><br><span class="line">		&lt;key&gt;CFBundleIconFiles&lt;/key&gt;</span><br><span class="line">		&lt;array&gt;</span><br><span class="line">			&lt;string&gt;邮件信息&lt;/string&gt;</span><br><span class="line">		&lt;/array&gt;</span><br><span class="line">		&lt;key&gt;UIPrerenderedIcon&lt;/key&gt;</span><br><span class="line">		&lt;<span class="literal">false</span>/&gt;</span><br><span class="line">	&lt;/dict&gt;</span><br><span class="line">&lt;/dict&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意事项:<ul>
+<li>虽然文档中写着<code>「You must declare your app&#39;s primary and alternate icons using the CFBundleIcons key of your app&#39;s Info.plist file. 」</code>，但经测试，<code>CFBundlePrimaryIcon</code> 可以省略掉。在工程配置 <code>App Icons and Launch Image</code> - <code>App Icons Source</code> 中使用 <code>asset catalog</code>（默认配置），删除 <code>CFBundlePrimaryIcon</code> 的配置也是没有问题的。</li>
+<li>省略这个配置的好处是，避免处理 <code>App icon</code> 的尺寸。现在的工程中，大家一般都使用 <code>asset catalog</code> 进行 icon 的配置，而一个 icon 对应有很多尺寸的文件。省略 <code>CFBundlePrimaryIcon</code> 就可以沿用 <code>Asset</code> 中的配置。</li>
+<li>如果想设置回默认 icon，在 <code>setAlternateIconName</code> 中传入 nil 即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="API调用"><a href="#API调用" class="headerlink" title="API调用"></a>API调用</h2><p>下面我们看一下系统提供的三个API, 这里产看<a href="https://developer.apple.com/documentation/uikit/uiapplication/2806818-setalternateiconname" target="_blank" rel="noopener">官方文档</a></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var supportsAlternateIcons: Bool</span><br><span class="line"><span class="comment">//一个布尔值，指示是否允许应用程序更改其图标</span></span><br><span class="line"></span><br><span class="line">var alternateIconName: String?</span><br><span class="line"><span class="comment">//可选图标的名称，在app的Info.plist文件中声明的CFBundleAlternateIcons中设置。</span></span><br><span class="line"><span class="comment">//如果要显示应用程序的主图标alternateIconName 传nil即可，主图标使用CFBundlePrimaryIcon声明，CFBundleAlternateIcons与CFBundlePrimaryIcon两个key都是CFBundleIcons的子条目</span></span><br><span class="line"></span><br><span class="line">func setAlternateIconName(_ alternateIconName: String?,</span><br><span class="line">        completionHandler: ((Error?) -&gt; Void)? = <span class="literal">nil</span>)</span><br><span class="line"><span class="comment">//更改应用程序的图标</span></span><br><span class="line"><span class="comment">//completionHandler: 当有结果的时候的回调</span></span><br><span class="line"><span class="comment">//成功改变图标的的时候，error为nil，如果发生错误，error描述发生什么了。并且alternateIconName的值保持不变</span></span><br></pre></td></tr></table></figure>
+<p>具体的实现代码:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="meta">#available(iOS 10.3, *) &#123;</span></span><br><span class="line">    <span class="comment">//判断是否支持替换图标, false: 不支持</span></span><br><span class="line">    guard <span class="built_in">UIApplication</span>.shared.supportsAlternateIcons <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果支持, 替换icon</span></span><br><span class="line">    <span class="built_in">UIApplication</span>.shared.setAlternateIconName(imageStr) &#123; (error) <span class="keyword">in</span></span><br><span class="line">        <span class="keyword">if</span> error != <span class="literal">nil</span> &#123;</span><br><span class="line">            print(error ?? <span class="string">"更换icon发生错误"</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            print(<span class="string">"更换成功"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="消除alert弹窗"><a href="#消除alert弹窗" class="headerlink" title="消除alert弹窗"></a>消除alert弹窗</h2><p><img src="https://upload-images.jianshu.io/upload_images/4122543-8ffa3280a84c46ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="Snip20180315_3.png"></p>
+<ul>
+<li>动态更换App图标会有弹框, 有时候这个弹框看上去可能会很别扭, 但是这个弹框是系统直接调用弹出的, 我们又如何消除呢</li>
+<li>通过层级关系可以看到这个弹框就是一个<code>UIAlertController</code>, 并且是通过<code>presentViewController:animated:completion:</code>方法弹出的</li>
+<li>所以可以考虑使用<code>runtime</code>, 拦截并替换该方法, 让更换icon的时候, 不弹</li>
+<li>下面看一下具体代码:</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">extension NoAlertChangeViewController &#123;</span><br><span class="line">    fileprivate func runtimeReplaceAlert() &#123;</span><br><span class="line">        DispatchQueue.once(token: <span class="string">"UIAlertController"</span>) &#123;</span><br><span class="line">            let originalSelector = <span class="meta">#selector(present(_:animated:completion:))</span></span><br><span class="line">            let swizzledSelector = <span class="meta">#selector(noAlert_present(_:animated:completion:))</span></span><br><span class="line"></span><br><span class="line">            let originalMethod = class_getInstanceMethod(NoAlertChangeViewController.self, originalSelector)</span><br><span class="line">            let swizzledMethod = class_getInstanceMethod(NoAlertChangeViewController.self, swizzledSelector)</span><br><span class="line"></span><br><span class="line">            <span class="comment">//交换实现的方法</span></span><br><span class="line">            method_exchangeImplementations(originalMethod!, swizzledMethod!)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @objc fileprivate func noAlert_present(_ viewControllerToPresent: <span class="built_in">UIViewController</span>, animated flag: Bool, completion: (() -&gt; Swift.Void)? = <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="comment">//判断是否是alert弹窗</span></span><br><span class="line">        <span class="keyword">if</span> viewControllerToPresent.isKind(of: <span class="built_in">UIAlertController</span>.self) &#123;</span><br><span class="line">            print(<span class="string">"title: \(String(describing: (viewControllerToPresent as? UIAlertController)?.title))"</span>)</span><br><span class="line">            print(<span class="string">"message: \(String(describing: (viewControllerToPresent as? UIAlertController)?.message))"</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 换图标时的提示框的title和message都是nil，由此可特殊处理</span></span><br><span class="line">            let alertController = viewControllerToPresent as? <span class="built_in">UIAlertController</span></span><br><span class="line">            <span class="keyword">if</span> alertController?.title == <span class="literal">nil</span> &amp;&amp; alertController?.message == <span class="literal">nil</span> &#123;</span><br><span class="line">                <span class="comment">//是更换icon的提示</span></span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//其他的弹框提示正常处理</span></span><br><span class="line">                noAlert_present(viewControllerToPresent, animated: flag, completion: completion)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        noAlert_present(viewControllerToPresent, animated: flag, completion: completion)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里用到了<code>DispatchQueue.once</code>, 这个<code>once</code>是我对<code>DispatchQueue</code>加了一个扩展</li>
+<li>在Swift4.0以后, <code>static dispatch_once_t onceToken;</code>这个已经不能用了</li>
+<li>关于这方面的详细介绍, 大家可以看看我的这篇文章–<a href="https://www.titanjun.top/2017/08/25/%E5%8D%87%E7%BA%A7Swift4.0%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" target="_blank" rel="noopener">升级Swift4.0遇到的坑</a><br>-</li>
+</ul>
+<h2 id="支持不同尺寸的Icon"><a href="#支持不同尺寸的Icon" class="headerlink" title="支持不同尺寸的Icon"></a>支持不同尺寸的Icon</h2><ul>
+<li>一个标准的Icon图集, 需要十几种尺寸, 比如: 20, 29, 40, 60等</li>
+<li>对于 <code>info.plist</code> 中的每个 <code>icon</code> 配置，<code>CFBundleIconFiles</code> 的值是一个数组，我们可以在其中填入这十几种规格的图片名称。经测试:<ul>
+<li>文件的命名没有强制的规则，可以随意取，</li>
+<li>数组中的文件名也不关心先后顺序。</li>
+</ul>
+</li>
+<li>总之把对应的文件名填进去即可，它会自动选择合适分辨率的文件（比如在 setting 中显示 icon 时，它会找到提供的数组中分辨率为 29pt 的那个文件）。</li>
+<li>具体相关官方文档可参考, <a href="https://developer.apple.com/ios/human-interface-guidelines/overview/themes/#app-icon-sizes" target="_blank" rel="noopener">官方介绍</a></li>
+<li>首先, 针对不同的尺寸, 我们要有不同的命名, 具体参考下图</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20180316194726671?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2htaWx5Q29kZXI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="不同尺寸图片配置图"></p>
+<ul>
+<li>文件扩展名，如@2x,@3x，要么统一不写，那么系统会自动寻找合适的尺寸。</li>
+<li>要写就需要把每张icon的扩展名写上，和上图的格式一样</li>
+<li>代码中调用图片名, 更不需要加上尺寸:</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="meta">#available(iOS 10.3, *) &#123;</span></span><br><span class="line">    <span class="comment">//判断是否支持替换图标, false: 不支持</span></span><br><span class="line">    guard <span class="built_in">UIApplication</span>.shared.supportsAlternateIcons <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果支持, 替换icon</span></span><br><span class="line">    <span class="built_in">UIApplication</span>.shared.setAlternateIconName(<span class="string">"Sunday"</span>) &#123; (error) <span class="keyword">in</span></span><br><span class="line">        <span class="comment">//点击弹框的确认按钮后的回调</span></span><br><span class="line">        <span class="keyword">if</span> error != <span class="literal">nil</span> &#123;</span><br><span class="line">            print(error ?? <span class="string">"更换icon发生错误"</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            print(<span class="string">"更换成功"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>具体可参考demo–<a href="https://github.com/CoderTitan/ChangeIcon" target="_blank" rel="noopener">github项目地址</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Swift高阶功能/">Swift高阶功能</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/AppIcon/">AppIcon</a>, <a href="/tags/iOS-10-3/">iOS 10.3</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2018/03/16/iOS神技之动态更换APP的Icon图/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Hexo博客/">Hexo博客</a><small>1</small></li>
+  
+    <li><a href="/categories/Socket学习笔记/">Socket学习笔记</a><small>1</small></li>
+  
+    <li><a href="/categories/SwiftLint/">SwiftLint</a><small>4</small></li>
+  
+    <li><a href="/categories/Swift学习笔记/">Swift学习笔记</a><small>1</small></li>
+  
+    <li><a href="/categories/Swift高阶功能/">Swift高阶功能</a><small>2</small></li>
+  
+    <li><a href="/categories/iOS动画/">iOS动画</a><small>1</small></li>
+  
+    <li><a href="/categories/iOS高阶功能/">iOS高阶功能</a><small>1</small></li>
+  
+    <li><a href="/categories/数据库基础/">数据库基础</a><small>1</small></li>
+  
+    <li><a href="/categories/组件化开发/">组件化开发</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/AppIcon/">AppIcon</a><small>1</small></li>
+  
+    <li><a href="/tags/CocoaPods/">CocoaPods</a><small>1</small></li>
+  
+    <li><a href="/tags/CoreAnimation/">CoreAnimation</a><small>1</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Github/">Github</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTPS/">HTTPS</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Homebrew/">Homebrew</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Objective-C/">Objective-C</a><small>1</small></li>
+  
+    <li><a href="/tags/Realm/">Realm</a><small>1</small></li>
+  
+    <li><a href="/tags/Socket/">Socket</a><small>1</small></li>
+  
+    <li><a href="/tags/Socket-IO/">Socket.IO</a><small>1</small></li>
+  
+    <li><a href="/tags/Swift/">Swift</a><small>6</small></li>
+  
+    <li><a href="/tags/Swift4-0/">Swift4.0</a><small>1</small></li>
+  
+    <li><a href="/tags/SwiftLint/">SwiftLint</a><small>4</small></li>
+  
+    <li><a href="/tags/UIStackView/">UIStackView</a><small>1</small></li>
+  
+    <li><a href="/tags/WebSocket/">WebSocket</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/tags/iOS-10-3/">iOS 10.3</a><small>1</small></li>
+  
+    <li><a href="/tags/pod/">pod</a><small>1</small></li>
+  
+    <li><a href="/tags/spec/">spec</a><small>1</small></li>
+  
+    <li><a href="/tags/trunk/">trunk</a><small>1</small></li>
+  
+    <li><a href="/tags/入坑/">入坑</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/规则/">规则</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 John Doe
+  
+</div>
+<div class="clearfix"></div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

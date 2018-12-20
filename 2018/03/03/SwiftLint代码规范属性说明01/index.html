@@ -1,0 +1,1275 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>SwiftLint代码规范属性说明01 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="下面来具体介绍一下SwiftLint的具体的代码规则的相关说明
+
+Github 公布的 Swift 代码规范–原文
+Github 公布的 Swift 代码规范–中文
+官方的SwiftLint规则说明">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="SwiftLint代码规范属性说明01">
+  <meta property="og:site_name" content="Hexo">
+
+  
+    <meta property="og:image" content="">
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/atom-one-dark.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/style.css?v=20170717" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/animation.css?v=7" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-03-03T12:53:54.000Z"><a href="/2018/03/03/SwiftLint代码规范属性说明01/">2018-03-03</a></time>
+      
+      
+  
+    <h1 class="title">SwiftLint代码规范属性说明01</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>下面来具体介绍一下SwiftLint的具体的代码规则的相关说明</p>
+<ul>
+<li><a href="https://github.com/github/swift-style-guide" target="_blank" rel="noopener">Github 公布的 Swift 代码规范–原文</a></li>
+<li><a href="https://github.com/Artwalk/swift-style-guide/blob/master/README_CN.md" target="_blank" rel="noopener">Github 公布的 Swift 代码规范–中文</a></li>
+<li><a href="https://github.com/realm/SwiftLint/blob/master/Rules.md" target="_blank" rel="noopener">官方的SwiftLint规则说明</a></li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<h3 id="规则1-closing-brace"><a href="#规则1-closing-brace" class="headerlink" title="规则1: closing_brace"></a>规则1: closing_brace</h3><p>在使用Swift 3.2或更高版本时，首选系统的KVO 的API和keypath</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>block_based_kvo</td>
+<td>启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>官方示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//编译通过</span></span><br><span class="line">let observer = foo.observe(\.value, options: [.new]) &#123; (foo, change) <span class="keyword">in</span></span><br><span class="line">   print(change.newValue)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发警告</span></span><br><span class="line"><span class="keyword">class</span> Foo: <span class="built_in">NSObject</span> &#123;</span><br><span class="line">   override func observeValue(forKeyPath keyPath: String?, of object: Any?,</span><br><span class="line">                               change: [<span class="built_in">NSKeyValueChangeKey</span> : Any]?,</span><br><span class="line">                               context: UnsafeMutableRawPointer?) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则2-class-delegate-protocol"><a href="#规则2-class-delegate-protocol" class="headerlink" title="规则2: class_delegate_protocol"></a>规则2: class_delegate_protocol</h3><p>委托协议应该只是class类，可以被弱引用(官方解释,先放出官方示例吧)</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>class_delegate_protocol</td>
+<td>启用</td>
+<td>no</td>
+<td>lint</td>
+</tr>
+</tbody>
+</table>
+<p>示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line">protocol FooDelegate: <span class="keyword">class</span> &#123;&#125;</span><br><span class="line">protocol FooDelegate: <span class="keyword">class</span>, BarDelegate &#123;&#125;</span><br><span class="line">protocol Foo &#123;&#125;</span><br><span class="line"><span class="keyword">class</span> FooDelegate &#123;&#125;</span><br><span class="line">@objc protocol FooDelegate &#123;&#125;</span><br><span class="line">@objc(MyFooDelegate)</span><br><span class="line">protocol FooDelegate &#123;&#125;</span><br><span class="line">protocol FooDelegate: BarDelegate &#123;&#125;</span><br><span class="line">protocol FooDelegate: AnyObject &#123;&#125;</span><br><span class="line">protocol FooDelegate: <span class="built_in">NSObjectProtocol</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line">protocol FooDelegate &#123;&#125;</span><br><span class="line">protocol FooDelegate: Bar &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则3-closing-brace"><a href="#规则3-closing-brace" class="headerlink" title="规则3: closing_brace"></a>规则3: closing_brace</h3><p>类似小括号包含大括号的不能用空格</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>closing_brace</td>
+<td>启用</td>
+<td>yes</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>具体示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map(&#123; $<span class="number">0</span> &#125;)</span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map(</span><br><span class="line">  &#123; $<span class="number">0</span> &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map(&#123; $<span class="number">0</span> &#125; )</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map(&#123; $<span class="number">0</span> &#125;   )</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map( &#123; $<span class="number">0</span> &#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="规则4-closure-end-indentation"><a href="#规则4-closure-end-indentation" class="headerlink" title="规则4: closure_end_indentation"></a>规则4: closure_end_indentation</h3><p>闭包的封闭端和开始端有相同的缩进, 意思就是 大括号（一般是方法）上下对齐的问题，这样使code看起来更加整洁</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>closure_end_indentation</td>
+<td>未启用</td>
+<td>no</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>具体示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发closure_end_indentation</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map &#123; $<span class="number">0</span> + <span class="number">1</span> &#125;</span><br><span class="line"><span class="comment">//不会触发closure_end_indentation</span></span><br><span class="line">SignalProducer(values: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">   .startWithNext &#123; number <span class="keyword">in</span></span><br><span class="line">       print(number)</span><br><span class="line">   &#125;</span><br><span class="line"><span class="comment">//不会触发closure_end_indentation</span></span><br><span class="line">function &#123;</span><br><span class="line">    ..........</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发closure_end_indentation</span></span><br><span class="line">SignalProducer(values: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">   .startWithNext &#123; number <span class="keyword">in</span></span><br><span class="line">       print(number)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//不会触发closure_end_indentation</span></span><br><span class="line">function &#123;</span><br><span class="line">    ..........</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则5-closure-parameter-position"><a href="#规则5-closure-parameter-position" class="headerlink" title="规则5: closure_parameter_position"></a>规则5: closure_parameter_position</h3><p>闭包参数位置， 闭包参数应该和大括号左边在同一行, 推荐使用</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>closure_parameter_position</td>
+<td>启用</td>
+<td>no</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>具体示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// number 和 &#123; 在同一行, 不会触发warning</span></span><br><span class="line">let names = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">names.forEach &#123; (number) <span class="keyword">in</span></span><br><span class="line">    print(number)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let names = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">names.map &#123; number <span class="keyword">in</span></span><br><span class="line">    number + <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/// 这样不行，违背 closure_parameter_position规则, 触发warning</span></span><br><span class="line">let names = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">names.forEach &#123; </span><br><span class="line">    (number) <span class="keyword">in</span></span><br><span class="line">    print(number)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> let names = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"> names.map &#123;</span><br><span class="line">     number <span class="keyword">in</span></span><br><span class="line">     number + <span class="number">1</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则6-closure-spacing"><a href="#规则6-closure-spacing" class="headerlink" title="规则6: closure_spacing"></a>规则6: closure_spacing</h3><p>在闭包的{}中间要有一个空格,如map({ $0 })</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>closure_spacing</td>
+<td>未启用</td>
+<td>yes</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>以下示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">不会触发警告</span><br><span class="line">map(&#123; $<span class="number">0</span> &#125;)</span><br><span class="line">[].map (&#123; $<span class="number">0.</span>description &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发警告</span></span><br><span class="line">map(&#123;$<span class="number">0</span> &#125;)</span><br><span class="line">map(&#123; $<span class="number">0</span>&#125;)</span><br><span class="line">map(&#123;$<span class="number">0</span>&#125;)</span><br><span class="line">[].map (&#123;$<span class="number">0.</span>description     &#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="规则7-colon"><a href="#规则7-colon" class="headerlink" title="规则7: colon"></a>规则7: colon</h3><p>冒号的使用， swiftlint的这个colon属性规则很简单，要求“ ：”紧靠所定义的常量或变量等，必须没有空格，与所指定的类型之间必须只有一个空格，多一个或少一个都不行，如果是用在Dictionary中，则要求紧靠Key，与Value之间必须有且仅有一个空格。这个规则我觉得应该强制推荐使用</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>colon</td>
+<td>启用</td>
+<td>yes</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>具体示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发警告</span></span><br><span class="line">let abc: String = <span class="string">"jun"</span></span><br><span class="line">let abc = [<span class="number">1</span>: [<span class="number">3</span>: <span class="number">2</span>], <span class="number">3</span>: <span class="number">4</span>]</span><br><span class="line">let abc = [<span class="number">1</span>: [<span class="number">3</span>: <span class="number">2</span>], <span class="number">3</span>: <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发警告</span></span><br><span class="line">let jun:Void</span><br><span class="line">let jun : Void</span><br><span class="line">let jun :Void</span><br><span class="line">let jun:   Void</span><br></pre></td></tr></table></figure>
+<h3 id="规则8-comma"><a href="#规则8-comma" class="headerlink" title="规则8: comma"></a>规则8: comma</h3><p>逗号使用只要遵循“前不离身后退一步”就行了，这个也强制推荐使用</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>comma</td>
+<td>启用</td>
+<td>yes</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>具体示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不触发警告</span></span><br><span class="line">[a, b, c, d]</span><br><span class="line"></span><br><span class="line"><span class="comment">//触发警告</span></span><br><span class="line">[a ,b]</span><br></pre></td></tr></table></figure>
+<h3 id="规则9-compiler-protocol-init"><a href="#规则9-compiler-protocol-init" class="headerlink" title="规则9: compiler_protocol_init"></a>规则9: compiler_protocol_init</h3><p>编译器协议初始化, 不建议.init等初始化方式, 建议使用简单的初始化形式</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>compiler_protocol_init</td>
+<td>启用</td>
+<td>no</td>
+<td>lint</td>
+</tr>
+</tbody>
+</table>
+<p>官方示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> let description = RuleDescription(</span><br><span class="line">    identifier: <span class="string">"compiler_protocol_init"</span>,</span><br><span class="line">    name: <span class="string">"Compiler Protocol Init"</span>,</span><br><span class="line">    description: <span class="string">"The initializers declared in compiler protocols such as `ExpressibleByArrayLiteral` "</span> +</span><br><span class="line">                 <span class="string">"shouldn't be called directly."</span>,</span><br><span class="line">    kind: .lint,</span><br><span class="line">    nonTriggeringExamples: [</span><br><span class="line">        <span class="string">"let set: Set&lt;Int&gt; = [1, 2]\n"</span>,</span><br><span class="line">        <span class="string">"let set = Set(array)\n"</span></span><br><span class="line">    ],</span><br><span class="line">    triggeringExamples: [</span><br><span class="line">        <span class="string">"let set = ↓Set(arrayLiteral: 1, 2)\n"</span>,</span><br><span class="line">        <span class="string">"let set = ↓Set.init(arrayLiteral: 1, 2)\n"</span></span><br><span class="line">    ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="规则10-conditional-returns-on-newline"><a href="#规则10-conditional-returns-on-newline" class="headerlink" title="规则10: conditional_returns_on_newline"></a>规则10: conditional_returns_on_newline</h3><p>条件语句不能写在同一行, 条件返回语句应该在新的一行。 当有条件返回的时候应该换行返回，而不是在同一行</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>conditional_returns_on_newline</td>
+<td>未启用</td>
+<td>no</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>具体示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// swiftlint 不推荐的写法, 否则会触发warning</span></span><br><span class="line"><span class="keyword">if</span> <span class="literal">true</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">guard <span class="literal">true</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// swiftlint 推荐的写法</span></span><br><span class="line"><span class="keyword">if</span> <span class="literal">true</span> &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">guard <span class="literal">true</span> <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则11-contains-over-first-not-nil"><a href="#规则11-contains-over-first-not-nil" class="headerlink" title="规则11: contains_over_first_not_nil"></a>规则11: contains_over_first_not_nil</h3><p>类似first函数不能判断是否为nil</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>contains_over_first_not_nil</td>
+<td>未启用</td>
+<td>no</td>
+<td>performance</td>
+</tr>
+</tbody>
+</table>
+<p>具体示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//推荐写法</span></span><br><span class="line">let first = myList.first(where: &#123; $<span class="number">0</span> % <span class="number">2</span> == <span class="number">0</span> &#125;)</span><br><span class="line">let first = myList.first &#123; $<span class="number">0</span> % <span class="number">2</span> == <span class="number">0</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不推荐写法</span></span><br><span class="line">myList.first &#123; $<span class="number">0</span> % <span class="number">2</span> == <span class="number">0</span> &#125; != <span class="literal">nil</span></span><br><span class="line">myList.first(where: &#123; $<span class="number">0</span> % <span class="number">2</span> == <span class="number">0</span> &#125;) != <span class="literal">nil</span></span><br></pre></td></tr></table></figure>
+<h3 id="规则12-control-statement"><a href="#规则12-control-statement" class="headerlink" title="规则12: control_statement"></a>规则12: control_statement</h3><p>控制语句, for，while，do，catch语句中的条件不能包含在()中</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>control_statement</td>
+<td>启用</td>
+<td>no</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>具体示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//建议写法</span></span><br><span class="line"><span class="keyword">if</span> condition &#123;</span><br><span class="line"><span class="keyword">if</span> (a, b) == (<span class="number">0</span>, <span class="number">1</span>) &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不建议写法</span></span><br><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line"><span class="keyword">if</span>(condition) &#123;</span><br><span class="line"><span class="keyword">if</span> ((a || b) &amp;&amp; (c || d)) &#123;</span><br></pre></td></tr></table></figure>
+<h3 id="规则13-custom-rules"><a href="#规则13-custom-rules" class="headerlink" title="规则13: custom_rules"></a>规则13: custom_rules</h3><p>自定义规则。 这个属性可以通过提供正则表达式来创建自定义规则， 可选指定语法类型搭配， 安全、级别和要陈列的什么信息。 这个属性只要熟悉使用正则表达式的人使用，目前可以不适用</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>custom_rules</td>
+<td>启用</td>
+<td>no</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<h3 id="规则14-cyclomatic-complexity"><a href="#规则14-cyclomatic-complexity" class="headerlink" title="规则14: cyclomatic_complexity"></a>规则14: cyclomatic_complexity</h3><p>循环复杂度。函数体的复杂度应该要限制，这个属性主要约束条件句、循环句中的循环嵌套问题， 当嵌套太多的循环时，则会触发swiftlint中的warning和error，当达到10个循环嵌套时就会报warning，达到20个循环嵌套时就会报error</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cyclomatic_complexity</td>
+<td>启用</td>
+<td>no</td>
+<td>metrics</td>
+</tr>
+</tbody>
+</table>
+<h3 id="规则15-discarded-notification-center-observer"><a href="#规则15-discarded-notification-center-observer" class="headerlink" title="规则15: discarded_notification_center_observer"></a>规则15: discarded_notification_center_observer</h3><p>当使用注册的通知时, 应该存储返回的观察者, 便于用完之后移除通知</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>discarded_notification_center_observer</td>
+<td>启用</td>
+<td>no</td>
+<td>lint</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//推荐写法</span></span><br><span class="line">let foo = nc.addObserver(forName: .NSSystemTimeZoneDidChange, object: <span class="literal">nil</span>, queue: <span class="literal">nil</span>) &#123; &#125;</span><br><span class="line"></span><br><span class="line">let foo = nc.addObserver(forName: .NSSystemTimeZoneDidChange, object: <span class="literal">nil</span>, queue: <span class="literal">nil</span>, using: &#123; &#125;)</span><br><span class="line"></span><br><span class="line">func foo() -&gt; Any &#123;</span><br><span class="line">   <span class="keyword">return</span> nc.addObserver(forName: .NSSystemTimeZoneDidChange, object: <span class="literal">nil</span>, queue: <span class="literal">nil</span>, using: &#123; &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//不推荐写法</span></span><br><span class="line">nc.addObserver(forName: .NSSystemTimeZoneDidChange, object: <span class="literal">nil</span>, queue: <span class="literal">nil</span>) &#123; &#125;</span><br><span class="line"></span><br><span class="line">nc.addObserver(forName: .NSSystemTimeZoneDidChange, object: <span class="literal">nil</span>, queue: <span class="literal">nil</span>, using: &#123; &#125;)</span><br><span class="line"></span><br><span class="line">@discardableResult func foo() -&gt; Any &#123;</span><br><span class="line">   <span class="keyword">return</span> nc.addObserver(forName: .NSSystemTimeZoneDidChange, object: <span class="literal">nil</span>, queue: <span class="literal">nil</span>, using: &#123; &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则16-discouraged-direct-init"><a href="#规则16-discouraged-direct-init" class="headerlink" title="规则16: discouraged_direct_init"></a>规则16: discouraged_direct_init</h3><p>阻止直接初始化导致的错误类型, 有类方法的,用类方法初始化(不建议直接init初始化)</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>discouraged_direct_init</td>
+<td>启用</td>
+<td>no</td>
+<td>lint</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//建议写法</span></span><br><span class="line">let foo = <span class="built_in">UIDevice</span>.current</span><br><span class="line">let foo = Bundle.main</span><br><span class="line">let foo = Bundle(path: <span class="string">"bar"</span>)</span><br><span class="line">let foo = Bundle(identifier: <span class="string">"bar"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//不建议写法</span></span><br><span class="line">let foo = <span class="built_in">UIDevice</span>()</span><br><span class="line">let foo = Bundle()</span><br><span class="line">let foo = bar(bundle: Bundle(), device: <span class="built_in">UIDevice</span>())</span><br></pre></td></tr></table></figure>
+<h3 id="规则17-discouraged-optional-boolean"><a href="#规则17-discouraged-optional-boolean" class="headerlink" title="规则17: discouraged_optional_boolean"></a>规则17: discouraged_optional_boolean</h3><p>不建议使用可选布尔值</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>discouraged_optional_boolean</td>
+<td>未启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//建议写法</span></span><br><span class="line">var foo: Bool</span><br><span class="line">var foo: [String: Bool]</span><br><span class="line">var foo: [Bool]</span><br><span class="line">let foo: Bool = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//不建议写法</span></span><br><span class="line">var foo: Bool?</span><br><span class="line">var foo: [String: Bool?]</span><br><span class="line">var foo: [Bool?]</span><br><span class="line">let foo: Bool? = <span class="literal">nil</span></span><br></pre></td></tr></table></figure>
+<h3 id="规则18-discouraged-object-literal"><a href="#规则18-discouraged-object-literal" class="headerlink" title="规则18: discouraged_object_literal"></a>规则18: discouraged_object_literal</h3><p>优先使用对象初始化方法, 不建议使用代码块初始化</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>discouraged_object_literal</td>
+<td>未启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不建议写法</span></span><br><span class="line">let white = <span class="meta">#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)</span></span><br><span class="line">let image = ↓<span class="meta">#imageLiteral(resourceName: <span class="meta-string">"image.jpg"</span>)</span></span><br></pre></td></tr></table></figure>
+<h3 id="规则19-dynamic-inline"><a href="#规则19-dynamic-inline" class="headerlink" title="规则19: dynamic_inline"></a>规则19: dynamic_inline</h3><p>避免一起使用 dynamic 和 @inline(_ _always)， 否则报 error</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dynamic_inline</td>
+<td>启用</td>
+<td>no</td>
+<td>lint</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 正确的做法</span></span><br><span class="line"><span class="keyword">class</span> LangKe &#123;</span><br><span class="line">    dynamic func myFunction() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> LangKe &#123;</span><br><span class="line">    @inline(__always) func myFunction() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> LangKe &#123;</span><br><span class="line">    @inline(never) dynamic func myFunction() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 只要同时使用 dynamic 和 @inline(_ _always)都报错 error！！！</span></span><br><span class="line"><span class="keyword">class</span> LangKe &#123;</span><br><span class="line">    @inline(__always) public dynamic func myFunction() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则20-array-init"><a href="#规则20-array-init" class="headerlink" title="规则20: array_init"></a>规则20: array_init</h3><p>序列转化成数组时, 优先使用数组转化, 而不是seq.map {$ 0}将序列转换为数组</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>array_init</td>
+<td>未启用</td>
+<td>no</td>
+<td>lint</td>
+</tr>
+</tbody>
+</table>
+<p>官方示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> let description = RuleDescription(</span><br><span class="line">    identifier: <span class="string">"array_init"</span>,</span><br><span class="line">    name: <span class="string">"Array Init"</span>,</span><br><span class="line">    description: <span class="string">"Prefer using Array(seq) than seq.map &#123; $0 &#125; to convert a sequence into an Array."</span>,</span><br><span class="line">    kind: .lint,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//以下示例不会触发警告</span></span><br><span class="line">    nonTriggeringExamples: [</span><br><span class="line">        <span class="string">"Array(foo)\n"</span>,</span><br><span class="line">        <span class="string">"foo.map &#123; $0.0 &#125;\n"</span>,</span><br><span class="line">        <span class="string">"foo.map &#123; $1 &#125;\n"</span>,</span><br><span class="line">        <span class="string">"foo.map &#123; $0() &#125;\n"</span>,</span><br><span class="line">        <span class="string">"foo.map &#123; ((), $0) &#125;\n"</span>,</span><br><span class="line">        <span class="string">"foo.map &#123; $0! &#125;\n"</span>,</span><br><span class="line">        <span class="string">"foo.map &#123; $0! /* force unwrap */ &#125;\n"</span>,</span><br><span class="line">        <span class="string">"foo.something &#123; RouteMapper.map($0) &#125;\n"</span></span><br><span class="line">    ],</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//以下示例会触发警告</span></span><br><span class="line">    triggeringExamples: [</span><br><span class="line">        <span class="string">"↓foo.map(&#123; $0 &#125;)\n"</span>,</span><br><span class="line">        <span class="string">"↓foo.map &#123; $0 &#125;\n"</span>,</span><br><span class="line">        <span class="string">"↓foo.map &#123; return $0 &#125;\n"</span>,</span><br><span class="line">        <span class="string">"↓foo.map &#123; elem in\n"</span> +</span><br><span class="line">        <span class="string">"   elem\n"</span> +</span><br><span class="line">        <span class="string">"&#125;\n"</span>,</span><br><span class="line">        <span class="string">"↓foo.map &#123; elem in\n"</span> +</span><br><span class="line">        <span class="string">"   return elem\n"</span> +</span><br><span class="line">        <span class="string">"&#125;\n"</span>,</span><br><span class="line">        <span class="string">"↓foo.map &#123; (elem: String) in\n"</span> +</span><br><span class="line">            <span class="string">"   elem\n"</span> +</span><br><span class="line">        <span class="string">"&#125;\n"</span>,</span><br><span class="line">        <span class="string">"↓foo.map &#123; elem -&gt; String in\n"</span> +</span><br><span class="line">        <span class="string">"   elem\n"</span> +</span><br><span class="line">        <span class="string">"&#125;\n"</span>,</span><br><span class="line">        <span class="string">"↓foo.map &#123; $0 /* a comment */ &#125;\n"</span></span><br><span class="line">    ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="规则21-empty-count"><a href="#规则21-empty-count" class="headerlink" title="规则21: empty_count"></a>规则21: empty_count</h3><p>建议使用isEmpty判断,而不是使用count==0判断</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>empty_count</td>
+<td>未启用</td>
+<td>no</td>
+<td>performance</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// swiftlint不建议这样使用</span></span><br><span class="line">let number = <span class="string">"long"</span></span><br><span class="line"><span class="keyword">if</span> number.characters.count == <span class="number">0</span> &#123;</span><br><span class="line">    print(<span class="string">"为空"</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    print(<span class="string">"不为空"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// swiftlint建议这种正式风格</span></span><br><span class="line"><span class="keyword">if</span> number.isEmpty &#123;</span><br><span class="line">    print(<span class="string">"为空"</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    print(<span class="string">"不为空"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则22-empty-enum-arguments"><a href="#规则22-empty-enum-arguments" class="headerlink" title="规则22: empty_enum_arguments"></a>规则22: empty_enum_arguments</h3><p>当枚举与关联类型匹配时，如果不使用它们，参数可以省略</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>empty_enum_arguments</td>
+<td>启用</td>
+<td>yes</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SwiftLint建议写法</span></span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line">    <span class="keyword">case</span> .bar: <span class="keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line">    <span class="keyword">case</span> .bar(let x): <span class="keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line">    <span class="keyword">case</span> let .bar(x): <span class="keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">switch</span> (foo, bar) &#123;</span><br><span class="line">    <span class="keyword">case</span> (_, _): <span class="keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">"bar"</span>.uppercased(): <span class="keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//SwiftLint不建议写法</span></span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line">    <span class="keyword">case</span> .bar(_): <span class="keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line">    <span class="keyword">case</span> .bar(): <span class="keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line">    <span class="keyword">case</span> .bar(_), .bar2(_): <span class="keyword">break</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则23-empty-parameters"><a href="#规则23-empty-parameters" class="headerlink" title="规则23: empty_parameters"></a>规则23: empty_parameters</h3><p>闭包参数为空时,建议使用() -&gt;Void, 而不是Void -&gt;Void</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>empty_parameters</td>
+<td>启用</td>
+<td>yes</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 01 不会触发warning</span></span><br><span class="line">let abc: () -&gt; Void</span><br><span class="line"></span><br><span class="line">func foo(completion: () -&gt; Void) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 02 直接报错</span></span><br><span class="line">let bcd: Void -&gt; Void</span><br><span class="line"></span><br><span class="line">func foo(completion: Void -&gt; Void) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则24-empty-parentheses-with-trailing-closure"><a href="#规则24-empty-parentheses-with-trailing-closure" class="headerlink" title="规则24: empty_parentheses_with_trailing_closure"></a>规则24: empty_parentheses_with_trailing_closure</h3><p>在使用尾随闭包的时候， 应该尽量避免使用空的圆括号</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>empty_parentheses_with_trailing_closure</td>
+<td>启用</td>
+<td>yes</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map &#123; $<span class="number">0</span> + <span class="number">1</span> &#125;</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map(&#123; $<span class="number">0</span> + <span class="number">1</span> &#125;)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].reduce(<span class="number">0</span>) &#123; $<span class="number">0</span> + $<span class="number">1</span> &#125;</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map &#123; number <span class="keyword">in</span></span><br><span class="line">   number + <span class="number">1</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map() &#123; $<span class="number">0</span> + <span class="number">1</span> &#125;</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map( ) &#123; $<span class="number">0</span> + <span class="number">1</span> &#125;</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map() &#123; number <span class="keyword">in</span></span><br><span class="line">   number + <span class="number">1</span> </span><br><span class="line">&#125;</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map(  ) &#123; number <span class="keyword">in</span></span><br><span class="line">   number + <span class="number">1</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则26-explicit-acl"><a href="#规则26-explicit-acl" class="headerlink" title="规则26: explicit_acl"></a>规则26: explicit_acl</h3><p>…所有属性和方法的声明, 都应该明确指定修饰关键字</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>explicit_acl</td>
+<td>未启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>官方代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//非触发示例</span></span><br><span class="line">internal <span class="keyword">enum</span> A &#123;&#125;</span><br><span class="line">public final <span class="keyword">class</span> B &#123;&#125;</span><br><span class="line">private <span class="keyword">struct</span> C &#123;&#125;</span><br><span class="line">internal func a() &#123; let a =  &#125;</span><br><span class="line">private <span class="keyword">struct</span> C &#123; let d = <span class="number">5</span> &#125;</span><br><span class="line">internal <span class="keyword">class</span> A &#123; deinit &#123;&#125; &#125;</span><br><span class="line">internal protocol A &#123;</span><br><span class="line">    func b()</span><br><span class="line">    var c: Int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//触发示例</span></span><br><span class="line"><span class="keyword">enum</span> A &#123;&#125;</span><br><span class="line">final <span class="keyword">class</span> B &#123;&#125;</span><br><span class="line">internal <span class="keyword">struct</span> C &#123; let d = <span class="number">5</span> &#125;</span><br><span class="line">public <span class="keyword">struct</span> C &#123; let d = <span class="number">5</span> &#125;</span><br><span class="line">func a() &#123;&#125;</span><br><span class="line">internal let a = <span class="number">0</span></span><br><span class="line">func b() &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则27-explicit-type-interface"><a href="#规则27-explicit-type-interface" class="headerlink" title="规则27: explicit_type_interface"></a>规则27: explicit_type_interface</h3><p>声明的属性应该明确其类型, 如: var myVar: Int = 0</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>explicit_type_interface</td>
+<td>未启用</td>
+<td>no</td>
+<td>idomatic</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//推荐写法</span></span><br><span class="line"><span class="keyword">class</span> Foo &#123;</span><br><span class="line">  var myVar: Int? = <span class="number">0</span></span><br><span class="line">  let myLet: Int? = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不建议写法</span></span><br><span class="line"><span class="keyword">class</span> Foo &#123;</span><br><span class="line">  var myVar = <span class="number">0</span></span><br><span class="line">  let myLet = <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则28-extension-access-modifier"><a href="#规则28-extension-access-modifier" class="headerlink" title="规则28: extension_access_modifier"></a>规则28: extension_access_modifier</h3><p>在自定义类中,推荐使用extension扩展</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>extension_access_modifier</td>
+<td>未启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<h3 id="规则29-no-extension-access-modifier"><a href="#规则29-no-extension-access-modifier" class="headerlink" title="规则29: no_extension_access_modifier"></a>规则29: no_extension_access_modifier</h3><p>在extension扩展前面,不建议使用(fileprivate, public)等修饰符</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>no_extension_access_modifier</td>
+<td>未启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不建议以下写法</span></span><br><span class="line">private extension String &#123;&#125;</span><br><span class="line">public extension String &#123;&#125;</span><br><span class="line">open extension String &#123;&#125;</span><br><span class="line">internal extension String &#123;&#125;</span><br><span class="line">fileprivate extension String &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则30-fallthrough"><a href="#规则30-fallthrough" class="headerlink" title="规则30: fallthrough"></a>规则30: fallthrough</h3><p>switch语句中不建议使用fallthrough</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fallthrough</td>
+<td>启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//推荐写法</span></span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line"><span class="keyword">case</span> .bar, .bar2, .bar3:</span><br><span class="line">    something()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不建议写法</span></span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line"><span class="keyword">case</span> .bar:</span><br><span class="line">    fallthrough</span><br><span class="line"><span class="keyword">case</span> .bar2:</span><br><span class="line">    something()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则31-fatal-error-message"><a href="#规则31-fatal-error-message" class="headerlink" title="规则31: fatal_error_message"></a>规则31: fatal_error_message</h3><p>执行fatalError错误时,建议有一个提示信息; 如:fatalError(“Foo”)</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fatal_error_message</td>
+<td>未启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//推荐写法</span></span><br><span class="line">required init?(coder aDecoder: <span class="built_in">NSCoder</span>) &#123;</span><br><span class="line">    fatalError(<span class="string">"init(coder:) has not been implemented"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不建议</span></span><br><span class="line">required init?(coder aDecoder: <span class="built_in">NSCoder</span>) &#123;</span><br><span class="line">    fatalError(<span class="string">""</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则32-file-header"><a href="#规则32-file-header" class="headerlink" title="规则32: file_header"></a>规则32: file_header</h3><p>文件头。新建的文件开始的注释应该一样</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aaa</td>
+<td>未启用</td>
+<td>no</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 不会触发warning</span></span><br><span class="line"><span class="comment">/// 如果我新建一个工程，在ViewController.swift文件中， 开始的注释应该是：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  ViewController.swift</span></span><br><span class="line"><span class="comment">//  SwiftLint</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by langke on 17/1/17.</span></span><br><span class="line"><span class="comment">//  Copyright © 2017年 langke. All rights reserved.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line">改变一下变为：</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  MyViewController.swift...................由于这里和外面的文件名不一样，所以触发warning（实际上在swift 3.0上测试这个属性暂时没有任何作用！！）</span></span><br><span class="line"><span class="comment">//  SwiftLint</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by langke on 17/1/17.</span></span><br><span class="line"><span class="comment">//   Copyright © 2017年 langke. All rights reserved................官方terminal表示，Copyright和Created没有对齐，也会触发warning！！！</span></span><br><span class="line"><span class="comment">//</span></span><br></pre></td></tr></table></figure>
+<h3 id="规则33-file-length"><a href="#规则33-file-length" class="headerlink" title="规则33: file_length"></a>规则33: file_length</h3><p>文件内容行数, 超过400行warning, 超过1000行给error</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>file_length</td>
+<td>启用</td>
+<td>no</td>
+<td>metrics</td>
+</tr>
+</tbody>
+</table>
+<h3 id="规则34-first-where"><a href="#规则34-first-where" class="headerlink" title="规则34: first_where"></a>规则34: first_where</h3><p>不建议在使用filter和map函数后直接使用.first</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>first_where</td>
+<td>未启用</td>
+<td>no</td>
+<td>performance</td>
+</tr>
+</tbody>
+</table>
+<p>官方代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> let description = RuleDescription(</span><br><span class="line">    identifier: <span class="string">"first_where"</span>,</span><br><span class="line">    name: <span class="string">"First Where"</span>,</span><br><span class="line">    description: <span class="string">"Prefer using `.first(where:)` over `.filter &#123; &#125;.first` in collections."</span>,</span><br><span class="line">    kind: .performance,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//不会触发警告</span></span><br><span class="line">    nonTriggeringExamples: [</span><br><span class="line">        <span class="string">"kinds.filter(excludingKinds.contains).isEmpty &amp;&amp; kinds.first == .identifier\n"</span>,</span><br><span class="line">        <span class="string">"myList.first(where: &#123; $0 % 2 == 0 &#125;)\n"</span>,</span><br><span class="line">        <span class="string">"match(pattern: pattern).filter &#123; $0.first == .identifier &#125;\n"</span>,</span><br><span class="line">        <span class="string">"(myList.filter &#123; $0 == 1 &#125;.suffix(2)).first\n"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="comment">//以下写法会触发警告</span></span><br><span class="line">    triggeringExamples: [</span><br><span class="line">        <span class="string">"↓myList.filter &#123; $0 % 2 == 0 &#125;.first\n"</span>,</span><br><span class="line">        <span class="string">"↓myList.filter(&#123; $0 % 2 == 0 &#125;).first\n"</span>,</span><br><span class="line">        <span class="string">"↓myList.map &#123; $0 + 1 &#125;.filter(&#123; $0 % 2 == 0 &#125;).first\n"</span>,</span><br><span class="line">        <span class="string">"↓myList.map &#123; $0 + 1 &#125;.filter(&#123; $0 % 2 == 0 &#125;).first?.something()\n"</span>,</span><br><span class="line">        <span class="string">"↓myList.filter(someFunction).first\n"</span>,</span><br><span class="line">        <span class="string">"↓myList.filter(&#123; $0 % 2 == 0 &#125;)\n.first\n"</span>,</span><br><span class="line">        <span class="string">"(↓myList.filter &#123; $0 == 1 &#125;).first\n"</span></span><br><span class="line">    ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="规则35-for-where"><a href="#规则35-for-where" class="headerlink" title="规则35: for_where"></a>规则35: for_where</h3><p>在for循环中,不建议使用单个if语句或者只使用一次循环变量,可使用where或者if{}else{}语句</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>for_where</td>
+<td>启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//推荐写法</span></span><br><span class="line"><span class="keyword">for</span> user <span class="keyword">in</span> users where user.id == <span class="number">1</span> &#123; &#125;</span><br><span class="line"><span class="keyword">for</span> user <span class="keyword">in</span> users &#123;</span><br><span class="line">   <span class="keyword">if</span> let <span class="keyword">id</span> = user.id &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> user <span class="keyword">in</span> users &#123;</span><br><span class="line">   <span class="keyword">if</span> var <span class="keyword">id</span> = user.id &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> user <span class="keyword">in</span> users &#123;</span><br><span class="line">   <span class="keyword">if</span> user.id == <span class="number">1</span> &#123; &#125; <span class="keyword">else</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> user <span class="keyword">in</span> users &#123;</span><br><span class="line">   <span class="keyword">if</span> user.id == <span class="number">1</span> &#123; &#125;</span><br><span class="line">   print(user)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> user <span class="keyword">in</span> users &#123;</span><br><span class="line">   let <span class="keyword">id</span> = user.id</span><br><span class="line">   <span class="keyword">if</span> <span class="keyword">id</span> == <span class="number">1</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> user <span class="keyword">in</span> users &#123;</span><br><span class="line">   <span class="keyword">if</span> user.id == <span class="number">1</span> &amp;&amp; user.age &gt; <span class="number">18</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不建议写法</span></span><br><span class="line"><span class="keyword">for</span> user <span class="keyword">in</span> users &#123;</span><br><span class="line">   <span class="keyword">if</span> user.id == <span class="number">1</span> &#123; <span class="keyword">return</span> <span class="literal">true</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则36-force-cast"><a href="#规则36-force-cast" class="headerlink" title="规则36: force_cast"></a>规则36: force_cast</h3><p>不建议直接强解类型</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>force_cast</td>
+<td>启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//建议写法</span></span><br><span class="line"><span class="built_in">NSNumber</span>() as? Int</span><br><span class="line"></span><br><span class="line"><span class="comment">//不推荐</span></span><br><span class="line"><span class="built_in">NSNumber</span>() ↓as! Int</span><br></pre></td></tr></table></figure>
+<h3 id="规则37-force-try"><a href="#规则37-force-try" class="headerlink" title="规则37: force_try"></a>规则37: force_try</h3><p>对会抛出异常(throws)的方法,不建议try!强解</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>force_try</td>
+<td>启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">func myFunction() throws &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 这样写是可以的，不会触发 error</span></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    try myFunction()</span><br><span class="line">&#125; catch &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 这样直接触发 error</span></span><br><span class="line">try! myFunction()</span><br></pre></td></tr></table></figure>
+<h3 id="规则38-force-unwrapping"><a href="#规则38-force-unwrapping" class="headerlink" title="规则38: force_unwrapping"></a>规则38: force_unwrapping</h3><p>强制解包/拆包。我们知道，当一个类型是可选类型的时候，当我们获取值时，需要强制解包（也叫隐式解包）, 通常我们是在一个变量或者所需要的常量、类型等后面加一个“ ！”， 然而，swiftlint建议强制解包应该要避免， 否则将给予warning</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>force_unwrapping</td>
+<td>未启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 将触发warning</span></span><br><span class="line">navigationController!.pushViewController(myViewController, animated: <span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line">let url = <span class="built_in">NSURL</span>(string: <span class="string">"http://www.baidu.com"</span>)!</span><br><span class="line">print(url)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> cell!</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 不会触发warning</span></span><br><span class="line">navigationController?.pushViewController(myViewController, animated: <span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="规则39-function-body-length"><a href="#规则39-function-body-length" class="headerlink" title="规则39: function_body_length"></a>规则39: function_body_length</h3><p>函数体长度， 函数体不应该跨越太多行， 超过40行给warning， 超过100行直接报错</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>function_body_length</td>
+<td>启用</td>
+<td>no</td>
+<td>metrics</td>
+</tr>
+</tbody>
+</table>
+<h3 id="规则40-function-parameter-count"><a href="#规则40-function-parameter-count" class="headerlink" title="规则40: function_parameter_count"></a>规则40: function_parameter_count</h3><ul>
+<li>函数参数个数， 函数参数数量(init方法除外)应该少点， 不要太多，swiftlint规定函数参数数量超过5个给warning， 超过8个直接报error</li>
+<li>注：<code>function_parameter_count: error</code> 这样并不能改变它的警告或错误，该属性不允许修改，但是可以禁用</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>function_parameter_count</td>
+<td>启用</td>
+<td>no</td>
+<td>metrics</td>
+</tr>
+</tbody>
+</table>
+<h3 id="规则41-generic-type-name"><a href="#规则41-generic-type-name" class="headerlink" title="规则41: generic_type_name"></a>规则41: generic_type_name</h3><p>泛型类型名称只能包含字母数字字符，以大写字母开头，长度介于1到20个字符之间</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>generic_type_name</td>
+<td>未启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//推荐写法</span></span><br><span class="line">func foo&lt;T&gt;() &#123;&#125;</span><br><span class="line">func foo&lt;T&gt;() -&gt; T &#123;&#125;</span><br><span class="line">func foo&lt;T, U&gt;(param: U) -&gt; T &#123;&#125;</span><br><span class="line">func foo&lt;T: Hashable, U: Rule&gt;(param: U) -&gt; T &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不推荐写法</span></span><br><span class="line">func foo&lt;T_Foo&gt;() &#123;&#125;</span><br><span class="line">func foo&lt;T, U_Foo&gt;(param: U_Foo) -&gt; T &#123;&#125;</span><br><span class="line">func foo&lt;TTTTTTTTTTTTTTTTTTTTT&gt;() &#123;&#125;</span><br><span class="line">func foo&lt;type&gt;() &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则42-identifier-name"><a href="#规则42-identifier-name" class="headerlink" title="规则42: identifier_name"></a>规则42: identifier_name</h3><p>变量标识符名称应该只包含字母数字字符，并以小写字母开头或只应包含大写字母。在上述例外情况下，当变量名称被声明为静态且不可变时，变量名称可能以大写字母开头。变量名称不应该太长或太短</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>identifier_name</td>
+<td>启用</td>
+<td>no</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>官方给出的示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">internal <span class="keyword">struct</span> IdentifierNameRuleExamples &#123;</span><br><span class="line">    <span class="comment">//不会触发error</span></span><br><span class="line">    <span class="keyword">static</span> let nonTriggeringExamples = [</span><br><span class="line">        <span class="string">"let myLet = 0"</span>,</span><br><span class="line">        <span class="string">"var myVar = 0"</span>,</span><br><span class="line">        <span class="string">"private let _myLet = 0"</span>,</span><br><span class="line">        <span class="string">"class Abc &#123; static let MyLet = 0 &#125;"</span>,</span><br><span class="line">        <span class="string">"let URL: NSURL? = nil"</span>,</span><br><span class="line">        <span class="string">"let XMLString: String? = nil"</span>,</span><br><span class="line">        <span class="string">"override var i = 0"</span>,</span><br><span class="line">        <span class="string">"enum Foo &#123; case myEnum &#125;"</span>,</span><br><span class="line">        <span class="string">"func isOperator(name: String) -&gt; Bool"</span>,</span><br><span class="line">        <span class="string">"func typeForKind(_ kind: SwiftDeclarationKind) -&gt; String"</span>,</span><br><span class="line">        <span class="string">"func == (lhs: SyntaxToken, rhs: SyntaxToken) -&gt; Bool"</span>,</span><br><span class="line">        <span class="string">"override func IsOperator(name: String) -&gt; Bool"</span></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    <span class="comment">//会触发error</span></span><br><span class="line">    <span class="keyword">static</span> let triggeringExamples = [</span><br><span class="line">        <span class="string">"↓let MyLet = 0"</span>,</span><br><span class="line">        <span class="string">"↓let _myLet = 0"</span>,</span><br><span class="line">        <span class="string">"private ↓let myLet_ = 0"</span>,</span><br><span class="line">        <span class="string">"↓let myExtremelyVeryVeryVeryVeryVeryVeryLongLet = 0"</span>,</span><br><span class="line">        <span class="string">"↓var myExtremelyVeryVeryVeryVeryVeryVeryLongVar = 0"</span>,</span><br><span class="line">        <span class="string">"private ↓let _myExtremelyVeryVeryVeryVeryVeryVeryLongLet = 0"</span>,</span><br><span class="line">        <span class="string">"↓let i = 0"</span>,</span><br><span class="line">        <span class="string">"↓var id = 0"</span>,</span><br><span class="line">        <span class="string">"private ↓let _i = 0"</span>,</span><br><span class="line">        <span class="string">"↓func IsOperator(name: String) -&gt; Bool"</span>,</span><br><span class="line">        <span class="string">"enum Foo &#123; case ↓MyEnum &#125;"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则44-implicit-getter"><a href="#规则44-implicit-getter" class="headerlink" title="规则44: implicit_getter"></a>规则44: implicit_getter</h3><p>对于只有只读属性不建议重写get方法</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>implicit_getter</td>
+<td>启用</td>
+<td>no</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发error</span></span><br><span class="line"><span class="comment">//重写get和set方法</span></span><br><span class="line"><span class="keyword">class</span> Foo &#123;</span><br><span class="line">  var foo: Int &#123;</span><br><span class="line">    get &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">3</span></span><br><span class="line">    &#125;</span><br><span class="line">    set &#123;</span><br><span class="line">      _abc = newValue </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//只读</span></span><br><span class="line"><span class="keyword">class</span> Foo &#123;</span><br><span class="line">  var foo: Int &#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">20</span> </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Foo &#123;</span><br><span class="line">  <span class="keyword">static</span> var foo: Int &#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">20</span> </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发error</span></span><br><span class="line"><span class="keyword">class</span> Foo &#123;</span><br><span class="line">  var foo: Int &#123;</span><br><span class="line">    get &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">20</span> </span><br><span class="line">    &#125; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Foo &#123;</span><br><span class="line">  var foo: Int &#123;</span><br><span class="line">    get&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">20</span> </span><br><span class="line">    &#125; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则45-implicit-return"><a href="#规则45-implicit-return" class="headerlink" title="规则45: implicit_return"></a>规则45: implicit_return</h3><p> 建议使用隐式返回闭包; 如: foo.map({ $0 + 1 })</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>implicit_return</td>
+<td>未启用</td>
+<td>no</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//推荐写法</span></span><br><span class="line">foo.map &#123; $<span class="number">0</span> + <span class="number">1</span> &#125;</span><br><span class="line">foo.map(&#123; $<span class="number">0</span> + <span class="number">1</span> &#125;)</span><br><span class="line">foo.map &#123; value <span class="keyword">in</span> value + <span class="number">1</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不建议写法</span></span><br><span class="line">foo.map &#123; value <span class="keyword">in</span></span><br><span class="line">  <span class="keyword">return</span> value + <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">foo.map &#123;</span><br><span class="line">  <span class="keyword">return</span> $<span class="number">0</span> + <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="规则46-implicitly-unwrapped-optional"><a href="#规则46-implicitly-unwrapped-optional" class="headerlink" title="规则46: implicitly_unwrapped_optional"></a>规则46: implicitly_unwrapped_optional</h3><p>尽量避免隐式解析可选类型的使用</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>implicitly_unwrapped_optional</td>
+<td>未启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>下面吗给出官方示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> let description = RuleDescription(</span><br><span class="line">    identifier: <span class="string">"implicitly_unwrapped_optional"</span>,</span><br><span class="line">    name: <span class="string">"Implicitly Unwrapped Optional"</span>,</span><br><span class="line">    description: <span class="string">"Implicitly unwrapped optionals should be avoided when possible."</span>,</span><br><span class="line">    kind: .idiomatic,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//不会触发warning</span></span><br><span class="line">    nonTriggeringExamples: [</span><br><span class="line">        <span class="string">"@IBOutlet private var label: UILabel!"</span>,</span><br><span class="line">        <span class="string">"@IBOutlet var label: UILabel!"</span>,</span><br><span class="line">        <span class="string">"@IBOutlet var label: [UILabel!]"</span>,</span><br><span class="line">        <span class="string">"if !boolean &#123;&#125;"</span>,</span><br><span class="line">        <span class="string">"let int: Int? = 42"</span>,</span><br><span class="line">        <span class="string">"let int: Int? = nil"</span></span><br><span class="line">    ],</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//会触发warning</span></span><br><span class="line">    triggeringExamples: [</span><br><span class="line">        <span class="string">"let label: UILabel!"</span>,</span><br><span class="line">        <span class="string">"let IBOutlet: UILabel!"</span>,</span><br><span class="line">        <span class="string">"let labels: [UILabel!]"</span>,</span><br><span class="line">        <span class="string">"var ints: [Int!] = [42, nil, 42]"</span>,</span><br><span class="line">        <span class="string">"let label: IBOutlet!"</span>,</span><br><span class="line">        <span class="string">"let int: Int! = 42"</span>,</span><br><span class="line">        <span class="string">"let int: Int! = nil"</span>,</span><br><span class="line">        <span class="string">"var int: Int! = 42"</span>,</span><br><span class="line">        <span class="string">"let int: ImplicitlyUnwrappedOptional&lt;Int&gt;"</span>,</span><br><span class="line">        <span class="string">"let collection: AnyCollection&lt;Int!&gt;"</span>,</span><br><span class="line">        <span class="string">"func foo(int: Int!) &#123;&#125;"</span></span><br><span class="line">    ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="规则47-is-disjoint"><a href="#规则47-is-disjoint" class="headerlink" title="规则47: is_disjoint"></a>规则47: is_disjoint</h3><p>初始化集合Set时,推荐使用Set.isDisjoint(), 不建议:Set.intersection</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is_disjoint</td>
+<td>启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//推荐写法</span></span><br><span class="line">_ = Set(syntaxKinds).isDisjoint(with: commentAndStringKindsSet)</span><br><span class="line">let isObjc = !objcAttributes.isDisjoint(with: dictionary.enclosedSwiftAttributes)</span><br></pre></td></tr></table></figure>
+<h3 id="规则48-joined-default-parameter"><a href="#规则48-joined-default-parameter" class="headerlink" title="规则48: joined_default_parameter"></a>规则48: joined_default_parameter</h3><p>joined方法使用默认分隔符时, 建议使用joined()方法, 而不是joined(separator: “”)方法</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>joined_default_parameter</td>
+<td>未启用</td>
+<td>yes</td>
+<td>idiomatic</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//建议写法</span></span><br><span class="line">let foo = bar.joined()</span><br><span class="line">let foo = bar.joined(separator: <span class="string">","</span>)</span><br><span class="line">let foo = bar.joined(separator: toto)</span><br><span class="line"></span><br><span class="line"><span class="comment">//不建议写法</span></span><br><span class="line">let foo = bar.joined(separator: <span class="string">""</span>)</span><br><span class="line">let foo = bar.filter(toto).joined(separator: <span class="string">""</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="规则49-large-tuple"><a href="#规则49-large-tuple" class="headerlink" title="规则49: large_tuple"></a>规则49: large_tuple</h3><p>定义的元组成员个数,超过两个warning</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>large_tuple</td>
+<td>启用</td>
+<td>no</td>
+<td>metrics</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line">let foo: (Int, Int)</span><br><span class="line">let foo: (start: Int, end: Int)</span><br><span class="line">let foo: (Int, (Int, String))</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line">let foo: (Int, Int, Int)</span><br><span class="line">let foo: (start: Int, end: Int, value: String)</span><br><span class="line">let foo: (Int, (Int, Int, Int))</span><br></pre></td></tr></table></figure>
+<h3 id="规则50-leading-whitespace"><a href="#规则50-leading-whitespace" class="headerlink" title="规则50: leading_whitespace"></a>规则50: leading_whitespace</h3><p>文件开始不应该有空格或者换行, 否则就会触发warning</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>leading_whitespace</td>
+<td>启用</td>
+<td>yes</td>
+<td>style</td>
+</tr>
+</tbody>
+</table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 不会触发warning</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  ViewController.swift</span></span><br><span class="line"><span class="comment">//  SwiftLint</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by langke on 17/1/12.</span></span><br><span class="line"><span class="comment">//  Copyright © 2017年 langke. All rights reserved.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/// 会触发warning</span></span><br><span class="line"> <span class="comment">//..................................这里有一个空格</span></span><br><span class="line"><span class="comment">//  ViewController.swift</span></span><br><span class="line"><span class="comment">//  SwiftLint</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by langke on 17/1/12.</span></span><br><span class="line"><span class="comment">//  Copyright © 2017年 langke. All rights reserved.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/// 会触发warning</span></span><br><span class="line">......................................这里是一个空行</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  ViewController.swift</span></span><br><span class="line"><span class="comment">//  SwiftLint</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by langke on 17/1/12.</span></span><br><span class="line"><span class="comment">//  Copyright © 2017年 langke. All rights reserved.</span></span><br><span class="line"><span class="comment">//</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考文档<br><a href="https://github.com/realm/SwiftLint/blob/master/Rules.md#array-init" target="_blank" rel="noopener">SwiftLint规则官方文档</a><br><a href="https://github.com/realm/SwiftLint/tree/master/Source/SwiftLintFramework/Rules" target="_blank" rel="noopener">SwiftLint个规则详细介绍</a></p>
+</blockquote>
+<blockquote>
+<p>有些地方的解释和示例可能不是很完善, 希望各位大神多多指导,后续会持续更新中…….</p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/SwiftLint/">SwiftLint</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Swift/">Swift</a>, <a href="/tags/SwiftLint/">SwiftLint</a>, <a href="/tags/规则/">规则</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2018/03/03/SwiftLint代码规范属性说明01/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Hexo博客/">Hexo博客</a><small>1</small></li>
+  
+    <li><a href="/categories/Socket学习笔记/">Socket学习笔记</a><small>1</small></li>
+  
+    <li><a href="/categories/SwiftLint/">SwiftLint</a><small>4</small></li>
+  
+    <li><a href="/categories/Swift学习笔记/">Swift学习笔记</a><small>1</small></li>
+  
+    <li><a href="/categories/Swift高阶功能/">Swift高阶功能</a><small>2</small></li>
+  
+    <li><a href="/categories/iOS动画/">iOS动画</a><small>1</small></li>
+  
+    <li><a href="/categories/iOS高阶功能/">iOS高阶功能</a><small>1</small></li>
+  
+    <li><a href="/categories/数据库基础/">数据库基础</a><small>1</small></li>
+  
+    <li><a href="/categories/组件化开发/">组件化开发</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/AppIcon/">AppIcon</a><small>1</small></li>
+  
+    <li><a href="/tags/CocoaPods/">CocoaPods</a><small>1</small></li>
+  
+    <li><a href="/tags/CoreAnimation/">CoreAnimation</a><small>1</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Github/">Github</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTPS/">HTTPS</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Homebrew/">Homebrew</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Objective-C/">Objective-C</a><small>1</small></li>
+  
+    <li><a href="/tags/Realm/">Realm</a><small>1</small></li>
+  
+    <li><a href="/tags/Socket/">Socket</a><small>1</small></li>
+  
+    <li><a href="/tags/Socket-IO/">Socket.IO</a><small>1</small></li>
+  
+    <li><a href="/tags/Swift/">Swift</a><small>6</small></li>
+  
+    <li><a href="/tags/Swift4-0/">Swift4.0</a><small>1</small></li>
+  
+    <li><a href="/tags/SwiftLint/">SwiftLint</a><small>4</small></li>
+  
+    <li><a href="/tags/UIStackView/">UIStackView</a><small>1</small></li>
+  
+    <li><a href="/tags/WebSocket/">WebSocket</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/tags/iOS-10-3/">iOS 10.3</a><small>1</small></li>
+  
+    <li><a href="/tags/pod/">pod</a><small>1</small></li>
+  
+    <li><a href="/tags/spec/">spec</a><small>1</small></li>
+  
+    <li><a href="/tags/trunk/">trunk</a><small>1</small></li>
+  
+    <li><a href="/tags/入坑/">入坑</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/规则/">规则</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 John Doe
+  
+</div>
+<div class="clearfix"></div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

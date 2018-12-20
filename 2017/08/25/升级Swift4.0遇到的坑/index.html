@@ -1,0 +1,360 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>升级Swift4.0遇到的坑 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="并不是所有库都能做到及时支持Swift4.0，更何况是在现在连Xcode9也还是beta的状态
+所以我们仅能做到将自己的业务代码（主工程代码）部分升级到Swift4.0，然后同时保留各种pod库在Swift3.2版本。
+没办法，谁叫Swift4.0也还无法做到API兼容呢（但愿能在Swift5之前实现吧）。
+至于我说的同时使用两个版本的Swift，这是没问题的，Xcode9支持在项目中同时使用Swift3.2和Swift4.0。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="升级Swift4.0遇到的坑">
+  <meta property="og:site_name" content="Hexo">
+
+  
+    <meta property="og:image" content="">
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/atom-one-dark.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/style.css?v=20170717" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://oindk07nf.qussl.com/animation.css?v=7" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-08-25T07:06:40.000Z"><a href="/2017/08/25/升级Swift4.0遇到的坑/">2017-08-25</a></time>
+      
+      
+  
+    <h1 class="title">升级Swift4.0遇到的坑</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <ul>
+<li>并不是所有库都能做到及时支持<code>Swift4.0</code>，更何况是在现在连<code>Xcode9</code>也还是beta的状态</li>
+<li>所以我们仅能做到将自己的业务代码（主工程代码）部分升级到<code>Swift4.0</code>，然后同时保留各种pod库在<code>Swift3.2</code>版本。</li>
+<li>没办法，谁叫<code>Swift4.0</code>也还无法做到API兼容呢（但愿能在<code>Swift5</code>之前实现吧）。</li>
+<li>至于我说的同时使用两个版本的<code>Swift</code>，这是没问题的，Xcode9支持在项目中同时使用<code>Swift3.2</code>和<code>Swift4.0</code>。</li>
+</ul>
+<a id="more"></a>
+<h2 id="修改Swift版本"><a href="#修改Swift版本" class="headerlink" title="修改Swift版本"></a>修改Swift版本</h2><h3 id="指定主工程的Swift版本为4-0"><a href="#指定主工程的Swift版本为4-0" class="headerlink" title="指定主工程的Swift版本为4.0"></a>指定主工程的Swift版本为4.0</h3><p><img src="http://upload-images.jianshu.io/upload_images/4122543-1a9aeacc47b262a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Xcode图示.png"></p>
+<h3 id="修改pod库"><a href="#修改pod库" class="headerlink" title="修改pod库"></a>修改pod库</h3><ul>
+<li>在Podfile文件的最下方加入如下代码，指定pod库的Swift版本为3.2(这样会使得所有的第三方pod库的Swift版本都为3.2)</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">post_install <span class="keyword">do</span> |installer|</span><br><span class="line">  installer.pods_project.targets.each <span class="keyword">do</span> |target|</span><br><span class="line">    target.build_configurations.each <span class="keyword">do</span> |config|</span><br><span class="line">      config.build_settings['SWIFT_VERSION'] = '3.2'</span><br><span class="line">    end</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h2 id="主工程中的代码修改"><a href="#主工程中的代码修改" class="headerlink" title="主工程中的代码修改"></a>主工程中的代码修改</h2><h3 id="Swift3-2到Swift4-0的改变"><a href="#Swift3-2到Swift4-0的改变" class="headerlink" title="Swift3.2到Swift4.0的改变"></a>Swift3.2到Swift4.0的改变</h3><ul>
+<li>1). <code>Swift4.0</code>中对于扩展的属性(包括实例属性、<code>static</code>属性、<code>class</code>属性)，都只能使用get方法，不可使用set方法</li>
+<li>2). <code>Swift4.0</code>中不再允许复写扩展中的方法(包括实例方法、<code>static</code>方法、<code>class</code>方法)<ul>
+<li>比如:自定义的协议方法在<code>extension</code>中实现,若某个类遵循了该协议,其子类便不能重写该协议方法</li>
+<li>解决的方法是: 在每个需要该协议的类里面都重新遵循该协议,实现协议方法</li>
+<li>个人想到的办法,不知道有没有其他解决办法可以提供一下</li>
+</ul>
+</li>
+<li>3). <code>swift3</code>使用<code>#selector</code>指定的方法，只有当方法权限为private时需要加<code>@objc</code>修饰符，现在<code>Swift4.0</code>全都要加<code>@objc</code>修饰符</li>
+<li><p>4). 自定义的<code>protocol</code>协议中,有<code>optional</code>修饰的非必须实现的方法,需要用<code>@objc</code>修饰</p>
+</li>
+<li><p>5). 字体方面的一些重命名</p>
+</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSFontAttributeName</span> --- .font</span><br><span class="line"><span class="comment">//或者NSAttributedStringKey.font</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSForegroundColorAttributeName</span> --- .foregroundColor</span><br><span class="line"><span class="comment">//NSAttributedStringKey.foregroundColor</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSStrikethroughStyleAttributeName</span> --- .strikethroughStyle</span><br><span class="line"><span class="comment">//NSAttributedStringKey.strikethroughStyle</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串类型的,添加rawValue</span></span><br><span class="line"><span class="built_in">NSAttributedStringKey</span>.font.rawValue</span><br><span class="line"></span><br><span class="line"><span class="comment">//等等等等..........</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//大部分类似以下,涉及富文本的方法均已改为了NSAttributedStringKey类型</span></span><br><span class="line">addAttributes(_ attrs: [<span class="built_in">NSAttributedStringKey</span> : Any] = [:], range: <span class="built_in">NSRange</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="一些的报错问题"><a href="#一些的报错问题" class="headerlink" title="一些的报错问题"></a>一些的报错问题</h2><h3 id="“Closure-cannot-implicitly-capture-a-mutating-self-parameter”错误"><a href="#“Closure-cannot-implicitly-capture-a-mutating-self-parameter”错误" class="headerlink" title="“Closure cannot implicitly capture a mutating self parameter”错误"></a>“Closure cannot implicitly capture a mutating self parameter”错误</h3><blockquote>
+<p>在struct中，如果我们在闭包中使用self，就会得到Closure cannot implicitly capture a mutating self parameter的错误提示。比如：</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">struct</span> RecordModel &#123;</span><br><span class="line">    <span class="comment">/// 定义一个闭包</span></span><br><span class="line">    var action: (() -&gt; ())?</span><br><span class="line">    var height = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">self</span>.action = &#123;</span><br><span class="line">        <span class="keyword">self</span>.height = <span class="number">20</span></span><br><span class="line">        <span class="comment">//Closure cannot implicitly capture a mutating self parameter报错</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>并且由<code>于RecordModel</code>的类型是<code>struct</code>，我们也没发在<code>action</code>闭包里添加截获列表。那么是不是就必须使用<code>class</code>了？答案是否定的。有两种方式可以解决这个问题。</p>
+</blockquote>
+<h4 id="方案一：为closure增加一个inout类型的参数"><a href="#方案一：为closure增加一个inout类型的参数" class="headerlink" title="方案一：为closure增加一个inout类型的参数"></a>方案一：为<code>closure</code>增加一个inout类型的参数</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">struct</span> RecordModel &#123;</span><br><span class="line">    <span class="comment">/// 定义一个闭包</span></span><br><span class="line">    var action: ((_ inSelf: <span class="keyword">inout</span> RecordModel) -&gt; ())?</span><br><span class="line">    var height = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">self</span>.action = &#123; (inSelf) <span class="keyword">in</span></span><br><span class="line">        inSelf.height = <span class="number">20</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>根据inout类型的说明，我们知道，实际上这相当于增加了一个隐藏的临时变量，self被复制，然后在closure(闭包)中使用，完成后，再复制回self。也就是说，这个方法有额外的内存开销。如果是struct较大的情形，这么做并不划算。</p>
+</blockquote>
+<h4 id="方案二：使用UnsafeMutablePointer-lt-Pointee-gt"><a href="#方案二：使用UnsafeMutablePointer-lt-Pointee-gt" class="headerlink" title="方案二：使用UnsafeMutablePointer&lt;Pointee&gt;"></a>方案二：使用<code>UnsafeMutablePointer&lt;Pointee&gt;</code></h4><ul>
+<li>这次采用直接指针的方式对于struct来进行操作，采用指针的好处是self不会被多次复制，性能较高。缺点是你需要自行确定你的代码的安全。</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">struct</span> RecordModel &#123;</span><br><span class="line">    <span class="comment">/// 定义一个闭包</span></span><br><span class="line">    var action: (() -&gt; ())?</span><br><span class="line">    var height = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">    let selfPointer = UnsafeMutablePointer(&amp;<span class="keyword">self</span>)</span><br><span class="line">    <span class="keyword">self</span>.action = &#123;</span><br><span class="line">        selfPointer.pointee.height = <span class="number">20</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p><code>Closure cannot implicitly capture a mutating self parameter</code>错误的原因是在进出<code>closure(闭包)</code>之后，self的一致性没办法得到保证，所以编译器默认不允许在<code>struct的closure(闭包)</code>中使用self。如果我们确定这么做是安全的，就可以通过上面的两种方式解决这个问题。其中，方法二的性能更好一些。</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><blockquote>
+<h4 id="这里可以记一下指针和swift变量之间的关系："><a href="#这里可以记一下指针和swift变量之间的关系：" class="headerlink" title="这里可以记一下指针和swift变量之间的关系："></a>这里可以记一下指针和swift变量之间的关系：</h4></blockquote>
+<ul>
+<li><code>UnsafePointer对应let</code></li>
+<li><code>UnsafeMutablePointer对应var</code></li>
+<li><code>AutoreleasingUnsafeMutablePointer对应unowned UnsafeMutablePointer</code>，用于inout的参数类型</li>
+<li><code>UnsafeRawPointer对应let Any</code>，raw系列都是对应相应的Any类型</li>
+<li><code>UnsafeBufferPointer是non-owning的类型（unowned</code>），用于collection的elements, buffer系列均如此</li>
+</ul>
+<h3 id="Declarations-from-extensions-cannot-be-overridden-yet-错误"><a href="#Declarations-from-extensions-cannot-be-overridden-yet-错误" class="headerlink" title="Declarations from extensions cannot be overridden yet 错误"></a><code>Declarations from extensions cannot be overridden yet</code> 错误</h3><p>这个错误大致是因为,协议方法是在<code>extension</code>里面的,不能被重写</p>
+<blockquote>
+<p>解决办法:(仅供参考,如有更好的建议还望多多指教)</p>
+<ul>
+<li>小编想到的解决办法就是在每一个需要此协议的类里面,重新遵循代理,实现该协议方法</li>
+</ul>
+</blockquote>
+<h3 id="quot-Method-39-initialize-39-defines-Objective-C-class-method-39-initialize-39-which-is-not-permitted-by-Swift-quot"><a href="#quot-Method-39-initialize-39-defines-Objective-C-class-method-39-initialize-39-which-is-not-permitted-by-Swift-quot" class="headerlink" title="&quot;Method &#39;initialize()&#39; defines Objective-C class method &#39;initialize&#39;, which is not permitted by Swift&quot;"></a><code>&quot;Method &#39;initialize()&#39; defines Objective-C class method &#39;initialize&#39;, which is not permitted by Swift&quot;</code></h3><p>报错原因: 在于已经废弃的initialize方法,示例如下</p>
+<ul>
+<li>方法交叉(Method Swizzling)</li>
+<li>有时为了方便，也有可能是解决某些框架内的 bug，或者别无他法时，需要修改一个已经存在类的方法的行为。方法交叉可以让你交换两个方法的实现，相当于是用你写的方法来重载原有方法，并且还能够是原有方法的行为保持不变。</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">extension <span class="built_in">UIViewController</span> &#123;</span><br><span class="line">    public override <span class="keyword">class</span> func initialize() &#123;<span class="comment">//此处报错</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//此处省略100行代码</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>initialize该方法已经被Swift4.0废弃</li>
+<li>在Swift3.0还勉强可以使用,但是会有警告;但是在4.0已经被完全废弃</li>
+</ul>
+<blockquote>
+<p>替代方法:</p>
+</blockquote>
+<ul>
+<li>在 app delegate 中实现方法交叉</li>
+<li>像上面通过类扩展进行方法交叉，而是简单地在 app delegate 的 application(_:didFinishLaunchingWithOptions:) 方法调用时调用该方法</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">extension <span class="built_in">UIViewController</span> &#123;</span><br><span class="line">    public override <span class="keyword">class</span> func initializeOnceMethod() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//此处省略100行代码</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在AppDelegate的方法中调用:</span></span><br><span class="line">func application(_ application: <span class="built_in">UIApplication</span>, didFinishLaunchingWithOptions launchOptions: [<span class="built_in">UIApplicationLaunchOptionsKey</span> : Any]? = <span class="literal">nil</span>) -&gt; Bool &#123;</span><br><span class="line">    <span class="comment">//此处省略100行代码</span></span><br><span class="line">    <span class="built_in">UIViewController</span>.initializeOnceMethod()</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="39-dispatch-once-39-is-unavailable-in-Swift-Use-lazily-initialized-globals-instead"><a href="#39-dispatch-once-39-is-unavailable-in-Swift-Use-lazily-initialized-globals-instead" class="headerlink" title="&#39;dispatch_once&#39; is unavailable in Swift: Use lazily initialized globals instead"></a><code>&#39;dispatch_once&#39; is unavailable in Swift: Use lazily initialized globals instead</code></h3><blockquote>
+<p>报错原因: <code>dispatch_once在Swift4.0</code>也已经被废弃</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">extension <span class="built_in">UITableView</span> &#123;</span><br><span class="line">    <span class="keyword">struct</span> once&#123;</span><br><span class="line">        <span class="keyword">static</span> var onceTaken:Int = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">dispatch_once</span>(&amp;once.onceTaken) &#123; () -&gt; Void <span class="keyword">in</span></span><br><span class="line">    <span class="comment">//在这里dispatch_once就会报错</span></span><br><span class="line">        <span class="comment">//此处省略1000000行代码    </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note success"><p>解决方法: 通过给DispatchQueue添加扩展实现</p></div>
+
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">extension DispatchQueue &#123;</span><br><span class="line">    private <span class="keyword">static</span> var _onceTracker = [String]()</span><br><span class="line">    public <span class="keyword">class</span> func once(token: String, block: () -&gt; ()) &#123;</span><br><span class="line">        objc_sync_enter(<span class="keyword">self</span>)</span><br><span class="line">        defer &#123;</span><br><span class="line">            objc_sync_exit(<span class="keyword">self</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> _onceTracker.contains(token) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        _onceTracker.append(token)</span><br><span class="line">        block()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    func async(block: @escaping ()-&gt;()) &#123;</span><br><span class="line">        <span class="keyword">self</span>.async(execute: block)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    func after(time: DispatchTime, block: @escaping ()-&gt;()) &#123;</span><br><span class="line">        <span class="keyword">self</span>.asyncAfter(deadline: time, execute: block)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用字符串token作为once的ID，执行once的时候加了一个锁，避免多线程下的token判断不准确的问题。<br>使用的时候可以传token</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DispatchQueue.once(token: <span class="string">"tableViewOnce"</span>) &#123;</span><br><span class="line">    print( <span class="string">"Do This Once!"</span> )  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>或者使用UUID也可以：</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private let _onceToken = <span class="built_in">NSUUID</span>().uuidString</span><br><span class="line"></span><br><span class="line">DispatchQueue.once(token: _onceToken) &#123;  </span><br><span class="line">    print( <span class="string">"Do This Once!"</span> )  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>后续又遇到别的问题会继续更新</li>
+<li>文章中如有解释不足之处,还望多多指教</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Swift学习笔记/">Swift学习笔记</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Swift4-0/">Swift4.0</a>, <a href="/tags/Error/">Error</a>, <a href="/tags/入坑/">入坑</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2017/08/25/升级Swift4.0遇到的坑/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Hexo博客/">Hexo博客</a><small>1</small></li>
+  
+    <li><a href="/categories/Socket学习笔记/">Socket学习笔记</a><small>1</small></li>
+  
+    <li><a href="/categories/SwiftLint/">SwiftLint</a><small>4</small></li>
+  
+    <li><a href="/categories/Swift学习笔记/">Swift学习笔记</a><small>1</small></li>
+  
+    <li><a href="/categories/Swift高阶功能/">Swift高阶功能</a><small>2</small></li>
+  
+    <li><a href="/categories/iOS动画/">iOS动画</a><small>1</small></li>
+  
+    <li><a href="/categories/iOS高阶功能/">iOS高阶功能</a><small>1</small></li>
+  
+    <li><a href="/categories/数据库基础/">数据库基础</a><small>1</small></li>
+  
+    <li><a href="/categories/组件化开发/">组件化开发</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/AppIcon/">AppIcon</a><small>1</small></li>
+  
+    <li><a href="/tags/CocoaPods/">CocoaPods</a><small>1</small></li>
+  
+    <li><a href="/tags/CoreAnimation/">CoreAnimation</a><small>1</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Github/">Github</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTPS/">HTTPS</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Homebrew/">Homebrew</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Objective-C/">Objective-C</a><small>1</small></li>
+  
+    <li><a href="/tags/Realm/">Realm</a><small>1</small></li>
+  
+    <li><a href="/tags/Socket/">Socket</a><small>1</small></li>
+  
+    <li><a href="/tags/Socket-IO/">Socket.IO</a><small>1</small></li>
+  
+    <li><a href="/tags/Swift/">Swift</a><small>6</small></li>
+  
+    <li><a href="/tags/Swift4-0/">Swift4.0</a><small>1</small></li>
+  
+    <li><a href="/tags/SwiftLint/">SwiftLint</a><small>4</small></li>
+  
+    <li><a href="/tags/UIStackView/">UIStackView</a><small>1</small></li>
+  
+    <li><a href="/tags/WebSocket/">WebSocket</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/tags/iOS-10-3/">iOS 10.3</a><small>1</small></li>
+  
+    <li><a href="/tags/pod/">pod</a><small>1</small></li>
+  
+    <li><a href="/tags/spec/">spec</a><small>1</small></li>
+  
+    <li><a href="/tags/trunk/">trunk</a><small>1</small></li>
+  
+    <li><a href="/tags/入坑/">入坑</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/规则/">规则</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 John Doe
+  
+</div>
+<div class="clearfix"></div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
