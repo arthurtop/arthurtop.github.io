@@ -2,18 +2,22 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Category: SwiftLint - Hexo</title>
+<title>Socket搭建即时通讯服务器 - Hexo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/categories/SwiftLint/index.html">
+    <meta name="keywords" content="Node.js,Socket,WebSocket,Socket.IO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Socket搭建即时通讯服务器">
+<meta property="og:url" content="http://yoursite.com/2016/11/16/Socket搭建即时通讯服务器/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://pcat1usdp.bkt.clouddn.com/webServer.jpg">
+<meta property="og:updated_time" content="2018-12-20T09:39:38.839Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Socket搭建即时通讯服务器">
+<meta name="twitter:image" content="http://pcat1usdp.bkt.clouddn.com/webServer.jpg">
 
 
 
@@ -79,7 +83,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Hexo" height="28">
+                <img src="/images/logo.svg" alt="Socket搭建即时通讯服务器" height="28">
             
             </a>
         </div>
@@ -125,34 +129,22 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">Categories</a></li>
-            
-            <li class="is-active"><a href="#" aria-current="page">SwiftLint</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-03-10T12:04:54.000Z">2018-03-10</time>
+                <time class="level-item has-text-grey" datetime="2016-11-16T03:45:00.000Z">2016-11-16</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
+                <a class="has-link-grey -link" href="/categories/Socket学习笔记/">Socket学习笔记</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    20 minutes read (About 3037 words)
+                    33 minutes read (About 5013 words)
                 </span>
                 
             </div>
@@ -160,200 +152,269 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/03/10/SwiftLint代码规范属性说明03/">SwiftLint代码规范属性说明03</a>
+                Socket搭建即时通讯服务器
             
         </h1>
         <div class="content">
-            <ul>
-<li>这篇文章是继前两篇文章的继续更新</li>
-<li><a href="https://www.titanjun.top/2018/02/07/Xcode%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E4%B9%8BSwiftLint%E9%85%8D%E7%BD%AE/" target="_blank" rel="noopener">Xcode代码规范之SwiftLint配置</a>–这篇文章对SwiftLint进行了简单介绍和针对Xcode的相关配置</li>
-<li><a href="https://www.titanjun.top/2018/03/03/SwiftLint%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B1%9E%E6%80%A7%E8%AF%B4%E6%98%8E01/" target="_blank" rel="noopener">SwiftLint代码规范属性说明01</a>–这里介绍了上半部分的相关属性的介绍</li>
-<li><p><a href="http://www.titanjun.top/2018/03/10/SwiftLint%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B1%9E%E6%80%A7%E8%AF%B4%E6%98%8E02/" target="_blank" rel="noopener">SwiftLint代码规范属性说明02</a>–这里介绍了上半部分的相关属性的介绍</p>
-</li>
-<li><p>下面来具体介绍一下SwiftLint的其他的代码规则的相关说明</p>
-</li>
+            <!-- ![webSecket](https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/WebSocket1.png?x-oss-process=style/titanjun) -->
+<a id="more"></a>
+<h2 id="即时通讯"><a href="#即时通讯" class="headerlink" title="即时通讯"></a>即时通讯</h2><ul>
+<li>相关代码<a href="https://github.com/CoderTitan/WebSocketDemo" target="_blank" rel="noopener">Demo地址</a></li>
+<li>即时通讯<code>（Instant messaging，简称IM）</code>是一个终端服务，允许两人或多人使用网路即时的传递文字讯息、档案、语音与视频交流</li>
+<li>即时通讯按使用用途分为企业即时通讯和网站即时通讯</li>
+<li>根据装载的对象又可分为手机即时通讯和PC即时通讯，手机即时通讯代表是短信，网站、视频即时通讯</li>
 </ul>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/03/10/SwiftLint代码规范属性说明03/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-03-10T09:04:54.000Z">2018-03-10</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    31 minutes read (About 4659 words)
-                </span>
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/03/10/SwiftLint代码规范属性说明02/">SwiftLint代码规范属性说明02</a>
-            
-        </h1>
-        <div class="content">
-            <ul>
-<li>这篇文章是继前两篇文章的继续更新</li>
-<li><a href="https://www.titanjun.top/2018/02/07/Xcode%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E4%B9%8BSwiftLint%E9%85%8D%E7%BD%AE/" target="_blank" rel="noopener">Xcode代码规范之SwiftLint配置</a>–这篇文章对SwiftLint进行了简单介绍和针对Xcode的相关配置</li>
-<li><a href="https://www.titanjun.top/2018/03/03/SwiftLint%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B1%9E%E6%80%A7%E8%AF%B4%E6%98%8E01/" target="_blank" rel="noopener">SwiftLint代码规范属性说明01</a>–这里介绍了上半部分的相关属性的介绍</li>
-<li>下面来具体介绍一下SwiftLint的其他的代码规则的相关说明</li>
+<h3 id="IM通信原理"><a href="#IM通信原理" class="headerlink" title="IM通信原理"></a>IM通信原理</h3><ul>
+<li>客户端A与客户端B如何产生通信？客户端A不能直接和客户端B，因为两者相距太远。</li>
+<li>这时就需要通过IM服务器，让两者产生通信.</li>
+<li>客户端A通过<code>socket</code>与IM服务器产生连接,客户端B也通过<code>socket</code>与IM服务器产生连接</li>
+<li>A先把信息发送给IM应用服务器，并且指定发送给B，服务器根据A信息中描述的接收者将它转发给B，同样B到A也是这样。</li>
+<li>通讯问题: 服务器是不能主动连接客户端的，只能客户端主动连接服务器</li>
 </ul>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/03/10/SwiftLint代码规范属性说明02/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-03-03T12:53:54.000Z">2018-03-03</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    35 minutes read (About 5250 words)
-                </span>
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/03/03/SwiftLint代码规范属性说明01/">SwiftLint代码规范属性说明01</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>下面来具体介绍一下SwiftLint的具体的代码规则的相关说明</p>
+<h3 id="即时通讯连接原理"><a href="#即时通讯连接原理" class="headerlink" title="即时通讯连接原理"></a>即时通讯连接原理</h3><ul>
+<li>即时通讯都是长连接，基本上都是<a href="https://blog.csdn.net/linsongbin1/article/details/54980801/" target="_blank" rel="noopener">HTTP1.1</a>协议，设置<code>Connection</code>为<code>keep-alive</code>即可实现长连接，而<code>HTTP1.1</code>默认是长连接，也就是默认<code>Connection</code>的值就是<code>keep-alive</code></li>
+<li>HTTP分为长连接和短连接，其实本质上是TCP连接，HTTP协议是应用层的协议，而TCP才是真正的传输层协议, IP是网络层协议，只有负责传输的这一层才需要建立连接</li>
+<li>例如: 急送一个快递，HTTP协议指的那个快递单，你寄件的时候填的单子就像是发了一个HTTP请求。而TCP协议就是中间运货的运输工具，它是负责运输的，而运输工具所行驶的路就是所谓的TCP连接</li>
+<li>HTTP短连接（非持久连接）是指，客户端和服务端进行一次HTTP请求/响应之后，就关闭连接。所以，下一次的HTTP请求/响应操作就需要重新建立连接。</li>
+<li>HTTP长连接（持久连接）是指，客户端和服务端建立一次连接之后，可以在这条连接上进行多次请求/响应操作。持久连接可以设置过期时间，也可以不设置</li>
+</ul>
+<h3 id="即时通讯数据传递方式"><a href="#即时通讯数据传递方式" class="headerlink" title="即时通讯数据传递方式"></a>即时通讯数据传递方式</h3><p>目前实现即时通讯的有四种方式（短轮询、长轮询、SSE、<code>Websocket</code>）</p>
+<h4 id="短轮询"><a href="#短轮询" class="headerlink" title="短轮询:"></a>短轮询:</h4><ul>
+<li>每隔一小段时间就发送一个请求到服务器，服务器返回最新数据，然后客户端根据获得的数据来更新界面，这样就间接实现了即时通信</li>
+<li>优点是简单，缺点是对服务器压力较大，浪费带宽流量（通常情况下数据都是没有发生改变的）。</li>
+<li>主要是客户端人员写代码，服务器人员比较简单，适于小型应用</li>
+</ul>
+<h4 id="长轮询"><a href="#长轮询" class="headerlink" title="长轮询:"></a>长轮询:</h4><ul>
+<li>客户端发送一个请求到服务器，服务器查看客户端请求的数据(服务器中数据)是否发生了变化（是否有最新数据），如果发生变化则立即响应返回，否则保持这个连接并定期检查最新数据，直到发生了数据更新或连接超时</li>
+<li>同时客户端连接一旦断开，则再次发出请求，这样在相同时间内大大减少了客户端请求服务器的次数.</li>
+<li>弊端:服务器长时间连接会消耗资源，返回数据顺序无保证，难于管理维护</li>
+<li>底层实现:在服务器的程序中加入一个死循环，在循环中监测数据的变动。当发现新数据时，立即将其输出给浏览器并断开连接，浏览器在收到数据后，再次发起请求以进入下一个周期</li>
+</ul>
+<h4 id="SSE"><a href="#SSE" class="headerlink" title="SSE"></a>SSE</h4><ul>
+<li>（<code>Server-sent Events</code>服务器推送事件）:为了解决浏览器只能够单向传输数据到服务端，HTML5提供了一种新的技术叫做服务器推送事件SSE</li>
+<li>SSE技术提供的是从服务器单向推送数据给浏览器的功能，加上配合浏览器主动HTTP请求，两者结合起来,实际上就实现了客户端和服务器的双向通信.</li>
+</ul>
+<h4 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h4><ul>
+<li>以上提到的这些解决方案中，都是利用浏览器单向请求服务器或者服务器单向推送数据到浏览器</li>
+<li>而在HTML5中，为了加强web的功能，提供了<code>websocket</code>技术，它不仅是一种web通信方式，也是一种应用层协议</li>
+<li>它提供了浏览器和服务器之间原生的全双工跨域通信，通过浏览器和服务器之间建立<code>websocket</code>连接,在同一时刻能够实现客户端到服务器和服务器到客户端的数据发送</li>
+</ul>
+<h2 id="WebSocket-1"><a href="#WebSocket-1" class="headerlink" title="WebSocket"></a>WebSocket</h2><ul>
+<li><a href="http://websocket.org/" target="_blank" rel="noopener">WebSocket</a> 是一种网络通信协议。<a href="https://note.youdao.com/" target="_blank" rel="noopener">RFC6455</a> 定义了它的通信标准</li>
+<li><code>WebSocket</code>是一种双向通信协议，在建立连接后，<code>WebSocket</code> 服务器和客户端都能主动的向对方发送或接收数据</li>
+<li><code>WebSocket</code>是基于<code>HTTP</code>协议的，或者说借用了<code>HTTP</code>协议来完成一部分握手(连接)，在握手(连接)阶段与<code>HTTP</code>是相同的,只不过<code>HTTP</code>不能服务器给客户端推送，而<code>WebSocket</code>可以</li>
+</ul>
+<h3 id="WebSocket如何工作"><a href="#WebSocket如何工作" class="headerlink" title="WebSocket如何工作"></a>WebSocket如何工作</h3><ul>
+<li>Web浏览器和服务器都必须实现<code>WebSockets</code>协议来建立和维护连接。</li>
+<li>由于<code>WebSockets</code>连接长期存在，与典型的<code>HTTP</code>连接不同，对服务器有重要的影响</li>
+<li>基于多线程或多进程的服务器无法适用于 <code>WebSockets</code>，因为它旨在打开连接，尽可能快地处理请求，然后关闭连接</li>
+<li>任何实际的<code>WebSockets</code>服务器端实现都需要一个异步服务器</li>
+</ul>
+<p><img src="http://pcat1usdp.bkt.clouddn.com/webServer.jpg" alt="webServer"></p>
+<h4 id="Websocket协议"><a href="#Websocket协议" class="headerlink" title="Websocket协议"></a><code>Websocket</code>协议</h4><p>协议头: ws, 服务器根据协议头判断是<code>Http</code>还是<code>websocket</code></p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 请求头</span></span><br><span class="line">     GET ws:<span class="hljs-comment">//localhost:12345/websocket/test.html HTTP/1.1</span></span><br><span class="line">     Origin: http:<span class="hljs-comment">//localhost</span></span><br><span class="line">     Connection: Upgrade</span><br><span class="line">     Host: localhost:<span class="hljs-number">12345</span></span><br><span class="line">     Sec-WebSocket-Key: JspZdPxs9MrWCt3j6h7KdQ==  </span><br><span class="line">     Upgrade: websocket </span><br><span class="line">     Sec-WebSocket-Version: <span class="hljs-number">13</span></span><br><span class="line">    <span class="hljs-comment">// Sec-WebSocket-Key: 叫“梦幻字符串”是个密钥，只有有这个密钥 服务器才能通过解码认出来，这是个WB的请求，要建立TCP连接了！！！如果这个字符串没有按照加密规则加密，那服务端就认不出来，就会认为这整个协议就是个HTTP请求。更不会开TCP。其他的字段都可以随便设置，但是这个字段是最重要的字段，标识WB协议的一个字段</span></span><br><span class="line">     </span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 响应头</span></span><br><span class="line">     HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">101</span> Web Socket Protocol Handshake</span><br><span class="line">     WebSocket-Location: ws:<span class="hljs-comment">//localhost:12345/websocket/test.php</span></span><br><span class="line">     Connection: Upgrade</span><br><span class="line">     Upgrade: websocket</span><br><span class="line">     Sec-WebSocket-Accept: zUyzbJdkVJjhhu8KiAUCDmHtY/o= </span><br><span class="line">     WebSocket-Origin: http:<span class="hljs-comment">//localhost</span></span><br><span class="line">     </span><br><span class="line">    <span class="hljs-comment">// Sec-WebSocket-Accept: 叫“梦幻字符串”，和上面那个梦幻字符串作用一样。不同的是，这个字符串是要让客户端辨认的，客户端拿到后自动解码。并且辨认是不是一个WB请求。然后进行相应的操作。这个字段也是重中之重，不可随便修改的。加密规则，依然是有规则的</span></span><br></pre></td></tr></table></figure>
+<h3 id="WebSocket客户端"><a href="#WebSocket客户端" class="headerlink" title="WebSocket客户端"></a>WebSocket客户端</h3><p>在客户端，没有必要为<code>WebSockets</code>使用<code>JavaScript</code>库。实现<code>WebSockets</code>的<code>Web</code> 浏览器将通过<code>WebSockets</code>对象公开所有必需的客户端功能（主要指支持<code>HTML5</code>的浏览器）</p>
+<h4 id="客户端-API"><a href="#客户端-API" class="headerlink" title="客户端 API"></a>客户端 API</h4><p>以下 API 用于创建<code>WebSocket</code>对象。</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> Socket = <span class="hljs-keyword">new</span> WebSocket(url, [protocol] );</span><br></pre></td></tr></table></figure>
 <ul>
-<li><a href="https://github.com/github/swift-style-guide" target="_blank" rel="noopener">Github 公布的 Swift 代码规范–原文</a></li>
-<li><a href="https://github.com/Artwalk/swift-style-guide/blob/master/README_CN.md" target="_blank" rel="noopener">Github 公布的 Swift 代码规范–中文</a></li>
-<li><a href="https://github.com/realm/SwiftLint/blob/master/Rules.md" target="_blank" rel="noopener">官方的SwiftLint规则说明</a></li>
+<li>以上代码中的第一个参数<code>url</code>, 指定连接的<code>URL</code></li>
+<li>第二个参数<code>protocol</code>是可选的，指定了可接受的子协议</li>
 </ul>
+<h4 id="WebSocket属性"><a href="#WebSocket属性" class="headerlink" title="WebSocket属性"></a>WebSocket属性</h4><p>以下是<code>WebSocket</code>对象的属性。假定我们使用了以上代码创建了<code>Socket</code>对象</p>
+<ul>
+<li><code>Socket.readyState</code>: 只读属性<code>readyState</code>表示连接状态, 可以是以下值<ul>
+<li>0 : 表示连接尚未建立</li>
+<li>1 : 表示连接已建立，可以进行通信</li>
+<li>2 : 表示连接正在进行关闭</li>
+<li>3 : 表示连接已经关闭或者连接不能打开。</li>
+</ul>
+</li>
+<li><code>Socket.bufferedAmount</code>: 只读属性<code>bufferedAmount</code><ul>
+<li>表示已被<code>send()</code> 放入正在队列中等待传输，但是还没有发出的<code>UTF-8</code>文本字节数</li>
+</ul>
+</li>
+</ul>
+<h4 id="WebSocket事件"><a href="#WebSocket事件" class="headerlink" title="WebSocket事件"></a>WebSocket事件</h4><p>以下是<code>WebSocket</code>对象的相关事件。假定我们使用了以上代码创建了<code>Socket</code> 对象：</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>事件处理程序</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>open</td>
+<td>Socket.onopen</td>
+<td>连接建立时触发</td>
+</tr>
+<tr>
+<td>message</td>
+<td>Socket.onmessage</td>
+<td>客户端接收服务端数据时触发</td>
+</tr>
+<tr>
+<td>error</td>
+<td>Socket.onerror</td>
+<td>通信发生错误时触发</td>
+</tr>
+<tr>
+<td>close</td>
+<td>Socket.onclose</td>
+<td>连接关闭时触发</td>
+</tr>
+</tbody>
+</table>
+<h4 id="WebSocket方法"><a href="#WebSocket方法" class="headerlink" title="WebSocket方法"></a>WebSocket方法</h4><p>以下是<code>WebSocket</code>对象的相关方法。假定我们使用了以上代码创建了<code>Socket</code>对象：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Socket.send()</td>
+<td>使用连接发送数据</td>
+</tr>
+<tr>
+<td>Socket.close()</td>
+<td>关闭连接</td>
+</tr>
+</tbody>
+</table>
+<div class="note success"><p>代码示例</p></div>
+
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 客户端</span></span><br><span class="line"><span class="hljs-keyword">var</span> socket = <span class="hljs-keyword">new</span> WebSocket(<span class="hljs-string">"ws://localhost:9090"</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 建立 web socket 连接成功触发事件</span></span><br><span class="line">socket.onopen = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 使用send发送数据</span></span><br><span class="line">    socket.send(<span class="hljs-string">"发送数据"</span>)</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(socket.bufferedAmount)</span><br><span class="line">    alert(<span class="hljs-string">'数据发送中'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 接受服务端数据是触发事件</span></span><br><span class="line">socket.onmessage = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">evt</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> received_msg = evt.data</span><br><span class="line">    alert(<span class="hljs-string">'数据已经接受..'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 断开 websocket 连接成功触发事件</span></span><br><span class="line">socket.onclose = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="hljs-string">'链接已经关闭'</span>)</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(socket.readyState)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="WebSocket服务端"><a href="#WebSocket服务端" class="headerlink" title="WebSocket服务端"></a>WebSocket服务端</h3><p><code>WebSocket</code>在服务端的实现非常丰富。<code>Node.js</code>、<code>Java</code>、<code>C++</code>、<code>Python</code> 等多种语言都有自己的解决方案, 其中<code>Node.js</code>常用的有以下三种</p>
+<ul>
+<li><a href="https://github.com/uNetworking/uWebSockets" target="_blank" rel="noopener">µWebSockets</a></li>
+<li><a href="https://socket.io/" target="_blank" rel="noopener">Socket.IO</a></li>
+<li><a href="https://github.com/theturtle32/WebSocket-Node" target="_blank" rel="noopener">WebSocket-Node</a></li>
+</ul>
+<p>下面就着重研究一下<code>Socket.IO</code>吧, 因为别的我也不会, 哈哈哈哈……</p>
+<h2 id="Socket-IO"><a href="#Socket-IO" class="headerlink" title="Socket.IO"></a><code>Socket.IO</code></h2><ul>
+<li><a href="https://github.com/socketio" target="_blank" rel="noopener">Socket.IO</a>是一个库，可以在浏览器和服务器之间实现实时，双向和基于事件的通信</li>
+<li><a href="https://github.com/socketio" target="_blank" rel="noopener">Socket.IO</a>是一个完全由<code>JavaScript</code>实现、基于<code>Node.js</code>、支持<code>WebSocket</code>的协议用于实时通信、跨平台的开源框架</li>
+<li><a href="https://github.com/socketio" target="_blank" rel="noopener">Socket.IO</a>包括了客户端(<code>iOS,Android</code>)和服务器端(<code>Node.js</code>)的代码，可以很好的实现iOS即时通讯技术</li>
+<li><a href="https://github.com/socketio" target="_blank" rel="noopener">Socket.IO</a>支持及时、双向、基于事件的交流，可在不同平台、浏览器、设备上工作，可靠性和速度稳定</li>
+<li><a href="https://github.com/socketio" target="_blank" rel="noopener">Socket.IO</a>实际上是<code>WebSocket</code>的父集，<code>Socket.io</code>封装了<code>WebSocket</code>和轮询等方法，会根据情况选择方法来进行通讯</li>
+<li>典型的应用场景如：<ul>
+<li>实时分析：将数据推送到客户端，客户端表现为实时计数器、图表、日志客户</li>
+<li>实时通讯：聊天应用</li>
+<li>二进制流传输：<code>socket.io</code>支持任何形式的二进制文件传输，例如图片、视频、音频等</li>
+<li>文档合并：允许多个用户同时编辑一个文档，并能够看到每个用户做出的修改</li>
+</ul>
+</li>
+</ul>
+<h3 id="Socket-IO服务端"><a href="#Socket-IO服务端" class="headerlink" title="Socket.IO服务端"></a>Socket.IO服务端</h3><ul>
+<li><a href="https://github.com/socketio" target="_blank" rel="noopener">Socket.IO</a>实质是一个库, 所以在使用之前必须先导入<code>Socket.IO</code>库</li>
+<li><code>Node.js</code>导入库和<code>iOS</code>导入第三方库性质一样, 只不过<code>iOS</code>使用的是<code>pods</code>管理, <code>Node.js</code>使用<code>npm</code></li>
+</ul>
+<h4 id="导入Socket-IO库"><a href="#导入Socket-IO库" class="headerlink" title="导入Socket.IO库"></a>导入<code>Socket.IO</code>库</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 1. 进入当当前文件夹</span><br><span class="line">cd ...</span><br><span class="line"></span><br><span class="line">// 2. 创建package.json文件</span><br><span class="line">npm init</span><br><span class="line"></span><br><span class="line">/// 3. 导入库</span><br><span class="line">npm install socket.io --sava</span><br><span class="line">npm install express --sava</span><br></pre></td></tr></table></figure>
+<h4 id="创建socket"><a href="#创建socket" class="headerlink" title="创建socket"></a>创建socket</h4><ul>
+<li><code>socket</code>本质还是<code>http</code>协议，所以需要绑定<code>http</code>服务器，才能启动socket服务.</li>
+<li>而且需要通过<code>web</code>服务器监听端口，<code>socket</code>不能监听端口，有人访问端口才能建立连接，所以先创建<code>web</code>服务器</li>
+</ul>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 引入http模块</span></span><br><span class="line"><span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 面向express框架开发，加载express框架，方便处理get,post请求</span></span><br><span class="line"><span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 创建web服务器</span></span><br><span class="line"><span class="hljs-keyword">var</span> server = http.Server(express)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 引入socket.io模块</span></span><br><span class="line"><span class="hljs-keyword">var</span> socketio = <span class="hljs-built_in">require</span>(<span class="hljs-string">'socket.io'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 创建爱你socket服务器</span></span><br><span class="line"><span class="hljs-keyword">var</span> serverSocket = socketio(server)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server.listen(<span class="hljs-number">9090</span>)</span><br><span class="line"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">'监听9090'</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="建立socket连接"><a href="#建立socket连接" class="headerlink" title="建立socket连接"></a>建立socket连接</h4><ul>
+<li>服务器不需要主动建立连接，建立连接是客户端的事情，服务器只需要监听连接</li>
+<li>客户端主动连接会发送<code>connection</code>事件，服务端只需要监听<code>connection</code>事件有没有发送，就知道客户端有没有主动连接服务器</li>
+<li><code>Socket.IO</code>本质是通过发送和接受事件触发服务器和客户端之间的通讯，任何能被编辑成<code>JSON</code>或二进制的对象都可以传递</li>
+<li><code>socket.on</code>: 监听事件，这个方法会有两个参数，第一个参数是事件名称，第二个参数是监听事件的回调函数，监听到链接就会执行这个回调函数</li>
+<li>监听<code>connection</code>，回调函数会传入一个连接好的<code>socket</code>，这个<code>socket</code>就是客户端的<code>socket</code></li>
+<li><code>socket</code>连接原理，就是客户端和服务端通过<code>socket</code>连接，服务器有<code>socket</code>，客户端也有</li>
+</ul>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 监听客户端有没有连接成功,如果连接成功,服务端会发送connection事件,通知客户端连接成功</span></span><br><span class="line"><span class="hljs-comment">// serverSocket: 服务端, clientSocket: 客户端</span></span><br><span class="line">serverSocket.on(<span class="hljs-string">'connection'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">clientSocket</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 建立socket连接成功</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'建立连接成功'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(clientSocket)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="Socket-IO客户端"><a href="#Socket-IO客户端" class="headerlink" title="Socket.IO客户端"></a>Socket.IO客户端</h3><ul>
+<li><a href="https://github.com/socketio/socket.io-client-swift" target="_blank" rel="noopener">Socket.IO-Client-Swift</a>是<code>iOS</code>使用的库, 目前只有<code>Swift</code>版本</li>
+<li>iOS中的使用</li>
+</ul>
+<h4 id="创建socket对象"><a href="#创建socket对象" class="headerlink" title="创建socket对象"></a>创建socket对象</h4><p>创建<code>SocketIOClient</code>对象, 两种创建方式</p>
+<figure class="highlight swift hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 第一种, SocketIOClientConfiguration: 可选参数</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">init</span>(socketURL: <span class="hljs-type">URL</span>, config: <span class="hljs-type">SocketIOClientConfiguration</span> = [])</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 第二种, 底层还是使用的第一种方式创建</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">convenience</span> <span class="hljs-keyword">init</span>(socketURL: <span class="hljs-type">URL</span>, config: [<span class="hljs-type">String</span>: <span class="hljs-type">Any</span>]?) &#123;</span><br><span class="line">        <span class="hljs-keyword">self</span>.<span class="hljs-keyword">init</span>(socketURL: socketURL, config: config?.toSocketConfiguration() ?? [])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>SocketIOClientConfiguration</code>: 是一个数组, 等同于<code>[SocketIOClientOption]</code></li>
+<li><code>SocketIOClientOption</code>的所有取值如下</li>
+</ul>
+<figure class="highlight swift hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">SocketIOClientOption</span> : <span class="hljs-title">ClientOption</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/// 使用压缩的方式进行传输</span></span><br><span class="line">    <span class="hljs-keyword">case</span> compress</span><br><span class="line">    <span class="hljs-comment">/// 通过字典内容连接</span></span><br><span class="line">    <span class="hljs-keyword">case</span> connectParams([<span class="hljs-type">String</span>: <span class="hljs-type">Any</span>])</span><br><span class="line">    <span class="hljs-comment">/// NSHTTPCookies的数组, 在握手过程中传递, Default is nil.</span></span><br><span class="line">    <span class="hljs-keyword">case</span> cookies([<span class="hljs-type">HTTPCookie</span>])</span><br><span class="line">    <span class="hljs-comment">/// 添加自定义请求头初始化来请求, 默认为nil</span></span><br><span class="line">    <span class="hljs-keyword">case</span> extraHeaders([<span class="hljs-type">String</span>: <span class="hljs-type">String</span>])</span><br><span class="line">    <span class="hljs-comment">/// 将为每个连接创建一个新的connect, 如果你在重新连接有bug时使用.</span></span><br><span class="line">    <span class="hljs-keyword">case</span> forceNew(<span class="hljs-type">Bool</span>)</span><br><span class="line">    <span class="hljs-comment">/// 传输是否使用HTTP长轮询, 默认false</span></span><br><span class="line">    <span class="hljs-keyword">case</span> forcePolling(<span class="hljs-type">Bool</span>)</span><br><span class="line">    <span class="hljs-comment">/// 是否使用 WebSockets. Default is `false`</span></span><br><span class="line">    <span class="hljs-keyword">case</span> forceWebsockets(<span class="hljs-type">Bool</span>)</span><br><span class="line">    <span class="hljs-comment">/// 调度handle的运行队列, 默认在主队列</span></span><br><span class="line">    <span class="hljs-keyword">case</span> handleQueue(<span class="hljs-type">DispatchQueue</span>)</span><br><span class="line">    <span class="hljs-comment">/// 是否打印调试信息. Default is false</span></span><br><span class="line">    <span class="hljs-keyword">case</span> log(<span class="hljs-type">Bool</span>)</span><br><span class="line">    <span class="hljs-comment">/// 可自定义SocketLogger调试日志</span></span><br><span class="line">    <span class="hljs-keyword">case</span> logger(<span class="hljs-type">SocketLogger</span>)</span><br><span class="line">    <span class="hljs-comment">/// 自定义服务器使用的路径.</span></span><br><span class="line">    <span class="hljs-keyword">case</span> path(<span class="hljs-type">String</span>)</span><br><span class="line">    <span class="hljs-comment">/// 链接失败时, 是否重新链接, Default is `true`</span></span><br><span class="line">    <span class="hljs-keyword">case</span> reconnects(<span class="hljs-type">Bool</span>)</span><br><span class="line">    <span class="hljs-comment">/// 重新连接多少次. Default is `-1` (无限次)</span></span><br><span class="line">    <span class="hljs-keyword">case</span> reconnectAttempts(<span class="hljs-type">Int</span>)</span><br><span class="line">    <span class="hljs-comment">/// 等待重连时间. Default is `10`</span></span><br><span class="line">    <span class="hljs-keyword">case</span> reconnectWait(<span class="hljs-type">Int</span>)</span><br><span class="line">    <span class="hljs-comment">/// 是否使用安全传输, Default is false</span></span><br><span class="line">    <span class="hljs-keyword">case</span> secure(<span class="hljs-type">Bool</span>)</span><br><span class="line">    <span class="hljs-comment">/// 设置允许那些证书有效</span></span><br><span class="line">    <span class="hljs-keyword">case</span> security(<span class="hljs-type">SSLSecurity</span>)</span><br><span class="line">    <span class="hljs-comment">/// 自签名只能用于开发模式</span></span><br><span class="line">    <span class="hljs-keyword">case</span> selfSigned(<span class="hljs-type">Bool</span>)</span><br><span class="line">    <span class="hljs-comment">/// NSURLSessionDelegate 底层引擎设置. 如果你需要处理自签名证书. Default is nil.</span></span><br><span class="line">    <span class="hljs-keyword">case</span> sessionDelegate(<span class="hljs-type">URLSessionDelegate</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建<code>SocketIOClient</code></p>
+<figure class="highlight swift hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 注意协议：ws开头</span></span><br><span class="line"><span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> url = <span class="hljs-type">URL</span>(string: <span class="hljs-string">"ws://localhost:9090"</span>) <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line"><span class="hljs-keyword">let</span> manager = <span class="hljs-type">SocketManager</span>(socketURL: url, config: [.log(<span class="hljs-literal">true</span>), .compress])</span><br><span class="line"><span class="hljs-comment">// SocketIOClient</span></span><br><span class="line"><span class="hljs-keyword">let</span> socket = manager.defaultSocket</span><br></pre></td></tr></table></figure>
+<h4 id="监听连接"><a href="#监听连接" class="headerlink" title="监听连接"></a>监听连接</h4><ul>
+<li>创建好<code>socket</code>对象,然后连接用<code>connect</code>方法</li>
+<li>因为<code>socket</code>需要进行3次握手，不可能马上建议连接，需要监听是否连接成功的回调,使用<code>on</code>方法</li>
+<li><code>ON</code>方法两个参数<ul>
+<li>参数一: 监听的事件名称，参数二：监听事件回调函数，会自动调用</li>
+<li>回调函数也有两个参数(参数一：服务器传递的数据 参数二:确认请求数据<code>ACK</code>)</li>
+<li>在<code>TCP/IP</code>协议中，如果接收方成功的接收到数据，那么会回复一个<code>ACK</code>数据- <code>ACK</code>只是一个标记，标记是否成功传输数据</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight swift hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 回调闭包</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">typealias</span> <span class="hljs-type">NormalCallback</span> = ([<span class="hljs-type">Any</span>], <span class="hljs-type">SocketAckEmitter</span>) -&gt; ()</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// on方法</span></span><br><span class="line"><span class="hljs-meta">@discardableResult</span></span><br><span class="line"><span class="hljs-keyword">open</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">on</span><span class="hljs-params">(<span class="hljs-number">_</span> event: String, callback: @escaping NormalCallback)</span></span> -&gt; <span class="hljs-type">UUID</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// SocketClientEvent: 接受枚举类型的on方法</span></span><br><span class="line"><span class="hljs-meta">@discardableResult</span></span><br><span class="line"><span class="hljs-keyword">open</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">on</span><span class="hljs-params">(clientEvent event: SocketClientEvent, callback: @escaping NormalCallback)</span></span> -&gt; <span class="hljs-type">UUID</span> &#123;</span><br><span class="line">    <span class="hljs-comment">// 这里调用的是上面的on方法</span></span><br><span class="line">    <span class="hljs-keyword">return</span> on(event.rawValue, callback: callback)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>完整代码</p>
 </blockquote>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/03/03/SwiftLint代码规范属性说明01/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-02-07T07:34:34.000Z">2018-02-07</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    19 minutes read (About 2854 words)
-                </span>
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/02/07/Xcode代码规范之SwiftLint配置/">Xcode代码规范之SwiftLint配置</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li>最近公司大佬考虑将项目代码规范化, 然而自Xcode9之后,Xcode的插件基本处于废弃的状态大部分插件都是在一年前就停止更新了;</li>
-<li>于是在谷歌找到了一款强大的代码规范工具<a href="https://github.com/realm/SwiftLint" target="_blank" rel="noopener">SwiftLint</a></li>
-<li><a href="https://github.com/realm/SwiftLint" target="_blank" rel="noopener">SwiftLint</a>是 <a href="https://realm.io/" target="_blank" rel="noopener">Realm</a> 推出的一款 Swift 代码规范检查工具, SwiftLint 基于 <a href="https://github.com/Artwalk/swift-style-guide/blob/master/README_CN.md" target="_blank" rel="noopener">Github 公布的 Swift 代码规范</a>进行代码检查，并且能够很好的和 Xcode 整合</li>
-<li><a href="https://github.com/github/swift-style-guide" target="_blank" rel="noopener">Github 公布的 Swift 代码规范–原文</a></li>
-<li><a href="https://github.com/Artwalk/swift-style-guide/blob/master/README_CN.md" target="_blank" rel="noopener">Github 公布的 Swift 代码规范–中文</a></li>
-<li>配置好所有的设置之后，在 Xcode 中执行编译时，SwiftLint 会自动运行检查，不符合规范的代码会通过警告或者 红色错误 的形式指示出来</li>
-<li>支持自定义规则,可禁用或者开启某一些规则</li>
+<figure class="highlight swift hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> url = <span class="hljs-type">URL</span>(string: <span class="hljs-string">"ws://localhost:9090"</span>) <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">let</span> manager = <span class="hljs-type">SocketManager</span>(socketURL: url, config: [.log(<span class="hljs-literal">true</span>), .compress])</span><br><span class="line"><span class="hljs-keyword">let</span> socket = manager.defaultSocket</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 监听链接成功</span></span><br><span class="line">socket.on(clientEvent: .connect) &#123; (data, ack) <span class="hljs-keyword">in</span></span><br><span class="line">    <span class="hljs-built_in">print</span>(<span class="hljs-string">"链接成功"</span>)</span><br><span class="line">    <span class="hljs-built_in">print</span>(data)</span><br><span class="line">    <span class="hljs-built_in">print</span>(ack)</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line">socket.connect()</span><br></pre></td></tr></table></figure>
+<h3 id="SocketIO事件"><a href="#SocketIO事件" class="headerlink" title="SocketIO事件"></a>SocketIO事件</h3><p><code>SocketIO</code>通过事件链接服务器和传递数据</p>
+<h4 id="客户端监听事件"><a href="#客户端监听事件" class="headerlink" title="客户端监听事件"></a>客户端监听事件</h4><figure class="highlight swift hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 监听链接成功</span></span><br><span class="line">socket.on(clientEvent: .connect) &#123; (data, ack) <span class="hljs-keyword">in</span></span><br><span class="line">    <span class="hljs-built_in">print</span>(<span class="hljs-string">"链接成功"</span>)</span><br><span class="line">    <span class="hljs-built_in">print</span>(data)</span><br><span class="line">    <span class="hljs-built_in">print</span>(ack)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="客户端发送事件"><a href="#客户端发送事件" class="headerlink" title="客户端发送事件"></a>客户端发送事件</h4><p>只有连接成功之后，才能发送事件</p>
+<figure class="highlight swift hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 建立一个连接到服务器. 连接成功会触发 "connect"事件</span></span><br><span class="line"><span class="hljs-keyword">open</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">connect</span><span class="hljs-params">()</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 连接到服务器. 如果连接超时,会调用handle</span></span><br><span class="line"><span class="hljs-keyword">open</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">connect</span><span class="hljs-params">(timeoutAfter: Double, withHandler handler: <span class="hljs-params">(<span class="hljs-params">()</span></span></span></span> -&gt; ())?)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 重开一个断开连接的socket</span></span><br><span class="line"><span class="hljs-keyword">open</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">disconnect</span><span class="hljs-params">()</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 向服务器发送事件, 参数一: 事件的名称，参数二: 传输的数据组</span></span><br><span class="line"><span class="hljs-keyword">open</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">emit</span><span class="hljs-params">(<span class="hljs-number">_</span> event: String, with items: [<span class="hljs-keyword">Any</span>])</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="服务器监听事件"><a href="#服务器监听事件" class="headerlink" title="服务器监听事件"></a>服务器监听事件</h4><ul>
+<li>监听客户端事件，需要嵌套在连接好的<code>connect</code>回调函数中</li>
+<li>必须使用回调函数的<code>socket</code>参数，如<code>function(s)</code>中的s，监听事件,因此这是客户端的<code>socket</code>，肯定监听客户端发来的事件</li>
+<li>服务器监听连接的回调函数的参数可以添加多个，具体看客户端传递数据数组有几个，每个参数都是与客户段一一对应，第一个参数对应客户端数组第0个数据</li>
 </ul>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 监听socket连接</span></span><br><span class="line">socket.on(<span class="hljs-string">'connection'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'监听到客户端连接'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// data:客户端数组第0个元素</span></span><br><span class="line">    <span class="hljs-comment">// data1:客户端数组第1个元素</span></span><br><span class="line">    s.on(<span class="hljs-string">'chat'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data,data1</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'监听到chat事件'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-built_in">console</span>.log(data,data1);</span><br><span class="line">        </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="服务器发送事件"><a href="#服务器发送事件" class="headerlink" title="服务器发送事件"></a>服务器发送事件</h4><p>这里的<code>socket</code>一定要用服务器端的<code>socket</code></p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 给当前客户端发送数据，其他客户端收不到.</span></span><br><span class="line">socket.emit(<span class="hljs-string">'chat'</span>, <span class="hljs-string">'服务器'</span> + data)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 发给所有客户端，不包含当前客户端</span></span><br><span class="line">socket.emit.broadcast.emit(<span class="hljs-string">'chat'</span>, <span class="hljs-string">'发给所有客户端,不包含当前客户端'</span> + data)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 发给所有客户端，包含当前客户端</span></span><br><span class="line">socket.emit.sockets.emit(<span class="hljs-string">'chat'</span>, <span class="hljs-string">'发给所有客户端,包含当前客户端'</span> + data)</span><br></pre></td></tr></table></figure>
+<h2 id="SocketIO分组"><a href="#SocketIO分组" class="headerlink" title="SocketIO分组"></a>SocketIO分组</h2><ul>
+<li>每一个客户端和服务器只会保持一个<code>socket</code>链接, 那么怎么吧每一条信息推送到对应的聊天室, 针对多个聊天室的问题有如何解决</li>
+<li>给每个聊天室都分组, 服务器就可以给指定的组进行数据的推送, 就不会影响到其他的聊天室</li>
+</ul>
+<h3 id="如何分组"><a href="#如何分组" class="headerlink" title="如何分组"></a>如何分组</h3><ul>
+<li><code>socket.io</code>提供<a href="https://socket.io/docs/rooms-and-namespaces/" target="_blank" rel="noopener">rooms和namespace的API</a></li>
+<li>用<code>rooms</code>的API就可以实现多房间聊天了，总结出来无外乎就是：<code>join/leave room</code> 和 <code>say to room</code></li>
+<li>这里的<code>socket</code>是客户端的<code>socket</code>，也就是连接成功，传递过来的<code>socket</code></li>
+</ul>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// join和leave</span></span><br><span class="line">io.on(<span class="hljs-string">'connection'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">socket</span>)</span>&#123;</span><br><span class="line">  socket.join(<span class="hljs-string">'some room'</span>);</span><br><span class="line">  <span class="hljs-comment">// socket.leave('some room');</span></span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"><span class="hljs-comment">// say to room</span></span><br><span class="line">io.to(<span class="hljs-string">'some room'</span>).emit(<span class="hljs-string">'some event'</span>):</span><br><span class="line">io.in(<span class="hljs-string">'some room'</span>).emit(<span class="hljs-string">'some event'</span>):</span><br></pre></td></tr></table></figure>
+<h3 id="分组的原理"><a href="#分组的原理" class="headerlink" title="分组的原理"></a>分组的原理</h3><ul>
+<li>只要客户端<code>socket</code>调用<code>join</code>，服务器就会把客户端<code>socket</code>和分组的名称绑定起来</li>
+<li>到时候就可以根据分组的名称找到对应客户端的<code>socket</code>，就能给指定的客户端推送信息</li>
+<li>一个客户端<code>socket</code>只能添加到一组，离开的时候，要记得移除</li>
+</ul>
+<hr>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/02/07/Xcode代码规范之SwiftLint配置/#more">Read More</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Node-js/">Node.js</a>, <a class="has-link-grey -link" href="/tags/Socket/">Socket</a>, <a class="has-link-grey -link" href="/tags/Socket-IO/">Socket.IO</a>, <a class="has-link-grey -link" href="/tags/WebSocket/">WebSocket</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
 </div>
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2017/06/10/iOS9之UIStackView的使用/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">iOS9之UIStackView的使用</span>
+            </a>
+        </div>
+        
+        
+    </div>
+</div>
 
 
 </div>
@@ -1663,7 +1724,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Hexo" height="28">
+                    <img src="/images/logo.svg" alt="Socket搭建即时通讯服务器" height="28">
                 
                 </a>
                 <p class="is-size-7">
