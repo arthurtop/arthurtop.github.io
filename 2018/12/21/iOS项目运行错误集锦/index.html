@@ -2,18 +2,26 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Tag: Swift4.0 - Hexo</title>
+<title>iOS 错误积累 - Hexo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/Swift4-0/index.html">
+    <meta name="description" content="记录一些iOS 项目运行时的错误 把所有错误累计起来，已被以后查看">
+<meta name="keywords" content="iOS,工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 错误积累">
+<meta property="og:url" content="http://yoursite.com/2018/12/21/iOS项目运行错误集锦/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="记录一些iOS 项目运行时的错误 把所有错误累计起来，已被以后查看">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1342455-8ae6cdbd9dda4245.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1342455-52cbaccd8f327912.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-12-21T02:30:10.745Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="iOS 错误积累">
+<meta name="twitter:description" content="记录一些iOS 项目运行时的错误 把所有错误累计起来，已被以后查看">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1342455-8ae6cdbd9dda4245.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -79,7 +87,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Hexo" height="28">
+                <img src="/images/logo.svg" alt="iOS 错误积累" height="28">
             
             </a>
         </div>
@@ -125,33 +133,22 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">Tags</a></li>
-            <li class="is-active"><a href="#" aria-current="page">Swift4.0</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-08-25T07:06:40.000Z">2017-08-25</time>
+                <time class="level-item has-text-grey" datetime="2018-12-21T02:22:40.000Z">2018-12-21</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Swift学习笔记/">Swift学习笔记</a>
+                <a class="has-link-grey -link" href="/categories/xcode/">xcode</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    12 minutes read (About 1738 words)
+                    2 minutes read (About 295 words)
                 </span>
                 
             </div>
@@ -159,33 +156,59 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2017/08/25/升级Swift4.0遇到的坑/">升级Swift4.0遇到的坑</a>
+                iOS 错误积累
             
         </h1>
         <div class="content">
             <ul>
-<li>并不是所有库都能做到及时支持<code>Swift4.0</code>，更何况是在现在连<code>Xcode9</code>也还是beta的状态</li>
-<li>所以我们仅能做到将自己的业务代码（主工程代码）部分升级到<code>Swift4.0</code>，然后同时保留各种pod库在<code>Swift3.2</code>版本。</li>
-<li>没办法，谁叫<code>Swift4.0</code>也还无法做到API兼容呢（但愿能在<code>Swift5</code>之前实现吧）。</li>
-<li>至于我说的同时使用两个版本的<code>Swift</code>，这是没问题的，Xcode9支持在项目中同时使用<code>Swift3.2</code>和<code>Swift4.0</code>。</li>
+<li>记录一些iOS 项目运行时的错误</li>
+<li>把所有错误累计起来，已被以后查看<a id="more"></a>
+</li>
 </ul>
+<h2 id="一、项目运行不了"><a href="#一、项目运行不了" class="headerlink" title="一、项目运行不了"></a>一、项目运行不了</h2><p><mark>Failed to initiate service connection to simulator Error returned in reply: Connection invalid</mark></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1342455-8ae6cdbd9dda4245.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>解决办法：需要关闭所有不同版本的xcode还有模拟器，重新打开运行就行</p>
+<h2 id="二、添加文件或者第三方库出错"><a href="#二、添加文件或者第三方库出错" class="headerlink" title="二、添加文件或者第三方库出错"></a>二、添加文件或者第三方库出错</h2><p><mark> linker command failed with exit code 1 (use -v to see invocation) </mark></p>
+<ul>
+<li>1、首先排查项目中是否有名字重复的文件;</li>
+</ul>
+<p>结合我的以上的报错情况,查看项目中是否不止一个ViewController文件</p>
+<ul>
+<li>2、检查是否在#import头文件的时候,错把.h写成了.m</li>
+</ul>
+<p>通过Xcode的过滤查询功能,我很很快就修正了错误。</p>
+<h2 id="三、引入ARC库"><a href="#三、引入ARC库" class="headerlink" title="三、引入ARC库"></a>三、引入ARC库</h2><p>iOS 报错：<mark>cannot create weak reference in file using</mark><br>解决办法：<br>点击工程启动文件 - TARGETS -Build Settings - 在下方搜索框搜索weak - 在Apple LLVM 8.0 - Language - Objective C选项下边 - 把Weak Reference in Manual Retain Release选项改成YES即可。<br><img src="https://upload-images.jianshu.io/upload_images/1342455-52cbaccd8f327912.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2017/08/25/升级Swift4.0遇到的坑/#more">Read More</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/iOS/">iOS</a>, <a class="has-link-grey -link" href="/tags/工具/">工具</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
 </div>
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/12/20/Mac软件大全/">
+                <span class="level-item">Mac软件大全</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -1635,7 +1658,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Hexo" height="28">
+                    <img src="/images/logo.svg" alt="iOS 错误积累" height="28">
                 
                 </a>
                 <p class="is-size-7">
