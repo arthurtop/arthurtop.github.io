@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Mac环境下MySQL命令的使用 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="MySQL是一种关系数据库管理系统，关系数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。 MySQL所使用的SQL语言是用于访问数据库的最常用标准化语言。 由于其体积小、速度快、总体拥有成本低，尤其是开放源码这一特点，许多中小型网站为了降低网站总体拥有成本而选择了MySQL作为网站数据库。 MySQL是一个多用户、多线程的关系型数据库管理系统。">
+<meta name="keywords" content="Python,MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac环境下MySQL命令的使用">
+<meta property="og:url" content="http://yoursite.com/2017/05/16/Mac数据库安装与使用MySQL/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="MySQL是一种关系数据库管理系统，关系数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。 MySQL所使用的SQL语言是用于访问数据库的最常用标准化语言。 由于其体积小、速度快、总体拥有成本低，尤其是开放源码这一特点，许多中小型网站为了降低网站总体拥有成本而选择了MySQL作为网站数据库。 MySQL是一个多用户、多线程的关系型数据库管理系统。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-4b588c7801a15bf2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-4d7bddda7663e338.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-a704a63464f08911.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-d826199a57d36385.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-64606af819564228.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://p7hfnfk6u.bkt.clouddn.com/sqlSuccess.png">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-82c6b03e2d0e3f89.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-763a7bd7dcafd230.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-12-21T02:03:51.616Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac环境下MySQL命令的使用">
+<meta name="twitter:description" content="MySQL是一种关系数据库管理系统，关系数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。 MySQL所使用的SQL语言是用于访问数据库的最常用标准化语言。 由于其体积小、速度快、总体拥有成本低，尤其是开放源码这一特点，许多中小型网站为了降低网站总体拥有成本而选择了MySQL作为网站数据库。 MySQL是一个多用户、多线程的关系型数据库管理系统。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4122543-4b588c7801a15bf2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Mac环境下MySQL命令的使用" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-05-16T04:05:46.000Z">2017-05-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/数据库基础/">数据库基础</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    24 minutes read (About 3671 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Mac环境下MySQL命令的使用
+            
+        </h1>
+        <div class="content">
+            <!-- /Users/soole/Desktop/SooLeHexo  -->
+<ul>
+<li><code>MySQL</code>是一种关系数据库管理系统，关系数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。</li>
+<li><code>MySQL</code>所使用的<code>SQL</code>语言是用于访问数据库的最常用标准化语言。</li>
+<li>由于其体积小、速度快、总体拥有成本低，尤其是开放源码这一特点，许多中小型网站为了降低网站总体拥有成本而选择了<code>MySQL</code>作为网站数据库。</li>
+<li><code>MySQL</code>是一个多用户、多线程的关系型数据库管理系统。 工作模式是基于客户机/服务器结构。目前它可以支持几乎所有的操作系统</li>
+<li>简单的来说，<code>MySQL</code>是一个开放的、快速的、多线程的、多用户的SQL数据库服务器<a id="more"></a>
+</li>
+</ul>
+<h2 id="MySQL的安装"><a href="#MySQL的安装" class="headerlink" title="MySQL的安装"></a>MySQL的安装</h2><p>工欲善其事必先利其器, 要研究<code>MySQL</code>我们首先要安装<code>MySQL</code>, 这里只介绍<code>Mac</code>环境下的安装和数据库操作</p>
+<h3 id="下载MySQL"><a href="#下载MySQL" class="headerlink" title="下载MySQL"></a>下载<code>MySQL</code></h3><p>直接打开<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">MySQL官网下载页</a>, 选择<code>mac OS</code>系统后, 选择<code>DMG</code>格式下载软件</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-4b588c7801a15bf2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SQLDownload1"></p>
+<p>接着, 会跳转到如下页面, 你只需要选择不登录,直接下载即可(当然也可以选择注册并登录)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-4d7bddda7663e338.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SQLDownload2"></p>
+<ul>
+<li>下载好后, 按照<code>dmg</code>里面的<code>pkg</code>文件一路安装即可, 但是需要注意的是<ul>
+<li>除了倒数第二步之外按照默认一路安装即可</li>
+<li>倒数第二步会有一个设置管理员密码的过程, 设置好后, 一定要牢记该密码, 后期链接数据库会需要</li>
+</ul>
+</li>
+<li>最后打开系统偏好设置, 最后会有一个<code>MySQL</code>的图标</li>
+<li>打开<code>MySQL</code>会看到默认是开启的(安装的时候按照默认设置安装的情况下)</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-a704a63464f08911.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<div class="note success"><p>到这里<code>MySQL</code>就已经基本安装完成了, 不需要再修改什么配置了</p></div>
+
+
+<h3 id="安装Navicat-for-MySQL"><a href="#安装Navicat-for-MySQL" class="headerlink" title="安装Navicat for MySQL"></a>安装<code>Navicat for MySQL</code></h3><ul>
+<li><code>Navicat for MySQL</code>是一套专为<code>MySQL</code>设计的高性能数据库管理及开发工具</li>
+<li>它可以用于任何版本<code>3.21</code>或以上的 <code>MySQL</code>数据库服务器</li>
+<li>支持大部份<code>MySQL</code>最新版本的功能，包括触发器、存储过程、函数、事件、视图、管理用户等</li>
+<li><a href="http://www.navicat.com.cn/products/navicat-for-mysql/" target="_blank" rel="noopener">正版下载地址</a>, 不过正版只有14天的试用时间</li>
+<li>安装后, 按照下图完善配置即可, 其中连接名随意, 密码即为安装<code>MySQL</code>环境的时候设置的密码</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-d826199a57d36385.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MySQLConten"></p>
+<h2 id="MySQL的基本命令"><a href="#MySQL的基本命令" class="headerlink" title="MySQL的基本命令"></a><code>MySQL</code>的基本命令</h2><h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><ul>
+<li>首先要打开终端(<code>Windows</code>中是<code>cmd</code>), 以下命令均是在终端运行</li>
+<li>启动/停止服务只有在<code>Windows</code>系统中才需要运行, <code>Mac</code>环境下不需要</li>
+</ul>
+<h4 id="启动-停止服务"><a href="#启动-停止服务" class="headerlink" title="启动/停止服务"></a>启动/停止服务</h4><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 启动服务</span></span><br><span class="line">    格式：net start 服务名称</span><br><span class="line">    示例：net start titansql</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 停止服务</span></span><br><span class="line">    格式：net stop 服务名称</span><br><span class="line">    示例：net stop titansql</span><br></pre></td></tr></table></figure>
+<h4 id="连接数据"><a href="#连接数据" class="headerlink" title="连接数据"></a>连接数据</h4><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">格式：mysql -u 用户名 -p</span><br><span class="line">示例：mysql -u root -p</span><br><span class="line"><span class="hljs-comment">// 此处会提示你输入密码(安装时设置的)</span></span><br></pre></td></tr></table></figure>
+<h4 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h4><ul>
+<li>链接他人或其他服务器的数据库<ul>
+<li>格式：<code>mysql -h ip地址 -u 用户名 -p</code></li>
+<li>输入对方<code>mysql</code>密码</li>
+</ul>
+</li>
+</ul>
+<h4 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h4><div class="note warning"><p>需要注意的是:</p></div>
+
+<p>以下所有命令中如过结尾有分号(<code>;</code>)的一定不能省略, 否则不是一条完整的命令, 系统会提示你继续输入命令</p>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 查看版本（连接后可以执行）</span></span><br><span class="line">select version();</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//显示当前时间（连接后可以执行）</span></span><br><span class="line">select now();</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//退出登录(断开连接)</span></span><br><span class="line">quit或exit</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-64606af819564228.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h3><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 1、创建数据库</span></span><br><span class="line">    格式：create database 数据库名 charset=utf8;</span><br><span class="line">    示例：create database titansql charset=utf8;</span><br><span class="line"><span class="hljs-comment">// 2、删除数据库</span></span><br><span class="line">    格式：drop database 数据库名;</span><br><span class="line">    示例：drop database titansql;</span><br><span class="line"><span class="hljs-comment">// 3、切换数据库</span></span><br><span class="line">    格式：use 数据库名;</span><br><span class="line">    示例：use titansql;</span><br><span class="line"><span class="hljs-comment">// 4、查看当前选择的数据库</span></span><br><span class="line">    select database();</span><br></pre></td></tr></table></figure>
+<p>创建完成记得刷新<code>Navicat for MySQL</code></p>
+<p><img src="http://p7hfnfk6u.bkt.clouddn.com/sqlSuccess.png" alt="image"></p>
+<h3 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h3><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 1、查看当前数据库中所有表</span></span><br><span class="line">    show tables;</span><br><span class="line">    </span><br><span class="line"><span class="hljs-comment">// 2、创建表</span></span><br><span class="line">    格式：create table 表名(列及类型);</span><br><span class="line">    说明：</span><br><span class="line">        <span class="hljs-comment">//id, name, age: 等为字段名</span></span><br><span class="line">        <span class="hljs-comment">//auto_increment: 表示自增长   </span></span><br><span class="line">        <span class="hljs-comment">//primary key: 表示主键  </span></span><br><span class="line">        <span class="hljs-comment">//int, varchar(20): 等为数据类型, 20为可存储的字节数</span></span><br><span class="line">        <span class="hljs-comment">//not null: 表示不为空</span></span><br><span class="line">        <span class="hljs-comment">//default: 为设置默认值</span></span><br><span class="line">    示例：create table student(<span class="hljs-keyword">id</span> <span class="hljs-keyword">int</span> auto_increment primary key, name varchar(<span class="hljs-number">20</span>) not null, age <span class="hljs-keyword">int</span> not null, gender bit <span class="hljs-keyword">default</span> <span class="hljs-number">1</span>, address varchar(<span class="hljs-number">20</span>), isDelete bit <span class="hljs-keyword">default</span> <span class="hljs-number">0</span>);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="hljs-comment">// 3、删除表</span></span><br><span class="line">    格式：drop table 表名;</span><br><span class="line">    示例：drop table student;</span><br><span class="line">    </span><br><span class="line"><span class="hljs-comment">// 4、查看表结构</span></span><br><span class="line">    格式：desc 表名;</span><br><span class="line">    示例：desc student;</span><br><span class="line">    </span><br><span class="line"><span class="hljs-comment">// 5、查看建表语句</span></span><br><span class="line">    格式：show create table 表名;</span><br><span class="line">    示例：show create table student;</span><br><span class="line">    </span><br><span class="line"><span class="hljs-comment">// 6、重命名表名</span></span><br><span class="line">    格式：rename table 原表名 to 新表名;</span><br><span class="line">    示例：rename table car to newCar;</span><br><span class="line">    </span><br><span class="line"><span class="hljs-comment">// 7、修改表</span></span><br><span class="line">    格式：alter table 表名 add|change|drop 列名 类型;</span><br><span class="line">    示例：alter table newcar add isDelete bit <span class="hljs-keyword">default</span> <span class="hljs-number">0</span></span><br></pre></td></tr></table></figure>
+<h3 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h3><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">1</span>、增</span><br><span class="line">    a、全列插入</span><br><span class="line">        格式：insert into 表名 values(...);</span><br><span class="line">        说明：主键列是自动增长，但是在全列插入时需要占位，通常使用<span class="hljs-number">0</span>，插入成功以后以实际数据为准</span><br><span class="line">        示例：insert into student values(<span class="hljs-number">0</span>, <span class="hljs-string">"tom"</span>, <span class="hljs-number">19</span>, <span class="hljs-number">1</span>, <span class="hljs-string">"北京"</span>, <span class="hljs-number">0</span>);</span><br><span class="line">    b、缺省插入</span><br><span class="line">        格式：insert into 表名(列<span class="hljs-number">1</span>,列<span class="hljs-number">2</span>,……) values(值<span class="hljs-number">1</span>,值<span class="hljs-number">2</span>,……);</span><br><span class="line">        示例：insert into student(name, age, address) values(<span class="hljs-string">"titan"</span>, <span class="hljs-number">19</span>, <span class="hljs-string">"上海"</span>);</span><br><span class="line">    c、同时插入多条数据</span><br><span class="line">        格式：insert into 表名 values(...),(...),……</span><br><span class="line">        示例：insert into student values(<span class="hljs-number">0</span>, <span class="hljs-string">"jun"</span>, <span class="hljs-number">18</span>, <span class="hljs-number">0</span>, <span class="hljs-string">"北京"</span>, <span class="hljs-number">0</span>), (<span class="hljs-number">0</span>, <span class="hljs-string">"poi"</span>, <span class="hljs-number">22</span>, <span class="hljs-number">1</span>, <span class="hljs-string">"海南"</span>, <span class="hljs-number">0</span>), (<span class="hljs-number">0</span>, <span class="hljs-string">"coder"</span>, <span class="hljs-number">20</span>, <span class="hljs-number">0</span>, <span class="hljs-string">"石家庄"</span>, <span class="hljs-number">0</span>);</span><br><span class="line"><span class="hljs-number">2</span>、删</span><br><span class="line">    格式：delete from 表名 where 条件;  </span><br><span class="line">    示例：delete from student where <span class="hljs-keyword">id</span>=<span class="hljs-number">4</span>;</span><br><span class="line">    注意：没有条件是全部删除，慎用</span><br><span class="line"><span class="hljs-number">3</span>、改</span><br><span class="line">    格式：update 表名 set 列<span class="hljs-number">1</span>=值<span class="hljs-number">1</span>,列<span class="hljs-number">2</span>=值<span class="hljs-number">2</span>,…… where 条件;</span><br><span class="line">    示例：update student set age=<span class="hljs-number">16</span> where <span class="hljs-keyword">id</span>=<span class="hljs-number">7</span>;  </span><br><span class="line">    注意：没有条件是全部列都修改，慎用</span><br><span class="line"><span class="hljs-number">4</span>、查</span><br><span class="line">    说明：查询表中的全部数据</span><br><span class="line">    格式：select * from 表名;</span><br><span class="line">    示例：select * from student;</span><br></pre></td></tr></table></figure>
+<h3 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h3><h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4><ul>
+<li>格式：<code>select * from 表名;</code></li>
+<li>说明：<ul>
+<li><code>from</code>关键字后面是表名，表示数据来源于这张表</li>
+<li><code>select</code>后面写表中的列名，如果是*表示在结果集中显示表中的所有列</li>
+<li>在<code>select</code>后面的列名部分，可以使用<code>as</code>为列名起别名，这个别名显示在结果集中</li>
+<li>如果要查询多个列，之间使用逗号分隔</li>
+</ul>
+</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//查询所有数据</span></span><br><span class="line">select * from student;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//查询某列数据</span></span><br><span class="line">select name, age from student;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//以别名显示搜索结果</span></span><br><span class="line">select name as a, age from student;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-82c6b03e2d0e3f89.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="别名"></p>
+<h4 id="消除重复行"><a href="#消除重复行" class="headerlink" title="消除重复行"></a>消除重复行</h4><ul>
+<li>在<code>select</code>后面列前面使用<code>distinct</code>可以消除重复的行</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select gender from student;</span><br><span class="line">select distinct gender from student;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-763a7bd7dcafd230.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="distinct"></p>
+<h4 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h4><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 1、语法</span></span><br><span class="line">    select * from 表名 where 条件</span><br><span class="line">    </span><br><span class="line"><span class="hljs-comment">// 2、比较运算符</span></span><br><span class="line">        等于        =</span><br><span class="line">        大于        &gt;</span><br><span class="line">        小于        &lt;</span><br><span class="line">        大于等于    &gt;=</span><br><span class="line">        小于等于    &lt;=</span><br><span class="line">        不等于      !=或&lt;&gt;</span><br><span class="line">    需求：查询<span class="hljs-keyword">id</span>值大于<span class="hljs-number">8</span>的所有数据</span><br><span class="line">    示例：select * from student where <span class="hljs-keyword">id</span>&gt;<span class="hljs-number">8</span>;</span><br><span class="line">        </span><br><span class="line"><span class="hljs-comment">// 3、逻辑运算符</span></span><br><span class="line">        and    并且</span><br><span class="line">        or     或者</span><br><span class="line">        not    非</span><br><span class="line">            </span><br><span class="line">    需求：查询<span class="hljs-keyword">id</span>值大于<span class="hljs-number">7</span>的女同学</span><br><span class="line">    示例：select * from student where <span class="hljs-keyword">id</span>&gt;<span class="hljs-number">7</span> and gender=<span class="hljs-number">0</span>;</span><br><span class="line">    </span><br><span class="line"><span class="hljs-comment">// 4、模糊查询(like)</span></span><br><span class="line">        %: 表示任意多个任意字符</span><br><span class="line">        _: 表示一个任意字符</span><br><span class="line"></span><br><span class="line">    需求：查询姓习的同学</span><br><span class="line">    示例：</span><br><span class="line">        select * from student where name like <span class="hljs-string">"习%"</span>;</span><br><span class="line">        select * from student where name like <span class="hljs-string">"习_"</span>;</span><br><span class="line">        </span><br><span class="line"><span class="hljs-comment">// 5、范围查询</span></span><br><span class="line">        <span class="hljs-keyword">in</span>                表示在一个非连续的范围内</span><br><span class="line">        between...and...  表示在一个连续的范围内</span><br><span class="line"></span><br><span class="line">    需求：查询编号为<span class="hljs-number">8</span>、<span class="hljs-number">10</span>、<span class="hljs-number">12</span>的学生</span><br><span class="line">    示例：select * from student where <span class="hljs-keyword">id</span> <span class="hljs-keyword">in</span> (<span class="hljs-number">8</span>,<span class="hljs-number">10</span>,<span class="hljs-number">12</span>);</span><br><span class="line">    需求：查询编号为<span class="hljs-number">6</span>到<span class="hljs-number">8</span>的学生</span><br><span class="line">    示例：select * from student where <span class="hljs-keyword">id</span> between <span class="hljs-number">6</span> and <span class="hljs-number">8</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 6、空判断</span></span><br><span class="line">        注意：null与<span class="hljs-string">""</span>是不同的</span><br><span class="line">        判断空：is null</span><br><span class="line">        判断非空： is not null</span><br><span class="line"></span><br><span class="line">    需求：查询没有地址的同学</span><br><span class="line">    示例：select * from student where address is null;</span><br><span class="line">    需求：查询有地址的同学</span><br><span class="line">    示例：select * from student where address is not null;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 7、优先级</span></span><br><span class="line">        小括号，not 比较运算符，逻辑运算符</span><br><span class="line">        and比or优先级高，如果同时出现并希望先选or,需要结合()来使用</span><br></pre></td></tr></table></figure>
+<h4 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h4><ul>
+<li>为了快速等到统计数据，提供了5个聚合函数<ul>
+<li><code>count(*)</code>: 表示计算总行数，括号中可以写*和列名</li>
+<li><code>max(列)</code>: 表示求此列的最大值</li>
+<li><code>min(列)</code>: 表示求此列的最小值</li>
+<li><code>sum(列)</code>: 表示求此列的和</li>
+<li><code>avg(列)</code>: 表示求此列的平均值</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//需求：查询学生总数</span></span><br><span class="line">select count(*) from student;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//需求：查询女生的编号最大值</span></span><br><span class="line">select max(<span class="hljs-keyword">id</span>) from student where gender=<span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//需求：查询女生的编号最小值</span></span><br><span class="line">select min(<span class="hljs-keyword">id</span>) from student where gender=<span class="hljs-number">0</span>;</span><br><span class="line">        </span><br><span class="line"><span class="hljs-comment">//需求：查询所有学生的年龄和</span></span><br><span class="line">select sum(age) from student;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//需求：查询所有学生的年龄平均值</span></span><br><span class="line">select avg(age) from student;</span><br></pre></td></tr></table></figure>
+<h4 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h4><ul>
+<li>按照字段分组，表示此字段相同的数据会被放到一个集合中。</li>
+<li>分组后，只能查询出相同的数据列，对于有差异的数据列无法显示在结果集中</li>
+<li>可以对分组后的数据进行统计，做聚合运算</li>
+<li>语法：<ul>
+<li><code>select 列1,列2,聚合…… from 表名 group by 列1,列2,列3,……;</code></li>
+</ul>
+</li>
+<li>需求：查询男女生总数</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select gender,count(*) from student group by gender;</span><br><span class="line">select name,gender,count(*) from student group by gender,age;</span><br></pre></td></tr></table></figure>
+<p>分组后的数据筛选：</p>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select 列<span class="hljs-number">1</span>,列<span class="hljs-number">2</span>,聚合…… from 表名 group by 列<span class="hljs-number">1</span>,列<span class="hljs-number">2</span>,列<span class="hljs-number">3</span>,…… having 列<span class="hljs-number">1</span>,……聚合……;</span><br><span class="line"></span><br><span class="line">示例：select gender,count(*) from student group by gender having gender;</span><br></pre></td></tr></table></figure>
+<div class="note info"><p><code>where</code>与<code>having</code>的区别：</p></div>
+
+<ul>
+<li><code>where</code>是对<code>from</code>后面指定的表进行筛选，属于对原始数据的筛选</li>
+<li><code>having</code>是对<code>group by</code>的结果进行筛选</li>
+</ul>
+<h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h4><ul>
+<li>语法：<code>select * from 表名 order by 列1 asc|desc，列2 asc|desc , ……;</code></li>
+<li>说明：<ul>
+<li>将数据按照列1进行排序，如果某些列1的值相同，则按照列2进行排序</li>
+<li>默认按照从小到大的顺序排序</li>
+<li><code>asc</code>: 升序</li>
+<li><code>desc</code>: 降序</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//需求：将没有被删除的数据按年龄排序</span></span><br><span class="line">select * from student where isDelete=<span class="hljs-number">0</span> order by age desc;</span><br><span class="line">select * from student where isDelete=<span class="hljs-number">0</span> order by age desc, <span class="hljs-keyword">id</span> desc;</span><br></pre></td></tr></table></figure>
+<h4 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h4><ul>
+<li>语法：<code>select * from 表名 limit start,count;</code></li>
+<li>说明：<code>start</code>索引从0开始</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select * from student limit <span class="hljs-number">0</span>,<span class="hljs-number">3</span>;</span><br><span class="line">select * from student limit <span class="hljs-number">3</span>,<span class="hljs-number">3</span>;</span><br><span class="line">select * from student where gender=<span class="hljs-number">1</span> limit <span class="hljs-number">0</span>,<span class="hljs-number">3</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h3><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 建表语句：</span></span><br><span class="line">    <span class="hljs-number">1</span>、create table <span class="hljs-keyword">class</span>(<span class="hljs-keyword">id</span> <span class="hljs-keyword">int</span> auto_increment primary key, name varchar(<span class="hljs-number">20</span>) not null, stuNum <span class="hljs-keyword">int</span> not null);</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-number">2</span>、create table students(<span class="hljs-keyword">id</span> <span class="hljs-keyword">int</span> auto_increment primary key, name varchar(<span class="hljs-number">20</span>) not null, gender bit <span class="hljs-keyword">default</span> <span class="hljs-number">1</span>, classid <span class="hljs-keyword">int</span> not null, foreign key(classid) references <span class="hljs-keyword">class</span>(<span class="hljs-keyword">id</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 查询所有数据</span></span><br><span class="line">    select * from students;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/* 关联查询：</span></span><br><span class="line"><span class="hljs-comment">    分类：</span></span><br><span class="line"><span class="hljs-comment">    1、表A inner join 表B：</span></span><br><span class="line"><span class="hljs-comment">        表A与表B匹配的行会出现在结果集中</span></span><br><span class="line"><span class="hljs-comment">    2、表A left join 表B：</span></span><br><span class="line"><span class="hljs-comment">        表A与表B匹配的行会出现在结果集中，外加表A中独有的数据，未对应的数据使用null填充</span></span><br><span class="line"><span class="hljs-comment">    3、表A right join 表B：</span></span><br><span class="line"><span class="hljs-comment">        表A与表B匹配的行会出现在结果集中，外加表B中独有的数据，未对应的数据使用null填充</span></span><br><span class="line"><span class="hljs-comment">    */</span></span><br><span class="line">select students.name,<span class="hljs-keyword">class</span>.name from <span class="hljs-keyword">class</span> inner join students on <span class="hljs-keyword">class</span>.id=students.classid;</span><br><span class="line"></span><br><span class="line">select students.name,<span class="hljs-keyword">class</span>.name from <span class="hljs-keyword">class</span> left join students on <span class="hljs-keyword">class</span>.id=students.classid;</span><br><span class="line"></span><br><span class="line">select students.name,<span class="hljs-keyword">class</span>.name from <span class="hljs-keyword">class</span> right join students on <span class="hljs-keyword">class</span>.id=students.classid;</span><br></pre></td></tr></table></figure>
+<div class="note success"><p>至此, <code>MySQL</code>中一些常用的命令行也基本介绍完了</p></div>
+
+<p>下面看一些<code>MySQL</code>和<code>Python</code>是如何进行交互的</p>
+<h2 id="MySQL和Python的交互"><a href="#MySQL和Python的交互" class="headerlink" title="MySQL和Python的交互"></a><code>MySQL</code>和<code>Python</code>的交互</h2><ul>
+<li><code>Python</code>要对<code>MySQL</code>数据库进行操作, 需要引入<code>pymysql</code>模块</li>
+<li><code>pymsql</code>是<code>Python</code>中操作<code>MySQL</code>的模块, 并且<code>pymysql</code>支持<code>python3.x</code>版本</li>
+<li>首先要先安装<code>pymysql</code>, 终端执行一下语句</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install pymysql</span><br></pre></td></tr></table></figure>
+<h3 id="创建数据库连接"><a href="#创建数据库连接" class="headerlink" title="创建数据库连接"></a>创建数据库连接</h3><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 链接数据库</span></span><br><span class="line"><span class="hljs-comment"># 参数1：mysql服务所在主机的IP(可以是IP地址, 本机链接可以是localhost)</span></span><br><span class="line"><span class="hljs-comment"># 参数2：用户名</span></span><br><span class="line"><span class="hljs-comment"># 参数3：密码</span></span><br><span class="line"><span class="hljs-comment"># 参数4：要连接的数据库名</span></span><br><span class="line"></span><br><span class="line">db = pymysql.connect(<span class="hljs-string">'localhost'</span>, <span class="hljs-string">'root'</span>, <span class="hljs-string">'titanjun'</span>, <span class="hljs-string">'titansql'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 创建游标, 查询数据默认为元组类型</span></span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 创建sql语句</span></span><br><span class="line">sql = <span class="hljs-string">"select version()"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 执行sql语句</span></span><br><span class="line">cursor.execute(sql)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 获取返回的信息</span></span><br><span class="line">data = cursor.fetchone()</span><br><span class="line">print(data)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 关闭游标</span></span><br><span class="line">cursor.close()</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 关闭数据库</span></span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db = pymysql.connect(<span class="hljs-string">'localhost'</span>, <span class="hljs-string">'root'</span>, <span class="hljs-string">'jun.0929'</span>, <span class="hljs-string">'titansql'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 创建游标, 查询数据默认为元组类型</span></span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 建表</span></span><br><span class="line"><span class="hljs-comment"># 在建表之前要检查表是否存在, 如果存在则删除</span></span><br><span class="line">cursor.execute(<span class="hljs-string">"drop table if exists userinfo"</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 创建表</span></span><br><span class="line"><span class="hljs-keyword">try</span>:</span><br><span class="line">    sql = <span class="hljs-string">"create table userinfo(id int auto_increment primary key, age int not null)"</span></span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    print(<span class="hljs-string">'创建成功'</span>)</span><br><span class="line"><span class="hljs-keyword">except</span>:</span><br><span class="line">    print(<span class="hljs-string">'创建表失败'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
+<h3 id="在表中插入数据"><a href="#在表中插入数据" class="headerlink" title="在表中插入数据"></a>在表中插入数据</h3><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db = pymysql.connect(<span class="hljs-string">'localhost'</span>, <span class="hljs-string">'root'</span>, <span class="hljs-string">'jun.0929'</span>, <span class="hljs-string">'titansql'</span>)</span><br><span class="line"></span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 插入数据的字符串命令</span></span><br><span class="line">sql = <span class="hljs-string">'insert into userinfo values'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>):</span><br><span class="line">    ageStr = <span class="hljs-string">"(0, %d)"</span> % i</span><br><span class="line">    addsql = sql + ageStr</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">try</span>:</span><br><span class="line">        cursor.execute(addsql)</span><br><span class="line">        <span class="hljs-comment"># 提交到数据库, 不然无法保存新建或者修改的数据</span></span><br><span class="line">        db.commit()</span><br><span class="line">        print(<span class="hljs-string">'插入数据成功'</span>)</span><br><span class="line">    <span class="hljs-keyword">except</span>:</span><br><span class="line">        <span class="hljs-comment"># 如果提交失败则回滚到上一次的提交, 否则下一次提交可能会冲突</span></span><br><span class="line">        db.rollback()</span><br><span class="line">        print(<span class="hljs-string">'插入数据失败'</span>)</span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
+<h3 id="修改-更新-删除数据"><a href="#修改-更新-删除数据" class="headerlink" title="修改/更新/删除数据"></a>修改/更新/删除数据</h3><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db = pymysql.connect(<span class="hljs-string">'localhost'</span>, <span class="hljs-string">'root'</span>, <span class="hljs-string">'jun.0929'</span>, <span class="hljs-string">'titansql'</span>)</span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 修改/更新数据命令字符串</span></span><br><span class="line">sql = <span class="hljs-string">'update userinfo set age=30 where id=4'</span></span><br><span class="line"><span class="hljs-comment"># 删除数据命令字符串</span></span><br><span class="line"><span class="hljs-comment"># sql = 'delete from userinfo where age=16'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span>:</span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    db.commit()</span><br><span class="line">    print(<span class="hljs-string">'数据更新成功'</span>)</span><br><span class="line"><span class="hljs-keyword">except</span>:</span><br><span class="line">    db.rollback()</span><br><span class="line">    print(<span class="hljs-string">'数据更新失败'</span>)</span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
+<h3 id="查询数据-1"><a href="#查询数据-1" class="headerlink" title="查询数据"></a>查询数据</h3><ul>
+<li><code>fetchone</code>: 获取下一个查询结果集，结果集是一个对象</li>
+<li><code>fetchall</code>: 接收全部的返回的行</li>
+<li><code>rowcount</code>: 是一个只读属性，返回<code>execute()</code>方法影响的行数</li>
+</ul>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db = pymysql.connect(<span class="hljs-string">'localhost'</span>, <span class="hljs-string">'root'</span>, <span class="hljs-string">'jun.0929'</span>, <span class="hljs-string">'titansql'</span>)</span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 查询数据字符串</span></span><br><span class="line">sql = <span class="hljs-string">'select * from userinfo where age&gt;16'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">try</span>:</span><br><span class="line">    cursor.execute(sql)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment"># 获得一条查询数据</span></span><br><span class="line">    print(cursor.fetchone())</span><br><span class="line">    print(<span class="hljs-string">'查询到-%d-条数据'</span> % cursor.rowcount)</span><br><span class="line"></span><br><span class="line">    result = cursor.fetchall()</span><br><span class="line">    <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> result:</span><br><span class="line">        print(<span class="hljs-string">'%d--%d'</span> % (row[<span class="hljs-number">0</span>], row[<span class="hljs-number">1</span>]))</span><br><span class="line"></span><br><span class="line">    print(<span class="hljs-string">'数据查询成功'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">except</span>:</span><br><span class="line">    print(<span class="hljs-string">'数据查询失败'</span>)</span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
+<div class="note success"><p>至此, <code>Python</code>和<code>MySQL</code>交互的最基本最简单的使用也介绍完了, 如有不足之处还望告知</p></div>
+
+
+<hr>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/MySQL/">MySQL</a>, <a class="has-link-grey -link" href="/tags/Python/">Python</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2017/06/10/iOS9之UIStackView的使用/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">iOS9之UIStackView的使用</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2016/11/16/Socket搭建即时通讯服务器/">
+                <span class="level-item">Socket搭建即时通讯服务器</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="SooLe">
+                    
+                    <p class="is-size-4 is-block">
+                        SooLe
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        iOS
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>shenzhen</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Entradas
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        15
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categorias
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        9
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Etiquetas
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        30
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/arthurtop">
+                SEGUIR</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/arthurtop">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://weibo.com/3935895096677821">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://www.jianshu.com/u/cda07f394e73">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://juejin.im/user/5ac98725f265da23830b263b">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://github.com/ppoffice</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categorias
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Hexo博客/">
+            <span class="level-start">
+                <span class="level-item">Hexo博客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Socket学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Socket学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SwiftLint/">
+            <span class="level-start">
+                <span class="level-item">SwiftLint</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Swift学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift高阶功能/">
+            <span class="level-start">
+                <span class="level-item">Swift高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS动画/">
+            <span class="level-start">
+                <span class="level-item">iOS动画</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS高阶功能/">
+            <span class="level-start">
+                <span class="level-item">iOS高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数据库基础/">
+            <span class="level-start">
+                <span class="level-item">数据库基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/组件化开发/">
+            <span class="level-start">
+                <span class="level-item">组件化开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Nube de etiquetas
+        </h3>
+        <a href="/tags/AppIcon/" style="font-size: 10px;">AppIcon</a> <a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/CoreAnimation/" style="font-size: 10px;">CoreAnimation</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Homebrew/" style="font-size: 10px;">Homebrew</a> <a href="/tags/Mac-工具/" style="font-size: 10px;">Mac 工具</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Socket/" style="font-size: 10px;">Socket</a> <a href="/tags/Socket-IO/" style="font-size: 10px;">Socket.IO</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/Swift4-0/" style="font-size: 10px;">Swift4.0</a> <a href="/tags/SwiftLint/" style="font-size: 16.67px;">SwiftLint</a> <a href="/tags/UIStackView/" style="font-size: 10px;">UIStackView</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS-10-3/" style="font-size: 10px;">iOS 10.3</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/spec/" style="font-size: 10px;">spec</a> <a href="/tags/trunk/" style="font-size: 10px;">trunk</a> <a href="/tags/入坑/" style="font-size: 10px;">入坑</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/规则/" style="font-size: 13.33px;">规则</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recientes
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/12/20/Mac软件大全/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Mac软件大全">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-20T05:30:03.000Z">2018-12-20</time></div>
+                    <a href="/2018/12/20/Mac软件大全/" class="has-link-black-ter is-size-6">Mac软件大全</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/10/Realm在iOS中的简单使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Realm在iOS中的简单使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-10T02:46:40.000Z">2018-08-10</time></div>
+                    <a href="/2018/08/10/Realm在iOS中的简单使用/" class="has-link-black-ter is-size-6">Realm在iOS中的简单使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库基础/">数据库基础</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="发布开源框架到CocoaPods入坑指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-06-29T12:06:20.000Z">2018-06-29</time></div>
+                    <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="has-link-black-ter is-size-6">发布开源框架到CocoaPods入坑指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/组件化开发/">组件化开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="iOS神技之动态更换APP的Icon图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-16T12:18:00.000Z">2018-03-16</time></div>
+                    <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="has-link-black-ter is-size-6">iOS神技之动态更换APP的Icon图</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Swift高阶功能/">Swift高阶功能</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SwiftLint代码规范属性说明03">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-10T12:04:54.000Z">2018-03-10</time></div>
+                    <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="has-link-black-ter is-size-6">SwiftLint代码规范属性说明03</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archivos
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Etiquetas
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Mac-工具/">
+                        <span class="level-start">
+                            <span class="level-item">Mac 工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/MySQL/">
+                        <span class="level-start">
+                            <span class="level-item">MySQL</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Python/">
+                        <span class="level-start">
+                            <span class="level-item">Python</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">6</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recientes
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/12/20/Mac软件大全/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Mac软件大全">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-20T05:30:03.000Z">2018-12-20</time></div>
+                    <a href="/2018/12/20/Mac软件大全/" class="has-link-black-ter is-size-6">Mac软件大全</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/10/Realm在iOS中的简单使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Realm在iOS中的简单使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-10T02:46:40.000Z">2018-08-10</time></div>
+                    <a href="/2018/08/10/Realm在iOS中的简单使用/" class="has-link-black-ter is-size-6">Realm在iOS中的简单使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库基础/">数据库基础</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="发布开源框架到CocoaPods入坑指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-06-29T12:06:20.000Z">2018-06-29</time></div>
+                    <a href="/2018/06/29/发布开源框架到CocoaPods入坑指南/" class="has-link-black-ter is-size-6">发布开源框架到CocoaPods入坑指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/组件化开发/">组件化开发</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="iOS神技之动态更换APP的Icon图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-16T12:18:00.000Z">2018-03-16</time></div>
+                    <a href="/2018/03/16/iOS神技之动态更换APP的Icon图/" class="has-link-black-ter is-size-6">iOS神技之动态更换APP的Icon图</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Swift高阶功能/">Swift高阶功能</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SwiftLint代码规范属性说明03">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-10T12:04:54.000Z">2018-03-10</time></div>
+                    <a href="/2018/03/10/SwiftLint代码规范属性说明03/" class="has-link-black-ter is-size-6">SwiftLint代码规范属性说明03</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SwiftLint/">SwiftLint</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archivos
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Etiquetas
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Mac-工具/">
+                        <span class="level-start">
+                            <span class="level-item">Mac 工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/MySQL/">
+                        <span class="level-start">
+                            <span class="level-item">MySQL</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Python/">
+                        <span class="level-start">
+                            <span class="level-item">Python</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">6</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Mac环境下MySQL命令的使用" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2018 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Entradas',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
