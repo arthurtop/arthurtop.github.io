@@ -2,21 +2,26 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Tag: CoreAnimation - SooLe</title>
+<title>2019上传审核遇Bug - SooLe</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="i have a dream. Do what you love, Love what you do.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SooLe">
-<meta property="og:url" content="http://yoursite.com/tags/CoreAnimation/index.html">
+    <meta name="description" content="# 2019 上传api到App Store出错">
+<meta name="keywords" content="Hexo,Github,Bug">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019上传审核遇Bug">
+<meta property="og:url" content="http://yoursite.com/2019/03/29/2019做了国际化上传审核被拒/index.html">
 <meta property="og:site_name" content="SooLe">
-<meta property="og:description" content="i have a dream. Do what you love, Love what you do.">
+<meta property="og:description" content="# 2019 上传api到App Store出错">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1342455-543960504c3630b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1342455-2b4cb3fe1e6cc36a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-03-29T00:58:27.339Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SooLe">
-<meta name="twitter:description" content="i have a dream. Do what you love, Love what you do.">
+<meta name="twitter:title" content="2019上传审核遇Bug">
+<meta name="twitter:description" content="# 2019 上传api到App Store出错">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1342455-543960504c3630b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -82,7 +87,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="SooLe" height="28">
+                <img src="/images/logo.svg" alt="2019上传审核遇Bug" height="28">
             
             </a>
         </div>
@@ -128,33 +133,22 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">Tags</a></li>
-            <li class="is-active"><a href="#" aria-current="page">CoreAnimation</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-10-12T11:48:28.000Z">2017-10-12</time>
+                <time class="level-item has-text-grey" datetime="2019-03-29T00:55:00.000Z">2019-03-29</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/iOS动画/">iOS动画</a>
+                <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    25 minutes read (About 3691 words)
+                    a few seconds read (About 78 words)
                 </span>
                 
             </div>
@@ -162,33 +156,46 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2017/10/12/iOS出门必备之CoreAnimation(核心动画)/">iOS出门必备之CoreAnimation(核心动画)</a>
+                2019上传审核遇Bug
             
         </h1>
         <div class="content">
-            <ul>
-<li>前段时间接触到了一个牛逼的动画框架<a href="https://github.com/facebook/pop" target="_blank" rel="noopener">POP</a>,本来想来装装逼,突然发现,苹果大大的CoreAnimation我还不会用呢!</li>
-<li>依稀记得乔帮主在2007年的WWDC大会上亲自为你演示Core Animation的强大：<a href="http://v.youku.com/v_show/id_XMzQ2MTcwNDQ0.html" target="_blank" rel="noopener">点击查看视频</a>(不好意思,又装逼了)</li>
-<li>言归正传,我只是来温习一下CoreAnimation,还望路过的大神不要吐槽我太low</li>
-<li><a href="https://github.com/coderQuanjun/POPAnimationDemo" target="_blank" rel="noopener">GitHub项目地址</a></li>
-</ul>
+            <p>#</p>
+<h1 id="2019-上传api到App-Store出错"><a href="#2019-上传api到App-Store出错" class="headerlink" title="2019 上传api到App Store出错"></a>2019 上传api到App Store出错</h1><p><img src="https://upload-images.jianshu.io/upload_images/1342455-543960504c3630b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<a id="more"></a>
+<p>1.这个可能是info.plist 有权限没加<br>2.还有就是做了国际化，需要在info.plist加入</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1342455-2b4cb3fe1e6cc36a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2017/10/12/iOS出门必备之CoreAnimation(核心动画)/#more">Read More</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Bug/">Bug</a>, <a class="has-link-grey -link" href="/tags/Github/">Github</a>, <a class="has-link-grey -link" href="/tags/Hexo/">Hexo</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
 </div>
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/03/25/flutter全局/">
+                <span class="level-item"></span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -1726,7 +1733,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="SooLe" height="28">
+                    <img src="/images/logo.svg" alt="2019上传审核遇Bug" height="28">
                 
                 </a>
                 <p class="is-size-7">
