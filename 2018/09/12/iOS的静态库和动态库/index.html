@@ -1,0 +1,2445 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>iOS的静态库和动态库 - SooLe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="keywords" content="静态库,动态库,framewoframework">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS的静态库和动态库">
+<meta property="og:url" content="http://yoursite.com/2018/09/12/iOS的静态库和动态库/index.html">
+<meta property="og:site_name" content="SooLe">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/staticFramework.jpg?x-oss-process=style/titanjun">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-b8f9c74fc0185ddd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://pcat1usdp.bkt.clouddn.com/bundleActive.png">
+<meta property="og:image" content="http://pcat1usdp.bkt.clouddn.com/EditScheme.png">
+<meta property="og:image" content="http://pcat1usdp.bkt.clouddn.com/inclode2.png">
+<meta property="og:image" content="http://pcat1usdp.bkt.clouddn.com/productA.png">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-88dc3d5139099895.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://pcat1usdp.bkt.clouddn.com/machtype.png">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-6e40f428fc01b99b.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-768361c8b9d2c1a7.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://pcat1usdp.bkt.clouddn.com/exampleTest.png">
+<meta property="og:image" content="http://pcat1usdp.bkt.clouddn.com/addItems.png">
+<meta property="og:image" content="http://pcat1usdp.bkt.clouddn.com/copyItem.png">
+<meta property="og:image" content="http://pcat1usdp.bkt.clouddn.com/selectLib.png">
+<meta property="og:updated_time" content="2018-12-18T15:26:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS的静态库和动态库">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/staticFramework.jpg?x-oss-process=style/titanjun">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="iOS的静态库和动态库" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-09-12T03:56:26.000Z">2018-09-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/组件化开发/">组件化开发</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    29 minutes read (About 4350 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                iOS的静态库和动态库
+            
+        </h1>
+        <div class="content">
+            <p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/staticFramework.jpg?x-oss-process=style/titanjun" alt="staticFramework"></p>
+<a id="more"></a>
+<h2 id="静态库简介"><a href="#静态库简介" class="headerlink" title="静态库简介"></a>静态库简介</h2><h3 id="什么是库"><a href="#什么是库" class="headerlink" title="什么是库?"></a>什么是库?</h3><ul>
+<li>库从本质上来说是一种可执行代码的二进制格式，可以被载入内存中执行</li>
+<li>库就是程序代码的集合, 是共享程序代码的一种方式</li>
+<li>库从广义上可分为开源库和闭源库, 而闭源库才分为静态库和动态库<ul>
+<li>开源库: 对外公开源代码, 能看到具体的代码实现, 例如<code>Github</code>上面的第三方开源库都称之为开源库</li>
+<li>闭源库: 不公开源代码, 文件是经过编译后的二进制文件, 看不到具体实现, 例如<code>.a</code>文件和<code>.framework</code>文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="静态库与动态库"><a href="#静态库与动态库" class="headerlink" title="静态库与动态库"></a>静态库与动态库</h3><ul>
+<li>静态库：链接时完整地拷贝至可执行文件中，被多次使用就有多份冗余拷贝<ul>
+<li>静态库有两种存在形式: <code>.a</code>和<code>.framework</code></li>
+</ul>
+</li>
+<li>动态库：动态库则不会复制, 只有一份. 程序运行时动态加载到内存; 系统只加载一次, 多个程序共用, 节省内存<ul>
+<li>动态库有两种存在形式: <code>.dylib</code>和<code>.framework</code></li>
+<li>需要注意的是: 系统的<code>.framework</code>是动态库，我们自己建立的<code>.framework</code>是静态库</li>
+</ul>
+</li>
+<li>但是项目中如果使用到自己的动态库, 苹果是不允许上架!</li>
+<li>再但是<code>WWDC2014</code>上公布的苹果对<code>ios8</code>开放动态加载<code>dylib</code>的接口 也就是说 开放了动态库挂载, 但是目前几乎没有上架的项目使用</li>
+</ul>
+ <div class="note info"><p><code>.a</code>与<code>.framework</code>的区别</p></div>
+
+<ul>
+<li><code>.a</code>是一个纯二进制文件不能直接使用, 必须要有<code>.h</code>文件才能使用, <code>.h</code>文件对外提供接口, <code>.a</code>文件是代码的具体实现, 即<code>.m</code></li>
+<li><code>.framework</code>中除了有二进制文件之外还有资源文件, 可以直接使用</li>
+<li>所以开发中建议使用<code>.framework</code></li>
+</ul>
+<h3 id="为什么要使用静态库？"><a href="#为什么要使用静态库？" class="headerlink" title="为什么要使用静态库？"></a>为什么要使用静态库？</h3><ul>
+<li>保护自己的核心代码, 国内的企业，掌握有核心技术，同时是又希望更多的程序员来使用其技术，因此采用”闭源”的方式开发使用</li>
+<li>实现iOS项目的组件化, 可以把固定的业务模块编译成静态库</li>
+<li>开发第三方SDK, 例如: 友盟SDK, 百度地图SDK….</li>
+<li>提高项目的编译速度, 比如项目的组件化, 虽然使用了组件化, 但依然是源码, 如果工程庞大, 编译速度依然非常慢, 但是如果把响应的功能和业务组件编译成静态库, 将会大大提高项目的编译速度</li>
+</ul>
+<h2 id="a静态库的生成和使用"><a href="#a静态库的生成和使用" class="headerlink" title=".a静态库的生成和使用"></a><code>.a</code>静态库的生成和使用</h2><p><img src="http://upload-images.jianshu.io/upload_images/4122543-b8f9c74fc0185ddd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="staticLibrary"></p>
+<ul>
+<li>生成<code>.a</code>静态库, 这里我们选择第二个创建</li>
+<li>静态库分真机和模拟机两种环境<ul>
+<li>在真机环境下编译出来的是只适用于真机的静态库</li>
+<li>在模拟机环境下编译出来的是只使用模拟机的静态库</li>
+<li>同事使用真机和模拟机的静态库, 后面会提到, 暂不赘述</li>
+</ul>
+</li>
+<li>在不同的环境下静态库支持的架构也是不同的, 模拟器下的静态库和真机下的静态库不能共用, 不同型号编译的静态库也是不能共用的</li>
+<li>不同设备使用的CPU不同，从而使用的CPU架构（指令集）也不同，静态库有其支持的CPU架构，若静态库在不支持的CPU架构上运行程序就会崩溃</li>
+</ul>
+<h3 id="静态库的架构"><a href="#静态库的架构" class="headerlink" title="静态库的架构"></a>静态库的架构</h3><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 1. 模拟器使用的CPU架构： </span></span><br><span class="line">iphone4s - iphone5 : i386 </span><br><span class="line">iPhone5s - iPhoneX ：x86_64</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 2. 真机使用的CPU架构： </span></span><br><span class="line">iPhone3gs - iPhone4s：armv7 </span><br><span class="line">iPhone5 - iPhone5c：armv7s </span><br><span class="line">iPhone5s - iPhoneX：armv64</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果想要查看不同的机型所支持的架构, 可分别使用不同的模拟器或者真机, 编译出不同的静态库</li>
+<li>然后使用终端, cd 到静态库所在的目录</li>
+<li>在执行<code>lipo -info 静态库名称</code>即可</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 执行lipo -info的输出结果</span></span><br><span class="line">$ lipo -info libStateLib.a </span><br><span class="line">input file libStateLib.a is not a fat file</span><br><span class="line">Non-fat file: libStateLib.a is architecture: x86_64</span><br></pre></td></tr></table></figure>
+<h3 id="编译多架构静态库"><a href="#编译多架构静态库" class="headerlink" title="编译多架构静态库"></a>编译多架构静态库</h3><ul>
+<li>在调试不同机型的过程中, 需要选中每一个模拟器进行编译, 生成支持对应架构的静态库然后合并, 非常蛋疼</li>
+<li>怎样一次编译支持多个架构的的静态库?</li>
+</ul>
+<p><img src="http://pcat1usdp.bkt.clouddn.com/bundleActive.png" alt="bundleActive"></p>
+<ul>
+<li>该选项默认是<code>YES</code>, 也就是只编译当前活跃环境的架构, 设置成<code>No</code>即可</li>
+<li>模拟器环境编译出来的就支持所有的模拟机型号, 真机亦是如此</li>
+</ul>
+<h3 id="静态库的版本"><a href="#静态库的版本" class="headerlink" title="静态库的版本"></a>静态库的版本</h3><ul>
+<li>和<code>iOS</code>证书一样分调试版本(<code>Debug</code>)和发布版本<code>Release</code></li>
+<li>真机-<code>Debug</code>版本 </li>
+<li>真机-<code>Release</code>版本 </li>
+<li>模拟器-<code>Debug</code>版本 </li>
+<li>模拟器-<code>Release</code>版本</li>
+</ul>
+<div class="note info"><p>调试版本<code>Debug</code></p></div>
+
+<ul>
+<li>真机-<code>Debug</code>版本和模拟器-<code>Debug</code>版本 </li>
+<li>调试版本的特点<ul>
+<li>调试版本会包含完整的符号信息，以方便调试</li>
+<li>调试版本不会对代码进行优化</li>
+</ul>
+</li>
+</ul>
+<div class="note info"><p>发布版本<code>Release</code></p></div>
+
+<ul>
+<li>真机-<code>Release</code>版本和模拟器-<code>Release</code>版本 </li>
+<li>发布版本的特点<ul>
+<li>发布版本不会包含完整的符号信息， </li>
+<li>发布版本的执行代码是进行过优化的， </li>
+<li>发布版本的大小会比调试版本的略小， </li>
+<li>在执行速度方面，发布版本会更快些，但不意味着会有显著的提升</li>
+</ul>
+</li>
+</ul>
+<div class="note primary"><p>生成不同版本的静态库</p></div>
+
+<p>选择项目 <code>-&gt; Edit Scheme -&gt; Run -&gt; Release/Debug</code> 分别进行编译, 即可得到不同版本的静态库</p>
+<p><img src="http://pcat1usdp.bkt.clouddn.com/EditScheme.png" alt="EditScheme"></p>
+<h3 id="生成-a和-h文件"><a href="#生成-a和-h文件" class="headerlink" title="生成.a和.h文件"></a>生成<code>.a</code>和<code>.h</code>文件</h3><ul>
+<li>正常情况下, 生成的<code>.h</code>文件是在<code>../include/$(PRODUCT_NAME)</code>目录下的, <code>$(PRODUCT_NAME)</code>指的是项目的名字</li>
+<li>修改图中2处的路径地址, 即可修改<code>.h</code>文件生成的路径, 填空即为和<code>.a</code>文件在同级目录下</li>
+</ul>
+<p><img src="http://pcat1usdp.bkt.clouddn.com/inclode2.png" alt="image"></p>
+<p>最后编写好代码, <code>command+B</code>编译之后, 如图所示操作即可找到生成的静态库</p>
+<p><img src="http://pcat1usdp.bkt.clouddn.com/productA.png" alt="image"></p>
+<div class="note success"><p>合并静态库</p></div>
+
+<ul>
+<li>因为静态库针对于模拟器和真机生成了不同版本(支持不同架构), 所以没法同时运行</li>
+<li>合并后的静态库既可以在真机上调试，也可以在模拟器上调试, 省去了来回切换的诸多烦恼</li>
+<li>但是合并后的静态库大小是模拟器和真机的大小之和，如果静态库太大，合并打包后，会非常大，因此很多第三方的静态库的<code>.a</code>是区分版本的</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 以下所有方式得到的静态库都可以通过lipo -info xx.a方式检测现有的架构, 注意要在xx.a所在的目录下</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 1. 合并静态库</span></span><br><span class="line">lipo -create 静态库<span class="hljs-number">1</span>路径 静态库<span class="hljs-number">2</span>路径 -output 合并后的静态库名称</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 示例</span></span><br><span class="line">lipo -create /Users/xxx/Debug-iphoneos/libStateLib.a /Users/xxx/Debug-iphonesimulator/libStateLib.a -output hahah.a</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 2. 移除某一个架构</span></span><br><span class="line">lipo -remove 架构名称 静态库绝对路径 -output 新的静态库名字</span><br><span class="line">lipo -remove arm64 /Users/xxx/Build/Products/hahah.a -output ha_arm64.a</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 2. 拆分出一个单独架构的静态库</span></span><br><span class="line">lipo -thin 架构名称 静态库绝对路径 -output 新的静态库名字</span><br><span class="line">lipo -thin arm64 /Users/xxx/Build/Products/hahah.a -output only_arm64.a</span><br></pre></td></tr></table></figure>
+<h2 id="framework静态库"><a href="#framework静态库" class="headerlink" title=".framework静态库"></a><code>.framework</code>静态库</h2><h3 id="生成-framework静态库"><a href="#生成-framework静态库" class="headerlink" title="生成.framework静态库"></a>生成<code>.framework</code>静态库</h3><h4 id="选择framework"><a href="#选择framework" class="headerlink" title="选择framework"></a>选择<code>framework</code></h4><p>创建新工程, 选择第一个创建<code>Framework</code>工程</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-88dc3d5139099895.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="staticLibrary"></p>
+<h4 id="选择编译环境"><a href="#选择编译环境" class="headerlink" title="选择编译环境"></a>选择编译环境</h4><p>选择适配所有真机或者适配所有模拟器(编译所有架构), <code>Build Settings -&gt; Build Active Architecture Only</code>选项设为<code>NO</code></p>
+<h4 id="手动设置静态库"><a href="#手动设置静态库" class="headerlink" title="手动设置静态库"></a>手动设置静态库</h4><p>刚创建的工程默认创建的是动态库, 需要手动设置链接类型, <code>Build Settings -&gt; Mach-o Type</code>设置成<code>Static Library</code></p>
+<p><img src="http://pcat1usdp.bkt.clouddn.com/machtype.png" alt="machtype"></p>
+<h4 id="静态库版本"><a href="#静态库版本" class="headerlink" title="静态库版本"></a>静态库版本</h4><p>设置静态库的版本, 选择项目 -&gt; <code>Edit Scheme -&gt; Run -&gt; Release/Debug</code> 分别进行编译, 即可得到不同版本的静态库</p>
+<h4 id="添加公开头文件"><a href="#添加公开头文件" class="headerlink" title="添加公开头文件"></a>添加公开头文件</h4><p><code>Target-&gt;Build Phases-&gt;Headers</code>中的<code>Project</code>中要暴露的头文件拖拽到<code>Pulic</code>里面： </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-6e40f428fc01b99b.gif?imageMogr2/auto-orient/strip" alt="headerfile"></p>
+<h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h4><p>分别选择<code>Generic iOS Device</code>和任意一个模拟器各编译一次。编译完，工程中<code>Products</code>文件夹下的<code>xxx.framework</code>由红色变成了黑色，然后<code>show in finder</code>，看看生成的文件 </p>
+<div class="note warning"><p>注意事项</p></div>
+
+<ul>
+<li>如果静态库中有<code>category</code>类，则在使用静态库的项目配置中<code>Other Linker Flags</code>需要添加参数<code>-ObjC</code>或者<code>-all_load</code> </li>
+<li>如果创建的<code>framework</code>类中使用了<code>.tbd</code>，则需要在实际项目中导入<code>.tbd</code>动态库。</li>
+<li><code>.framework</code>静态库的合并和拆分和<code>.a</code>静态库的方式一样, 就不在赘述了</li>
+</ul>
+<h3 id="bundle加载资源"><a href="#bundle加载资源" class="headerlink" title="bundle加载资源"></a><code>bundle</code>加载资源</h3><ul>
+<li>由于<code>Xcode</code>默认在编译时会把所有的素材文件导入到<code>mainBundle</code>中，可能会让宿主工程与使用静态库的程序冲突。</li>
+<li>在创建静态库的项目中又是难免会用到一些图片或者<code>xib</code>等资源, 类似这些资源在静态库中又如何进行管理呢</li>
+<li>这里我们就要引入一个<code>bundle</code>文件, 对资源进行管理, 用以存放<code>xib</code>文件或者图片等资源</li>
+<li><code>bundle</code>文件是是静态的，不进行编译的资源文件, 所以使用时需要找到相应的资源路径</li>
+</ul>
+<div class="note success"><p>创建方式</p></div>
+
+<ul>
+<li>把包含资源文件的文件夹的后缀改为<code>.bundle</code>, 这时他就变成一个<code>bundle</code>文件</li>
+<li>或者右键显示包内容就可以把对应的图片资源等放进文件中，然后把他丢进工程中就可以使用了</li>
+<li>调用该图片时, 需要在图片名前加上<code>xxx.bundle</code>前缀</li>
+</ul>
+<h3 id="静态库的测试"><a href="#静态库的测试" class="headerlink" title="静态库的测试"></a>静态库的测试</h3><ul>
+<li>静态库本身就是一个小项目, 实现某些功能, 但是这些功能在开发中也需要测试. 而测试代码又不能作为静态库的一部分</li>
+<li>建议创建一个复合项目, 在宿主工程中添加一个静态库的工程</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-768361c8b9d2c1a7.gif?imageMogr2/auto-orient/strip" alt="allStatic"></p>
+<h3 id="自动打包"><a href="#自动打包" class="headerlink" title="自动打包"></a>自动打包</h3><ul>
+<li>上面介绍的都是手动打包的方式, 虽然麻烦一些, 但是相对更不容易出错, 而且可以对本地代码打包</li>
+<li>还有一种自动打包方式, 只需一条命令<code>package</code>, 便可对静态库进行打包, 但是前提是: 代码必须已经上传到远程仓库</li>
+<li>首先安装<code>package</code>: <ul>
+<li><code>sudo gem install cocoapods-packager</code></li>
+</ul>
+</li>
+<li>使用</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 前提是代码必须已经上传到远程仓库, 否则报错不会成功</span></span><br><span class="line"><span class="hljs-comment">// 1. cd 到podspec文件所在的根目录</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//2. 执行</span></span><br><span class="line">pod package xxx.podspec</span><br></pre></td></tr></table></figure>
+<h2 id="私有库的二进制"><a href="#私有库的二进制" class="headerlink" title="私有库的二进制"></a>私有库的二进制</h2><ul>
+<li>在组件化开发的过程选中, 虽然使用了组件化, 但依然是源码, 如果工程庞大, 编译速度依然非常慢</li>
+<li>所以,为了加快编译速度可以直接把私有库打包成为一个静态库库文件, 进行使用</li>
+<li>在每一个私有库里面都有一个这样的测试工程, 但是这个工程不能打包成静态库</li>
+<li>但是, 如果为了打包静态库单独分离出一个工程用于打包, 那么我们后期就需要维护和更新两套代码, 过于繁琐</li>
+<li>所以我们可以用符合工程进行处理, 在<code>Example</code>所在的测试工程中添加一个静态库的工程, 如<a href="#静态库的测试">静态库的测试</a>所示</li>
+</ul>
+<p><img src="http://pcat1usdp.bkt.clouddn.com/exampleTest.png" alt="exampleTest"></p>
+<h3 id="打包静态库"><a href="#打包静态库" class="headerlink" title="打包静态库"></a>打包静态库</h3><p>这里我们是以<code>framework</code>静态库为例, 静态库工程添加之后, 左侧会多出一个类似<code>BaseLib</code>的文件夹, 该文件夹用于存放需要打包的文件, 即<code>TitanBase/Classes</code>目录下的文件</p>
+<p><img src="http://pcat1usdp.bkt.clouddn.com/addItems.png" alt="image"></p>
+<ul>
+<li>导入文件的时候需要注意, 一定不能勾选<code>Copy Items</code>选项, 因为我们需要的是引用<code>Classes</code>目录下的文件, 而不是拷贝</li>
+<li>如果是拷贝, 静态库和<code>Classes</code>目录使用的将会是两套不同的代码(虽然内容可能一样), 由乙方改变, 另一方的代码不会改变</li>
+<li>引用则可以做到一改全改</li>
+</ul>
+<p><img src="http://pcat1usdp.bkt.clouddn.com/copyItem.png" alt="copyItem"></p>
+<ul>
+<li>接下来选择静态库的工程, 并修改打包静态库的相应的配置, 步骤参考<a href="#生成.framework静态库">生成.framework静态库</a></li>
+<li>这里生成的静态库的目录是系统默认, 我们也可以自行设置: <code>File -&gt; WorkSpace Setting</code></li>
+</ul>
+<p><img src="http://pcat1usdp.bkt.clouddn.com/selectLib.png" alt="selectLib"></p>
+<ul>
+<li>最后在<code>Classes</code>的统计目录下创建一个<code>Products</code>的目录(自定义创建, 你开心就好)</li>
+<li>把打包好的<code>.framework</code>或者<code>.a</code>的静态库, 放到<code>Products</code>目录下</li>
+</ul>
+<h3 id="修改podspec文件"><a href="#修改podspec文件" class="headerlink" title="修改podspec文件"></a>修改<code>podspec</code>文件</h3><h4 id="引入静态库"><a href="#引入静态库" class="headerlink" title="引入静态库"></a>引入静态库</h4><p>完成了静态库的打包, 下面就是修改<code>podspec</code>文件中相应的配置了</p>
+<figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s.source_files = <span class="hljs-string">'TitanBase/Classes/**/*.h'</span></span><br><span class="line">s.vendored_frameworks = <span class="hljs-string">"TitanBase/Products/BaseLib.framework"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>source_files</code>: 需要导入的文件, 现在只需要导入<code>.h</code>文件即可</li>
+<li><code>vendored_frameworks</code>: 需要导入的<code>framework</code>静态库</li>
+<li>最后重新对测试工程进行<code>pod install</code>即可, 更多配置相关信息可参考<a href="https://guides.cocoapods.org/syntax/podspec.html#specification" target="_blank" rel="noopener">官方文档</a></li>
+</ul>
+<figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 表示依赖的系统类库，比如libz.dylib等</span></span><br><span class="line">s.libraries     = <span class="hljs-string">'z'</span>, <span class="hljs-string">'sqlite3'</span> </span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 表示依赖系统的框架</span></span><br><span class="line">s.frameworks    = <span class="hljs-string">'UIKit'</span>,<span class="hljs-string">'AVFoundation'</span> </span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 依赖的第三方/自己的framework静态库</span></span><br><span class="line">s.vendored_frameworks = <span class="hljs-string">'YJKit/YJKit.framework'</span> </span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 表示依赖第三方/自己的静态库（比如libWeChatSDK.a）</span></span><br><span class="line">s.vendored_libraries = <span class="hljs-string">'Library/Classes/libWeChatSDK.a'</span> </span><br><span class="line"><span class="hljs-comment"># 依赖的第三方的或者自己的静态库文件必须以lib为前缀进行命名，否则会出现找不到的情况，这一点非常重要</span></span><br></pre></td></tr></table></figure>
+<h4 id="切换静态库和源码"><a href="#切换静态库和源码" class="headerlink" title="切换静态库和源码"></a>切换静态库和源码</h4><ul>
+<li>开发过程中如果需要调试代码的时候, 需要查看源码进行调试</li>
+<li>但是静态库却只能看到头文件, 没有源码, 无法进行调试</li>
+<li>在导入的私有库中, 静态库和源码如何进行切换呢</li>
+<li>这里我们在<code>podspec</code>配置文件中引入一个<code>if-else</code>语句, 如下所示</li>
+</ul>
+<figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> ENV[<span class="hljs-string">'IS_SOURCE'</span>]</span><br><span class="line">    s.source_files = <span class="hljs-string">'TitanBase/Classes/**/*'</span></span><br><span class="line">    s.dependency <span class="hljs-string">'AFNetworking'</span></span><br><span class="line"><span class="hljs-keyword">else</span></span><br><span class="line">    s.source_files = <span class="hljs-string">'TitanBase/Classes/**/*.h'</span></span><br><span class="line">    s.vendored_frameworks = <span class="hljs-string">"TitanBase/Products/BaseLib.framework"</span></span><br><span class="line">    s.dependency <span class="hljs-string">'AFNetworking'</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>此时如果需要切换为源码, 只需要执行<code>IS_SOURCE=1 pod install</code>即可(或者任意非0的数字, 非0即为真)</li>
+<li>执行<code>pod install</code>, 就会执行<code>else</code>后面的语句, 即导入静态库</li>
+<li>但是如果所有的组件都加了类似的判断, 切判断条件都是<code>IS_SOURCE</code>, 那么每次重新切换, 所有的组件都会导入源码或者导入静态库</li>
+<li>建议每一语句可以加两个判断条件, 一个统一的判断条件, 一个只对每一个组件的条件</li>
+</ul>
+<figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> ENV[<span class="hljs-string">'IS_SOURCE'</span>] <span class="hljs-params">||</span> ENV[<span class="hljs-string">'IS_BASE'</span>]</span><br><span class="line">   ...</span><br><span class="line"><span class="hljs-keyword">else</span></span><br><span class="line">    ...</span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="有依赖关系的静态库"><a href="#有依赖关系的静态库" class="headerlink" title="有依赖关系的静态库"></a>有依赖关系的静态库</h3><ul>
+<li>对单独的静态库工程打包静态库的时候, 默认不会将第三方库的内容打包进去, 是可以使用的</li>
+<li>对包含静态库工程的复合工程打包的时候, 可能会出现引用的第三方头文件找不到的问题或者出现打包出的静态库包含第三方库的代码和资源, 这样打包出来的静态库<ul>
+<li>第一: 打包好的静态库应该是不能使用的</li>
+<li>第二: 打包好的静态库中包含第三方库的所有代码和资源, 所以打包的静态库会很大</li>
+</ul>
+</li>
+<li>所以我们打包静态库, 是不需要把第三方的任何东西打包进去的</li>
+<li>在复合工程中建议的办法: 修改<code>Podfile</code>文件, 如下</li>
+</ul>
+<figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">target <span class="hljs-string">'CoreImage_Example'</span> <span class="hljs-keyword">do</span></span><br><span class="line">  pod <span class="hljs-string">'CoreImage'</span>, <span class="hljs-symbol">:path</span> =&gt; <span class="hljs-string">'../'</span></span><br><span class="line"></span><br><span class="line">  target <span class="hljs-string">'CoreImage_Tests'</span> <span class="hljs-keyword">do</span></span><br><span class="line">    inherit! <span class="hljs-symbol">:search_paths</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment"># 以下添加的部分, CoreImgLib: 为静态库的名称, 需要在静态库中重新引用pod库的部分</span></span><br><span class="line">  target <span class="hljs-string">'CoreImgLib'</span> <span class="hljs-keyword">do</span></span><br><span class="line">      </span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>在引用第三方头文件的地方</p>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 如果使用""方式报错</span></span><br><span class="line"><span class="hljs-meta">#import <span class="hljs-meta-string">"AFNetworking.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 可改成以下方式引用</span></span><br><span class="line"><span class="hljs-meta">#import <span class="hljs-meta-string">&lt;AFNetworking/AFNetworking.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>接下来在重新打包就可以了</p>
+<h3 id="多分类的静态库打包"><a href="#多分类的静态库打包" class="headerlink" title="多分类的静态库打包"></a>多分类的静态库打包</h3><p>类似<code>AFNetworking</code>的多分类框架</p>
+<figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-&gt; AFNetworking (<span class="hljs-number">3.2</span>.<span class="hljs-number">1</span>)</span><br><span class="line">   A delightful iOS <span class="hljs-keyword">and</span> OS X networking framework.</span><br><span class="line">   pod <span class="hljs-string">'AFNetworking'</span>, <span class="hljs-string">'~&gt; 3.2.1'</span></span><br><span class="line">   - <span class="hljs-symbol">Homepage:</span> <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/github.com/</span>AFNetworking/AFNetworking</span><br><span class="line">   - <span class="hljs-symbol">Source:</span>   <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/github.com/</span>AFNetworking/AFNetworking.git</span><br><span class="line">   - <span class="hljs-symbol">Versions:</span> <span class="hljs-number">3.2</span>.<span class="hljs-number">1</span>, ......,<span class="hljs-number">0</span>.<span class="hljs-number">5.1</span> [master repo]</span><br><span class="line">   - <span class="hljs-symbol">Subspecs:</span></span><br><span class="line">     - AFNetworking/Serialization (<span class="hljs-number">3.2</span>.<span class="hljs-number">1</span>)</span><br><span class="line">     - AFNetworking/Security (<span class="hljs-number">3.2</span>.<span class="hljs-number">1</span>)</span><br><span class="line">     - AFNetworking/Reachability (<span class="hljs-number">3.2</span>.<span class="hljs-number">1</span>)</span><br><span class="line">     - AFNetworking/NSURLSession (<span class="hljs-number">3.2</span>.<span class="hljs-number">1</span>)</span><br><span class="line">     - AFNetworking/UIKit (<span class="hljs-number">3.2</span>.<span class="hljs-number">1</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对于有多个分类的私有库, 如果要打包成静态库<ul>
+<li>一: 可以每个分类单独处理, 分别打包, 很麻烦不建议这么做(也没必要)</li>
+<li>二: 把分类整合到一起, 打包成一个静态库</li>
+</ul>
+</li>
+<li>如下, 如果使用源码, 按照分类导入, 如果使用静态库, 打包成一个静态库导入</li>
+</ul>
+<figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> ENV[<span class="hljs-string">'IS_SOURCE'</span>]</span><br><span class="line">    <span class="hljs-comment"># 静态库</span></span><br><span class="line">    s.source_files = <span class="hljs-string">'TKDownloadPlayer/Classes/**/*.h'</span></span><br><span class="line">    s.vendored_frameworks = <span class="hljs-string">'TKDownloadPlayer/Products/TKDownPlayerLib.framework'</span></span><br><span class="line"><span class="hljs-keyword">else</span></span><br><span class="line">    <span class="hljs-comment"># 源码</span></span><br><span class="line">    s.subspec <span class="hljs-string">'TKDownload'</span> <span class="hljs-keyword">do</span> <span class="hljs-params">|dl|</span></span><br><span class="line">        dl.source_files = <span class="hljs-string">'TKDownloadPlayer/Classes/TKDownload/**/*'</span></span><br><span class="line">    <span class="hljs-keyword">end</span></span><br><span class="line">    </span><br><span class="line">    s.subspec <span class="hljs-string">'TKRemotePlayer'</span> <span class="hljs-keyword">do</span> <span class="hljs-params">|rp|</span></span><br><span class="line">        rp.source_files = <span class="hljs-string">'TKDownloadPlayer/Classes/TKRemotePlayer/**/*'</span></span><br><span class="line">    <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure>
+<hr>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/framewoframework/">framewoframework</a>, <a class="has-link-grey -link" href="/tags/动态库/">动态库</a>, <a class="has-link-grey -link" href="/tags/静态库/">静态库</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/12/20/Mac软件大全/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Mac软件大全</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/08/10/Realm在iOS中的简单使用/">
+                <span class="level-item">Realm在iOS中的简单使用</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="SooLe">
+                    
+                    <p class="is-size-4 is-block">
+                        SooLe
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        iOS
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>shenzhen</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        11
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        43
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/arthurtop">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/arthurtop">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://weibo.com/3935895096677821">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://www.jianshu.com/u/cda07f394e73">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://juejin.im/user/5ac98725f265da23830b263b">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://github.com/ppoffice</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Hexo博客/">
+            <span class="level-start">
+                <span class="level-item">Hexo博客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Socket学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Socket学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SwiftLint/">
+            <span class="level-start">
+                <span class="level-item">SwiftLint</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Swift学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift高阶功能/">
+            <span class="level-start">
+                <span class="level-item">Swift高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift黑科技/">
+            <span class="level-start">
+                <span class="level-item">Swift黑科技</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS动画/">
+            <span class="level-start">
+                <span class="level-item">iOS动画</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS高阶功能/">
+            <span class="level-start">
+                <span class="level-item">iOS高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/xcode/">
+            <span class="level-start">
+                <span class="level-item">xcode</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数据库基础/">
+            <span class="level-start">
+                <span class="level-item">数据库基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/组件化开发/">
+            <span class="level-start">
+                <span class="level-item">组件化开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/AVFoundation/" style="font-size: 10px;">AVFoundation</a> <a href="/tags/AppIcon/" style="font-size: 10px;">AppIcon</a> <a href="/tags/Bug/" style="font-size: 12.5px;">Bug</a> <a href="/tags/CIDetector/" style="font-size: 10px;">CIDetector</a> <a href="/tags/CIFilter/" style="font-size: 10px;">CIFilter</a> <a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/CoreAnimation/" style="font-size: 10px;">CoreAnimation</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Facebook-POP/" style="font-size: 10px;">Facebook POP</a> <a href="/tags/Github/" style="font-size: 17.5px;">Github</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTPS/" style="font-size: 12.5px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 17.5px;">Hexo</a> <a href="/tags/Homebrew/" style="font-size: 10px;">Homebrew</a> <a href="/tags/Mac-工具/" style="font-size: 10px;">Mac 工具</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Socket/" style="font-size: 10px;">Socket</a> <a href="/tags/Socket-IO/" style="font-size: 10px;">Socket.IO</a> <a href="/tags/Speech/" style="font-size: 10px;">Speech</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/Swift4-0/" style="font-size: 10px;">Swift4.0</a> <a href="/tags/SwiftLint/" style="font-size: 17.5px;">SwiftLint</a> <a href="/tags/UIStackView/" style="font-size: 10px;">UIStackView</a> <a href="/tags/Vision/" style="font-size: 10px;">Vision</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/framewoframework/" style="font-size: 10px;">framewoframework</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 12.5px;">iOS</a> <a href="/tags/iOS-10-3/" style="font-size: 10px;">iOS 10.3</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/spec/" style="font-size: 10px;">spec</a> <a href="/tags/trunk/" style="font-size: 10px;">trunk</a> <a href="/tags/入坑/" style="font-size: 10px;">入坑</a> <a href="/tags/动态库/" style="font-size: 10px;">动态库</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/规则/" style="font-size: 15px;">规则</a> <a href="/tags/静态库/" style="font-size: 10px;">静态库</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019上传审核遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-29T00:55:00.000Z">2019-03-29</time></div>
+                    <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="has-link-black-ter is-size-6">2019上传审核遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/25/flutter全局/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-25T07:40:54.339Z">2019-03-25</time></div>
+                    <a href="/2019/03/25/flutter全局/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/14/2019app审核报错/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019开年遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-14T03:13:00.000Z">2019-02-14</time></div>
+                    <a href="/2019/02/14/2019app审核报错/" class="has-link-black-ter is-size-6">2019开年遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/01/16/vue 全局错误/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-16T08:29:24.700Z">2019-01-16</time></div>
+                    <a href="/2019/01/16/vue 全局错误/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/01/15/2019 前端学习路线建议/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019 前端学习路线建议">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-15T06:52:00.000Z">2019-01-15</time></div>
+                    <a href="/2019/01/15/2019 前端学习路线建议/" class="has-link-black-ter is-size-6">2019 前端学习路线建议</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AVFoundation/">
+                        <span class="level-start">
+                            <span class="level-item">AVFoundation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Bug/">
+                        <span class="level-start">
+                            <span class="level-item">Bug</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIDetector/">
+                        <span class="level-start">
+                            <span class="level-item">CIDetector</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIFilter/">
+                        <span class="level-start">
+                            <span class="level-item">CIFilter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Facebook-POP/">
+                        <span class="level-start">
+                            <span class="level-item">Facebook POP</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTML5/">
+                        <span class="level-start">
+                            <span class="level-item">HTML5</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Mac-工具/">
+                        <span class="level-start">
+                            <span class="level-item">Mac 工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/MySQL/">
+                        <span class="level-start">
+                            <span class="level-item">MySQL</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Python/">
+                        <span class="level-start">
+                            <span class="level-item">Python</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Speech/">
+                        <span class="level-start">
+                            <span class="level-item">Speech</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">11</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Vision/">
+                        <span class="level-start">
+                            <span class="level-item">Vision</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebView/">
+                        <span class="level-start">
+                            <span class="level-item">WebView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/framewoframework/">
+                        <span class="level-start">
+                            <span class="level-item">framewoframework</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/动态库/">
+                        <span class="level-start">
+                            <span class="level-item">动态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/工具/">
+                        <span class="level-start">
+                            <span class="level-item">工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/静态库/">
+                        <span class="level-start">
+                            <span class="level-item">静态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019上传审核遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-29T00:55:00.000Z">2019-03-29</time></div>
+                    <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="has-link-black-ter is-size-6">2019上传审核遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/25/flutter全局/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-25T07:40:54.339Z">2019-03-25</time></div>
+                    <a href="/2019/03/25/flutter全局/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/14/2019app审核报错/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019开年遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-14T03:13:00.000Z">2019-02-14</time></div>
+                    <a href="/2019/02/14/2019app审核报错/" class="has-link-black-ter is-size-6">2019开年遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/01/16/vue 全局错误/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-16T08:29:24.700Z">2019-01-16</time></div>
+                    <a href="/2019/01/16/vue 全局错误/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/01/15/2019 前端学习路线建议/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019 前端学习路线建议">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-15T06:52:00.000Z">2019-01-15</time></div>
+                    <a href="/2019/01/15/2019 前端学习路线建议/" class="has-link-black-ter is-size-6">2019 前端学习路线建议</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AVFoundation/">
+                        <span class="level-start">
+                            <span class="level-item">AVFoundation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Bug/">
+                        <span class="level-start">
+                            <span class="level-item">Bug</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIDetector/">
+                        <span class="level-start">
+                            <span class="level-item">CIDetector</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIFilter/">
+                        <span class="level-start">
+                            <span class="level-item">CIFilter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Facebook-POP/">
+                        <span class="level-start">
+                            <span class="level-item">Facebook POP</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTML5/">
+                        <span class="level-start">
+                            <span class="level-item">HTML5</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Mac-工具/">
+                        <span class="level-start">
+                            <span class="level-item">Mac 工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/MySQL/">
+                        <span class="level-start">
+                            <span class="level-item">MySQL</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Python/">
+                        <span class="level-start">
+                            <span class="level-item">Python</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Speech/">
+                        <span class="level-start">
+                            <span class="level-item">Speech</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">11</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Vision/">
+                        <span class="level-start">
+                            <span class="level-item">Vision</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebView/">
+                        <span class="level-start">
+                            <span class="level-item">WebView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/framewoframework/">
+                        <span class="level-start">
+                            <span class="level-item">framewoframework</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/动态库/">
+                        <span class="level-start">
+                            <span class="level-item">动态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/工具/">
+                        <span class="level-start">
+                            <span class="level-item">工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/静态库/">
+                        <span class="level-start">
+                            <span class="level-item">静态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="iOS的静态库和动态库" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 SooLe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-Hans");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

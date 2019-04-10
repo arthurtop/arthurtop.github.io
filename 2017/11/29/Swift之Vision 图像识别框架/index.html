@@ -1,0 +1,2494 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Swift之Vision 图像识别框架 - SooLe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="keywords" content="Swift,Vision">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift之Vision 图像识别框架">
+<meta property="og:url" content="http://yoursite.com/2017/11/29/Swift之Vision 图像识别框架/index.html">
+<meta property="og:site_name" content="SooLe">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-c0b83aa723e149ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-b58783bec9d07551.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-c0b83aa723e149ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-0c09426c80013322.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/200">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-8b970c464c26ffb0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/200">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-05e6a9cc6c193b1d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-e5faf93cebae945e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-9f199a027f186a5c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-895670df5fd8e2c9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="og:updated_time" content="2018-12-18T15:26:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift之Vision 图像识别框架">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4122543-c0b83aa723e149ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Swift之Vision 图像识别框架" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-11-29T06:58:00.000Z">2017-11-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Swift黑科技/">Swift黑科技</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    21 minutes read (About 3092 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Swift之Vision 图像识别框架
+            
+        </h1>
+        <div class="content">
+            <p><img src="http://upload-images.jianshu.io/upload_images/4122543-c0b83aa723e149ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="VNObservation.png"></p>
+<a id="more"></a>
+<ul>
+<li>2017年苹果大大又推出了新机型iPhone 8和iPhone 8Plus, 这还不是重点, 重点是那一款价值9000RMB的iPhone X, 虽说网上吐槽声从未停止过, 但是我觉得还是不错的哈!</li>
+<li>软件方面, 苹果大大也推出了iOS 11, 经本人iPhone 7手机亲测, 耗电快外加通知栏改不完的bug</li>
+<li>当然了随着iOS 11的推出, 也随之推出了一些新的API，如：<a href="https://developer.apple.com/documentation/arkit" target="_blank" rel="noopener"><code>ARKit</code></a> 、<a href="https://developer.apple.com/documentation/coreml" target="_blank" rel="noopener"><code>Core ML</code></a>、<a href="https://developer.apple.com/documentation/fileprovider" target="_blank" rel="noopener"><code>FileProvider</code></a>、<a href="https://developer.apple.com/documentation/identitylookup" target="_blank" rel="noopener"><code>IdentityLookup</code></a> 、<a href="https://developer.apple.com/documentation/corenfc" target="_blank" rel="noopener"><code>Core NFC</code></a>、<a href="https://developer.apple.com/documentation/vision" target="_blank" rel="noopener"><code>Vison</code></a> 等。</li>
+<li>这里我们还要说的就是Apple 在 WWDC 2017 推出的图像识别框架–<code>Vison</code><a href="https://developer.apple.com/documentation/vision" target="_blank" rel="noopener">官方文档</a></li>
+<li><a href="https://github.com/coderQuanjun/JunVisionFace" target="_blank" rel="noopener">Demo地址</a></li>
+</ul>
+<h2 id="Vision应用场景"><a href="#Vision应用场景" class="headerlink" title="Vision应用场景"></a>Vision应用场景</h2><ul>
+<li><code>Face Detection and Recognition</code> : 人脸检测<ul>
+<li>支持检测笑脸、侧脸、局部遮挡脸部、戴眼镜和帽子等场景，可以标记出人脸的矩形区域</li>
+<li>可以标记出人脸和眼睛、眉毛、鼻子、嘴、牙齿的轮廓，以及人脸的中轴线</li>
+</ul>
+</li>
+<li><code>Image Alignment Analysis</code>: 图像对比分析</li>
+<li><code>Barcode Detection</code>: 二维码/条形码检测<ul>
+<li>用于查找和识别图像中的条码</li>
+<li>检测条形码信息</li>
+</ul>
+</li>
+<li><code>Text Detection</code>: 文字检测<ul>
+<li>查找图像中可见文本的区域</li>
+<li>检测文本区域的信息</li>
+</ul>
+</li>
+<li><code>Object Detection and Tracking</code>: 目标跟踪<ul>
+<li>脸部，矩形和通用模板</li>
+</ul>
+</li>
+</ul>
+<h2 id="Vision支持的图片类型"><a href="#Vision支持的图片类型" class="headerlink" title="Vision支持的图片类型"></a>Vision支持的图片类型</h2><h3 id="Objective-C中"><a href="#Objective-C中" class="headerlink" title="Objective-C中"></a>Objective-C中</h3><ul>
+<li><code>CVPixelBufferRef</code></li>
+<li><code>CGImageRef</code></li>
+<li><code>CIImage</code></li>
+<li><code>NSURL</code></li>
+<li><code>NSData</code></li>
+</ul>
+<h3 id="Swift中"><a href="#Swift中" class="headerlink" title="Swift中"></a>Swift中</h3><ul>
+<li><code>CVPixelBuffer</code></li>
+<li><code>CGImage</code></li>
+<li><code>CIImage</code></li>
+<li><code>URL</code></li>
+<li><code>Data</code></li>
+</ul>
+<blockquote>
+<p>具体详情可在<code>Vision.framework</code>的<code>VNImageRequestHandler.h</code>文件中查看</p>
+</blockquote>
+<h2 id="Vision之API介绍"><a href="#Vision之API介绍" class="headerlink" title="Vision之API介绍"></a>Vision之API介绍</h2><ul>
+<li>使用在<code>vision</code>的时候，我们首先需要明确自己需要什么效果，然后根据想要的效果来选择不同的类</li>
+<li>给各种功能的 <code>Request</code> 提供给一个 <code>RequestHandler</code></li>
+<li><code>Handler</code> 持有需要识别的图片信息，并将处理结果分发给每个 <code>Request</code> 的 <code>completion Block</code> 中</li>
+<li>可以从 <code>results</code> 属性中得到 <code>Observation</code> 数组</li>
+<li><code>observations</code>数组中的内容根据不同的request请求返回了不同的<code>observation</code></li>
+<li>每种<code>Observation</code>有<code>boundingBox</code>，<code>landmarks</code>等属性，存储的是识别后物体的坐标，点位等</li>
+<li>我们拿到坐标后，就可以进行一些UI绘制。</li>
+</ul>
+<h3 id="RequestHandler处理请求对象"><a href="#RequestHandler处理请求对象" class="headerlink" title="RequestHandler处理请求对象"></a><code>RequestHandler</code>处理请求对象</h3><ul>
+<li><code>VNImageRequestHandler</code>: 处理与单个图像有关的一个或多个图像分析请求的对象<ul>
+<li>一般情况下都是用该类处理识别请求</li>
+<li>初始化方法支持<code>CVPixelBuffer</code>, <code>CGImage</code>, <code>CIImage</code>, <code>URL</code>, <code>Data</code></li>
+</ul>
+</li>
+<li><code>VNSequenceRequestHandler</code>: 处理与多个图像序列有关的图像分析请求的对象<ul>
+<li>目前我在处理物体跟踪的时候使用该类</li>
+<li>初始化方法同上</li>
+</ul>
+</li>
+</ul>
+<h3 id="VNRequest介绍"><a href="#VNRequest介绍" class="headerlink" title="VNRequest介绍"></a>VNRequest介绍</h3><ul>
+<li><code>VNRequest</code>: 图像分析请求的抽象类, 继承于<code>NSObject</code></li>
+<li><code>VNBaseImageRequest</code>: 专注于图像的特定部分的分析请求</li>
+<li>具体分析请求类如下: </li>
+<li><img src="http://upload-images.jianshu.io/upload_images/4122543-b58783bec9d07551.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="VNImageBasedRequest.png"></li>
+</ul>
+<h3 id="VNObservation检测对象"><a href="#VNObservation检测对象" class="headerlink" title="VNObservation检测对象"></a><code>VNObservation</code>检测对象</h3><ul>
+<li><code>VNObservation</code>: 图像分析结果的抽象类, 继承与<code>NSObject</code></li>
+<li>图像检测结果的相关处理类如下:</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-c0b83aa723e149ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="VNObservation.png"></p>
+<h2 id="实战演练"><a href="#实战演练" class="headerlink" title="实战演练"></a>实战演练</h2><h3 id="文本检测"><a href="#文本检测" class="headerlink" title="文本检测"></a>文本检测</h3><ul>
+<li>方式一: 识别出具体的每一个字体的位置信息</li>
+<li>方式二: 识别一行字体的位置信息</li>
+<li>如图效果:</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-0c09426c80013322.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/200" alt="WechatIMG3.jpeg"> </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-8b970c464c26ffb0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/200" alt="WechatIMG5.jpeg"></p>
+<h4 id="现将图片转成初始化VNImageRequestHandler对象时-可接受的的CIImage"><a href="#现将图片转成初始化VNImageRequestHandler对象时-可接受的的CIImage" class="headerlink" title="现将图片转成初始化VNImageRequestHandler对象时, 可接受的的CIImage"></a>现将图片转成初始化<code>VNImageRequestHandler</code>对象时, 可接受的的<code>CIImage</code></h4><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//1. 转成ciimage</span></span><br><span class="line">guard let ciImage = <span class="hljs-built_in">CIImage</span>(image: image) <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="创建处理请求的handle"><a href="#创建处理请求的handle" class="headerlink" title="创建处理请求的handle"></a>创建处理请求的handle</h4><ul>
+<li>参数一: 图片类型</li>
+<li>参数二: 字典类型, 有默认值为[:]</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let requestHandle = VNImageRequestHandler(ciImage: ciImage, options: [:])</span><br></pre></td></tr></table></figure>
+<h4 id="创建回调闭包"><a href="#创建回调闭包" class="headerlink" title="创建回调闭包"></a>创建回调闭包</h4><ul>
+<li>两个参数, 无返回值</li>
+<li><code>VNRequest</code>: 是所有请求Request的父类</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public typealias VNRequestCompletionHandler = (VNRequest, Error?) -&gt; Swift.Void</span><br></pre></td></tr></table></figure>
+<ul>
+<li>具体代码如下: </li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//4. 设置回调</span></span><br><span class="line">let completionHandle: VNRequestCompletionHandler = &#123; request, error <span class="hljs-keyword">in</span></span><br><span class="line">    let observations = request.results</span><br><span class="line">    <span class="hljs-comment">//识别出来的对象数组    </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="创建识别请求"><a href="#创建识别请求" class="headerlink" title="创建识别请求"></a>创建识别请求</h4><ul>
+<li>两种初始化方式</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//无参数</span></span><br><span class="line">public convenience init()</span><br><span class="line">    </span><br><span class="line"><span class="hljs-comment">//闭包参数</span></span><br><span class="line">public init(completionHandler: Vision.VNRequestCompletionHandler? = <span class="hljs-literal">nil</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里使用带闭包的初始化方式</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let baseRequest = VNDetectTextRectanglesRequest(completionHandler: completionHandle)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>属性设置(是否识别具体的每一个文字)</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 设置识别具体文字</span></span><br><span class="line">baseRequest.setValue(<span class="hljs-literal">true</span>, forKey: <span class="hljs-string">"reportCharacterBoxes"</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不设置该属性, 识别出来的是一行文字</li>
+</ul>
+<h4 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h4><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open func perform(_ requests: [VNRequest]) throws</span><br></pre></td></tr></table></figure>
+<ul>
+<li>该方法会抛出一个异常错误</li>
+<li>在连续不断(摄像头扫描)发送请求过程中, 必须在子线程执行该方法, 否则会造成线程堵塞</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//6. 发送请求</span></span><br><span class="line">DispatchQueue.global().async &#123;</span><br><span class="line">    <span class="hljs-keyword">do</span>&#123;</span><br><span class="line">        try requestHandle.perform([baseRequest])</span><br><span class="line">    &#125;catch&#123;</span><br><span class="line">        print(<span class="hljs-string">"Throws：\(error)"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="处理识别的Observations对象"><a href="#处理识别的Observations对象" class="headerlink" title="处理识别的Observations对象"></a>处理识别的<code>Observations</code>对象</h4><ul>
+<li>识别出来的<code>results</code>是<code>[Any]?</code>类型</li>
+<li>根据<code>boundingBox</code>属性可以获取到对应的文本区域的尺寸</li>
+<li>需要注意的是:<ul>
+<li><code>boundingBox</code>得到的是相对iamge的比例尺寸, 都是小于1的</li>
+<li>Y轴坐标于UIView坐标系是相反的</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//1. 获取识别到的VNTextObservation</span></span><br><span class="line">guard let boxArr = observations as? [VNTextObservation] <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line">        </span><br><span class="line"><span class="hljs-comment">//2. 创建rect数组</span></span><br><span class="line">var bigRects = [<span class="hljs-built_in">CGRect</span>](), smallRects = [<span class="hljs-built_in">CGRect</span>]()</span><br><span class="line">        </span><br><span class="line"><span class="hljs-comment">//3. 遍历识别结果</span></span><br><span class="line"><span class="hljs-keyword">for</span> boxObj <span class="hljs-keyword">in</span> boxArr &#123;</span><br><span class="line">    <span class="hljs-comment">// 3.1尺寸转换</span></span><br><span class="line">    <span class="hljs-comment">//获取一行文本的区域位置</span></span><br><span class="line">    bigRects.append(convertRect(boxObj.boundingBox, image))</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">//2. 获取</span></span><br><span class="line">    guard let rectangleArr = boxObj.characterBoxes <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">continue</span> &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> rectangle <span class="hljs-keyword">in</span> rectangleArr&#123;</span><br><span class="line">        <span class="hljs-comment">//3. 得到每一个字体的的尺寸</span></span><br><span class="line">        let boundBox = rectangle.boundingBox</span><br><span class="line">        smallRects.append(convertRect(boundBox, image))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>坐标转换</p>
+</blockquote>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// image坐标转换</span></span><br><span class="line">fileprivate func convertRect(_ rectangleRect: <span class="hljs-built_in">CGRect</span>, _ image: <span class="hljs-built_in">UIImage</span>) -&gt; <span class="hljs-built_in">CGRect</span> &#123;</span><br><span class="line"><span class="hljs-comment">//此处是将Image的实际尺寸转化成imageView的尺寸</span></span><br><span class="line">    let imageSize = image.scaleImage()</span><br><span class="line">    let w = rectangleRect.width * imageSize.width</span><br><span class="line">    let h = rectangleRect.height * imageSize.height</span><br><span class="line">    let x = rectangleRect.minX * imageSize.width</span><br><span class="line">    <span class="hljs-comment">//该Y坐标与UIView的Y坐标是相反的</span></span><br><span class="line">    let y = (<span class="hljs-number">1</span> - rectangleRect.minY) * imageSize.height - h</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-built_in">CGRect</span>(x: x, y: y, width: w, height: h)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="矩形识别和静态人脸识别"><a href="#矩形识别和静态人脸识别" class="headerlink" title="矩形识别和静态人脸识别"></a>矩形识别和静态人脸识别</h3><ul>
+<li>识别图像中的矩形</li>
+<li><p><img src="http://upload-images.jianshu.io/upload_images/4122543-05e6a9cc6c193b1d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="1511935758595.jpg"></p>
+</li>
+<li><p>静态人脸识别</p>
+</li>
+<li><p><img src="http://upload-images.jianshu.io/upload_images/4122543-e5faf93cebae945e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="1511936019734.jpg"></p>
+</li>
+<li><p>主要核心代码</p>
+</li>
+<li></li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//1. 转成ciimage</span></span><br><span class="line">guard let ciImage = <span class="hljs-built_in">CIImage</span>(image: image) <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line">        </span><br><span class="line"><span class="hljs-comment">//2. 创建处理request</span></span><br><span class="line">let requestHandle = VNImageRequestHandler(ciImage: ciImage, options: [:])</span><br><span class="line">        </span><br><span class="line"><span class="hljs-comment">//3. 创建baseRequest</span></span><br><span class="line"><span class="hljs-comment">//大多数识别请求request都继承自VNImageBasedRequest</span></span><br><span class="line">var baseRequest = VNImageBasedRequest()</span><br><span class="line">        </span><br><span class="line"><span class="hljs-comment">//4. 设置回调</span></span><br><span class="line">let completionHandle: VNRequestCompletionHandler = &#123; request, error <span class="hljs-keyword">in</span></span><br><span class="line">    let observations = request.results</span><br><span class="line">    <span class="hljs-keyword">self</span>.handleImageObservable(type: type, image: image, observations, completeBack)</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line"><span class="hljs-comment">//5. 创建识别请求</span></span><br><span class="line"><span class="hljs-keyword">switch</span> type &#123;</span><br><span class="line"><span class="hljs-keyword">case</span> .rectangle:</span><br><span class="line">    baseRequest = VNDetectRectanglesRequest(completionHandler: completionHandle)</span><br><span class="line"><span class="hljs-keyword">case</span> .staticFace:</span><br><span class="line">    baseRequest = VNDetectFaceRectanglesRequest(completionHandler: completionHandle)</span><br><span class="line"><span class="hljs-keyword">default</span>:</span><br><span class="line">    <span class="hljs-keyword">break</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>处理识别的observation</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// 矩形检测</span></span><br><span class="line">fileprivate func rectangleDectect(_ observations: [Any]?, image: <span class="hljs-built_in">UIImage</span>, _ complecHandle: JunDetectHandle)&#123;</span><br><span class="line">    <span class="hljs-comment">//1. 获取识别到的VNRectangleObservation</span></span><br><span class="line">    guard let boxArr = observations as? [VNRectangleObservation] <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line">    <span class="hljs-comment">//2. 创建rect数组</span></span><br><span class="line">    var bigRects = [<span class="hljs-built_in">CGRect</span>]()</span><br><span class="line">    <span class="hljs-comment">//3. 遍历识别结果</span></span><br><span class="line">    <span class="hljs-keyword">for</span> boxObj <span class="hljs-keyword">in</span> boxArr &#123;</span><br><span class="line">        <span class="hljs-comment">// 3.1</span></span><br><span class="line">        bigRects.append(convertRect(boxObj.boundingBox, image))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">//4. 回调结果</span></span><br><span class="line">    complecHandle(bigRects, [])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>静态人脸识别需要将<code>observation</code>转成<code>VNFaceObservation</code></li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">guard let boxArr = observations as? [VNFaceObservation] <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="条码识别"><a href="#条码识别" class="headerlink" title="条码识别"></a>条码识别</h3><p><img src="http://upload-images.jianshu.io/upload_images/4122543-9f199a027f186a5c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="1511936988374.jpg"></p>
+<ul>
+<li>这里请求的步骤与矩形识别相同, 这里不再赘述</li>
+<li>需要注意的是,在初始化request的时候需要设一个置可识别的条码类型参数</li>
+<li>这里先看一下<code>VNDetectBarcodesRequest</code>的两个参数</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//支持的可识别的条码类型(需要直接用class调用)</span></span><br><span class="line">open <span class="hljs-keyword">class</span> var supportedSymbologies: [VNBarcodeSymbology] &#123; get &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//设置可识别的条码类型</span></span><br><span class="line">open var symbologies: [VNBarcodeSymbology]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>此处设置可识别到的条码类型为, 该请求支持是别的所有类型, 如下</li>
+<li>注意<code>supportedSymbologies</code>参数的调用方法</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let request = VNDetectBarcodesRequest(completionHandler: completionHandle)</span><br><span class="line">request.symbologies = VNDetectBarcodesRequest.supportedSymbologies</span><br></pre></td></tr></table></figure>
+<ul>
+<li>条码识别不但能识别条码的位置信息, 还可以识别出条码的相关信息, 这里以二维码为例</li>
+<li>这里需要将识别的<code>observations</code>转成<code>[VNBarcodeObservation]</code></li>
+<li><code>VNBarcodeObservation</code>有三个属性</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//条码类型: qr, code128....等等</span></span><br><span class="line">open var symbology: VNBarcodeSymbology &#123; get &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//条码的相关信息</span></span><br><span class="line">open var barcodeDescriptor: <span class="hljs-built_in">CIBarcodeDescriptor</span>? &#123; get &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//如果是二维码, 则是二维码的网址链接    </span></span><br><span class="line">open var payloadStringValue: String? &#123; get &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如上述图片识别出来的<code>payloadStringValue</code>参数则是小编的<a href="http://www.jianshu.com/u/5bd5e9ed569e" target="_blank" rel="noopener">简书地址</a></li>
+<li>下面是以上述图片的二维码为例处理的<code>CIBarcodeDescriptor</code>对象</li>
+<li>有兴趣的可以仔细研究研究</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// 二维码信息处理</span></span><br><span class="line">fileprivate func qrCodeHandle(barCode: <span class="hljs-built_in">CIBarcodeDescriptor</span>?)&#123;</span><br><span class="line">    <span class="hljs-comment">//1. 转成对应的条码对象</span></span><br><span class="line">    guard let code = barCode as? <span class="hljs-built_in">CIQRCodeDescriptor</span> <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">//2. 解读条码信息</span></span><br><span class="line">    let level = code.errorCorrectionLevel.hashValue</span><br><span class="line">    let version = code.symbolVersion</span><br><span class="line">    let mask = code.maskPattern</span><br><span class="line">    let data = code.errorCorrectedPayload</span><br><span class="line">    let dataStr = String(data: data, encoding: .utf8)</span><br><span class="line">    print(<span class="hljs-string">"这是二维码信息--"</span>, level, <span class="hljs-string">"---"</span>, version, <span class="hljs-string">"----"</span>, mask, <span class="hljs-string">"---"</span>, dataStr ?? <span class="hljs-string">""</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="人脸特征识别"><a href="#人脸特征识别" class="headerlink" title="人脸特征识别"></a>人脸特征识别</h3><ul>
+<li>可识别出人脸的轮廓, 眼睛, 鼻子, 嘴巴等具体位置</li>
+<li><img src="http://upload-images.jianshu.io/upload_images/4122543-895670df5fd8e2c9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="1511944652200.jpg"></li>
+</ul>
+<ul>
+<li><code>VNFaceLandmarks2D</code>介绍</li>
+<li></li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// 脸部轮廓</span></span><br><span class="line">var faceContour: VNFaceLandmarkRegion2D?</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 左眼, 右眼</span></span><br><span class="line">var leftEye: VNFaceLandmarkRegion2D?</span><br><span class="line">var rightEye: VNFaceLandmarkRegion2D?</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 左睫毛, 右睫毛</span></span><br><span class="line">var leftEyebrow: VNFaceLandmarkRegion2D?</span><br><span class="line">var rightEyebrow: VNFaceLandmarkRegion2D?</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 左眼瞳, 右眼瞳</span></span><br><span class="line">var leftPupil: VNFaceLandmarkRegion2D?</span><br><span class="line">var rightPupil: VNFaceLandmarkRegion2D?</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 鼻子, 鼻嵴, 正中线</span></span><br><span class="line">var nose: VNFaceLandmarkRegion2D?</span><br><span class="line">var noseCrest: VNFaceLandmarkRegion2D?</span><br><span class="line">var medianLine: VNFaceLandmarkRegion2D?</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// 外唇, 内唇</span></span><br><span class="line">var outerLips: VNFaceLandmarkRegion2D?</span><br><span class="line">var innerLips: VNFaceLandmarkRegion2D?</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//某一部位所有的像素点</span><br><span class="line">@nonobjc public var normalizedPoints: [CGPoint] &#123; get &#125;</span><br><span class="line"></span><br><span class="line">//某一部位的所有像素点的个数</span><br><span class="line">open var pointCount: Int &#123; get &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将所有的像素点坐标转换成image对应的尺寸坐标</li>
+<li>使用图像上下文, 对应部位画线</li>
+<li>在UIView中重写<code>func draw(_ rect: CGRect)</code>方法</li>
+<li></li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//5.1 获取当前上下文</span></span><br><span class="line">let content = <span class="hljs-built_in">UIGraphicsGetCurrentContext</span>()</span><br><span class="line">                </span><br><span class="line"><span class="hljs-comment">//5.2 设置填充颜色(setStroke设置描边颜色)</span></span><br><span class="line"><span class="hljs-built_in">UIColor</span>.green.set()</span><br><span class="line">                </span><br><span class="line"><span class="hljs-comment">//5.3 设置宽度</span></span><br><span class="line">content?.setLineWidth(<span class="hljs-number">2</span>)</span><br><span class="line">                </span><br><span class="line"><span class="hljs-comment">//5.4. 设置线的类型(连接处)</span></span><br><span class="line">content?.setLineJoin(.round)</span><br><span class="line">content?.setLineCap(.round)</span><br><span class="line">                </span><br><span class="line"><span class="hljs-comment">//5.5. 设置抗锯齿效果</span></span><br><span class="line">content?.setShouldAntialias(<span class="hljs-literal">true</span>)</span><br><span class="line">content?.setAllowsAntialiasing(<span class="hljs-literal">true</span>)</span><br><span class="line">                </span><br><span class="line"><span class="hljs-comment">//5.6 开始绘制</span></span><br><span class="line">content?.addLines(between: pointArr)</span><br><span class="line">content?.drawPath(using: .stroke)</span><br><span class="line">                </span><br><span class="line"><span class="hljs-comment">//5.7 结束绘制</span></span><br><span class="line">content?.strokePath()</span><br></pre></td></tr></table></figure>
+<h3 id="动态人脸识别和实时动态添加"><a href="#动态人脸识别和实时动态添加" class="headerlink" title="动态人脸识别和实时动态添加"></a>动态人脸识别和实时动态添加</h3><blockquote>
+<p>由于真机不好录制gif图(尝试了一下, 效果不是很好, 放弃了), 想看效果的朋友<a href="https://github.com/coderQuanjun/JunVisionFace" target="_blank" rel="noopener">下载源码</a>真机运行吧</p>
+<ul>
+<li>这里提供一张<a href="http://upload-images.jianshu.io/upload_images/4122543-e390e4107c0b811b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" target="_blank" rel="noopener">可供扫描的图片</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><code>request</code>的初始化这里就不做介绍了, 说一下<code>handle</code>的初始化方法<ul>
+<li><code>CVPixelBuffer</code>: 扫描实时输出的对象</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//1. 创建处理请求</span></span><br><span class="line">let faceHandle = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>主要强调一点, 相机扫描, 获取实时图像的过程, 必须在子线程执行, 否在会堵塞线程, 整个app失去响应, 亲自踩过的坑</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DispatchQueue.global().async &#123;</span><br><span class="line">    <span class="hljs-keyword">do</span>&#123;</span><br><span class="line">        try faceHandle.perform([baseRequest])</span><br><span class="line">    &#125;catch&#123;</span><br><span class="line">        print(<span class="hljs-string">"Throws：\(error)"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="扫描结果处理"><a href="#扫描结果处理" class="headerlink" title="扫描结果处理"></a>扫描结果处理</h4><ul>
+<li>动态人脸识别和静态人脸识别不同的地方就是, 动态实时刷新, 更新UI, 所以处理结果的方法相同</li>
+<li>动态添加: 这里处理方式是添加一个眼镜效果</li>
+<li>这里需要获取到两只眼睛的位置和宽度<ul>
+<li>先获取到左右眼的所有的像素点和像素点的个数</li>
+<li>遍历所有的像素点, 转换成合适的坐标</li>
+<li>将左右眼的所有的point, 分别获取X和Y坐标放到不同的数组</li>
+<li>将数组有小到大排序, 得到X的最大和最小的差值, Y的最大和最小的差值</li>
+<li>具体代码如下</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// H偶去转换后的尺寸坐标</span></span><br><span class="line">fileprivate func getEyePoint(faceModel: FaceFeatureModel, position: <span class="hljs-built_in">AVCaptureDevice</span>.Position) -&gt; <span class="hljs-built_in">CGRect</span>&#123;</span><br><span class="line">    <span class="hljs-comment">//1. 获取左右眼</span></span><br><span class="line">    guard let leftEye = faceModel.leftEye <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> <span class="hljs-built_in">CGRect</span>.zero &#125;</span><br><span class="line">    guard let rightEye = faceModel.rightEye <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> <span class="hljs-built_in">CGRect</span>.zero &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//2. 位置数组</span></span><br><span class="line">    let leftPoint = conventPoint(landmark: leftEye, faceRect: faceModel.faceObservation.boundingBox, position: position)</span><br><span class="line">    let rightPoint = conventPoint(landmark: rightEye, faceRect: faceModel.faceObservation.boundingBox, position: position)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//3. 排序</span></span><br><span class="line">    let pointXs = (leftPoint<span class="hljs-number">.0</span> + rightPoint<span class="hljs-number">.0</span>).sorted()</span><br><span class="line">    let pointYs = (leftPoint<span class="hljs-number">.1</span> + rightPoint<span class="hljs-number">.1</span>).sorted()</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">//4. 添加眼睛</span></span><br><span class="line">    let image = <span class="hljs-built_in">UIImage</span>(named: <span class="hljs-string">"eyes"</span>)!</span><br><span class="line">    let imageWidth = (pointXs.last ?? <span class="hljs-number">0.0</span>) - (pointXs.first ?? <span class="hljs-number">0</span>) + <span class="hljs-number">40</span></span><br><span class="line">    let imageHeight = image.size.height / image.size.width * imageWidth</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-built_in">CGRect</span>(x: (pointXs.first ?? <span class="hljs-number">0</span>) - <span class="hljs-number">20</span>, y: (pointYs.first ?? <span class="hljs-number">0</span>) - <span class="hljs-number">5</span>, width: imageWidth, height: imageHeight)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>每一只眼睛的坐标处理</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/// 坐标转换</span></span><br><span class="line">fileprivate func conventPoint(landmark: VNFaceLandmarkRegion2D, faceRect: <span class="hljs-built_in">CGRect</span>, position: <span class="hljs-built_in">AVCaptureDevice</span>.Position) -&gt; ([<span class="hljs-built_in">CGFloat</span>], [<span class="hljs-built_in">CGFloat</span>])&#123;</span><br><span class="line">    <span class="hljs-comment">//1. 定义</span></span><br><span class="line">    var XArray = [<span class="hljs-built_in">CGFloat</span>](), YArray = [<span class="hljs-built_in">CGFloat</span>]()</span><br><span class="line">    let viewRect = previewLayer.frame</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">//2. 遍历</span></span><br><span class="line">    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">0.</span>.&lt;landmark.pointCount &#123;</span><br><span class="line">        <span class="hljs-comment">//2.1 获取当前位置并转化到合适尺寸</span></span><br><span class="line">        let point = landmark.normalizedPoints[i]</span><br><span class="line">        let rectWidth = viewRect.width * faceRect.width</span><br><span class="line">        let rectHeight = viewRect.height * faceRect.height</span><br><span class="line">        let rectY = viewRect.height - (point.y * rectHeight + faceRect.minY * viewRect.height)</span><br><span class="line">        var rectX = point.x * rectWidth + faceRect.minX * viewRect.width</span><br><span class="line">        <span class="hljs-keyword">if</span> position == .front&#123;</span><br><span class="line">            rectX = viewRect.width + (point.x - <span class="hljs-number">1</span>) * rectWidth</span><br><span class="line">        &#125;</span><br><span class="line">        XArray.append(rectX)</span><br><span class="line">        YArray.append(rectY)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-keyword">return</span> (XArray, YArray)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>最后获取到该<code>CGRect</code>, 添加眼镜效果即可</li>
+</ul>
+<h3 id="物体跟踪"><a href="#物体跟踪" class="headerlink" title="物体跟踪"></a>物体跟踪</h3><ul>
+<li>简介<ul>
+<li>我们在屏幕上点击某物体, 然后Vision就会根据点击的物体, 实时跟踪该物体</li>
+<li>当你移动手机或者物体时, 识别的对象和红框的位置是统一的</li>
+</ul>
+</li>
+<li>这里我们出的的对象是<code>VNDetectedObjectObservation</code></li>
+<li>定义一个观察属性</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fileprivate var lastObservation: VNDetectedObjectObservation?</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建一个处理多个图像序列的请求</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//处理与多个图像序列的请求handle</span></span><br><span class="line">let sequenceHandle = VNSequenceRequestHandler()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建跟踪识别请求</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//4. 创建跟踪识别请求</span></span><br><span class="line">let trackRequest = VNTrackObjectRequest(detectedObjectObservation: lastObservation, completionHandler: completionHandle)</span><br><span class="line"><span class="hljs-comment">//将精度设置为高</span></span><br><span class="line">trackRequest.trackingLevel = .accurate</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当用户点击屏幕时，我们想要找出用户点击的位置,</li>
+<li>根据点击的位置, 获取到一个新的物体对象</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//2. 转换坐标</span></span><br><span class="line">let convertRect = visionTool.convertRect(viewRect: redView.frame, layerRect: previewLayer.frame)</span><br><span class="line">        </span><br><span class="line"><span class="hljs-comment">//3. 根据点击的位置获取新的对象</span></span><br><span class="line">let newObservation = VNDetectedObjectObservation(boundingBox: convertRect)</span><br><span class="line">lastObservation = newObservation</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取到扫描的结果, 如果是一个<code>VNDetectedObjectObservation</code>对象, 重新赋值</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//1. 获取一个实际的结果</span><br><span class="line">guard let newObservation = observations?.first as? VNDetectedObjectObservation else &#123; return &#125;</span><br><span class="line">            </span><br><span class="line">//2. 重新赋值</span><br><span class="line">self.lastObservation = newObservation</span><br></pre></td></tr></table></figure>
+<ul>
+<li>根据获取到的新值, 获取物体的坐标位置</li>
+<li>转换坐标, 改变红色框的位置</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//4. 坐标转换</span></span><br><span class="line">let newRect = newObservation.boundingBox</span><br><span class="line">let convertRect = visionTool.convertRect(newRect, <span class="hljs-keyword">self</span>.previewLayer.frame)</span><br><span class="line"><span class="hljs-keyword">self</span>.redView.frame = convertRect</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>以上就是iOS 11的新框架Vision在Swift中的所有使用的情况</p>
+<ul>
+<li>文中所列的内容可能有点空洞, 也稍微有点乱</li>
+<li>小编也是刚接触Vision, 文中如有解释不全, 或者错误的地方, 还请不吝赐教</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="GitHub–Demo地址"><a href="#GitHub–Demo地址" class="headerlink" title="GitHub–Demo地址"></a>GitHub–<a href="https://github.com/coderQuanjun/JunVisionFace" target="_blank" rel="noopener">Demo地址</a></h2><ul>
+<li>注意:  <ul>
+<li>这里只是列出了主要的核心代码,具体的代码逻辑请参考demo</li>
+<li>文中相关介绍有的地方如果有不是很详细或者有更好建议的,欢迎联系小编</li>
+<li>如果方便的话, 还望star一下</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Swift/">Swift</a>, <a class="has-link-grey -link" href="/tags/Vision/">Vision</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2017/12/10/Swift语音和文本的转换/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Swift语音和文本的转换</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2017/11/16/Swift之二维码的生成、识别和扫描/">
+                <span class="level-item">Swift之二维码的生成、识别和扫描</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="SooLe">
+                    
+                    <p class="is-size-4 is-block">
+                        SooLe
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        iOS
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>shenzhen</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        11
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        43
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/arthurtop">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/arthurtop">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://weibo.com/3935895096677821">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://www.jianshu.com/u/cda07f394e73">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://juejin.im/user/5ac98725f265da23830b263b">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://github.com/ppoffice</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Hexo博客/">
+            <span class="level-start">
+                <span class="level-item">Hexo博客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Socket学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Socket学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SwiftLint/">
+            <span class="level-start">
+                <span class="level-item">SwiftLint</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Swift学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift高阶功能/">
+            <span class="level-start">
+                <span class="level-item">Swift高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift黑科技/">
+            <span class="level-start">
+                <span class="level-item">Swift黑科技</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS动画/">
+            <span class="level-start">
+                <span class="level-item">iOS动画</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS高阶功能/">
+            <span class="level-start">
+                <span class="level-item">iOS高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/xcode/">
+            <span class="level-start">
+                <span class="level-item">xcode</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数据库基础/">
+            <span class="level-start">
+                <span class="level-item">数据库基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/组件化开发/">
+            <span class="level-start">
+                <span class="level-item">组件化开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/AVFoundation/" style="font-size: 10px;">AVFoundation</a> <a href="/tags/AppIcon/" style="font-size: 10px;">AppIcon</a> <a href="/tags/Bug/" style="font-size: 12.5px;">Bug</a> <a href="/tags/CIDetector/" style="font-size: 10px;">CIDetector</a> <a href="/tags/CIFilter/" style="font-size: 10px;">CIFilter</a> <a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/CoreAnimation/" style="font-size: 10px;">CoreAnimation</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Facebook-POP/" style="font-size: 10px;">Facebook POP</a> <a href="/tags/Github/" style="font-size: 17.5px;">Github</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTPS/" style="font-size: 12.5px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 17.5px;">Hexo</a> <a href="/tags/Homebrew/" style="font-size: 10px;">Homebrew</a> <a href="/tags/Mac-工具/" style="font-size: 10px;">Mac 工具</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Socket/" style="font-size: 10px;">Socket</a> <a href="/tags/Socket-IO/" style="font-size: 10px;">Socket.IO</a> <a href="/tags/Speech/" style="font-size: 10px;">Speech</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/Swift4-0/" style="font-size: 10px;">Swift4.0</a> <a href="/tags/SwiftLint/" style="font-size: 17.5px;">SwiftLint</a> <a href="/tags/UIStackView/" style="font-size: 10px;">UIStackView</a> <a href="/tags/Vision/" style="font-size: 10px;">Vision</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/framewoframework/" style="font-size: 10px;">framewoframework</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 12.5px;">iOS</a> <a href="/tags/iOS-10-3/" style="font-size: 10px;">iOS 10.3</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/spec/" style="font-size: 10px;">spec</a> <a href="/tags/trunk/" style="font-size: 10px;">trunk</a> <a href="/tags/入坑/" style="font-size: 10px;">入坑</a> <a href="/tags/动态库/" style="font-size: 10px;">动态库</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/规则/" style="font-size: 15px;">规则</a> <a href="/tags/静态库/" style="font-size: 10px;">静态库</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019上传审核遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-29T00:55:00.000Z">2019-03-29</time></div>
+                    <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="has-link-black-ter is-size-6">2019上传审核遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/25/flutter全局/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-25T07:40:54.339Z">2019-03-25</time></div>
+                    <a href="/2019/03/25/flutter全局/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/14/2019app审核报错/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019开年遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-14T03:13:00.000Z">2019-02-14</time></div>
+                    <a href="/2019/02/14/2019app审核报错/" class="has-link-black-ter is-size-6">2019开年遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/01/16/vue 全局错误/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-16T08:29:24.700Z">2019-01-16</time></div>
+                    <a href="/2019/01/16/vue 全局错误/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/01/15/2019 前端学习路线建议/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019 前端学习路线建议">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-15T06:52:00.000Z">2019-01-15</time></div>
+                    <a href="/2019/01/15/2019 前端学习路线建议/" class="has-link-black-ter is-size-6">2019 前端学习路线建议</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AVFoundation/">
+                        <span class="level-start">
+                            <span class="level-item">AVFoundation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Bug/">
+                        <span class="level-start">
+                            <span class="level-item">Bug</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIDetector/">
+                        <span class="level-start">
+                            <span class="level-item">CIDetector</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIFilter/">
+                        <span class="level-start">
+                            <span class="level-item">CIFilter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Facebook-POP/">
+                        <span class="level-start">
+                            <span class="level-item">Facebook POP</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTML5/">
+                        <span class="level-start">
+                            <span class="level-item">HTML5</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Mac-工具/">
+                        <span class="level-start">
+                            <span class="level-item">Mac 工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/MySQL/">
+                        <span class="level-start">
+                            <span class="level-item">MySQL</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Python/">
+                        <span class="level-start">
+                            <span class="level-item">Python</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Speech/">
+                        <span class="level-start">
+                            <span class="level-item">Speech</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">11</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Vision/">
+                        <span class="level-start">
+                            <span class="level-item">Vision</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebView/">
+                        <span class="level-start">
+                            <span class="level-item">WebView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/framewoframework/">
+                        <span class="level-start">
+                            <span class="level-item">framewoframework</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/动态库/">
+                        <span class="level-start">
+                            <span class="level-item">动态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/工具/">
+                        <span class="level-start">
+                            <span class="level-item">工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/静态库/">
+                        <span class="level-start">
+                            <span class="level-item">静态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019上传审核遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-29T00:55:00.000Z">2019-03-29</time></div>
+                    <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="has-link-black-ter is-size-6">2019上传审核遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/25/flutter全局/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-25T07:40:54.339Z">2019-03-25</time></div>
+                    <a href="/2019/03/25/flutter全局/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/14/2019app审核报错/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019开年遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-14T03:13:00.000Z">2019-02-14</time></div>
+                    <a href="/2019/02/14/2019app审核报错/" class="has-link-black-ter is-size-6">2019开年遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/01/16/vue 全局错误/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-16T08:29:24.700Z">2019-01-16</time></div>
+                    <a href="/2019/01/16/vue 全局错误/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/01/15/2019 前端学习路线建议/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019 前端学习路线建议">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-15T06:52:00.000Z">2019-01-15</time></div>
+                    <a href="/2019/01/15/2019 前端学习路线建议/" class="has-link-black-ter is-size-6">2019 前端学习路线建议</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AVFoundation/">
+                        <span class="level-start">
+                            <span class="level-item">AVFoundation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Bug/">
+                        <span class="level-start">
+                            <span class="level-item">Bug</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIDetector/">
+                        <span class="level-start">
+                            <span class="level-item">CIDetector</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIFilter/">
+                        <span class="level-start">
+                            <span class="level-item">CIFilter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Facebook-POP/">
+                        <span class="level-start">
+                            <span class="level-item">Facebook POP</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTML5/">
+                        <span class="level-start">
+                            <span class="level-item">HTML5</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Mac-工具/">
+                        <span class="level-start">
+                            <span class="level-item">Mac 工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/MySQL/">
+                        <span class="level-start">
+                            <span class="level-item">MySQL</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Python/">
+                        <span class="level-start">
+                            <span class="level-item">Python</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Speech/">
+                        <span class="level-start">
+                            <span class="level-item">Speech</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">11</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Vision/">
+                        <span class="level-start">
+                            <span class="level-item">Vision</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebView/">
+                        <span class="level-start">
+                            <span class="level-item">WebView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/framewoframework/">
+                        <span class="level-start">
+                            <span class="level-item">framewoframework</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/动态库/">
+                        <span class="level-start">
+                            <span class="level-item">动态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/工具/">
+                        <span class="level-start">
+                            <span class="level-item">工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/静态库/">
+                        <span class="level-start">
+                            <span class="level-item">静态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Swift之Vision 图像识别框架" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 SooLe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-Hans");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

@@ -1,0 +1,2342 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Swift之Facebook的POP动画使用和实战 - SooLe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="keywords" content="Swift,Facebook POP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift之Facebook的POP动画使用和实战">
+<meta property="og:url" content="http://yoursite.com/2017/10/17/Swift之Facebook的POP动画使用和实战/index.html">
+<meta property="og:site_name" content="SooLe">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-a85faa1b734ebc00.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-1efeb167ad71b59d.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-070c23772942ed82.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-737cf17a9cb95542.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
+<meta property="og:updated_time" content="2018-12-18T15:26:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift之Facebook的POP动画使用和实战">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4122543-a85faa1b734ebc00.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Swift之Facebook的POP动画使用和实战" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-10-17T13:18:38.000Z">2017-10-17</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/iOS动画/">iOS动画</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    17 minutes read (About 2477 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Swift之Facebook的POP动画使用和实战
+            
+        </h1>
+        <div class="content">
+            <p><img src="http://upload-images.jianshu.io/upload_images/4122543-a85faa1b734ebc00.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<a id="more"></a>
+<ul>
+<li><a href="https://github.com/facebook/pop" target="_blank" rel="noopener">POP</a>是一个来自于Facebook，在iOS与OSX上通用的极具扩展性的动画引擎。它在基本的静态动画的基础上增加的弹簧动画与衰减动画，使之能创造出更真实更具物理性的交互动画。</li>
+<li><code>Pop Animation</code>在使用上和<code>Core Animation</code>很相似，都涉及<code>Animation</code>对象以及<code>Animation</code>的载体的概念</li>
+<li>关于<code>Core Animation</code>的相关详解, 可参考我的上一篇文章<a href="http://blog.csdn.net/ShmilyCoder/article/details/78219044" target="_blank" rel="noopener">Core Animation(核心动画)</a></li>
+<li>不同的是<code>Core Animation</code>的载体只能是<code>CALayer</code>，而<code>Pop Animation</code>可以是任意基于<code>NSObject</code>的对象</li>
+<li><a href="https://github.com/facebook/pop" target="_blank" rel="noopener">POP</a> 使用 <code>Objective-C++</code> 编写，<code>Objective-C++</code> 是对 <code>C++</code> 的扩展</li>
+<li><a href="https://github.com/coderQuanjun/POPAnimationDemo" target="_blank" rel="noopener">GitHub项目地址</a></li>
+</ul>
+<h2 id="POP自我介绍"><a href="#POP自我介绍" class="headerlink" title="POP自我介绍"></a>POP自我介绍</h2><ul>
+<li><a href="https://github.com/facebook/pop" target="_blank" rel="noopener">POP</a> 目前由四部分组成：1. Animations；2. Engine；3. Utility；4. WebCore。</li>
+<li><a href="https://github.com/facebook/pop" target="_blank" rel="noopener">POP</a> 动画极为流畅，主要在于Enimator 里，POP 通过 CADisplayLink 高达 60 FPS 的特性，打造了一个游戏级的动画引擎。</li>
+<li>CADisplayLink 是类似 NSTimer 的定时器，不同之处在于，NSTimer 用于我们定义任务的执行周期、资料的更新周期，他的执行受到 CPU 的阻塞影响，而 CADisplayLink 则用于定义画面的重绘、动画的演变，他的执行基于 frames 的间隔。<ul>
+<li>通过 CADisplayLink，Apple 允许你将 App 的重绘速度设定到和屏幕刷新频率一致，由此你可以获得非常流畅的交互动画，这项技术的应用在游戏中非常常见，著名的 Cocos-2D 也应用了这个重要的技术。</li>
+<li><a href="https://opensource.apple.com/source/WebCore/" target="_blank" rel="noopener">WebCore</a> 里包含了一些从 Apple 的开源的网页渲染引擎里拿出的源文件，与 Utility 里的组件一并，提供了 POP 的各项复杂计算的基本支持</li>
+</ul>
+</li>
+</ul>
+<h2 id="POP参数介绍"><a href="#POP参数介绍" class="headerlink" title="POP参数介绍"></a>POP参数介绍</h2><ul>
+<li>POP默认支持三种动画，但同时也支持自定义动画<ul>
+<li><code>POPBasicAnimation</code>   //基础动画</li>
+<li><code>POPSpringAnimation</code>  //弹簧动画</li>
+<li><code>POPDecayAnimation</code>   //衰减动画</li>
+<li><code>POPCustomAnimation</code>  //自定义动画</li>
+</ul>
+</li>
+</ul>
+<h3 id="相关属性介绍"><a href="#相关属性介绍" class="headerlink" title="相关属性介绍"></a>相关属性介绍</h3><h4 id="属性简单介绍"><a href="#属性简单介绍" class="headerlink" title="属性简单介绍"></a>属性简单介绍</h4><ul>
+<li>POP动画大部分属性和CoreAnimation(核心动画)的含义和用法一样</li>
+<li>具体可参考<a href="http://blog.csdn.net/ShmilyCoder/article/details/78219044" target="_blank" rel="noopener">Core Animation(核心动画)</a></li>
+<li>每种动画的特殊属性会在下文中继续介绍</li>
+</ul>
+<h4 id="动画可配置属性"><a href="#动画可配置属性" class="headerlink" title="动画可配置属性"></a>动画可配置属性</h4><ul>
+<li>CALayer层各属性(比较简单,就不加注释了)</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> Common CALayer property names.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerBackgroundColor;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerBounds;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerCornerRadius;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerBorderWidth;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerBorderColor;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerOpacity;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerPosition;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerPositionX;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerPositionY;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerRotation;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerRotationX;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerRotationY;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerScaleX;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerScaleXY;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerScaleY;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerSize;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerSubscaleXY;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerSubtranslationX;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerSubtranslationXY;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerSubtranslationY;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerSubtranslationZ;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerTranslationX;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerTranslationXY;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerTranslationY;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerTranslationZ;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerZPosition;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerShadowColor;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerShadowOffset;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerShadowOpacity;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLayerShadowRadius;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>UIVIew层</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> Common UIView property names.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPViewAlpha;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPViewBackgroundColor;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPViewBounds;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPViewCenter;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPViewFrame;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPViewScaleX;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPViewScaleXY;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPViewScaleY;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPViewSize;</span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPViewTintColor;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>其他层视图层</li>
+</ul>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> Common UINavigationBar property names.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPNavigationBarBarTintColor;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> Common UIToolbar property names.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPToolbarBarTintColor;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> Common UITabBar property names.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPTabBarBarTintColor;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> Common UILabel property names.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">extern</span> <span class="hljs-built_in">NSString</span> * <span class="hljs-keyword">const</span> kPOPLabelTextColor;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>以上仅仅列出了常用的一些属性,更多控件/更多参考框架里面类<br>POPAnimatableProperty.h</p>
+</blockquote>
+<h4 id="POPBasicAnimation可配置的属性与默认值为"><a href="#POPBasicAnimation可配置的属性与默认值为" class="headerlink" title="POPBasicAnimation可配置的属性与默认值为"></a>POPBasicAnimation可配置的属性与默认值为</h4><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POPBasicAnimation *basic = [POPBasicAnimation linearAnimation];</span><br><span class="line">basic.fromValue = @(<span class="hljs-number">0</span>);<span class="hljs-comment">//从0开始    basic.toValue = @(3*60);//180秒后结束</span></span><br><span class="line">basic.duration = <span class="hljs-number">3</span>*<span class="hljs-number">60</span>;<span class="hljs-comment">//持续3分钟</span></span><br><span class="line">[lab pop_addAnimation:basic forKey:<span class="hljs-literal">nil</span>];</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let basic1 = POPBasicAnimation(propertyNamed: kPOPLayerPositionX)</span><br><span class="line">basic1?.fromValue = redView.layer.position.x</span><br><span class="line">basic1?.toValue = <span class="hljs-number">300</span></span><br><span class="line">basic1?.beginTime = <span class="hljs-built_in">CFTimeInterval</span>() + <span class="hljs-number">1.0</span></span><br><span class="line">redView.pop_add(basic1, forKey: <span class="hljs-string">"position.x"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="POPBasicAnimation基础动画"><a href="#POPBasicAnimation基础动画" class="headerlink" title="POPBasicAnimation基础动画"></a>POPBasicAnimation基础动画</h2><h3 id="先看一下效果-其动画效果如下"><a href="#先看一下效果-其动画效果如下" class="headerlink" title="先看一下效果, 其动画效果如下"></a>先看一下效果, 其动画效果如下</h3><p><img src="http://upload-images.jianshu.io/upload_images/4122543-1efeb167ad71b59d.gif?imageMogr2/auto-orient/strip" alt="image"></p>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let basic1 = POPBasicAnimation(propertyNamed: kPOPLayerPositionX)</span><br><span class="line">basic1?.toValue = <span class="hljs-number">300</span></span><br><span class="line"><span class="hljs-comment">//开始时间</span></span><br><span class="line">basic1?.beginTime = <span class="hljs-built_in">CFTimeInterval</span>() + <span class="hljs-number">1.0</span></span><br><span class="line">redView.pop_add(basic1, forKey: <span class="hljs-string">"position.x"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="可以看到，添加一个动画最少仅需三步"><a href="#可以看到，添加一个动画最少仅需三步" class="headerlink" title="可以看到，添加一个动画最少仅需三步"></a>可以看到，添加一个动画最少仅需三步</h3><ul>
+<li>1）定义一个<code>animation</code>对象，并指定对应的动画属性（<code>kPOPLayerPositionX</code>）</li>
+<li>2）设置初始值结束值(初始值可以不指定，会默认从当前值开始）</li>
+<li>3）添加到想产生动画的对象上</li>
+</ul>
+<h3 id="Core-Animation-和-POP-运行动画对比"><a href="#Core-Animation-和-POP-运行动画对比" class="headerlink" title="Core Animation 和 POP 运行动画对比"></a>Core Animation 和 POP 运行动画对比</h3><ul>
+<li>由于 POP 是基于定时器定时刷新添加动画的原理，那么如果将动画库运行在主线程上，会由于线程阻塞的问题导致动画效果出现卡顿、不流畅的情况。</li>
+<li>更为关键的是，你不能将动画效果放在子线程，因为你不能将对 view 和 layer 的操作放到主线程之外</li>
+<li>POP 受主线程阻塞的影响很大，在使用过程中，应避免在有可能发生主线程阻塞的情况下使用 POP ，避免制作卡顿的动画效果，产生不好的用户体验</li>
+</ul>
+<h2 id="POPSpringAnimation弹性动画"><a href="#POPSpringAnimation弹性动画" class="headerlink" title="POPSpringAnimation弹性动画"></a>POPSpringAnimation弹性动画</h2><h3 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h3><ul>
+<li><code>velocity</code>: 设置动画开始速度</li>
+<li><code>springBounciness</code>: 振幅, 可以设置的范围是0-20，默认为4。值越大振动的幅度越大</li>
+<li><code>springSpeed</code>: 速度, 可以设置的范围是0-20，默认为12.值越大速度越快，结束的越快</li>
+<li><code>dynamicsMass</code>: 质量, 质量越大，动画的速度越慢，振动的幅度越大，结束的越慢</li>
+<li><code>dynamicsTension</code>: 拉力 拉力越大，动画的速度越快，结束的越快</li>
+<li><code>dynamicsFriction</code>: 摩擦力, 摩擦力越大，动画的速度越慢，振动的幅度越小。</li>
+</ul>
+<blockquote>
+<p>注意: 以上的六个属性中一般只会设置<code>springBounciness</code>和<code>springSpeed</code>, 如有特殊需求才会设置其他属性</p>
+</blockquote>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let spring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)</span><br><span class="line"><span class="hljs-comment">//注意: 这里改变的是x和y的比例,参数赋值也要传两个; 若只需要其中一个,则可设置</span></span><br><span class="line"><span class="hljs-comment">//`spring?.fromValue = 0.4`即可</span></span><br><span class="line">spring?.fromValue = <span class="hljs-built_in">CGSize</span>(width: <span class="hljs-number">0.3</span>, height: <span class="hljs-number">0.3</span>)</span><br><span class="line">spring?.toValue = <span class="hljs-built_in">CGSize</span>(width: <span class="hljs-number">2</span>, height: <span class="hljs-number">2</span>)</span><br><span class="line">spring?.springSpeed = <span class="hljs-number">5</span></span><br><span class="line">spring?.springBounciness = <span class="hljs-number">15</span></span><br><span class="line">lightBlue.pop_add(spring, forKey: <span class="hljs-string">"scale"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="POPDecayAnimation"><a href="#POPDecayAnimation" class="headerlink" title="POPDecayAnimation"></a>POPDecayAnimation</h2><ul>
+<li><code>POPDecayAnimation</code>提供一个过阻尼效果（其实<code>Spring</code>是一种欠阻尼效果）可以实现类似<code>UIScrollView</code>的滑动衰减效果（是的你可以靠它来自己实现一个<code>UIScrollView</code>）</li>
+</ul>
+<blockquote>
+<p>属性介绍</p>
+<ul>
+<li><code>deceleration</code> （负加速度, 衰减系数(越小则衰减得越快)） 是一个你会很少用到的值，默认是就是我们地球的 0.998，如果你开发APP给火星人用，那么这个值你使用 0.376 会更合适</li>
+<li><code>velocity</code> 也是必须和你操作的属性有相同的结构，如果你操作的是 bounds, 传CGRect类型;如果 velocity 是负值，那么就会反向递减</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>代码示例</p>
+</blockquote>
+<figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let decay = POPDecayAnimation(propertyNamed: kPOPViewSize)</span><br><span class="line">decay?.velocity = <span class="hljs-built_in">CGSize</span>(width: <span class="hljs-number">300</span>, height: pictureBtn.frame.height)</span><br><span class="line"><span class="hljs-comment">//延迟1秒后执行</span></span><br><span class="line">decay?.beginTime = <span class="hljs-built_in">CACurrentMediaTime</span>() + <span class="hljs-number">1.0</span></span><br><span class="line">pictureBtn.pop_add(decay, forKey: <span class="hljs-string">"size"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="自定义属性"><a href="#自定义属性" class="headerlink" title="自定义属性"></a>自定义属性</h2><p>POP默认支持的三种动画都继承自<code>POPPropertyAnimation</code>,  <code>POPPropertyAnimation</code>中定义了一个叫<code>property</code>的属性（之前没有用到它是因为POP根据不同的默认动画属性帮你生成了默认的<code>property</code>这个属性则是用来驱动POP的动画效果中的重要一环</p>
+<h3 id="实力模块"><a href="#实力模块" class="headerlink" title="实力模块"></a>实力模块</h3><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> let proper = POPAnimatableProperty.property(withName: <span class="hljs-string">"prop"</span>, initializer: &#123; (prop) <span class="hljs-keyword">in</span></span><br><span class="line">    guard let prop = prop <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line">    <span class="hljs-comment">//read</span></span><br><span class="line">    prop.readBlock = &#123; (obj, values) <span class="hljs-keyword">in</span></span><br><span class="line">                </span><br><span class="line">    &#125;</span><br><span class="line">            </span><br><span class="line">    <span class="hljs-comment">//write</span></span><br><span class="line">    prop.writeBlock = &#123;(obj, values) <span class="hljs-keyword">in</span></span><br><span class="line">                </span><br><span class="line">    &#125;</span><br><span class="line">    prop.threshold = <span class="hljs-number">0.01</span></span><br><span class="line">            </span><br><span class="line">&#125;) as? POPAnimatableProperty &#123;</span><br><span class="line">    anim.property = proper</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="属性介绍-1"><a href="#属性介绍-1" class="headerlink" title="属性介绍"></a>属性介绍</h3><blockquote>
+<p>其组成就是一个readBlock一个writeBlock和一个threashold</p>
+<ul>
+<li><code>readBlock</code>告诉POP当前的属性值</li>
+<li><code>writeBlock</code>中修改变化后的属性值</li>
+<li><code>threashold</code>决定了动画变化间隔的阈值 值越大<code>writeBlock</code>的调用次数越少</li>
+</ul>
+</blockquote>
+<p>POPAnimatableProperty其实是POP中一个比较重要的东西 像上面提到的POP自带的动画属性 查看源代码可以看到也只是POP自动帮你设置好了POPAnimatableProperty而已 其作用就是当动画的某个时间片被触发时 告诉系统如何根据当前时间片做出变化</p>
+<blockquote>
+<p>还是以一个实际的例子来说明如何使用自定义属性 比如我们要实现一个像系统的时钟APP里秒表计时的一个效果</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-070c23772942ed82.gif?imageMogr2/auto-orient/strip" alt="计时器效果"></p>
+<h3 id="完整代码示例"><a href="#完整代码示例" class="headerlink" title="完整代码示例"></a>完整代码示例</h3><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> let proper = POPAnimatableProperty.property(withName: <span class="hljs-string">"prop"</span>, initializer: &#123; (prop) <span class="hljs-keyword">in</span></span><br><span class="line">    guard let prop = prop <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line">    <span class="hljs-comment">//read</span></span><br><span class="line">    prop.readBlock = &#123; (obj, values) <span class="hljs-keyword">in</span></span><br><span class="line">        guard let array = values <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line">        print(array[<span class="hljs-number">0</span>])</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">//write</span></span><br><span class="line">    prop.writeBlock = &#123;(obj, values) <span class="hljs-keyword">in</span></span><br><span class="line">        guard let button = obj as? <span class="hljs-built_in">UIButton</span>, let array = values <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;</span><br><span class="line">        let value = array[<span class="hljs-number">0</span>]</span><br><span class="line">        button.setTitle(String(format: <span class="hljs-string">"%02d:%02d:%02d"</span>, Int(value / <span class="hljs-number">60</span>), Int(value.truncatingRemainder(dividingBy: <span class="hljs-number">60</span>)), Int((value * <span class="hljs-number">100</span>).truncatingRemainder(dividingBy: <span class="hljs-number">100</span>))), <span class="hljs-keyword">for</span>: .normal)</span><br><span class="line">    &#125;</span><br><span class="line">    prop.threshold = <span class="hljs-number">0.01</span></span><br><span class="line">    </span><br><span class="line">&#125;) as? POPAnimatableProperty &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> let popBasic = POPBasicAnimation.linear() &#123;</span><br><span class="line">        <span class="hljs-comment">//秒表用线性的时间函数初始化</span></span><br><span class="line">        popBasic.property = proper</span><br><span class="line">        popBasic.fromValue = <span class="hljs-number">0</span> <span class="hljs-comment">//从0开始</span></span><br><span class="line">        popBasic.toValue = <span class="hljs-number">18</span>  <span class="hljs-comment">//到18秒</span></span><br><span class="line">        popBasic.duration = <span class="hljs-number">18</span> <span class="hljs-comment">//持续18秒</span></span><br><span class="line">        popBasic.beginTime = <span class="hljs-built_in">CACurrentMediaTime</span>() + <span class="hljs-number">2</span> <span class="hljs-comment">//延迟2秒开始</span></span><br><span class="line">        pictureBtn.pop_add(popBasic, forKey: <span class="hljs-string">"linear"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p>注意:</p></div>
+
+<ul>
+<li>在Swift4.0版本(4.0之前版本未知)中,初始化出来的对象都是可选类型</li>
+<li><a href="https://github.com/facebook/pop" target="_blank" rel="noopener">POP</a>官方的建议是添加<code>if</code>条件判断,详情可到GitHub上查看示例</li>
+<li>正如上段代码所示: 闭包中涉及的可选类型都添加了<code>guard</code>判断</li>
+</ul>
+<h2 id="类似微博中间发布按钮弹出动画"><a href="#类似微博中间发布按钮弹出动画" class="headerlink" title="类似微博中间发布按钮弹出动画"></a>类似微博中间发布按钮弹出动画</h2><h3 id="先看一下效果吧"><a href="#先看一下效果吧" class="headerlink" title="先看一下效果吧"></a>先看一下效果吧</h3><p><img src="http://upload-images.jianshu.io/upload_images/4122543-737cf17a9cb95542.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt="微博动画效果图"></p>
+<blockquote>
+<p>动画分为两个部分</p>
+</blockquote>
+<ul>
+<li>中间六个按钮依次执行动画弹出</li>
+<li>上面标题图片最后动画落下</li>
+</ul>
+<h3 id="下面来看一下部分的核心代码"><a href="#下面来看一下部分的核心代码" class="headerlink" title="下面来看一下部分的核心代码"></a>下面来看一下部分的核心代码</h3><h4 id="六个按钮的弹出和消失动画"><a href="#六个按钮的弹出和消失动画" class="headerlink" title="六个按钮的弹出和消失动画"></a>六个按钮的弹出和消失动画</h4><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">0.</span>.&lt;titles.count &#123;</span><br><span class="line">    let button = BaseButton()</span><br><span class="line">    button.setTitle(titles[i], <span class="hljs-keyword">for</span>: .normal)</span><br><span class="line">    button.setImage(<span class="hljs-built_in">UIImage</span>(named: images[i]), <span class="hljs-keyword">for</span>: .normal)</span><br><span class="line">    button.addTarget(<span class="hljs-keyword">self</span>, action: <span class="hljs-meta">#selector(buttonClick(button:)), for: .touchUpInside)</span></span><br><span class="line">    addSubview(button)</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">//计算X/Y</span></span><br><span class="line">    let row = i / maxCols</span><br><span class="line">    let col = i % maxCols</span><br><span class="line">    let buttonX = btnStsrtX + <span class="hljs-built_in">CGFloat</span>(col) * (xMargin + buttonW)</span><br><span class="line">    let buttonEndY = btnStartY + <span class="hljs-built_in">CGFloat</span>(row) * buttonH</span><br><span class="line">    let buttonStartY = buttonEndY - kScreenHeight</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">//按钮动画</span></span><br><span class="line">    let popSpring = POPSpringAnimation(propertyNamed: kPOPViewFrame)</span><br><span class="line">    popSpring?.fromValue = <span class="hljs-built_in">CGRect</span>(x: buttonX, y: buttonStartY, width: buttonW, height: buttonH)</span><br><span class="line">    popSpring?.toValue = <span class="hljs-built_in">CGRect</span>(x: buttonX, y: buttonEndY, width: buttonW, height: buttonH)</span><br><span class="line">    popSpring?.springBounciness = kSpringFactor</span><br><span class="line">    popSpring?.springSpeed = kSpringFactor</span><br><span class="line">    popSpring?.beginTime = <span class="hljs-built_in">CACurrentMediaTime</span>() + kAnimationDelay * Double(i)</span><br><span class="line">    button.pop_add(popSpring, forKey: <span class="hljs-string">"spring"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="最上部分标语的弹出和消失"><a href="#最上部分标语的弹出和消失" class="headerlink" title="最上部分标语的弹出和消失"></a>最上部分标语的弹出和消失</h4><figure class="highlight objc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//z执行动画</span></span><br><span class="line">let imagePOP = POPSpringAnimation(propertyNamed: kPOPViewCenter)</span><br><span class="line">imagePOP?.fromValue = <span class="hljs-built_in">CGPoint</span>(x: kScreenWidth * <span class="hljs-number">0.5</span>, y: <span class="hljs-number">0.2</span> * kScreenHeight - kScreenHeight)</span><br><span class="line">imagePOP?.toValue = <span class="hljs-built_in">CGPoint</span>(x: kScreenWidth * <span class="hljs-number">0.5</span>, y: <span class="hljs-number">0.2</span> * kScreenHeight)</span><br><span class="line">imagePOP?.springSpeed = kSpringFactor</span><br><span class="line">imagePOP?.springBounciness = kSpringFactor</span><br><span class="line">imagePOP?.beginTime = <span class="hljs-built_in">CACurrentMediaTime</span>() + Double(btnCount) * kAnimationDelay</span><br><span class="line">imagePOP?.completionBlock = &#123; popAnim, finished <span class="hljs-keyword">in</span></span><br><span class="line">    <span class="hljs-comment">//所有动画执行完毕,回复View点击事件</span></span><br><span class="line">    kRootView?.isUserInteractionEnabled = <span class="hljs-literal">true</span></span><br><span class="line">    <span class="hljs-keyword">self</span>.isUserInteractionEnabled = <span class="hljs-literal">true</span></span><br><span class="line">&#125;</span><br><span class="line">topImage.pop_add(imagePOP, forKey: <span class="hljs-literal">nil</span>)</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>以上是类似微博动画的部分核心代码, 具体代码详见<a href="https://github.com/coderQuanjun/POPAnimationDemo" target="_blank" rel="noopener">GitHub项目</a>, 喜欢请star</p>
+</blockquote>
+<ul>
+<li>折叠图片</li>
+<li>音量震动条</li>
+<li>活动指示器</li>
+<li>微博动画</li>
+<li>倒计时-计时器</li>
+<li>类似QQ信息条数的粘性动画</li>
+<li>类似雷达-水波纹动画</li>
+</ul>
+<blockquote>
+<p>注: 项目持续更新中……</p>
+</blockquote>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Facebook-POP/">Facebook POP</a>, <a class="has-link-grey -link" href="/tags/Swift/">Swift</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2017/11/11/Swift之删除HTML5页面的广告/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Swift之删除HTML5页面的广告</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2017/10/12/iOS出门必备之CoreAnimation(核心动画)/">
+                <span class="level-item">iOS出门必备之CoreAnimation(核心动画)</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="SooLe">
+                    
+                    <p class="is-size-4 is-block">
+                        SooLe
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        iOS
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>shenzhen</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        11
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        43
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/arthurtop">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/arthurtop">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://weibo.com/3935895096677821">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://www.jianshu.com/u/cda07f394e73">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://juejin.im/user/5ac98725f265da23830b263b">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://github.com/ppoffice</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Hexo博客/">
+            <span class="level-start">
+                <span class="level-item">Hexo博客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Socket学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Socket学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SwiftLint/">
+            <span class="level-start">
+                <span class="level-item">SwiftLint</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Swift学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift高阶功能/">
+            <span class="level-start">
+                <span class="level-item">Swift高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift黑科技/">
+            <span class="level-start">
+                <span class="level-item">Swift黑科技</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS动画/">
+            <span class="level-start">
+                <span class="level-item">iOS动画</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS高阶功能/">
+            <span class="level-start">
+                <span class="level-item">iOS高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/xcode/">
+            <span class="level-start">
+                <span class="level-item">xcode</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数据库基础/">
+            <span class="level-start">
+                <span class="level-item">数据库基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/组件化开发/">
+            <span class="level-start">
+                <span class="level-item">组件化开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/AVFoundation/" style="font-size: 10px;">AVFoundation</a> <a href="/tags/AppIcon/" style="font-size: 10px;">AppIcon</a> <a href="/tags/Bug/" style="font-size: 12.5px;">Bug</a> <a href="/tags/CIDetector/" style="font-size: 10px;">CIDetector</a> <a href="/tags/CIFilter/" style="font-size: 10px;">CIFilter</a> <a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/CoreAnimation/" style="font-size: 10px;">CoreAnimation</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Facebook-POP/" style="font-size: 10px;">Facebook POP</a> <a href="/tags/Github/" style="font-size: 17.5px;">Github</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTPS/" style="font-size: 12.5px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 17.5px;">Hexo</a> <a href="/tags/Homebrew/" style="font-size: 10px;">Homebrew</a> <a href="/tags/Mac-工具/" style="font-size: 10px;">Mac 工具</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Socket/" style="font-size: 10px;">Socket</a> <a href="/tags/Socket-IO/" style="font-size: 10px;">Socket.IO</a> <a href="/tags/Speech/" style="font-size: 10px;">Speech</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/Swift4-0/" style="font-size: 10px;">Swift4.0</a> <a href="/tags/SwiftLint/" style="font-size: 17.5px;">SwiftLint</a> <a href="/tags/UIStackView/" style="font-size: 10px;">UIStackView</a> <a href="/tags/Vision/" style="font-size: 10px;">Vision</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/framewoframework/" style="font-size: 10px;">framewoframework</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 12.5px;">iOS</a> <a href="/tags/iOS-10-3/" style="font-size: 10px;">iOS 10.3</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/spec/" style="font-size: 10px;">spec</a> <a href="/tags/trunk/" style="font-size: 10px;">trunk</a> <a href="/tags/入坑/" style="font-size: 10px;">入坑</a> <a href="/tags/动态库/" style="font-size: 10px;">动态库</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/规则/" style="font-size: 15px;">规则</a> <a href="/tags/静态库/" style="font-size: 10px;">静态库</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019上传审核遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-29T00:55:00.000Z">2019-03-29</time></div>
+                    <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="has-link-black-ter is-size-6">2019上传审核遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/25/flutter全局/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-25T07:40:54.339Z">2019-03-25</time></div>
+                    <a href="/2019/03/25/flutter全局/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/14/2019app审核报错/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019开年遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-14T03:13:00.000Z">2019-02-14</time></div>
+                    <a href="/2019/02/14/2019app审核报错/" class="has-link-black-ter is-size-6">2019开年遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/01/16/vue 全局错误/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-16T08:29:24.700Z">2019-01-16</time></div>
+                    <a href="/2019/01/16/vue 全局错误/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/01/15/2019 前端学习路线建议/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019 前端学习路线建议">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-15T06:52:00.000Z">2019-01-15</time></div>
+                    <a href="/2019/01/15/2019 前端学习路线建议/" class="has-link-black-ter is-size-6">2019 前端学习路线建议</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AVFoundation/">
+                        <span class="level-start">
+                            <span class="level-item">AVFoundation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Bug/">
+                        <span class="level-start">
+                            <span class="level-item">Bug</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIDetector/">
+                        <span class="level-start">
+                            <span class="level-item">CIDetector</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIFilter/">
+                        <span class="level-start">
+                            <span class="level-item">CIFilter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Facebook-POP/">
+                        <span class="level-start">
+                            <span class="level-item">Facebook POP</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTML5/">
+                        <span class="level-start">
+                            <span class="level-item">HTML5</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Mac-工具/">
+                        <span class="level-start">
+                            <span class="level-item">Mac 工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/MySQL/">
+                        <span class="level-start">
+                            <span class="level-item">MySQL</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Python/">
+                        <span class="level-start">
+                            <span class="level-item">Python</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Speech/">
+                        <span class="level-start">
+                            <span class="level-item">Speech</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">11</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Vision/">
+                        <span class="level-start">
+                            <span class="level-item">Vision</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebView/">
+                        <span class="level-start">
+                            <span class="level-item">WebView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/framewoframework/">
+                        <span class="level-start">
+                            <span class="level-item">framewoframework</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/动态库/">
+                        <span class="level-start">
+                            <span class="level-item">动态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/工具/">
+                        <span class="level-start">
+                            <span class="level-item">工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/静态库/">
+                        <span class="level-start">
+                            <span class="level-item">静态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019上传审核遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-29T00:55:00.000Z">2019-03-29</time></div>
+                    <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="has-link-black-ter is-size-6">2019上传审核遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/25/flutter全局/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-25T07:40:54.339Z">2019-03-25</time></div>
+                    <a href="/2019/03/25/flutter全局/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/14/2019app审核报错/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019开年遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-14T03:13:00.000Z">2019-02-14</time></div>
+                    <a href="/2019/02/14/2019app审核报错/" class="has-link-black-ter is-size-6">2019开年遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/01/16/vue 全局错误/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-16T08:29:24.700Z">2019-01-16</time></div>
+                    <a href="/2019/01/16/vue 全局错误/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/01/15/2019 前端学习路线建议/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019 前端学习路线建议">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-15T06:52:00.000Z">2019-01-15</time></div>
+                    <a href="/2019/01/15/2019 前端学习路线建议/" class="has-link-black-ter is-size-6">2019 前端学习路线建议</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AVFoundation/">
+                        <span class="level-start">
+                            <span class="level-item">AVFoundation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Bug/">
+                        <span class="level-start">
+                            <span class="level-item">Bug</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIDetector/">
+                        <span class="level-start">
+                            <span class="level-item">CIDetector</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIFilter/">
+                        <span class="level-start">
+                            <span class="level-item">CIFilter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Facebook-POP/">
+                        <span class="level-start">
+                            <span class="level-item">Facebook POP</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTML5/">
+                        <span class="level-start">
+                            <span class="level-item">HTML5</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Mac-工具/">
+                        <span class="level-start">
+                            <span class="level-item">Mac 工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/MySQL/">
+                        <span class="level-start">
+                            <span class="level-item">MySQL</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Python/">
+                        <span class="level-start">
+                            <span class="level-item">Python</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Speech/">
+                        <span class="level-start">
+                            <span class="level-item">Speech</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">11</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Vision/">
+                        <span class="level-start">
+                            <span class="level-item">Vision</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebView/">
+                        <span class="level-start">
+                            <span class="level-item">WebView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/framewoframework/">
+                        <span class="level-start">
+                            <span class="level-item">framewoframework</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/动态库/">
+                        <span class="level-start">
+                            <span class="level-item">动态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/工具/">
+                        <span class="level-start">
+                            <span class="level-item">工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/静态库/">
+                        <span class="level-start">
+                            <span class="level-item">静态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Swift之Facebook的POP动画使用和实战" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 SooLe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-Hans");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
