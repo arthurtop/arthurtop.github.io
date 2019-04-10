@@ -1,0 +1,2408 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Flutter开发之Dart的数据类型02 - SooLe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="keywords" content="Flutter,Dart">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter开发之Dart的数据类型02">
+<meta property="og:url" content="http://yoursite.com/2019/03/01/Flutter开发二/index.html">
+<meta property="og:site_name" content="SooLe">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/dart-logo.png?x-oss-process=style/titanjun">
+<meta property="og:updated_time" content="2019-04-10T03:14:00.758Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flutter开发之Dart的数据类型02">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/dart-logo.png?x-oss-process=style/titanjun">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Flutter开发之Dart的数据类型02" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-01T01:16:34.000Z">2019-03-01</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Flutter笔记/">Flutter笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    22 minutes read (About 3252 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Flutter开发之Dart的数据类型02
+            
+        </h1>
+        <div class="content">
+            <p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/dart-logo.png?x-oss-process=style/titanjun" alt="dart-logo"></p>
+<a id="more"></a>
+<ul>
+<li>这几篇文章都是在学习<code>Dart</code>过程中所记录的学习笔记, 都是一些基础知识, 几乎没什么技术含量, 主要是方便后期使用的时候方便查阅</li>
+<li>之前的一篇文章已经介绍了一部分的数据类型<a href="https://www.titanjun.top/2019/02/20/Flutter%E5%BC%80%E5%8F%91%E4%B9%8BDart%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/" target="_blank" rel="noopener">Flutter开发之Dart的数据类型01</a>, 这里主要记录剩下的一些常用的数据类型</li>
+<li>我写的<a href="https://www.titanjun.top/categories/Flutter笔记/" target="_blank" rel="noopener">Flutter和Dart语法系列相关的文章</a>, 有兴趣的可参考随便看看</li>
+</ul>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><ul>
+<li><code>key-value</code>键值对（可以使用相关联的<code>key</code>检索<code>value</code>值）的集合, 即传说中的字典</li>
+<li><code>Map</code>中<code>key</code>的数量是有限的，每个<code>key</code>正好有一个相关的<code>value</code></li>
+<li><code>Map</code>、以及它的键和值，都是可以迭代的, 迭代的顺序由<code>Map</code>不同的类型定义<ul>
+<li><a href="http://www.shutongye.com/dartapi/dart-collection/HashMap-class.html" target="_blank" rel="noopener"><code>HashMap</code></a>是无序的，这意味着它迭代的顺序是不确定的</li>
+<li><a href="http://www.shutongye.com/dartapi/dart-collection/LinkedHashMap-class.html" target="_blank" rel="noopener"><code>LinkedHashMap</code></a>按<code>key</code>的插入顺序进行迭代</li>
+<li><a href="http://www.shutongye.com/dartapi/dart-collection/SplayTreeMap-class.html" target="_blank" rel="noopener"><code>SplayTreeMap</code></a>按<code>key</code>的排序顺序进行迭代</li>
+</ul>
+</li>
+<li>当<code>Map</code>的一个操作正在执行的时候，通常不允许修改<code>Map</code>（添加或删除<code>key</code>）</li>
+</ul>
+<h3 id="创建Map"><a href="#创建Map" class="headerlink" title="创建Map"></a>创建Map</h3><figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">Map</span>()</span><br><span class="line"><span class="hljs-comment">// 创建一个Map实例，默认实现是LinkedHashMap。</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">Map</span>.from(<span class="hljs-built_in">Map</span> other)</span><br><span class="line"><span class="hljs-comment">// 创建一个LinkedHashMap实例，包含other的所有键值对。</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">Map</span>.fromIterable(<span class="hljs-built_in">Iterable</span> iterable, &#123;K key(element), V value(element)&#125;)</span><br><span class="line"><span class="hljs-comment">// 创建一个Map实例，其中Key和Value由iterable的元素计算得到。</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">Map</span>.fromIterables(<span class="hljs-built_in">Iterable</span>&lt;K&gt; keys, <span class="hljs-built_in">Iterable</span>&lt;V&gt; values)</span><br><span class="line"><span class="hljs-comment">// 将指定的keys和values关联，创建一个Map实例。</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">Map</span>.identity()</span><br><span class="line"><span class="hljs-comment">// 使用默认实现LinkedHashMap创建一个严格的Map。</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">Map</span>.unmodifiable(<span class="hljs-built_in">Map</span> other)</span><br><span class="line"><span class="hljs-comment">// 创建一个不可修改、基于哈希值的Map，包含other所有的项</span></span><br></pre></td></tr></table></figure>
+<p>每一种创建方式的具体使用</p>
+<figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 创建一个Map实例, 插入顺序进行排列</span></span><br><span class="line"><span class="hljs-keyword">var</span> dic = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>();</span><br><span class="line"><span class="hljs-built_in">print</span>(dic);  <span class="hljs-comment">// &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 根据一个Map创建一个新的Map, 插入顺序进行排列</span></span><br><span class="line"><span class="hljs-keyword">var</span> dic1 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>.from(&#123;<span class="hljs-string">'name'</span>: <span class="hljs-string">'titan'</span>&#125;);</span><br><span class="line"><span class="hljs-built_in">print</span>(dic1);  <span class="hljs-comment">// &#123;name: titan&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 根据List创建Map, 插入顺序进行排列</span></span><br><span class="line"><span class="hljs-built_in">List</span>&lt;<span class="hljs-built_in">int</span>&gt; list = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];</span><br><span class="line"><span class="hljs-comment">// 使用默认方式, key和value都是数组对应的元素</span></span><br><span class="line"><span class="hljs-keyword">var</span> dic2 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>.fromIterable(list);</span><br><span class="line"><span class="hljs-built_in">print</span>(dic2);  <span class="hljs-comment">// &#123;1: 1, 2: 2, 3: 3&#125;</span></span><br><span class="line"><span class="hljs-comment">// 设置key和value的值</span></span><br><span class="line"><span class="hljs-keyword">var</span> dic3 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>.fromIterable(list, key: (item) =&gt; item.toString(), value: (item) =&gt; item * item);</span><br><span class="line"><span class="hljs-built_in">print</span>(dic3);  <span class="hljs-comment">// &#123;1: 1, 2: 4, 3: 9&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 两个数组映射一个字典, 插入顺序进行排列</span></span><br><span class="line"><span class="hljs-built_in">List</span>&lt;<span class="hljs-built_in">String</span>&gt; keys = [<span class="hljs-string">'name'</span>, <span class="hljs-string">'age'</span>];</span><br><span class="line"><span class="hljs-keyword">var</span> values = [<span class="hljs-string">'jun'</span>, <span class="hljs-number">20</span>];</span><br><span class="line"><span class="hljs-comment">// 如果有相同的key值, 后面的值会覆盖前面的值</span></span><br><span class="line"><span class="hljs-keyword">var</span> dic4 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>.fromIterables(keys, values);</span><br><span class="line"><span class="hljs-built_in">print</span>(dic4);  <span class="hljs-comment">// &#123;name: jun, age: 20&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 创建一个空的Map, Map允许null作为key</span></span><br><span class="line"><span class="hljs-keyword">var</span> dic5 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>.identity();</span><br><span class="line"><span class="hljs-built_in">print</span>(dic5);  <span class="hljs-comment">//&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 创建一个不可修改、基于哈希值的Map</span></span><br><span class="line"><span class="hljs-keyword">var</span> dic6 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>.unmodifiable(&#123;<span class="hljs-string">'name'</span>: <span class="hljs-string">'titan'</span>&#125;);</span><br><span class="line"><span class="hljs-built_in">print</span>(dic6);</span><br></pre></td></tr></table></figure>
+<h3 id="相关属性"><a href="#相关属性" class="headerlink" title="相关属性"></a>相关属性</h3><p><code>Map</code>中相关属性和一些常用属性的操作如下:</p>
+<figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> map1 = &#123;<span class="hljs-string">'name'</span>: <span class="hljs-string">'titan'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">20</span>&#125;;</span><br><span class="line"><span class="hljs-comment">// 哈希值</span></span><br><span class="line"><span class="hljs-built_in">print</span>(map1.hashCode); </span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 运行时类型</span></span><br><span class="line"><span class="hljs-built_in">print</span>(map1.runtimeType);  <span class="hljs-comment">//_InternalLinkedHashMap&lt;String, Object&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 是否为空, null不能判断, 会报错</span></span><br><span class="line"><span class="hljs-built_in">print</span>(map1.isEmpty);  <span class="hljs-comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 是否不为空</span></span><br><span class="line"><span class="hljs-built_in">print</span>(map1.isNotEmpty);  <span class="hljs-comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 键值对个数</span></span><br><span class="line"><span class="hljs-built_in">print</span>(map1.length);   <span class="hljs-comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 所有的key值, 返回Iterable&lt;K&gt;类型</span></span><br><span class="line"><span class="hljs-built_in">print</span>(map1.keys.toList());  <span class="hljs-comment">// [name, age]</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 所有的value值, 返回Iterable&lt;K&gt;类型</span></span><br><span class="line"><span class="hljs-built_in">print</span>(map1.values.toList());   <span class="hljs-comment">// [titan, 20]</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 根据key取值</span></span><br><span class="line"><span class="hljs-built_in">print</span>(map1[<span class="hljs-string">'name'</span>] ?? <span class="hljs-string">''</span>);   <span class="hljs-comment">// titan</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 根据key赋值</span></span><br><span class="line">map1[<span class="hljs-string">'age'</span>] = <span class="hljs-number">30</span>;</span><br><span class="line"><span class="hljs-built_in">print</span>(map1);   <span class="hljs-comment">// &#123;name: titan, age: 30&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="相关函数"><a href="#相关函数" class="headerlink" title="相关函数"></a>相关函数</h3><figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> map2 = &#123;<span class="hljs-string">'name'</span>: <span class="hljs-string">'titan'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">20</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 添加一个map</span></span><br><span class="line">map2.addAll(&#123;<span class="hljs-string">'blog'</span>: <span class="hljs-string">'titanjun'</span>&#125;);</span><br><span class="line"><span class="hljs-built_in">print</span>(map2);</span><br><span class="line"><span class="hljs-comment">// &#123;name: titan, age: 20, blog: titanjun&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 判断是否包含指定的key</span></span><br><span class="line"><span class="hljs-built_in">print</span>(map2.containsKey(<span class="hljs-string">'age'</span>));  <span class="hljs-comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 判断是否包含指定的value</span></span><br><span class="line"><span class="hljs-built_in">print</span>(map2.containsValue(<span class="hljs-string">'titan'</span>));</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 操作每个键值对</span></span><br><span class="line">map2.forEach((key, value) &#123;</span><br><span class="line">  <span class="hljs-built_in">print</span>(<span class="hljs-string">'key = <span class="hljs-subst">$key</span>, value = <span class="hljs-subst">$value<span class="hljs-string">');</span></span></span></span><br><span class="line"><span class="hljs-string"><span class="hljs-subst"><span class="hljs-string">&#125;);</span></span></span></span><br><span class="line"><span class="hljs-string"><span class="hljs-subst"><span class="hljs-string"></span></span></span></span><br><span class="line"><span class="hljs-string"><span class="hljs-subst"><span class="hljs-string">// 查找key对应的value，或添加一个新的值为key.length的value</span></span></span></span><br><span class="line"><span class="hljs-string"><span class="hljs-subst"><span class="hljs-string">for (var key in ['</span></span>name'</span>, <span class="hljs-string">'age'</span>, <span class="hljs-string">'king'</span>]) &#123;</span><br><span class="line">  <span class="hljs-comment">// 函数的返回值为查找到的对应的value值</span></span><br><span class="line">  <span class="hljs-built_in">print</span>(map2.putIfAbsent(key, () =&gt; key.length));</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-built_in">print</span>(map2);</span><br><span class="line"><span class="hljs-comment">// &#123;name: titan, age: 20, blog: titanjun, king: 4&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 转成字符串</span></span><br><span class="line"><span class="hljs-built_in">print</span>(map2.toString());</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 删除键值对, 返回删除key对应的value值, 没有则返回null</span></span><br><span class="line"><span class="hljs-built_in">print</span>(map2.remove(<span class="hljs-string">'blog'</span>));  <span class="hljs-comment">//titanjun</span></span><br><span class="line"><span class="hljs-built_in">print</span>(map2.remove(<span class="hljs-string">'coder'</span>));  <span class="hljs-comment">//null</span></span><br><span class="line"><span class="hljs-built_in">print</span>(map2);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 删除所有的键值对</span></span><br><span class="line">map2.clear();</span><br><span class="line"><span class="hljs-built_in">print</span>(map2);  <span class="hljs-comment">//&#123;&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Iterable"><a href="#Iterable" class="headerlink" title="Iterable"></a>Iterable</h2><ul>
+<li>按顺序访问的值或元素的集合, <code>List</code>集合也是继承于<code>Iterable</code></li>
+<li><code>List</code>和<code>Set</code>也是<code>Iterable</code>，<code>dart:collection</code>库中同样有很多</li>
+<li>部分<code>Iterable</code>集合可以被修改   <ul>
+<li>向<code>List</code>或<code>Set</code>添加元素将改变对象所有包含的元素。 </li>
+<li>向Map添加新的<code>Key</code>会改变所有<code>Map.keys</code>的元素。 </li>
+<li>在集合改变后，创建的迭代器将提供新的所有元素，并且可能会保持目前元素的顺序, 也可能不会</li>
+</ul>
+</li>
+</ul>
+<h3 id="创建方式"><a href="#创建方式" class="headerlink" title="创建方式"></a>创建方式</h3><figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 创建空的可迭代对象</span></span><br><span class="line"><span class="hljs-keyword">var</span> ite = <span class="hljs-built_in">Iterable</span>.empty();</span><br><span class="line"><span class="hljs-built_in">print</span>(ite);   <span class="hljs-comment">// ()</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 创建一个Iterable，通过序列来动态生成元素</span></span><br><span class="line"><span class="hljs-keyword">var</span> ite1 = <span class="hljs-built_in">Iterable</span>.generate(<span class="hljs-number">5</span>);</span><br><span class="line"><span class="hljs-built_in">print</span>(ite1);  <span class="hljs-comment">// (0, 1, 2, 3, 4)</span></span><br></pre></td></tr></table></figure>
+<p>至于<code>Iterable</code>的所有属性和函数的介绍和使用, 在上篇文章<a href="https://www.titanjun.top/2019/02/20/Flutter%E5%BC%80%E5%8F%91%E4%B9%8BDart%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/#List" target="_blank" rel="noopener">Flutter开发之Dart的数据类型01</a>中的<code>List</code>模块中已经详细介绍了, 因为<code>List</code>是继承于<code>Iterable</code>的, 所以<code>Iterable</code>有的属性和方法<code>List</code>中都有</p>
+<h2 id="Runes"><a href="#Runes" class="headerlink" title="Runes"></a>Runes</h2><ul>
+<li>在<code>Dart</code>中，<code>Runes</code>代表字符串的<code>UTF-32</code>字符集, 另一种<code>Strings</code></li>
+<li><code>Unicode</code>为每一个字符、标点符号、表情符号等都定义了 一个唯一的数值</li>
+<li>由于<code>Dart</code>字符串是<code>UTF-16</code>的字符序列，所以在字符串中表达32的字符序列就需要新的语法了</li>
+<li>通常使用<code>\uXXXX</code>的方式来表示, 这里的<code>XXXX</code>是4个16进制的数, 如，心形符号<code>(♥)</code>是<code>\u2665</code></li>
+<li>对于非4个数值的情况，把编码值放到大括号中即可, 如，笑脸<code>emoji</code> (😆) 是<code>\u{1f600}</code></li>
+<li><code>String</code>类有一些属性可以提取<code>rune</code>信息<ul>
+<li><code>codeUnitAt</code>和<code>codeUnit</code>属性返回16为字符</li>
+<li>使用<code>runes</code>属性来获取字符串的<code>runes</code>信息</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> clapping = <span class="hljs-string">'\u&#123;1f44f&#125;'</span>;</span><br><span class="line"><span class="hljs-built_in">print</span>(clapping);  <span class="hljs-comment">// 👏</span></span><br><span class="line"><span class="hljs-built_in">print</span>(clapping.codeUnits);  <span class="hljs-comment">// [55357, 56399]</span></span><br><span class="line"><span class="hljs-built_in">print</span>(clapping.runes.toList());  <span class="hljs-comment">// [128079]</span></span><br></pre></td></tr></table></figure>
+<h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 根据字符串创建</span></span><br><span class="line">Runes runes = <span class="hljs-keyword">new</span> Runes(<span class="hljs-string">'\u2665, \u&#123;1f605&#125;, \u&#123;1f60e&#125;'</span>);</span><br><span class="line"><span class="hljs-built_in">print</span>(runes);</span><br><span class="line"><span class="hljs-comment">// (9829, 44, 32, 128517, 44, 32, 128526)</span></span><br><span class="line"><span class="hljs-comment">// 输出特殊字符的字符串</span></span><br><span class="line"><span class="hljs-built_in">print</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">String</span>.fromCharCodes(runes));</span><br><span class="line"><span class="hljs-comment">// ♥, 😅, 😎</span></span><br></pre></td></tr></table></figure>
+<p>由于<code>Runes</code>也是继承于<code>Iterable</code>, 所以<code>Runes</code>中的属性和方法的使用也和<code>Iterable</code>一样, 详情参考<a href="http://www.shutongye.com/dartapi/dart-core/Runes-class.html" target="_blank" rel="noopener">Runes</a>和<a href="https://www.titanjun.top/2019/02/20/Flutter%E5%BC%80%E5%8F%91%E4%B9%8BDart%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/#List" target="_blank" rel="noopener">Flutter开发之Dart的数据类型01</a>中的介绍</p>
+<h2 id="Symbols"><a href="#Symbols" class="headerlink" title="Symbols"></a>Symbols</h2><ul>
+<li>一个<code>Symbol</code>对象代表<code>Dart</code>程序中声明的操作符或者标识符</li>
+<li>也许不会用到<code>Symbol</code>，但是该功能对于通过名字来引用标识符的情况 是非常有价值的，特别是混淆后的代码，标识符的名字被混淆了，但是<code>Symbol</code>的名字不会改变</li>
+<li>使用<code>Symbol</code>字面量来获取标识符的<code>symbol</code>对象，也就是在标识符前面添加一个 <code>#</code> 符号</li>
+</ul>
+<figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 获取symbol 对象</span></span><br><span class="line"><span class="hljs-keyword">var</span> sym1 = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'name'</span>);</span><br><span class="line"><span class="hljs-built_in">print</span>(sym1);   <span class="hljs-comment">// Symbol("name")</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// #号创建</span></span><br><span class="line"><span class="hljs-keyword">var</span> sym2 = #titan;</span><br><span class="line"><span class="hljs-built_in">print</span>(sym2);   <span class="hljs-comment">// Symbol("titan")</span></span><br></pre></td></tr></table></figure>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><ul>
+<li>对象的集合，其中每个对象只能出现一次, <code>List</code>中一个对象可以出现多次</li>
+<li>迭代Set中的元素时，某些时候有可能是无序的，也有可能是有序的。例如：<ul>
+<li><code>HashSet</code>是无序的，这意味着它迭代的顺序是不确定的</li>
+<li><code>LinkedHashSet</code>按元素的插入顺序进行迭代</li>
+<li><code>SplayTreeSet</code>按排序顺序迭代元素</li>
+</ul>
+</li>
+<li><code>Set</code>除创建方式和<code>List</code>不同, 其他属性和方法基本一样</li>
+</ul>
+<h3 id="创建Set"><a href="#创建Set" class="headerlink" title="创建Set"></a>创建Set</h3><figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 创建一个空的Set。</span></span><br><span class="line"><span class="hljs-keyword">var</span> set1 = <span class="hljs-built_in">Set</span>();</span><br><span class="line"><span class="hljs-built_in">print</span>(set1);   <span class="hljs-comment">// &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 创建一个包含所有elements的Set</span></span><br><span class="line"><span class="hljs-keyword">var</span> set2 = <span class="hljs-built_in">Set</span>.from([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);</span><br><span class="line"><span class="hljs-built_in">print</span>(set2);   <span class="hljs-comment">// &#123;1, 2, 3&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 创建一个空的，元素严格相等的Set</span></span><br><span class="line"><span class="hljs-keyword">var</span> set3 = <span class="hljs-built_in">Set</span>.identity();</span><br><span class="line"><span class="hljs-built_in">print</span>(set3);   <span class="hljs-comment">// &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// set2 = &#123;1, 2, 3&#125;</span></span><br><span class="line"><span class="hljs-comment">//返回一个新的Set，它是this和other的交集</span></span><br><span class="line"><span class="hljs-keyword">var</span> set4 = <span class="hljs-built_in">Set</span>.from([<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]);</span><br><span class="line"><span class="hljs-built_in">print</span>(set2.intersection(set4));  <span class="hljs-comment">//&#123;2, 3&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 返回一个新的Set，它包含this和other的所有元素（并集）</span></span><br><span class="line"><span class="hljs-built_in">print</span>(set2.union(set4));  <span class="hljs-comment">// &#123;1, 2, 3, 5, 6&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 检查Set中是否包含object, 有则返回该object, 没有则返回null</span></span><br><span class="line"><span class="hljs-built_in">print</span>(set4.lookup(<span class="hljs-number">5</span>));   <span class="hljs-comment">// 5</span></span><br><span class="line"><span class="hljs-built_in">print</span>(set4.lookup(<span class="hljs-number">21</span>));  <span class="hljs-comment">// null</span></span><br></pre></td></tr></table></figure>
+<p>其他更多属性参考<a href="http://www.shutongye.com/dartapi/dart-core/Set-class.html" target="_blank" rel="noopener">Set<e></e></a>和<a href="https://www.titanjun.top/2019/02/20/Flutter%E5%BC%80%E5%8F%91%E4%B9%8BDart%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/#List" target="_blank" rel="noopener">Flutter开发之Dart的数据类型01</a>中的介绍</p>
+<h2 id="Duration"><a href="#Duration" class="headerlink" title="Duration"></a>Duration</h2><ul>
+<li><code>Duration</code>表示从一个时间点到另一个时间点的时间差</li>
+<li>如果是一个较晚的时间点和一个较早的时间点，<code>Duration</code>可能是负数</li>
+</ul>
+<h3 id="创建Duration"><a href="#创建Duration" class="headerlink" title="创建Duration"></a>创建Duration</h3><figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 唯一的构造函数创建Duration对象</span></span><br><span class="line"><span class="hljs-built_in">Duration</span>(&#123;<span class="hljs-built_in">int</span> days: <span class="hljs-number">0</span>, <span class="hljs-built_in">int</span> hours: <span class="hljs-number">0</span>, <span class="hljs-built_in">int</span> minutes: <span class="hljs-number">0</span>, <span class="hljs-built_in">int</span> seconds: <span class="hljs-number">0</span>, <span class="hljs-built_in">int</span> milliseconds: <span class="hljs-number">0</span>, <span class="hljs-built_in">int</span> microseconds: <span class="hljs-number">0</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 可以使用其中的一个或者几个参数创建</span></span><br><span class="line"><span class="hljs-comment">// 只是用其中的一个参数</span></span><br><span class="line"><span class="hljs-built_in">Duration</span> ration = <span class="hljs-built_in">Duration</span>(days: <span class="hljs-number">1</span>);</span><br><span class="line"><span class="hljs-built_in">print</span>(ration);  <span class="hljs-comment">//24:00:00.000000</span></span><br><span class="line"><span class="hljs-built_in">Duration</span> ration1 = <span class="hljs-built_in">Duration</span>(hours: <span class="hljs-number">10</span>);</span><br><span class="line"><span class="hljs-built_in">print</span>(ration1);  <span class="hljs-comment">//10:00:00.000000</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 只是用其中的两个参数</span></span><br><span class="line"><span class="hljs-built_in">Duration</span> ration2 = <span class="hljs-built_in">Duration</span>(days: <span class="hljs-number">1</span>, hours: <span class="hljs-number">3</span>);</span><br><span class="line"><span class="hljs-built_in">print</span>(ration2);  <span class="hljs-comment">//27:00:00.000000</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 使用所有的参数</span></span><br><span class="line"><span class="hljs-built_in">Duration</span> ration3 = <span class="hljs-built_in">Duration</span>(days: <span class="hljs-number">2</span>, hours: <span class="hljs-number">2</span>, minutes: <span class="hljs-number">23</span>, seconds: <span class="hljs-number">34</span>, milliseconds: <span class="hljs-number">56</span>, microseconds: <span class="hljs-number">89</span>);</span><br><span class="line"><span class="hljs-built_in">print</span>(ration3);  <span class="hljs-comment">//50:23:34.056089</span></span><br></pre></td></tr></table></figure>
+<h3 id="相关运算"><a href="#相关运算" class="headerlink" title="相关运算"></a>相关运算</h3><figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">Duration</span> time1 = <span class="hljs-built_in">Duration</span>(days: <span class="hljs-number">1</span>, hours: <span class="hljs-number">1</span>, minutes: <span class="hljs-number">1</span>, seconds: <span class="hljs-number">1</span>, milliseconds: <span class="hljs-number">1</span>, microseconds: <span class="hljs-number">1</span>);</span><br><span class="line"><span class="hljs-built_in">Duration</span> time2 = <span class="hljs-built_in">Duration</span>(days: <span class="hljs-number">2</span>, hours: <span class="hljs-number">2</span>, minutes: <span class="hljs-number">2</span>, seconds: <span class="hljs-number">2</span>, milliseconds: <span class="hljs-number">2</span>, microseconds: <span class="hljs-number">2</span>);</span><br><span class="line"><span class="hljs-built_in">print</span>(time1);  <span class="hljs-comment">//25:01:01.001001</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time2);  <span class="hljs-comment">//50:02:02.002002</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 加</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time1 + time2);  <span class="hljs-comment">//75:03:03.003003</span></span><br><span class="line"><span class="hljs-comment">// 减</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time1 - time2);  <span class="hljs-comment">//-25:01:01.001001</span></span><br><span class="line"><span class="hljs-comment">// 乘</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time1 * <span class="hljs-number">2</span>);    <span class="hljs-comment">//50:02:02.002002</span></span><br><span class="line"><span class="hljs-comment">// 除(取整)</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time2 ~/ <span class="hljs-number">3</span>);  <span class="hljs-comment">//16:40:40.667334</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 比较</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time1 &gt; time2);  <span class="hljs-comment">//false</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time1 &gt;= time2);  <span class="hljs-comment">//false</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time1 == time2);  <span class="hljs-comment">//false</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time1 &lt; time2);  <span class="hljs-comment">//true</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time1 &lt;= time2); <span class="hljs-comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 取相反值</span></span><br><span class="line"><span class="hljs-built_in">print</span>(-time1);  <span class="hljs-comment">//-25:01:01.001001</span></span><br><span class="line"><span class="hljs-built_in">print</span>(-(time1 - time2));  <span class="hljs-comment">//25:01:01.001001</span></span><br></pre></td></tr></table></figure>
+<h3 id="相关函数-1"><a href="#相关函数-1" class="headerlink" title="相关函数"></a>相关函数</h3><figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">Duration</span> time3 = -<span class="hljs-built_in">Duration</span>(days: <span class="hljs-number">1</span>, hours: <span class="hljs-number">1</span>, minutes: <span class="hljs-number">1</span>, seconds: <span class="hljs-number">1</span>, milliseconds: <span class="hljs-number">1</span>, microseconds: <span class="hljs-number">1</span>);</span><br><span class="line"><span class="hljs-built_in">print</span>(time3);  <span class="hljs-comment">//-25:01:01.001001</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 取绝对值</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time3.abs());  <span class="hljs-comment">//25:01:01.001001</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 比较, 返回值, 0: 相等, -1: time1 &lt; time2, 1: time1 &gt; time2</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time1.compareTo(time2));  <span class="hljs-comment">//-1</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 字符串形式</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time1.toString());</span><br></pre></td></tr></table></figure>
+<h2 id="DateTime"><a href="#DateTime" class="headerlink" title="DateTime"></a>DateTime</h2><ul>
+<li>表示一个时间点</li>
+<li>通过构造函数或解析格式化的字符串创建<code>DateTime</code>对象，并且符合<code>ISO 8601</code>标准的子集，小时是24小时制，范围在0-23之间</li>
+<li><code>DateTime</code>对象创建之后，将是固定不变的, 不可被修改</li>
+<li><code>DateTime</code>对象默认使用的是本地时区，除非显示地指定<code>UTC</code>时区</li>
+</ul>
+<h3 id="创建时间点"><a href="#创建时间点" class="headerlink" title="创建时间点"></a>创建时间点</h3><figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 当前时间</span></span><br><span class="line"><span class="hljs-keyword">var</span> date1 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>.now();</span><br><span class="line"><span class="hljs-built_in">print</span>(date1);  <span class="hljs-comment">//2019-02-23 16:43:15.505305</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 构造一个指定为本地时区的DateTime</span></span><br><span class="line"><span class="hljs-comment">//DateTime(int year, [int month = 1, int day = 1, int hour = 0, int minute = 0, int second = 0, int millisecond = 0, int microsecond = 0])</span></span><br><span class="line"><span class="hljs-keyword">var</span> date2 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>(<span class="hljs-number">2018</span>, <span class="hljs-number">10</span>, <span class="hljs-number">3</span>, <span class="hljs-number">12</span>, <span class="hljs-number">23</span>, <span class="hljs-number">34</span>, <span class="hljs-number">562</span>, <span class="hljs-number">1002</span>);</span><br><span class="line"><span class="hljs-built_in">print</span>(date2);  <span class="hljs-comment">//2018-10-03 12:23:34.563002</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 用微秒创建</span></span><br><span class="line"><span class="hljs-keyword">var</span> date3 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>.fromMicrosecondsSinceEpoch(<span class="hljs-number">1000222</span>);</span><br><span class="line"><span class="hljs-comment">// isUtc: true: UTC时区, 默认false</span></span><br><span class="line"><span class="hljs-keyword">var</span> date31 =  <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>.fromMicrosecondsSinceEpoch(<span class="hljs-number">1000222</span>, isUtc: <span class="hljs-keyword">true</span>);</span><br><span class="line"><span class="hljs-built_in">print</span>(date3);  <span class="hljs-comment">//1970-01-01 08:00:01.000222</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 用毫秒创建</span></span><br><span class="line"><span class="hljs-keyword">var</span> date4 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>.fromMillisecondsSinceEpoch(<span class="hljs-number">1000222</span>);</span><br><span class="line"><span class="hljs-comment">// isUtc: true: UTC时区, 默认false</span></span><br><span class="line"><span class="hljs-keyword">var</span> date41 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>.fromMillisecondsSinceEpoch(<span class="hljs-number">1000222</span>, isUtc: <span class="hljs-keyword">true</span>);</span><br><span class="line"><span class="hljs-built_in">print</span>(date4);  <span class="hljs-comment">//1970-01-01 08:16:40.222</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 指定为UTC时区的时间</span></span><br><span class="line"><span class="hljs-keyword">var</span> date5 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>.utc(<span class="hljs-number">1969</span>, <span class="hljs-number">7</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">18</span>, <span class="hljs-number">04</span>);</span><br><span class="line"><span class="hljs-built_in">print</span>(date5);  <span class="hljs-comment">//1969-07-20 20:18:04.000Z</span></span><br></pre></td></tr></table></figure>
+<h3 id="parse"><a href="#parse" class="headerlink" title="parse"></a>parse</h3><figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">DateTime</span> parse(<span class="hljs-built_in">String</span> formattedString)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>基于时间字符串, 创建<code>DateTime</code></li>
+<li>如果输入的字符串无法解析，将抛出异常</li>
+<li>当前接受的字符串为：<ul>
+<li>日期：一个有正负号之分的4-6位数的年份，2位数的月份，2位数的号数<ul>
+<li>年、月、日相互间可选-进行分割</li>
+<li>例如：”19700101”，”-0004-12-24”，”81030-04-01”</li>
+</ul>
+</li>
+<li>时间部分为可选项，从日期处以<code>T</code>或一个空格分开<ul>
+<li>对于时间部分，包括2位数的小时，然后2位数的分钟值可选，然后2位数的秒钟值可选， 然后 <code>.</code> 加1-6位数的秒数可选</li>
+<li>分和秒可以用<code>:</code>分隔</li>
+<li>如：”12”，”12:30:24.124”，”123010.50”</li>
+</ul>
+</li>
+<li>时区偏移量为可选项，可能用空格与之前的部分分隔开<ul>
+<li>时区是<code>z</code>或<code>Z</code>，或者是一个有正负之分的2位数的小时部分，和可选的2位数的分钟部分</li>
+<li>符号必须是<code>+</code>或<code>-</code>，并且不能省略</li>
+<li>分钟和小时可能用<code>:</code>分隔</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>接受的字符串例子：<ul>
+<li><code>&quot;2012-02-27 13:27:00&quot;</code></li>
+<li><code>&quot;2012-02-27 13:27:00.123456z&quot;</code></li>
+<li><code>&quot;20120227 13:27:00&quot;</code></li>
+<li><code>&quot;20120227T132700&quot;</code></li>
+<li><code>&quot;20120227&quot;</code></li>
+<li><code>&quot;+20120227&quot;</code></li>
+<li><code>&quot;2012-02-27T14Z&quot;</code></li>
+<li><code>&quot;2012-02-27T14+00:00&quot;</code></li>
+<li><code>&quot;-123450101 00:00:00 Z&quot;</code>：年份为-12345</li>
+<li><code>&quot;2002-02-27T14:00:00-0500&quot;</code>: 与<code>&quot;2002-02-27T19:00:00Z&quot;</code>相同</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 格式化时间字符串</span></span><br><span class="line"><span class="hljs-keyword">var</span> date6 = <span class="hljs-built_in">DateTime</span>.parse(<span class="hljs-string">"2012-02-27 13:27:00"</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> date7 = <span class="hljs-built_in">DateTime</span>.parse(<span class="hljs-string">'20120227T132700'</span>);</span><br><span class="line"><span class="hljs-built_in">print</span>(date6);  <span class="hljs-comment">// 2012-02-27 13:27:00.000</span></span><br><span class="line"><span class="hljs-built_in">print</span>(date7);  <span class="hljs-comment">// 2012-02-27 13:27:00.000</span></span><br></pre></td></tr></table></figure>
+<h3 id="属性值"><a href="#属性值" class="headerlink" title="属性值"></a>属性值</h3><figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> time = <span class="hljs-built_in">DateTime</span>.parse(<span class="hljs-string">"2019-02-25 13:27:04"</span>);</span><br><span class="line"><span class="hljs-comment">// 获取年-月-日-周几</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time.year);   <span class="hljs-comment">//2019</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time.month);  <span class="hljs-comment">//2</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time.day);    <span class="hljs-comment">//25</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time.weekday);<span class="hljs-comment">//1</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 获取时-分-秒-毫秒-微秒</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time.hour);       <span class="hljs-comment">//13</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time.minute);     <span class="hljs-comment">//27</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time.second);     <span class="hljs-comment">//4</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time.millisecond);<span class="hljs-comment">//0</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time.microsecond);<span class="hljs-comment">//0</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 是不是utc时区</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time.isUtc);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//1970-01-01T00:00:00Z (UTC)开始经过的微秒数</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time.microsecondsSinceEpoch);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//1970-01-01T00:00:00Z (UTC)开始经过的毫秒数</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time.millisecondsSinceEpoch);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//平台提供的时区名称</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time.timeZoneName);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//时区偏移量，即本地时间和UTC之间的时间差</span></span><br><span class="line"><span class="hljs-built_in">print</span>(time.timeZoneOffset);</span><br></pre></td></tr></table></figure>
+<h3 id="相关函数-2"><a href="#相关函数-2" class="headerlink" title="相关函数"></a>相关函数</h3><figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 获取当前时间</span></span><br><span class="line"><span class="hljs-built_in">DateTime</span> today = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>.now();</span><br><span class="line"><span class="hljs-built_in">print</span>(today);  <span class="hljs-comment">//2019-02-28 11:18:16.198088</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//加上duration，返回一个新的DateTime实例</span></span><br><span class="line"><span class="hljs-built_in">DateTime</span> newDay = today.add(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Duration</span>(days: <span class="hljs-number">60</span>));</span><br><span class="line"><span class="hljs-built_in">print</span>(newDay);  <span class="hljs-comment">//2019-04-29 11:18:16.198088</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//减去duration，返回一个新的DateTime实例</span></span><br><span class="line"><span class="hljs-built_in">DateTime</span> newDay1 = today.subtract(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Duration</span>(days: <span class="hljs-number">60</span>));</span><br><span class="line"><span class="hljs-built_in">print</span>(newDay1);  <span class="hljs-comment">//2018-12-30 11:25:31.741382</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 比较两个时间值的大小, 0: 相等, -1: 前值&lt;后值, 1: 前值&gt;后值</span></span><br><span class="line"><span class="hljs-keyword">var</span> isCom = today.compareTo(newDay);</span><br><span class="line"><span class="hljs-built_in">print</span>(isCom);  <span class="hljs-comment">// -1</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 计算两个时间的差值</span></span><br><span class="line"><span class="hljs-built_in">Duration</span> duration = today.difference(newDay);</span><br><span class="line"><span class="hljs-built_in">print</span>(duration);  <span class="hljs-comment">//-1440:00:00.000000</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 比较两个时间</span></span><br><span class="line"><span class="hljs-built_in">print</span>(today.isAfter(newDay));  <span class="hljs-comment">// false</span></span><br><span class="line"><span class="hljs-built_in">print</span>(today.isBefore(newDay)); <span class="hljs-comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 比较是否是同一时刻</span></span><br><span class="line"><span class="hljs-built_in">print</span>(today.isAtSameMomentAs(newDay));  <span class="hljs-comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 返回此DateTime在本地时区的值</span></span><br><span class="line"><span class="hljs-built_in">print</span>(today.toLocal());  <span class="hljs-comment">//2019-02-28 11:30:51.713069</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a href="http://dart.goodev.org/guides/language/language-tour" target="_blank" rel="noopener">Dart官网语法介绍-中文版</a></li>
+<li><a href="https://www.dartlang.org/guides/language/language-tour" target="_blank" rel="noopener">Dart官网语法介绍-英文版</a></li>
+<li><a href="http://www.shutongye.com/dartapi/dart-core/Map-class.html" target="_blank" rel="noopener">Dart语言中文社区</a></li>
+</ul>
+<hr>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Dart/">Dart</a>, <a class="has-link-grey -link" href="/tags/Flutter/">Flutter</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/03/25/flutter全局/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item"></span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/02/20/Flutter开发一/">
+                <span class="level-item">Flutter开发之Dart的数据类型01</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="SooLe">
+                    
+                    <p class="is-size-4 is-block">
+                        SooLe
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        iOS
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>shenzhen</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        31
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        12
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        46
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/arthurtop">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/arthurtop">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://weibo.com/3935895096677821">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://www.jianshu.com/u/cda07f394e73">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://juejin.im/user/5ac98725f265da23830b263b">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://github.com/ppoffice</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Flutter笔记/">
+            <span class="level-start">
+                <span class="level-item">Flutter笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Hexo博客/">
+            <span class="level-start">
+                <span class="level-item">Hexo博客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Socket学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Socket学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SwiftLint/">
+            <span class="level-start">
+                <span class="level-item">SwiftLint</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Swift学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift高阶功能/">
+            <span class="level-start">
+                <span class="level-item">Swift高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift黑科技/">
+            <span class="level-start">
+                <span class="level-item">Swift黑科技</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS动画/">
+            <span class="level-start">
+                <span class="level-item">iOS动画</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS高阶功能/">
+            <span class="level-start">
+                <span class="level-item">iOS高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/xcode/">
+            <span class="level-start">
+                <span class="level-item">xcode</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数据库基础/">
+            <span class="level-start">
+                <span class="level-item">数据库基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/组件化开发/">
+            <span class="level-start">
+                <span class="level-item">组件化开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/AVFoundation/" style="font-size: 10px;">AVFoundation</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/AppIcon/" style="font-size: 10px;">AppIcon</a> <a href="/tags/Bug/" style="font-size: 12.5px;">Bug</a> <a href="/tags/CIDetector/" style="font-size: 10px;">CIDetector</a> <a href="/tags/CIFilter/" style="font-size: 10px;">CIFilter</a> <a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/CoreAnimation/" style="font-size: 10px;">CoreAnimation</a> <a href="/tags/Dart/" style="font-size: 17.5px;">Dart</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Facebook-POP/" style="font-size: 10px;">Facebook POP</a> <a href="/tags/Flutter/" style="font-size: 17.5px;">Flutter</a> <a href="/tags/Github/" style="font-size: 17.5px;">Github</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTPS/" style="font-size: 12.5px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 17.5px;">Hexo</a> <a href="/tags/Homebrew/" style="font-size: 10px;">Homebrew</a> <a href="/tags/Mac-工具/" style="font-size: 10px;">Mac 工具</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Socket/" style="font-size: 10px;">Socket</a> <a href="/tags/Socket-IO/" style="font-size: 10px;">Socket.IO</a> <a href="/tags/Speech/" style="font-size: 10px;">Speech</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/Swift4-0/" style="font-size: 10px;">Swift4.0</a> <a href="/tags/SwiftLint/" style="font-size: 17.5px;">SwiftLint</a> <a href="/tags/UIStackView/" style="font-size: 10px;">UIStackView</a> <a href="/tags/Vision/" style="font-size: 10px;">Vision</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/framewoframework/" style="font-size: 10px;">framewoframework</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/iOS-10-3/" style="font-size: 10px;">iOS 10.3</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/spec/" style="font-size: 10px;">spec</a> <a href="/tags/trunk/" style="font-size: 10px;">trunk</a> <a href="/tags/入坑/" style="font-size: 10px;">入坑</a> <a href="/tags/动态库/" style="font-size: 10px;">动态库</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/规则/" style="font-size: 15px;">规则</a> <a href="/tags/静态库/" style="font-size: 10px;">静态库</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019上传审核遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-29T00:55:00.000Z">2019-03-29</time></div>
+                    <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="has-link-black-ter is-size-6">2019上传审核遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/25/flutter全局/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-25T07:40:54.339Z">2019-03-25</time></div>
+                    <a href="/2019/03/25/flutter全局/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/01/Flutter开发二/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flutter开发之Dart的数据类型02">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-01T01:16:34.000Z">2019-03-01</time></div>
+                    <a href="/2019/03/01/Flutter开发二/" class="has-link-black-ter is-size-6">Flutter开发之Dart的数据类型02</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Flutter笔记/">Flutter笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/20/Flutter开发一/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flutter开发之Dart的数据类型01">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-20T02:16:40.000Z">2019-02-20</time></div>
+                    <a href="/2019/02/20/Flutter开发一/" class="has-link-black-ter is-size-6">Flutter开发之Dart的数据类型01</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Flutter笔记/">Flutter笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/19/Flutter开发三/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flutter开发之Dart语法基础">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-19T06:10:40.000Z">2019-02-19</time></div>
+                    <a href="/2019/02/19/Flutter开发三/" class="has-link-black-ter is-size-6">Flutter开发之Dart语法基础</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Flutter笔记/">Flutter笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AVFoundation/">
+                        <span class="level-start">
+                            <span class="level-item">AVFoundation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Android/">
+                        <span class="level-start">
+                            <span class="level-item">Android</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Bug/">
+                        <span class="level-start">
+                            <span class="level-item">Bug</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIDetector/">
+                        <span class="level-start">
+                            <span class="level-item">CIDetector</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIFilter/">
+                        <span class="level-start">
+                            <span class="level-item">CIFilter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Dart/">
+                        <span class="level-start">
+                            <span class="level-item">Dart</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Facebook-POP/">
+                        <span class="level-start">
+                            <span class="level-item">Facebook POP</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Flutter/">
+                        <span class="level-start">
+                            <span class="level-item">Flutter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTML5/">
+                        <span class="level-start">
+                            <span class="level-item">HTML5</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Mac-工具/">
+                        <span class="level-start">
+                            <span class="level-item">Mac 工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/MySQL/">
+                        <span class="level-start">
+                            <span class="level-item">MySQL</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Python/">
+                        <span class="level-start">
+                            <span class="level-item">Python</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Speech/">
+                        <span class="level-start">
+                            <span class="level-item">Speech</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">11</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Vision/">
+                        <span class="level-start">
+                            <span class="level-item">Vision</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebView/">
+                        <span class="level-start">
+                            <span class="level-item">WebView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/framewoframework/">
+                        <span class="level-start">
+                            <span class="level-item">framewoframework</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/动态库/">
+                        <span class="level-start">
+                            <span class="level-item">动态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/工具/">
+                        <span class="level-start">
+                            <span class="level-item">工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/静态库/">
+                        <span class="level-start">
+                            <span class="level-item">静态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019上传审核遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-29T00:55:00.000Z">2019-03-29</time></div>
+                    <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="has-link-black-ter is-size-6">2019上传审核遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/25/flutter全局/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-25T07:40:54.339Z">2019-03-25</time></div>
+                    <a href="/2019/03/25/flutter全局/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/01/Flutter开发二/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flutter开发之Dart的数据类型02">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-01T01:16:34.000Z">2019-03-01</time></div>
+                    <a href="/2019/03/01/Flutter开发二/" class="has-link-black-ter is-size-6">Flutter开发之Dart的数据类型02</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Flutter笔记/">Flutter笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/20/Flutter开发一/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flutter开发之Dart的数据类型01">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-20T02:16:40.000Z">2019-02-20</time></div>
+                    <a href="/2019/02/20/Flutter开发一/" class="has-link-black-ter is-size-6">Flutter开发之Dart的数据类型01</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Flutter笔记/">Flutter笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/19/Flutter开发三/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flutter开发之Dart语法基础">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-19T06:10:40.000Z">2019-02-19</time></div>
+                    <a href="/2019/02/19/Flutter开发三/" class="has-link-black-ter is-size-6">Flutter开发之Dart语法基础</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Flutter笔记/">Flutter笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AVFoundation/">
+                        <span class="level-start">
+                            <span class="level-item">AVFoundation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Android/">
+                        <span class="level-start">
+                            <span class="level-item">Android</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Bug/">
+                        <span class="level-start">
+                            <span class="level-item">Bug</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIDetector/">
+                        <span class="level-start">
+                            <span class="level-item">CIDetector</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIFilter/">
+                        <span class="level-start">
+                            <span class="level-item">CIFilter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Dart/">
+                        <span class="level-start">
+                            <span class="level-item">Dart</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Facebook-POP/">
+                        <span class="level-start">
+                            <span class="level-item">Facebook POP</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Flutter/">
+                        <span class="level-start">
+                            <span class="level-item">Flutter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTML5/">
+                        <span class="level-start">
+                            <span class="level-item">HTML5</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Mac-工具/">
+                        <span class="level-start">
+                            <span class="level-item">Mac 工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/MySQL/">
+                        <span class="level-start">
+                            <span class="level-item">MySQL</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Python/">
+                        <span class="level-start">
+                            <span class="level-item">Python</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Speech/">
+                        <span class="level-start">
+                            <span class="level-item">Speech</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">11</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Vision/">
+                        <span class="level-start">
+                            <span class="level-item">Vision</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebView/">
+                        <span class="level-start">
+                            <span class="level-item">WebView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/framewoframework/">
+                        <span class="level-start">
+                            <span class="level-item">framewoframework</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/动态库/">
+                        <span class="level-start">
+                            <span class="level-item">动态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/工具/">
+                        <span class="level-start">
+                            <span class="level-item">工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/静态库/">
+                        <span class="level-start">
+                            <span class="level-item">静态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Flutter开发之Dart的数据类型02" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 SooLe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-Hans");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

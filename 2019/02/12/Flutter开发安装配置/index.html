@@ -1,0 +1,2416 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Flutter的安装和配置 - SooLe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="keywords" content="iOS,Flutter,Dart,Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter的安装和配置">
+<meta property="og:url" content="http://yoursite.com/2019/02/12/Flutter开发安装配置/index.html">
+<meta property="og:site_name" content="SooLe">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter.jpeg?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_SDK.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/android_flutter.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/android_create_flutter.png">
+<meta property="og:updated_time" content="2019-04-10T03:13:58.658Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flutter的安装和配置">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter.jpeg?x-oss-process=style/titanjun">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Flutter的安装和配置" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-02-12T11:20:40.000Z">2019-02-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Flutter笔记/">Flutter笔记</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    17 minutes read (About 2571 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Flutter的安装和配置
+            
+        </h1>
+        <div class="content">
+            <p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter.jpeg?x-oss-process=style/titanjun" alt="Flutter"></p>
+<a id="more"></a>
+<ul>
+<li><code>Flutter</code>是谷歌的移动<code>UI</code>框架，可以快速在<code>iOS</code>和<code>Android</code>上构建高质量的原生用户界面, 并且是未来新操作系统<a href="https://baike.baidu.com/item/Fuchsia/19900570" target="_blank" rel="noopener">Fuchsia</a>的默认开发套件</li>
+<li>在全世界，<code>Flutter</code>正在被越来越多的开发者和组织使用，并且<code>Flutter</code>是完全免费、开源的—-<a href="https://flutterchina.club/" target="_blank" rel="noopener">Flutter中文网</a></li>
+<li><code>Flutter</code>同时支持<code>Windows</code>、<code>Linux</code>和<code>MacOS</code>操作系统作为开发环境，并且在<code>Android Studio</code>和<code>VS Code</code>两个<code>IDE</code>上都提供了全功能的支持</li>
+<li><code>Flutter</code>以<code>Dart</code>语言为开发语言(之后的文章会介绍)</li>
+</ul>
+<h2 id="跨平台框架"><a href="#跨平台框架" class="headerlink" title="跨平台框架"></a>跨平台框架</h2><ul>
+<li>在<code>Flutter</code>诞生之前，已经有许多跨平台<code>UI</code>框架的方案，比如基<code>于WebView</code>的<code>Cordova</code>、<code>AppCan</code>等，还有使用<code>HTML+JavaScript</code>渲染成原生控件的<code>React Native</code>、<code>Weex</code>等(虽然我只用过<code>React Native</code>)</li>
+<li>基于<code>WebView</code>的框架<ul>
+<li>优点很明显，它们几乎可以完全继承现代<code>Web</code>开发的所有成果（丰富得多的控件库、满足各种需求的页面框架、完全的动态化、自动化测试工具等等），当然也包括<code>Web</code>开发人员，不需要太多的学习和迁移成本就可以开发一个<code>App</code></li>
+<li>缺点也很致命, 在对体验和性能有较高要求的情况下, <code>WebView</code>的渲染效率和<code>JavaScript</code>执行性能太差。再加上<code>Android</code>各个系统版本和设备厂商的定制，很难保证所在所有设备上都能提供一致的体验</li>
+</ul>
+</li>
+<li><code>React Native</code>一类的框架<ul>
+<li>将最终渲染工作交还给了系统，虽然同样使用类<code>HTML+JS</code>的<code>UI</code>构建逻辑，但是最终会生成对应的自定义原生控件，以充分利用原生控件相对于<code>WebView</code>的较高的绘制效率</li>
+<li>同时这种策略也将框架本身和<code>App</code>开发者绑在了系统的控件上，不仅框架本身需要处理大量平台相关的逻辑，随着系统版本变化和<code>API</code>的变化，开发者可能也需要处理不同平台的差异，甚至有些特性只能在部分平台上实现，这样框架的跨平台特性就会大打折扣</li>
+</ul>
+</li>
+<li><code>Flutter</code>框架<ul>
+<li><code>Flutter</code>则开辟了一种全新的思路，从头到尾重写一套跨平台的<code>UI</code>框架，包括<code>UI</code>控件、渲染逻辑甚至开发语言</li>
+<li><code>Flutter</code>使用自己的高性能渲染引擎来绘制<code>widget</code>, <code>Flutter</code>使用<code>C</code>、<code>C ++</code>、<code>Dart</code>和<code>Skia</code>（2D渲染引擎）构建</li>
+<li>在<code>iOS</code>上，<code>Flutter</code>引擎的<code>C/C ++</code>代码使用<code>LLVM</code>编译，任何<code>Dart</code>代码都是<code>AOT</code>编译为本地代码的，<code>Flutter</code>应用程序使用本机指令集运行（不涉及解释器）</li>
+<li>而在<code>Android</code>下，<code>Flutter</code>引擎的<code>C/C ++</code>代码是用<code>Android</code>的<code>NDK</code>编译的，任何<code>Dart</code>代码都是<code>AOT</code>编译成本地代码的，<code>Flutter</code>应用程序依然使用本机指令集运行（不涉及解释器）</li>
+</ul>
+</li>
+</ul>
+<h2 id="Flutter安装"><a href="#Flutter安装" class="headerlink" title="Flutter安装"></a><code>Flutter</code>安装</h2><ul>
+<li>可参考官网的<a href="https://flutterchina.club/get-started/install/" target="_blank" rel="noopener">安装Flutter</a>, 支持<code>Windows</code>、<code>Linux</code>和<code>MacOS</code>操作系统</li>
+<li>我使用的系统是<code>MacOS</code>操作系统</li>
+</ul>
+<h3 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h3><p>要安装并运行<code>Flutter</code>，您的开发环境必须满足以下最低要求:</p>
+<ul>
+<li>操作系统: macOS (64-bit)</li>
+<li>磁盘空间: 700 MB (不包括<code>Xcode</code>或<code>Android Studio</code>的磁盘空间）.</li>
+<li>工具: <code>Flutter</code>依赖下面这些命令行工具.<ul>
+<li><code>bash</code>, <code>mkdir</code>, <code>rm</code>, <code>git</code>, <code>curl</code>, <code>unzip</code>, <code>which</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="获取Flutter-SDK"><a href="#获取Flutter-SDK" class="headerlink" title="获取Flutter SDK"></a>获取<code>Flutter SDK</code></h3><h4 id="下载SDK"><a href="#下载SDK" class="headerlink" title="下载SDK"></a>下载SDK</h4><ul>
+<li>去<code>Flutter</code>官网下载其最新可用的安装包，<a href="https://flutter.io/docs/development/tools/sdk/archive?tab=macos#macos" target="_blank" rel="noopener">转到下载页</a></li>
+<li>注意，<code>Flutter</code>的渠道版本会不停变动，请以<code>Flutter</code>官网为准</li>
+<li>另外，在中国大陆地区，要想正常获取安装包列表或下载安装包，可能需要翻墙，读者也可以去<code>Flutter github</code>项目下去下载安装包，<a href="https://github.com/flutter/flutter/releases" target="_blank" rel="noopener">转到下载页</a></li>
+</ul>
+<p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_SDK.png?x-oss-process=style/titanjun" alt="Flutter_SDK"></p>
+<h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><ul>
+<li>解压SDK并把解压好的文件全部放在你想要放置的位置, 建议和其他开发语言的SDK放置在一起, 比如<code>~/Library/Flutter</code></li>
+<li>为了方便后续使用，需要将项目根目录下<code>bin</code>路径加入环境变量<code>PATH</code>中<ul>
+<li>编辑器打开<code>~/.bash_profile</code>文件, 添加如下</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight rb hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Flutter 相关配置</span></span><br><span class="line"><span class="hljs-comment"># xxx是你自己的Flutter文件夹路径</span></span><br><span class="line">export PATH=<span class="hljs-regexp">/xxx/</span>Flutter/<span class="hljs-symbol">bin:</span>$PATH</span><br></pre></td></tr></table></figure>
+<p>由于在国内访问<code>Flutter</code>有时可能会受到限制，<code>Flutter</code>官方为中国开发者搭建了临时镜像，大家可以将如下环境变量加入到用户环境变量中：</p>
+<figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PUB_HOSTED_URL=<span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/pub.flutter-io.cn</span></span><br><span class="line"><span class="hljs-regexp">export FLUTTER_STORAGE_BASE_URL=https:/</span><span class="hljs-regexp">/storage.flutter-io.cn</span></span><br></pre></td></tr></table></figure>
+<div class="note warning"><p>注意</p></div>
+
+<p>此镜像为临时镜像，并不能保证一直可用，读者可以参考详情请参考 <a href="https://github.com/flutter/flutter/wiki/Using-Flutter-in-China" target="_blank" rel="noopener">Using Flutter in China</a> 以获得有关镜像服务器的最新动态</p>
+<div class="note info"><p>保存文件, 并更新当前配置</p></div>
+
+
+<figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 执行命令</span></span><br><span class="line">source ~<span class="hljs-regexp">/.bash_profile</span></span><br></pre></td></tr></table></figure>
+<div class="note success"><p>验证<code>flutter/bin</code>目录是否在你的PATH中</p></div>
+
+
+<figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 执行下面命令</span></span><br><span class="line">echo $PATH</span><br></pre></td></tr></table></figure>
+<p>如果安装成功, 会输出类似<code>/xxx/Flutter/bin</code>的路径</p>
+<h3 id="安装开发工具"><a href="#安装开发工具" class="headerlink" title="安装开发工具"></a>安装开发工具</h3><h4 id="安装Android-Studio"><a href="#安装Android-Studio" class="headerlink" title="安装Android Studio"></a>安装Android Studio</h4><ul>
+<li>下载并安装<a href="http://www.android-studio.org/" target="_blank" rel="noopener">Android Studio</a></li>
+<li>启动<code>Android Studio</code>，然后执行<code>Android Studio</code>安装向导, 这将安装最新的<code>Android SDK</code>，<code>Android SDK</code>平台工具和<code>Android SDK</code>构建工具, 这是<code>Flutter</code>开发<code>Android</code>应用时所必备的</li>
+<li>安装完成后, 配置一个需要的<code>Android</code>模拟器</li>
+</ul>
+<h4 id="安装Xcode"><a href="#安装Xcode" class="headerlink" title="安装Xcode"></a>安装Xcode</h4><p>在<code>App Store</code>搜索最新版本<code>Xcode</code>下载安装即可</p>
+<h4 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h4><p>开发<code>IDE</code>，直接去<a href="https://code.visualstudio.com/" target="_blank" rel="noopener">官网下载</a>安装即可</p>
+<h3 id="环境配置检测"><a href="#环境配置检测" class="headerlink" title="环境配置检测"></a>环境配置检测</h3><p>通过<code>flutter doctor</code>命令来执行<code>Flutter</code>的安装程序了，经过一段时间的下载和安装，<code>Flutter</code>会输出安装结果(时间可能会比较久)</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">$ flutter doctor</span><br><span class="line">Doctor summary (to see all details, run flutter doctor -v):</span><br><span class="line">[✓] Flutter (Channel beta, v0.5.1, on Mac OS X 10.13.5 17F77, locale en-NZ)</span><br><span class="line">[!] Android toolchain - develop for Android devices (Android SDK 26.0.2)</span><br><span class="line">    ! Some Android licenses not accepted.  To resolve this, run: flutter doctor --android-licenses</span><br><span class="line">[!] iOS toolchain - develop for iOS devices (Xcode 9.4.1)</span><br><span class="line">    ✗ Missing Xcode dependency: Python module &quot;six&quot;.</span><br><span class="line">    Install via &apos;pip install six&apos; or &apos;sudo easy_install six&apos;.</span><br><span class="line">    ✗ libimobiledevice and ideviceinstaller are not installed. To install, run:</span><br><span class="line">        brew install --HEAD libimobiledevice</span><br><span class="line">        brew install ideviceinstaller</span><br><span class="line">    ✗ ios-deploy not installed. To install:</span><br><span class="line">        brew install ios-deploy</span><br><span class="line">    ✗ CocoaPods not installed.</span><br><span class="line">        CocoaPods is used to retrieve the iOS platform side&apos;s plugin code that responds to your plugin usage on the Dart side.</span><br><span class="line">        Without resolving iOS dependencies with CocoaPods, plugins will not work on iOS.</span><br><span class="line">        For more info, see https://flutter.io/platform-plugins</span><br><span class="line">    To install:</span><br><span class="line">        brew install cocoapods</span><br><span class="line">        pod setup</span><br><span class="line">[✓] Android Studio</span><br><span class="line">    ✗ Flutter plugin not installed; this adds Flutter specific functionality.</span><br><span class="line">    ✗ Dart plugin not installed; this adds Dart specific functionality.</span><br><span class="line">[✓] Android Studio (version 3.0)</span><br><span class="line">    ✗ Flutter plugin not installed; this adds Flutter specific functionality.</span><br><span class="line">    ✗ Dart plugin not installed; this adds Dart specific functionality.</span><br><span class="line">[!] IntelliJ IDEA Ultimate Edition (version 2017.1.1)</span><br><span class="line">    ✗ Flutter plugin not installed; this adds Flutter specific functionality.</span><br><span class="line">    ✗ Dart plugin not installed; this adds Dart specific functionality.</span><br><span class="line">[!] VS Code (version 1.24.1)</span><br><span class="line">[!] Connected devices</span><br><span class="line">    ! No devices available</span><br><span class="line"></span><br><span class="line">! Doctor found issues in 5 categories.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>其中前面有<code>[✓]</code>标识的是已经安装成功的</li>
+<li><code>[!]</code>标识是需要安装或者更新的</li>
+<li>下面介绍需要安装的编辑器及其配置</li>
+</ul>
+<h2 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h2><p>运行<code>flutter doctor</code>命令可看到相关信息</p>
+<ul>
+<li><code>Flutter</code>的版本和信息</li>
+<li><code>Flutter</code>运行所需的<code>Android</code>工具链，有些许可证没有接受，输入提示命令，输入<code>y</code>确认</li>
+<li><code>Flutter</code>运行所需的<code>iOS</code>工具链不满足</li>
+<li><code>AS</code>、<code>IDEA</code>的<code>Flutter</code>插件没有安装，所以需要安装，因此需要配置<code>AS</code>或<code>IDEA</code></li>
+<li>有可用的连接设备</li>
+</ul>
+<h3 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a><code>Android Studio</code></h3><ul>
+<li>打开插件选择项<code>Preferences &gt; Plugins</code></li>
+<li>选择<code>Browse repositories</code>，搜索<code>Flutter</code>插件并安装(同时自动安装<code>Dart</code>插件)</li>
+<li>插件安装完成后, 重启<code>Android Studio</code>后插件生效</li>
+</ul>
+<p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/android_flutter.png?x-oss-process=style/titanjun" alt="android_flutter"></p>
+<p>这时候在命令行运行<code>flutter doctor</code>，可以看到<code>Android Studio</code>已经好了</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[✓] Android Studio (version 3.2)</span><br></pre></td></tr></table></figure>
+<h3 id="iOS配置"><a href="#iOS配置" class="headerlink" title="iOS配置"></a>iOS配置</h3><ul>
+<li>在进行<code>iOS</code>配置之前, 首先需要安装<code>CocoaPods</code>, 可自行百度</li>
+<li>安装<code>CocoaPods</code>后, 在执行<code>flutter doctor</code>命令, 可能会出现如下问题</li>
+<li>此时在终端中依次执行出现的命令即可</li>
+</ul>
+<figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[!] iOS toolchain - develop <span class="hljs-keyword">for</span> iOS devices</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 可能出现的命令, 若出现, 依次执行出现的命令即可, 未出现的可不执行</span></span><br><span class="line">$ brew install --HEAD usbmuxd</span><br><span class="line">$ brew link usbmuxd</span><br><span class="line">$ brew install --HEAD libimobiledevice</span><br><span class="line">$ brew install ideviceinstaller ios-deploy cocoapods</span><br><span class="line">$ pod setup</span><br></pre></td></tr></table></figure>
+<p>这时候在命令行运行<code>flutter doctor</code>，可以看到<code>iOS</code>相关配置也好了</p>
+<h3 id="VSCode插件"><a href="#VSCode插件" class="headerlink" title="VSCode插件"></a>VSCode插件</h3><p>在扩展中搜索<code>Flutter</code>和<code>Dart</code>安装后, 重载即可</p>
+<h3 id="配置完成"><a href="#配置完成" class="headerlink" title="配置完成"></a>配置完成</h3><p>此刻, 在运行<code>flutter doctor</code>命令, 应该就没有问题了</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Doctor summary (to see all details, run flutter doctor -v):</span><br><span class="line">[✓] Flutter (Channel stable, v1.0.0, on Mac OS X 10.14.3 18D109, locale</span><br><span class="line">    zh-Hans-CN)</span><br><span class="line">[✓] Android toolchain - develop for Android devices (Android SDK 28.0.3)</span><br><span class="line">[✓] iOS toolchain - develop for iOS devices (Xcode 10.1)</span><br><span class="line">[✓] Android Studio (version 3.0)</span><br><span class="line">[✓] VS Code (version 1.30.2)</span><br><span class="line">[✓] Connected device (1 available)</span><br><span class="line"></span><br><span class="line">• No issues found!</span><br></pre></td></tr></table></figure>
+<h2 id="创建Flutter应用"><a href="#创建Flutter应用" class="headerlink" title="创建Flutter应用"></a>创建Flutter应用</h2><h3 id="CSCode创建"><a href="#CSCode创建" class="headerlink" title="CSCode创建"></a>CSCode创建</h3><p>中文版: <code>vscode</code> -&gt; 查看 -&gt; 命令面板 -&gt; <code>Flutter: new project</code> -&gt; 输入项目名称</p>
+<div class="note warning"><p>注意</p></div>
+
+<p>项目名称不支持大写字母</p>
+<h3 id="Android-Studio创建"><a href="#Android-Studio创建" class="headerlink" title="Android Studio创建"></a>Android Studio创建</h3><p>打开<code>Android studio</code>就可以看见<code>Flutter</code>工程模板如下</p>
+<p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/android_create_flutter.png" alt="android_create_flutte"></p>
+<h3 id="命令创建"><a href="#命令创建" class="headerlink" title="命令创建"></a>命令创建</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter create helloflutter</span><br></pre></td></tr></table></figure>
+<p>这里创建了一个名为<code>helloflutter</code>的<code>Dart package</code></p>
+<div class="note info"><p>参数介绍</p></div>
+
+<ul>
+<li>要创建插件包，请使用<code>--template=plugin</code>参数执行<code>flutter create</code></li>
+<li>使用<code>--org</code>选项指定您的组织，并使用反向域名表示法。该值用于生成的<code>Android</code>和<code>iOS</code>代码中的各种包和包标识符。</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter create --org com.example --template=plugin helloflutter</span><br></pre></td></tr></table></figure>
+<ul>
+<li>默认情况下，插件项目针对<code>iOS</code>代码使用<code>Objective-C</code>，<code>Android</code>代码使用<code>Java</code>。</li>
+<li>如果您更喜欢<code>Swift</code>或<code>Kotlin</code>，则可以使用<code>-i</code>或<code>-a</code> 为<code>iOS</code>或<code>Android</code>指定语言。例如：</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter create --template=plugin -i swift -a kotlin helloflutter</span><br></pre></td></tr></table></figure>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
+<li><a href="http://blog.itpub.net/31077337/viewspace-2199818/" target="_blank" rel="noopener">Flutter的原理及美团的实践</a></li>
+<li><a href="https://flutterchina.club/" target="_blank" rel="noopener">Flutter中文网</a></li>
+</ul>
+<blockquote>
+<p>初识<code>Flutter</code>, 总结的可能也不准确, 不足之处还望海涵, 后续会继续优化相关文章</p>
+</blockquote>
+<hr>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Android/">Android</a>, <a class="has-link-grey -link" href="/tags/Dart/">Dart</a>, <a class="has-link-grey -link" href="/tags/Flutter/">Flutter</a>, <a class="has-link-grey -link" href="/tags/iOS/">iOS</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/02/14/2019app审核报错/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">2019开年遇Bug</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/01/16/vue 全局错误/">
+                <span class="level-item"></span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="SooLe">
+                    
+                    <p class="is-size-4 is-block">
+                        SooLe
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        iOS
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>shenzhen</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        31
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        12
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        46
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/arthurtop">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/arthurtop">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://weibo.com/3935895096677821">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://www.jianshu.com/u/cda07f394e73">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://juejin.im/user/5ac98725f265da23830b263b">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://github.com/ppoffice</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Flutter笔记/">
+            <span class="level-start">
+                <span class="level-item">Flutter笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Hexo博客/">
+            <span class="level-start">
+                <span class="level-item">Hexo博客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Socket学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Socket学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SwiftLint/">
+            <span class="level-start">
+                <span class="level-item">SwiftLint</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift学习笔记/">
+            <span class="level-start">
+                <span class="level-item">Swift学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift高阶功能/">
+            <span class="level-start">
+                <span class="level-item">Swift高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Swift黑科技/">
+            <span class="level-start">
+                <span class="level-item">Swift黑科技</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS动画/">
+            <span class="level-start">
+                <span class="level-item">iOS动画</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/iOS高阶功能/">
+            <span class="level-start">
+                <span class="level-item">iOS高阶功能</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/xcode/">
+            <span class="level-start">
+                <span class="level-item">xcode</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数据库基础/">
+            <span class="level-start">
+                <span class="level-item">数据库基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/组件化开发/">
+            <span class="level-start">
+                <span class="level-item">组件化开发</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/AVFoundation/" style="font-size: 10px;">AVFoundation</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/AppIcon/" style="font-size: 10px;">AppIcon</a> <a href="/tags/Bug/" style="font-size: 12.5px;">Bug</a> <a href="/tags/CIDetector/" style="font-size: 10px;">CIDetector</a> <a href="/tags/CIFilter/" style="font-size: 10px;">CIFilter</a> <a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/CoreAnimation/" style="font-size: 10px;">CoreAnimation</a> <a href="/tags/Dart/" style="font-size: 17.5px;">Dart</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Facebook-POP/" style="font-size: 10px;">Facebook POP</a> <a href="/tags/Flutter/" style="font-size: 17.5px;">Flutter</a> <a href="/tags/Github/" style="font-size: 17.5px;">Github</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTPS/" style="font-size: 12.5px;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 17.5px;">Hexo</a> <a href="/tags/Homebrew/" style="font-size: 10px;">Homebrew</a> <a href="/tags/Mac-工具/" style="font-size: 10px;">Mac 工具</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Socket/" style="font-size: 10px;">Socket</a> <a href="/tags/Socket-IO/" style="font-size: 10px;">Socket.IO</a> <a href="/tags/Speech/" style="font-size: 10px;">Speech</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/Swift4-0/" style="font-size: 10px;">Swift4.0</a> <a href="/tags/SwiftLint/" style="font-size: 17.5px;">SwiftLint</a> <a href="/tags/UIStackView/" style="font-size: 10px;">UIStackView</a> <a href="/tags/Vision/" style="font-size: 10px;">Vision</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/framewoframework/" style="font-size: 10px;">framewoframework</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/iOS-10-3/" style="font-size: 10px;">iOS 10.3</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/spec/" style="font-size: 10px;">spec</a> <a href="/tags/trunk/" style="font-size: 10px;">trunk</a> <a href="/tags/入坑/" style="font-size: 10px;">入坑</a> <a href="/tags/动态库/" style="font-size: 10px;">动态库</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/规则/" style="font-size: 15px;">规则</a> <a href="/tags/静态库/" style="font-size: 10px;">静态库</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019上传审核遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-29T00:55:00.000Z">2019-03-29</time></div>
+                    <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="has-link-black-ter is-size-6">2019上传审核遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/25/flutter全局/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-25T07:40:54.339Z">2019-03-25</time></div>
+                    <a href="/2019/03/25/flutter全局/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/01/Flutter开发二/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flutter开发之Dart的数据类型02">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-01T01:16:34.000Z">2019-03-01</time></div>
+                    <a href="/2019/03/01/Flutter开发二/" class="has-link-black-ter is-size-6">Flutter开发之Dart的数据类型02</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Flutter笔记/">Flutter笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/20/Flutter开发一/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flutter开发之Dart的数据类型01">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-20T02:16:40.000Z">2019-02-20</time></div>
+                    <a href="/2019/02/20/Flutter开发一/" class="has-link-black-ter is-size-6">Flutter开发之Dart的数据类型01</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Flutter笔记/">Flutter笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/19/Flutter开发三/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flutter开发之Dart语法基础">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-19T06:10:40.000Z">2019-02-19</time></div>
+                    <a href="/2019/02/19/Flutter开发三/" class="has-link-black-ter is-size-6">Flutter开发之Dart语法基础</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Flutter笔记/">Flutter笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AVFoundation/">
+                        <span class="level-start">
+                            <span class="level-item">AVFoundation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Android/">
+                        <span class="level-start">
+                            <span class="level-item">Android</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Bug/">
+                        <span class="level-start">
+                            <span class="level-item">Bug</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIDetector/">
+                        <span class="level-start">
+                            <span class="level-item">CIDetector</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIFilter/">
+                        <span class="level-start">
+                            <span class="level-item">CIFilter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Dart/">
+                        <span class="level-start">
+                            <span class="level-item">Dart</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Facebook-POP/">
+                        <span class="level-start">
+                            <span class="level-item">Facebook POP</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Flutter/">
+                        <span class="level-start">
+                            <span class="level-item">Flutter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTML5/">
+                        <span class="level-start">
+                            <span class="level-item">HTML5</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Mac-工具/">
+                        <span class="level-start">
+                            <span class="level-item">Mac 工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/MySQL/">
+                        <span class="level-start">
+                            <span class="level-item">MySQL</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Python/">
+                        <span class="level-start">
+                            <span class="level-item">Python</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Speech/">
+                        <span class="level-start">
+                            <span class="level-item">Speech</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">11</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Vision/">
+                        <span class="level-start">
+                            <span class="level-item">Vision</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebView/">
+                        <span class="level-start">
+                            <span class="level-item">WebView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/framewoframework/">
+                        <span class="level-start">
+                            <span class="level-item">framewoframework</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/动态库/">
+                        <span class="level-start">
+                            <span class="level-item">动态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/工具/">
+                        <span class="level-start">
+                            <span class="level-item">工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/静态库/">
+                        <span class="level-start">
+                            <span class="level-item">静态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019上传审核遇Bug">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-29T00:55:00.000Z">2019-03-29</time></div>
+                    <a href="/2019/03/29/2019做了国际化上传审核被拒/" class="has-link-black-ter is-size-6">2019上传审核遇Bug</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo博客/">Hexo博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/25/flutter全局/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-25T07:40:54.339Z">2019-03-25</time></div>
+                    <a href="/2019/03/25/flutter全局/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/01/Flutter开发二/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flutter开发之Dart的数据类型02">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-01T01:16:34.000Z">2019-03-01</time></div>
+                    <a href="/2019/03/01/Flutter开发二/" class="has-link-black-ter is-size-6">Flutter开发之Dart的数据类型02</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Flutter笔记/">Flutter笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/20/Flutter开发一/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flutter开发之Dart的数据类型01">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-20T02:16:40.000Z">2019-02-20</time></div>
+                    <a href="/2019/02/20/Flutter开发一/" class="has-link-black-ter is-size-6">Flutter开发之Dart的数据类型01</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Flutter笔记/">Flutter笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/19/Flutter开发三/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flutter开发之Dart语法基础">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-19T06:10:40.000Z">2019-02-19</time></div>
+                    <a href="/2019/02/19/Flutter开发三/" class="has-link-black-ter is-size-6">Flutter开发之Dart语法基础</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Flutter笔记/">Flutter笔记</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AVFoundation/">
+                        <span class="level-start">
+                            <span class="level-item">AVFoundation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Android/">
+                        <span class="level-start">
+                            <span class="level-item">Android</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/AppIcon/">
+                        <span class="level-start">
+                            <span class="level-item">AppIcon</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Bug/">
+                        <span class="level-start">
+                            <span class="level-item">Bug</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIDetector/">
+                        <span class="level-start">
+                            <span class="level-item">CIDetector</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CIFilter/">
+                        <span class="level-start">
+                            <span class="level-item">CIFilter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CocoaPods/">
+                        <span class="level-start">
+                            <span class="level-item">CocoaPods</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CoreAnimation/">
+                        <span class="level-start">
+                            <span class="level-item">CoreAnimation</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Dart/">
+                        <span class="level-start">
+                            <span class="level-item">Dart</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Error/">
+                        <span class="level-start">
+                            <span class="level-item">Error</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Facebook-POP/">
+                        <span class="level-start">
+                            <span class="level-item">Facebook POP</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Flutter/">
+                        <span class="level-start">
+                            <span class="level-item">Flutter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Github/">
+                        <span class="level-start">
+                            <span class="level-item">Github</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTML5/">
+                        <span class="level-start">
+                            <span class="level-item">HTML5</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/HTTPS/">
+                        <span class="level-start">
+                            <span class="level-item">HTTPS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Hexo/">
+                        <span class="level-start">
+                            <span class="level-item">Hexo</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Homebrew/">
+                        <span class="level-start">
+                            <span class="level-item">Homebrew</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Mac-工具/">
+                        <span class="level-start">
+                            <span class="level-item">Mac 工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/MySQL/">
+                        <span class="level-start">
+                            <span class="level-item">MySQL</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Node-js/">
+                        <span class="level-start">
+                            <span class="level-item">Node.js</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Objective-C/">
+                        <span class="level-start">
+                            <span class="level-item">Objective-C</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Python/">
+                        <span class="level-start">
+                            <span class="level-item">Python</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Realm/">
+                        <span class="level-start">
+                            <span class="level-item">Realm</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket/">
+                        <span class="level-start">
+                            <span class="level-item">Socket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Socket-IO/">
+                        <span class="level-start">
+                            <span class="level-item">Socket.IO</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Speech/">
+                        <span class="level-start">
+                            <span class="level-item">Speech</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift/">
+                        <span class="level-start">
+                            <span class="level-item">Swift</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">11</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Swift4-0/">
+                        <span class="level-start">
+                            <span class="level-item">Swift4.0</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SwiftLint/">
+                        <span class="level-start">
+                            <span class="level-item">SwiftLint</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">4</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/UIStackView/">
+                        <span class="level-start">
+                            <span class="level-item">UIStackView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Vision/">
+                        <span class="level-start">
+                            <span class="level-item">Vision</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebSocket/">
+                        <span class="level-start">
+                            <span class="level-item">WebSocket</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/WebView/">
+                        <span class="level-start">
+                            <span class="level-item">WebView</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/framewoframework/">
+                        <span class="level-start">
+                            <span class="level-item">framewoframework</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/git/">
+                        <span class="level-start">
+                            <span class="level-item">git</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS/">
+                        <span class="level-start">
+                            <span class="level-item">iOS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/iOS-10-3/">
+                        <span class="level-start">
+                            <span class="level-item">iOS 10.3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/pod/">
+                        <span class="level-start">
+                            <span class="level-item">pod</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/spec/">
+                        <span class="level-start">
+                            <span class="level-item">spec</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/trunk/">
+                        <span class="level-start">
+                            <span class="level-item">trunk</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/入坑/">
+                        <span class="level-start">
+                            <span class="level-item">入坑</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/动态库/">
+                        <span class="level-start">
+                            <span class="level-item">动态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/工具/">
+                        <span class="level-start">
+                            <span class="level-item">工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/框架/">
+                        <span class="level-start">
+                            <span class="level-item">框架</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/规则/">
+                        <span class="level-start">
+                            <span class="level-item">规则</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">3</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/静态库/">
+                        <span class="level-start">
+                            <span class="level-item">静态库</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Flutter的安装和配置" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 SooLe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-Hans");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
